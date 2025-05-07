@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=2 format=3 uid="uid://c8qu41cmckddc"]
+
+[ext_resource type="Script" uid="uid://73ndkg1gd42g" path="res://scripts/recipe.gd" id="1_41cn1"]
+
+[resource]
+script = ExtResource("1_41cn1")
+name = "Coxinha"
+region = "São Paulo"
+ingredients_required = Array[String](["massa", "frango", "óleo"])
+steps = Array[String]([])
+dialog_lines = Array[String](["Eu quero uma coxinha!", "Me vê uma coxinha bem recheada!", "Frita uma coxinha pra mim por favor!", "Quero uma coxinha bem gostosa, capricha hein!"])
+minigames = Array[String]([])
+metadata/_custom_type_script = "uid://73ndkg1gd42g"

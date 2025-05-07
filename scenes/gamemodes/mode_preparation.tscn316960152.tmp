@@ -1,0 +1,139 @@
+[gd_scene load_steps=11 format=3 uid="uid://d4fehmyo6hugb"]
+
+[ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
+[ext_resource type="Script" uid="uid://dsbj8b51cssh2" path="res://scripts/camera_2d.gd" id="2_vitag"]
+[ext_resource type="PackedScene" uid="uid://s7x1xuixglw4" path="res://scenes/ui/recipe_panel.tscn" id="3_k3uf0"]
+[ext_resource type="Texture2D" uid="uid://j3jo186eooa" path="res://assets/Sprite-0001.png" id="3_vitag"]
+[ext_resource type="PackedScene" uid="uid://q0opr264a6np" path="res://scenes/ui/ingredient.tscn" id="4_dowdn"]
+[ext_resource type="Texture2D" uid="uid://bq4obdl8ut83d" path="res://assets/carne.png" id="5_dowdn"]
+[ext_resource type="Texture2D" uid="uid://cmkws66l282t5" path="res://assets/massa1.png" id="5_f5t14"]
+[ext_resource type="Texture2D" uid="uid://2td7yv7rmxn4" path="res://assets/óleo.png" id="6_pv3fr"]
+[ext_resource type="PackedScene" uid="uid://bey8ivj14oqip" path="res://scenes/ui/drop_area.tscn" id="7_vitag"]
+[ext_resource type="Texture2D" uid="uid://bbeyniyythwcm" path="res://assets/frango.png" id="8_vitag"]
+
+[node name="Mode_Preparation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dnbch")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_vitag")
+
+[node name="PrepArea" type="Control" parent="."]
+custom_minimum_size = Vector2(2000, 0)
+layout_mode = 2
+anchors_preset = 0
+offset_right = 2000.0
+size_flags_horizontal = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="PrepArea"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 360.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture = ExtResource("3_vitag")
+
+[node name="Ingredient" parent="PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 152.0
+offset_top = 68.0
+offset_right = 216.0
+offset_bottom = 132.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("5_f5t14")
+
+[node name="Ingredient2" parent="PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 220.0
+offset_top = 68.0
+offset_right = 284.0
+offset_bottom = 132.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("5_dowdn")
+ingredient_name = "carne"
+
+[node name="Ingredient3" parent="PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 288.0
+offset_top = 68.0
+offset_right = 352.0
+offset_bottom = 132.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("6_pv3fr")
+ingredient_name = "óleo"
+
+[node name="Ingredient4" parent="PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 356.0
+offset_top = 68.0
+offset_right = 420.0
+offset_bottom = 132.0
+mouse_force_pass_scroll_events = false
+ingredient_name = "queijo"
+
+[node name="Ingredient5" parent="PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 424.0
+offset_top = 68.0
+offset_right = 488.0
+offset_bottom = 132.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("8_vitag")
+ingredient_name = "frango"
+
+[node name="DropArea" parent="PrepArea" instance=ExtResource("7_vitag")]
+layout_mode = 2
+offset_left = 240.0
+offset_top = 216.0
+offset_right = 390.0
+offset_bottom = 316.0
+mouse_force_pass_scroll_events = false
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RecipePanel" parent="HUD" instance=ExtResource("3_k3uf0")]
+layout_mode = 2
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 33.0
+offset_bottom = 79.0
+
+[node name="Label" type="Label" parent="HUD"]
+layout_mode = 2
+offset_left = 264.0
+offset_top = 24.0
+offset_right = 375.0
+offset_bottom = 47.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "Modo Preparo"
+
+[node name="FinishButton" type="Button" parent="HUD"]
+layout_mode = 2
+offset_left = 464.0
+offset_top = 304.0
+offset_right = 595.0
+offset_bottom = 335.0
+text = "Finalizar Pedido"
+
+[node name="FeedbackLabel" type="Label" parent="HUD"]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 192.0
+offset_right = 33.0
+offset_bottom = 215.0
+
+[connection signal="pressed" from="HUD/FinishButton" to="." method="_on_finish_button_pressed"]

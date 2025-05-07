@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch10a2d2ac4y4"]
+
+[ext_resource type="Script" uid="uid://dtv3ojoursc38" path="res://scripts/mode_end_of_day.gd" id="1_xrqmx"]
+[ext_resource type="Texture2D" uid="uid://cjbnqj36w6y5i" path="res://assets/bg3.png" id="2_xrqmx"]
+
+[node name="Mode_EndOfDay" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_xrqmx")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_xrqmx")
+centered = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 104.0
+offset_right = 365.0
+offset_bottom = 127.0
+text = "Fim do dia!"
+
+[node name="NextDayButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 136.0
+offset_right = 373.0
+offset_bottom = 167.0
+text = "Próximo dia"
+
+[connection signal="pressed" from="NextDayButton" to="." method="_on_next_day_button_pressed"]

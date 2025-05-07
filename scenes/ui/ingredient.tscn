@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://q0opr264a6np"]
+
+[ext_resource type="Texture2D" uid="uid://cgf02fngi8itp" path="res://assets/massa.png" id="1_aljnp"]
+[ext_resource type="Script" uid="uid://dpauq0rlgw54v" path="res://scripts/ingredient.gd" id="2_32tvu"]
+
+[node name="Ingredient" type="TextureRect"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 0
+texture = ExtResource("1_aljnp")
+stretch_mode = 2
+script = ExtResource("2_32tvu")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "massa"
+horizontal_alignment = 1
+vertical_alignment = 1
