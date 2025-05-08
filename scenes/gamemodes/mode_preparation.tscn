@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://d4fehmyo6hugb"]
+[gd_scene load_steps=11 format=3 uid="uid://d4fehmyo6hugb"]
 
 [ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
+[ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
 [ext_resource type="PackedScene" uid="uid://s7x1xuixglw4" path="res://scenes/ui/recipe_panel.tscn" id="3_k3uf0"]
 [ext_resource type="Texture2D" uid="uid://j3jo186eooa" path="res://assets/Sprite-0001.png" id="3_vitag"]
 [ext_resource type="PackedScene" uid="uid://q0opr264a6np" path="res://scenes/ui/ingredient.tscn" id="4_dowdn"]
@@ -34,6 +35,7 @@ custom_minimum_size = Vector2(1280, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+script = ExtResource("2_vitag")
 
 [node name="Fundo" type="TextureRect" parent="ScrollContainer/PrepArea"]
 layout_mode = 0
@@ -46,6 +48,15 @@ layout_mode = 2
 offset_left = 148.0
 offset_top = 64.0
 offset_right = 212.0
+offset_bottom = 128.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("5_f5t14")
+
+[node name="Ingredient6" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 832.0
+offset_top = 64.0
+offset_right = 896.0
 offset_bottom = 128.0
 mouse_force_pass_scroll_events = false
 texture = ExtResource("5_f5t14")

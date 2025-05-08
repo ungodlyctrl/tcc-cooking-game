@@ -7,6 +7,7 @@ extends Node2D
 @onready var money_label = $HUD/MoneyLabel
 @onready var day_label = $HUD/DayLabel
 @onready var drop_area := $Mode_Preparation/ScrollContainer/PrepArea/DropArea
+@onready var scroll_container: ScrollContainer = $Mode_Preparation/ScrollContainer
 
 enum GameMode { ATTENDANCE, PREPARATION, END_OF_DAY }
 
@@ -37,6 +38,9 @@ func switch_mode(new_mode: GameMode):
 
 	if new_mode == GameMode.ATTENDANCE:
 		load_new_recipe() #nova receita
+		
+	if new_mode == GameMode.PREPARATION:
+		scroll_container.scroll_horizontal = 0  # ⬅️ Reseta scroll
 
 func _on_time_tick():
 	current_time_minutes += 15

@@ -16,7 +16,7 @@ var max_scroll := 0
 var dragging := false
 var last_mouse_pos := Vector2.ZERO
 var scroll_margin := 50  # margem da tela onde começa a rolagem
-var scroll_speed := 600  # velocidade da rolagem
+var scroll_speed := 400  # velocidade da rolagem
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -30,26 +30,25 @@ func _gui_input(event):
 		scroll_container.scroll_horizontal -= delta.x
 
 func _process(delta):
-	#parte da limitação do scroll até o fundo
+	# Atualiza o max_scroll uma única vez corretamente
 	if fundo.texture is Texture2D:
 		var fundo_largura = fundo.texture.get_width()
 		var visivel_largura = scroll_container.size.x
-		var max_scroll = max(fundo_largura - visivel_largura, 0)
-		scroll_container.scroll_horizontal = clamp(scroll_container.scroll_horizontal, 0, max_scroll)
+		max_scroll = max(fundo_largura - visivel_largura, 0)
 
-	#parte de arrastar com ingrediente
+	# Se não está arrastando nada, apenas limita o scroll atual (não faz scroll automático)
 	if not DragManager.is_dragging_ingredient:
+		scroll_container.scroll_horizontal = clamp(scroll_container.scroll_horizontal, 0, max_scroll)
 		return
 
 	var mouse_x = get_viewport().get_mouse_position().x
-	var screen_width = get_viewport().size.x
+	var screen_width = get_viewport().get_visible_rect().size.x
 
-	var scroll = scroll_container.scroll_horizontal
-	var max_scroll = scroll_container.get_h_scroll_bar().max_value
+	var scroll_val = scroll_container.scroll_horizontal
 
-	if mouse_x > screen_width - scroll_margin:
-		scroll += scroll_speed * delta
-	elif mouse_x < scroll_margin:
-		scroll -= scroll_speed * delta
+	if mouse_x >= screen_width - scroll_margin:
+		scroll_val += scroll_speed * delta
+	elif mouse_x <= scroll_margin:
+		scroll_val -= scroll_speed * delta
 
-	scroll_container.scroll_horizontal = clamp(scroll, 0, max_scroll)
+	scroll_container.scroll_horizontal = clamp(scroll_val, 0, max_scroll)
