@@ -15,6 +15,8 @@ func _on_finish_button_pressed() -> void:
 var max_scroll := 0
 var dragging := false
 var last_mouse_pos := Vector2.ZERO
+var scroll_margin := 50  # margem da tela onde começa a rolagem
+var scroll_speed := 600  # velocidade da rolagem
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -35,5 +37,19 @@ func _process(delta):
 		var max_scroll = max(fundo_largura - visivel_largura, 0)
 		scroll_container.scroll_horizontal = clamp(scroll_container.scroll_horizontal, 0, max_scroll)
 
-	
-#oiiiiii
+	#parte de arrastar com ingrediente
+	if not DragManager.is_dragging_ingredient:
+		return
+
+	var mouse_x = get_viewport().get_mouse_position().x
+	var screen_width = get_viewport().size.x
+
+	var scroll = scroll_container.scroll_horizontal
+	var max_scroll = scroll_container.get_h_scroll_bar().max_value
+
+	if mouse_x > screen_width - scroll_margin:
+		scroll += scroll_speed * delta
+	elif mouse_x < scroll_margin:
+		scroll -= scroll_speed * delta
+
+	scroll_container.scroll_horizontal = clamp(scroll, 0, max_scroll)
