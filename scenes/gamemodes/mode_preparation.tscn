@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d4fehmyo6hugb"]
+[gd_scene load_steps=13 format=3 uid="uid://d4fehmyo6hugb"]
 
 [ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
 [ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://2td7yv7rmxn4" path="res://assets/óleo.png" id="6_pv3fr"]
 [ext_resource type="PackedScene" uid="uid://bey8ivj14oqip" path="res://scenes/ui/drop_area.tscn" id="7_vitag"]
 [ext_resource type="Texture2D" uid="uid://bbeyniyythwcm" path="res://assets/frango.png" id="8_vitag"]
+[ext_resource type="Texture2D" uid="uid://wxlvpsmabcwq" path="res://assets/prato.png" id="10_tsv3s"]
+[ext_resource type="Texture2D" uid="uid://d3ccwjvseuvup" path="res://assets/fogao.png" id="11_ytfgg"]
 
 [node name="Mode_Preparation" type="Control"]
 layout_mode = 3
@@ -45,10 +47,28 @@ texture = ExtResource("3_vitag")
 
 [node name="Ingredient" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
 layout_mode = 2
-offset_left = 148.0
-offset_top = 64.0
-offset_right = 212.0
-offset_bottom = 128.0
+offset_left = 32.0
+offset_top = 40.0
+offset_right = 96.0
+offset_bottom = 104.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("5_f5t14")
+
+[node name="Ingredient11" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 104.0
+offset_top = 256.0
+offset_right = 168.0
+offset_bottom = 320.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("5_f5t14")
+
+[node name="Ingredient15" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 320.0
+offset_top = 112.0
+offset_right = 384.0
+offset_bottom = 176.0
 mouse_force_pass_scroll_events = false
 texture = ExtResource("5_f5t14")
 
@@ -63,52 +83,147 @@ texture = ExtResource("5_f5t14")
 
 [node name="Ingredient2" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
 layout_mode = 2
-offset_left = 216.0
-offset_top = 64.0
-offset_right = 280.0
-offset_bottom = 128.0
+offset_left = 32.0
+offset_top = 112.0
+offset_right = 96.0
+offset_bottom = 176.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("5_dowdn")
+ingredient_name = "carne"
+
+[node name="Ingredient13" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 320.0
+offset_top = 40.0
+offset_right = 384.0
+offset_bottom = 104.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("5_dowdn")
+ingredient_name = "carne"
+
+[node name="Ingredient9" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 104.0
+offset_top = 184.0
+offset_right = 168.0
+offset_bottom = 248.0
 mouse_force_pass_scroll_events = false
 texture = ExtResource("5_dowdn")
 ingredient_name = "carne"
 
 [node name="Ingredient3" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
 layout_mode = 2
-offset_left = 284.0
-offset_top = 64.0
-offset_right = 348.0
-offset_bottom = 128.0
+offset_left = 32.0
+offset_top = 184.0
+offset_right = 96.0
+offset_bottom = 248.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("6_pv3fr")
+ingredient_name = "óleo"
+
+[node name="Ingredient8" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 104.0
+offset_top = 112.0
+offset_right = 168.0
+offset_bottom = 176.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("6_pv3fr")
+ingredient_name = "óleo"
+
+[node name="Ingredient12" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 176.0
+offset_top = 40.0
+offset_right = 240.0
+offset_bottom = 104.0
 mouse_force_pass_scroll_events = false
 texture = ExtResource("6_pv3fr")
 ingredient_name = "óleo"
 
 [node name="Ingredient4" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
 layout_mode = 2
-offset_left = 352.0
-offset_top = 64.0
-offset_right = 416.0
-offset_bottom = 128.0
+offset_left = 32.0
+offset_top = 256.0
+offset_right = 96.0
+offset_bottom = 320.0
+mouse_force_pass_scroll_events = false
+ingredient_name = "queijo"
+
+[node name="Ingredient14" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 248.0
+offset_top = 112.0
+offset_right = 312.0
+offset_bottom = 176.0
+mouse_force_pass_scroll_events = false
+ingredient_name = "queijo"
+
+[node name="Ingredient16" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 392.0
+offset_top = 40.0
+offset_right = 456.0
+offset_bottom = 104.0
 mouse_force_pass_scroll_events = false
 ingredient_name = "queijo"
 
 [node name="Ingredient5" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
 layout_mode = 2
-offset_left = 420.0
-offset_top = 64.0
-offset_right = 484.0
-offset_bottom = 128.0
+offset_left = 104.0
+offset_top = 40.0
+offset_right = 168.0
+offset_bottom = 104.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("8_vitag")
+ingredient_name = "frango"
+
+[node name="Ingredient7" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 248.0
+offset_top = 40.0
+offset_right = 312.0
+offset_bottom = 104.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("8_vitag")
+ingredient_name = "frango"
+
+[node name="Ingredient10" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 176.0
+offset_top = 112.0
+offset_right = 240.0
+offset_bottom = 176.0
 mouse_force_pass_scroll_events = false
 texture = ExtResource("8_vitag")
 ingredient_name = "frango"
 
 [node name="DropArea" parent="ScrollContainer/PrepArea" instance=ExtResource("7_vitag")]
 layout_mode = 2
-offset_left = 236.0
+offset_left = 192.0
 offset_top = 216.0
-offset_right = 386.0
+offset_right = 342.0
 offset_bottom = 316.0
 mouse_force_pass_scroll_events = false
 
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PrepArea"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 216.0
+offset_right = 456.0
+offset_bottom = 312.0
+texture = ExtResource("10_tsv3s")
+
+[node name="TextureRect2" type="TextureRect" parent="ScrollContainer/PrepArea"]
+layout_mode = 0
+offset_left = 472.0
+offset_top = 176.0
+offset_right = 622.0
+offset_bottom = 326.0
+texture = ExtResource("11_ytfgg")
+
 [node name="HUD" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
