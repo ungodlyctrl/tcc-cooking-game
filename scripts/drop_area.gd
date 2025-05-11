@@ -20,15 +20,16 @@ func _can_drop_data(position, data):
 	return typeof(data) == TYPE_STRING
 
 func _drop_data(position, data):
-	if data in used_ingredients:
-		print("⚠️ Ingrediente já adicionado:", data)
-		return
-	if typeof(data) == TYPE_STRING:
-		# Aqui você decide se esse ingrediente precisa ser cortado
-		if data in ["cenoura", "carne", "cebola"]:  # só corta os que precisam
-			var board = preload("res://scenes/minigames/cutting_board.tscn").instantiate()
-			board.ingredient_name = data
-			add_child(board)
+	if data in ["cenoura", "carne", "cebola"]:  # ingredientes que exigem corte
+		var board = preload("res://scenes/minigames/cutting_board_qte.tscn").instantiate()
+		board.ingredient_name = data
+
+		# Adiciona na cena principal — supondo que esteja numa camada visível
+		get_tree().current_scene.add_child(board)
+
+		# Coloca a tábua exatamente sobre essa DropArea
+		var global = self.get_global_position()
+		board.position = get_tree().current_scene.to_local(global)
 
 	used_ingredients.append(data)
 

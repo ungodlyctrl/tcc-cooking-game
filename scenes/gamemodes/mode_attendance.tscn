@@ -88,13 +88,28 @@ texture = ExtResource("2_kpxur")
 centered = false
 
 [node name="DialogueBox" parent="." instance=ExtResource("3_tpq4o")]
-visible = false
-custom_minimum_size = Vector2(180, 0)
+custom_minimum_size = Vector2(170, 0)
 layout_mode = 1
-offset_left = 377.0
-offset_top = 56.0
-offset_right = 577.0
-offset_bottom = 56.0
+offset_left = 373.0
+offset_top = 54.0
+offset_right = 543.0
+offset_bottom = 54.0
+
+[node name="ConfirmButton" type="Button" parent="DialogueBox"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 36.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Confirmar pedido"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -109,13 +124,4 @@ texture = ExtResource("5_6enio")
 position = Vector2(320, 180)
 texture = ExtResource("6_k6rd5")
 
-[node name="ConfirmButton" type="Button" parent="."]
-texture_filter = 1
-layout_mode = 0
-offset_left = 474.0
-offset_top = 257.0
-offset_right = 619.0
-offset_bottom = 288.0
-text = "Confirmar pedido"
-
-[connection signal="pressed" from="ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="DialogueBox/ConfirmButton" to="." method="_on_confirm_button_pressed"]
