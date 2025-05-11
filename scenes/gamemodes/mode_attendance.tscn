@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dehkeao1vbiy0"]
+[gd_scene load_steps=10 format=3 uid="uid://dehkeao1vbiy0"]
 
 [ext_resource type="Script" uid="uid://6dn564kkwxms" path="res://scripts/mode_attendance.gd" id="1_jdssm"]
-[ext_resource type="Texture2D" uid="uid://divimu048n3qm" path="res://assets/fundo.png" id="2_kpxur"]
+[ext_resource type="Texture2D" uid="uid://0qin4q4lmblx" path="res://assets/fundos/Foodtruck.png" id="2_kpxur"]
 [ext_resource type="PackedScene" uid="uid://blgvyh35rltdl" path="res://scenes/ui/DialogueBox.tscn" id="3_tpq4o"]
-[ext_resource type="Texture2D" uid="uid://lbqoakhf3yqo" path="res://assets/fundo do fundo.png" id="3_y56bg"]
+[ext_resource type="Texture2D" uid="uid://bk0iu08dciiqr" path="res://assets/fundos/fundo.png" id="3_y56bg"]
+[ext_resource type="Texture2D" uid="uid://bimj0humej7l2" path="res://assets/fundos/relogio.png" id="5_6enio"]
+[ext_resource type="Texture2D" uid="uid://ca0kg54ynlnfb" path="res://assets/fundos/calendario.png" id="6_k6rd5"]
 
 [sub_resource type="Animation" id="Animation_kpxur"]
 length = 0.001
@@ -45,7 +47,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(165, 334), Vector2(165, 182)]
+"values": [Vector2(320, 334), Vector2(320, 167)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -73,39 +75,47 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_jdssm")
 
-[node name="Background" type="Sprite2D" parent="."]
-z_index = 2
-texture = ExtResource("2_kpxur")
-centered = false
-
 [node name="Background2" type="Sprite2D" parent="."]
 texture = ExtResource("3_y56bg")
 centered = false
 
-[node name="ConfirmButton" type="Button" parent="."]
-texture_filter = 1
-layout_mode = 0
-offset_left = 298.0
-offset_top = 172.0
-offset_right = 443.0
-offset_bottom = 203.0
-text = "Confirmar pedido"
-
-[node name="DialogueBox" parent="." instance=ExtResource("3_tpq4o")]
-layout_mode = 1
-offset_left = 300.0
-offset_top = 79.0
-offset_right = 500.0
-offset_bottom = 79.0
-
 [node name="ClientSprite" type="Sprite2D" parent="."]
 modulate = Color(0.01, 0.00990167, 0.0099, 0)
-z_index = 1
 position = Vector2(165, 334)
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_kpxur")
+centered = false
+
+[node name="DialogueBox" parent="." instance=ExtResource("3_tpq4o")]
+visible = false
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 1
+offset_left = 377.0
+offset_top = 56.0
+offset_right = 577.0
+offset_bottom = 56.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_y56bg")
 }
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+texture = ExtResource("5_6enio")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+texture = ExtResource("6_k6rd5")
+
+[node name="ConfirmButton" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 474.0
+offset_top = 257.0
+offset_right = 619.0
+offset_bottom = 288.0
+text = "Confirmar pedido"
 
 [connection signal="pressed" from="ConfirmButton" to="." method="_on_confirm_button_pressed"]

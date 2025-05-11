@@ -1,4 +1,4 @@
-extends Panel
+extends TextureRect
 
 @onready var used_list := $VBoxContainer/UsedList
 var used_ingredients: Array = []
@@ -23,6 +23,12 @@ func _drop_data(position, data):
 	if data in used_ingredients:
 		print("⚠️ Ingrediente já adicionado:", data)
 		return
+	if typeof(data) == TYPE_STRING:
+		# Aqui você decide se esse ingrediente precisa ser cortado
+		if data in ["cenoura", "carne", "cebola"]:  # só corta os que precisam
+			var board = preload("res://scenes/minigames/cutting_board.tscn").instantiate()
+			board.ingredient_name = data
+			add_child(board)
 
 	used_ingredients.append(data)
 

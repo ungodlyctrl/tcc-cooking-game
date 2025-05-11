@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://hic04vftrqg1"]
+
+[ext_resource type="Script" uid="uid://1p06mga7owgm" path="res://scripts/cutting_board.gd" id="1_tosx2"]
+[ext_resource type="Texture2D" uid="uid://dtdulxo2ea1g8" path="res://assets/tabua.png" id="2_t3hvw"]
+[ext_resource type="Texture2D" uid="uid://bv1bdm0dwyuy0" path="res://assets/faca.png" id="3_w50t5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndbns"]
+bg_color = Color(0.939521, 0.882097, 0.857261, 1)
+
+[node name="CuttingBoard" type="Control"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_tosx2")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 100.0
+texture = ExtResource("2_t3hvw")
+
+[node name="IngredientSprite" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 0
+offset_left = 15.0
+offset_top = -6.0
+offset_right = 127.0
+offset_bottom = 106.0
+stretch_mode = 5
+
+[node name="CutLines" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="CutLine" type="Panel" parent="CutLines"]
+modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ndbns")
+
+[node name="Knife" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 50.0
+offset_bottom = 100.0
+texture = ExtResource("3_w50t5")
+stretch_mode = 4
+
+[node name="FeedbackLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+horizontal_alignment = 1

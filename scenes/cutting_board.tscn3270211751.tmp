@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://hic04vftrqg1"]
+
+[ext_resource type="Script" uid="uid://1p06mga7owgm" path="res://scripts/cutting_board.gd" id="1_denqu"]
+[ext_resource type="Texture2D" uid="uid://dtdulxo2ea1g8" path="res://assets/tabua.png" id="2_m357l"]
+[ext_resource type="Texture2D" uid="uid://d27roy52odomm" path="res://assets/steak1_64x64.png" id="3_w3tbc"]
+[ext_resource type="Texture2D" uid="uid://bv1bdm0dwyuy0" path="res://assets/faca.png" id="4_jhklc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndbns"]
+bg_color = Color(0.939521, 0.882097, 0.857261, 1)
+
+[node name="CuttingBoard" type="Control"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_denqu")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 100.0
+texture = ExtResource("2_m357l")
+
+[node name="IngredientSprite" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 0
+offset_left = 15.0
+offset_top = -6.0
+offset_right = 127.0
+offset_bottom = 106.0
+texture = ExtResource("3_w3tbc")
+stretch_mode = 5
+
+[node name="CutLinesContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CutLines" type="Panel" parent="CutLinesContainer"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ndbns")
+
+[node name="Knife" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 19.0
+offset_right = 19.0
+offset_bottom = 40.0
+texture = ExtResource("4_jhklc")
+
+[node name="ProgressLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

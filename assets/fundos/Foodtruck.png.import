@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bq4obdl8ut83d"
-path="res://.godot/imported/carne.png-050691f08b412fa77486844f3dfce0da.ctex"
+uid="uid://0qin4q4lmblx"
+path="res://.godot/imported/Foodtruck.png-25ecd85a72e614cd45b270d4a4a384af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/carne.png"
-dest_files=["res://.godot/imported/carne.png-050691f08b412fa77486844f3dfce0da.ctex"]
+source_file="res://assets/fundos/Foodtruck.png"
+dest_files=["res://.godot/imported/Foodtruck.png-25ecd85a72e614cd45b270d4a4a384af.ctex"]
 
 [params]
 
