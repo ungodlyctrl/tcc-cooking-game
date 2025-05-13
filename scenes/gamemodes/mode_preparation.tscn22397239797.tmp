@@ -1,0 +1,333 @@
+[gd_scene load_steps=19 format=3 uid="uid://d4fehmyo6hugb"]
+
+[ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
+[ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
+[ext_resource type="Texture2D" uid="uid://cl0tdi3mgxlmv" path="res://assets/bancada3.png" id="3_axkwh"]
+[ext_resource type="PackedScene" uid="uid://s7x1xuixglw4" path="res://scenes/ui/recipe_panel.tscn" id="3_k3uf0"]
+[ext_resource type="PackedScene" uid="uid://q0opr264a6np" path="res://scenes/ui/ingredient.tscn" id="4_dowdn"]
+[ext_resource type="Texture2D" uid="uid://c2j4uen2bu1lv" path="res://assets/Batata.png" id="5_ytfgg"]
+[ext_resource type="Texture2D" uid="uid://elnc4tsbweco" path="res://assets/Mortadela.png" id="6_b513c"]
+[ext_resource type="Texture2D" uid="uid://c727pkqj563bo" path="res://assets/Presunto.png" id="7_5avst"]
+[ext_resource type="PackedScene" uid="uid://bey8ivj14oqip" path="res://scenes/ui/drop_area.tscn" id="7_vitag"]
+[ext_resource type="Texture2D" uid="uid://bdojo055at6ke" path="res://assets/Queijo.png" id="8_s610r"]
+[ext_resource type="Texture2D" uid="uid://c0ay8m1qs6qrk" path="res://assets/Salsicha.png" id="9_ktx3g"]
+[ext_resource type="Texture2D" uid="uid://wxlvpsmabcwq" path="res://assets/prato.png" id="10_tsv3s"]
+[ext_resource type="Texture2D" uid="uid://c7ipg8q1rlbtw" path="res://assets/Desenho 4 (4).png" id="11_s610r"]
+[ext_resource type="Texture2D" uid="uid://d3ccwjvseuvup" path="res://assets/fogao.png" id="11_ytfgg"]
+[ext_resource type="Texture2D" uid="uid://wqnu4k7wqwhv" path="res://assets/utensilios/frigideira.png" id="13_5avst"]
+[ext_resource type="Script" uid="uid://i0hbnj1ok75i" path="res://scripts/stove_drop_area.gd" id="14_ktx3g"]
+[ext_resource type="Texture2D" uid="uid://snf6kl2pdf58" path="res://assets/utensilios/panela.png" id="14_s610r"]
+[ext_resource type="Script" uid="uid://cwysf6owu3ccq" path="res://scripts/tool.gd" id="17_axkwh"]
+
+[node name="Mode_Preparation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dnbch")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+clip_contents = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scroll_horizontal_custom_step = 0.0
+scroll_vertical_custom_step = 0.0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+
+[node name="PrepArea" type="Control" parent="ScrollContainer"]
+custom_minimum_size = Vector2(1280, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("2_vitag")
+
+[node name="Fundo" type="TextureRect" parent="ScrollContainer/PrepArea"]
+custom_minimum_size = Vector2(1280, 360)
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 360.0
+texture = ExtResource("3_axkwh")
+
+[node name="Ingredient" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 40.0
+offset_right = 96.0
+offset_bottom = 104.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("5_ytfgg")
+ingredient_id = null
+state = null
+
+[node name="Ingredient11" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 101.0
+offset_top = 247.0
+offset_right = 165.0
+offset_bottom = 311.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("5_ytfgg")
+ingredient_id = null
+state = null
+
+[node name="Ingredient15" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 307.0
+offset_top = 109.0
+offset_right = 371.0
+offset_bottom = 173.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("6_b513c")
+ingredient_id = null
+state = null
+
+[node name="Ingredient2" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 109.0
+offset_right = 96.0
+offset_bottom = 173.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("7_5avst")
+ingredient_id = null
+state = null
+
+[node name="Ingredient13" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 376.0
+offset_top = 40.0
+offset_right = 440.0
+offset_bottom = 104.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("7_5avst")
+ingredient_id = null
+state = null
+
+[node name="Ingredient9" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 101.0
+offset_top = 178.0
+offset_right = 165.0
+offset_bottom = 242.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("8_s610r")
+ingredient_id = null
+state = null
+
+[node name="Ingredient3" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 178.0
+offset_right = 96.0
+offset_bottom = 242.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("9_ktx3g")
+ingredient_id = null
+state = null
+
+[node name="Ingredient8" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 101.0
+offset_top = 109.0
+offset_right = 165.0
+offset_bottom = 173.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("8_s610r")
+ingredient_id = null
+state = null
+
+[node name="Ingredient12" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+offset_left = 170.0
+offset_top = 40.0
+offset_right = 234.0
+offset_bottom = 104.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("9_ktx3g")
+stretch_mode = 0
+ingredient_id = null
+state = null
+
+[node name="Ingredient4" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 247.0
+offset_right = 96.0
+offset_bottom = 311.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("7_5avst")
+ingredient_id = null
+state = null
+
+[node name="Ingredient14" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 239.0
+offset_top = 109.0
+offset_right = 303.0
+offset_bottom = 173.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("5_ytfgg")
+ingredient_id = null
+state = null
+
+[node name="Ingredient16" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 445.0
+offset_top = 40.0
+offset_right = 509.0
+offset_bottom = 104.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("9_ktx3g")
+ingredient_id = null
+state = null
+
+[node name="Ingredient17" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 377.0
+offset_top = 109.0
+offset_right = 441.0
+offset_bottom = 173.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("5_ytfgg")
+ingredient_id = null
+state = null
+
+[node name="Ingredient5" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 101.0
+offset_top = 40.0
+offset_right = 165.0
+offset_bottom = 104.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("6_b513c")
+ingredient_id = null
+state = null
+
+[node name="Ingredient7" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+layout_mode = 2
+offset_left = 307.0
+offset_top = 40.0
+offset_right = 371.0
+offset_bottom = 104.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("8_s610r")
+ingredient_id = null
+state = null
+
+[node name="Ingredient10" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+offset_left = 170.0
+offset_top = 109.0
+offset_right = 234.0
+offset_bottom = 173.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("6_b513c")
+stretch_mode = 0
+ingredient_id = null
+state = null
+
+[node name="DropArea" parent="ScrollContainer/PrepArea" instance=ExtResource("7_vitag")]
+layout_mode = 2
+offset_left = 192.0
+offset_top = 192.0
+offset_right = 342.0
+offset_bottom = 292.0
+mouse_force_pass_scroll_events = false
+texture = ExtResource("11_s610r")
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PrepArea"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 200.0
+offset_right = 456.0
+offset_bottom = 296.0
+texture = ExtResource("10_tsv3s")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/PrepArea"]
+custom_minimum_size = Vector2(180, 76)
+layout_mode = 0
+offset_left = 552.0
+offset_top = 32.0
+offset_right = 732.0
+offset_bottom = 108.0
+alignment = 1
+
+[node name="Frigideira" type="TextureRect" parent="ScrollContainer/PrepArea/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("13_5avst")
+script = ExtResource("17_axkwh")
+tool_type = "frigideira"
+
+[node name="Panela" type="TextureRect" parent="ScrollContainer/PrepArea/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("14_s610r")
+script = ExtResource("17_axkwh")
+
+[node name="StoveArea" type="TextureRect" parent="ScrollContainer/PrepArea"]
+layout_mode = 0
+offset_left = 552.0
+offset_top = 128.0
+offset_right = 727.0
+offset_bottom = 303.0
+texture = ExtResource("11_ytfgg")
+script = ExtResource("14_ktx3g")
+
+[node name="ToolVisual" type="TextureRect" parent="ScrollContainer/PrepArea/StoveArea"]
+custom_minimum_size = Vector2(76, 76)
+layout_mode = 0
+offset_left = 11.0
+offset_top = 93.0
+offset_right = 87.0
+offset_bottom = 169.0
+
+[node name="HUD" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="RecipePanel" parent="HUD" instance=ExtResource("3_k3uf0")]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 48.0
+offset_right = 25.0
+offset_bottom = 79.0
+
+[node name="Label" type="Label" parent="HUD"]
+visible = false
+layout_mode = 0
+offset_left = 264.0
+offset_top = 24.0
+offset_right = 375.0
+offset_bottom = 47.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "Modo Preparo"
+
+[node name="FinishButton" type="Button" parent="HUD"]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 307.0
+offset_right = 629.0
+offset_bottom = 338.0
+text = "Finalizar Pedido"
+
+[node name="FeedbackLabel" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 192.0
+offset_right = 33.0
+offset_bottom = 215.0
+
+[connection signal="pressed" from="HUD/FinishButton" to="." method="_on_finish_button_pressed"]

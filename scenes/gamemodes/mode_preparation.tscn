@@ -2,17 +2,17 @@
 
 [ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
 [ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
+[ext_resource type="Texture2D" uid="uid://cl0tdi3mgxlmv" path="res://assets/bancada3.png" id="3_axkwh"]
 [ext_resource type="PackedScene" uid="uid://s7x1xuixglw4" path="res://scenes/ui/recipe_panel.tscn" id="3_k3uf0"]
-[ext_resource type="Texture2D" uid="uid://j3jo186eooa" path="res://assets/Sprite-0001.png" id="3_vitag"]
-[ext_resource type="PackedScene" uid="uid://q0opr264a6np" path="res://scenes/ui/ingredient.tscn" id="4_dowdn"]
-[ext_resource type="Texture2D" uid="uid://c2j4uen2bu1lv" path="res://assets/Batata.png" id="5_ytfgg"]
-[ext_resource type="Texture2D" uid="uid://elnc4tsbweco" path="res://assets/Mortadela.png" id="6_b513c"]
-[ext_resource type="Texture2D" uid="uid://c727pkqj563bo" path="res://assets/Presunto.png" id="7_5avst"]
 [ext_resource type="PackedScene" uid="uid://bey8ivj14oqip" path="res://scenes/ui/drop_area.tscn" id="7_vitag"]
-[ext_resource type="Texture2D" uid="uid://bdojo055at6ke" path="res://assets/Queijo.png" id="8_s610r"]
-[ext_resource type="Texture2D" uid="uid://c0ay8m1qs6qrk" path="res://assets/Salsicha.png" id="9_ktx3g"]
 [ext_resource type="Texture2D" uid="uid://wxlvpsmabcwq" path="res://assets/prato.png" id="10_tsv3s"]
-[ext_resource type="Texture2D" uid="uid://d3ccwjvseuvup" path="res://assets/fogao.png" id="11_ytfgg"]
+[ext_resource type="Texture2D" uid="uid://c7ipg8q1rlbtw" path="res://assets/Desenho 4 (4).png" id="11_s610r"]
+[ext_resource type="Texture2D" uid="uid://d26rq8sn4y5jo" path="res://assets/fogão.png" id="11_ytfgg"]
+[ext_resource type="Texture2D" uid="uid://wqnu4k7wqwhv" path="res://assets/utensilios/frigideira.png" id="13_5avst"]
+[ext_resource type="Script" uid="uid://i0hbnj1ok75i" path="res://scripts/stove_drop_area.gd" id="14_ktx3g"]
+[ext_resource type="Texture2D" uid="uid://snf6kl2pdf58" path="res://assets/utensilios/panela.png" id="14_s610r"]
+[ext_resource type="Script" uid="uid://cwysf6owu3ccq" path="res://scripts/tool.gd" id="17_axkwh"]
+[ext_resource type="PackedScene" uid="uid://r122jmxfj5su" path="res://scenes/ui/container_slot.tscn" id="19_7bx2v"]
 
 [node name="Mode_Preparation" type="Control"]
 layout_mode = 3
@@ -41,187 +41,171 @@ mouse_filter = 2
 script = ExtResource("2_vitag")
 
 [node name="Fundo" type="TextureRect" parent="ScrollContainer/PrepArea"]
+custom_minimum_size = Vector2(1280, 360)
 layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 360.0
-texture = ExtResource("3_vitag")
+texture = ExtResource("3_axkwh")
 
-[node name="Ingredient" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-layout_mode = 2
+[node name="ContainerSlot" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
 offset_left = 32.0
 offset_top = 40.0
-offset_right = 96.0
+offset_right = -1184.0
 offset_bottom = 104.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("5_ytfgg")
 
-[node name="Ingredient11" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-layout_mode = 2
+[node name="ContainerSlot2" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
 offset_left = 101.0
-offset_top = 247.0
-offset_right = 165.0
-offset_bottom = 311.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("5_ytfgg")
-
-[node name="Ingredient15" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-layout_mode = 2
-offset_left = 307.0
-offset_top = 109.0
-offset_right = 371.0
-offset_bottom = 173.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("6_b513c")
-
-[node name="Ingredient2" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-layout_mode = 2
-offset_left = 32.0
-offset_top = 109.0
-offset_right = 96.0
-offset_bottom = 173.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("7_5avst")
-ingredient_name = "carne"
-
-[node name="Ingredient13" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-layout_mode = 2
-offset_left = 376.0
 offset_top = 40.0
-offset_right = 440.0
+offset_right = -1115.0
 offset_bottom = 104.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("7_5avst")
-ingredient_name = "carne"
+ingredient_id = "arroz"
 
-[node name="Ingredient9" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-layout_mode = 2
-offset_left = 101.0
-offset_top = 178.0
-offset_right = 165.0
-offset_bottom = 242.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("8_s610r")
-ingredient_name = "carne"
-
-[node name="Ingredient3" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-layout_mode = 2
-offset_left = 32.0
-offset_top = 178.0
-offset_right = 96.0
-offset_bottom = 242.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("9_ktx3g")
-ingredient_name = "óleo"
-
-[node name="Ingredient8" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-layout_mode = 2
-offset_left = 101.0
-offset_top = 109.0
-offset_right = 165.0
-offset_bottom = 173.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("8_s610r")
-ingredient_name = "óleo"
-
-[node name="Ingredient12" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-custom_minimum_size = Vector2(128, 64)
-layout_mode = 2
+[node name="ContainerSlot3" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
 offset_left = 170.0
 offset_top = 40.0
-offset_right = 234.0
+offset_right = -1046.0
 offset_bottom = 104.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("9_ktx3g")
-stretch_mode = 0
-ingredient_name = "óleo"
+ingredient_id = "mortadela"
 
-[node name="Ingredient4" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-layout_mode = 2
+[node name="ContainerSlot4" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_left = 239.0
+offset_top = 40.0
+offset_right = -977.0
+offset_bottom = 104.0
+ingredient_id = "queijo"
+
+[node name="ContainerSlot5" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_left = 308.0
+offset_top = 40.0
+offset_right = -908.0
+offset_bottom = 104.0
+ingredient_id = "presunto"
+
+[node name="ContainerSlot17" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_left = 446.0
+offset_top = 40.0
+offset_right = -770.0
+offset_bottom = 104.0
+ingredient_id = "pao de queijo"
+
+[node name="ContainerSlot6" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_left = 377.0
+offset_top = 40.0
+offset_right = -839.0
+offset_bottom = 104.0
+ingredient_id = "farofa"
+
+[node name="ContainerSlot7" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_left = 32.0
+offset_top = 109.0
+offset_right = -1184.0
+offset_bottom = 173.0
+ingredient_id = "cuscuz"
+
+[node name="ContainerSlot8" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_left = 32.0
+offset_top = 178.0
+offset_right = -1184.0
+offset_bottom = 242.0
+ingredient_id = "farofa"
+
+[node name="ContainerSlot9" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
 offset_left = 32.0
 offset_top = 247.0
-offset_right = 96.0
+offset_right = -1184.0
 offset_bottom = 311.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("7_5avst")
-ingredient_name = "queijo"
+ingredient_id = "mortadela"
 
-[node name="Ingredient14" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-layout_mode = 2
+[node name="ContainerSlot10" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_left = 101.0
+offset_top = 109.0
+offset_right = -1115.0
+offset_bottom = 173.0
+ingredient_id = "presunto"
+
+[node name="ContainerSlot13" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_left = 170.0
+offset_top = 109.0
+offset_right = -1046.0
+offset_bottom = 173.0
+ingredient_id = "salsicha"
+
+[node name="ContainerSlot14" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
 offset_left = 239.0
 offset_top = 109.0
-offset_right = 303.0
+offset_right = -977.0
 offset_bottom = 173.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("5_ytfgg")
-ingredient_name = "queijo"
+ingredient_id = "carne"
 
-[node name="Ingredient16" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-layout_mode = 2
-offset_left = 445.0
-offset_top = 40.0
-offset_right = 509.0
-offset_bottom = 104.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("9_ktx3g")
-ingredient_name = "queijo"
+[node name="ContainerSlot15" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_left = 308.0
+offset_top = 109.0
+offset_right = -908.0
+offset_bottom = 173.0
+ingredient_id = "arroz"
 
-[node name="Ingredient17" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-layout_mode = 2
+[node name="ContainerSlot16" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
 offset_left = 377.0
 offset_top = 109.0
-offset_right = 441.0
+offset_right = -839.0
 offset_bottom = 173.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("5_ytfgg")
-ingredient_name = "queijo"
 
-[node name="Ingredient5" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-layout_mode = 2
+[node name="ContainerSlot11" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
 offset_left = 101.0
-offset_top = 40.0
-offset_right = 165.0
-offset_bottom = 104.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("6_b513c")
-ingredient_name = "frango"
+offset_top = 178.0
+offset_right = -1115.0
+offset_bottom = 242.0
+ingredient_id = "pao de queijo"
 
-[node name="Ingredient7" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-layout_mode = 2
-offset_left = 307.0
-offset_top = 40.0
-offset_right = 371.0
-offset_bottom = 104.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("8_s610r")
-ingredient_name = "frango"
-
-[node name="Ingredient10" parent="ScrollContainer/PrepArea" instance=ExtResource("4_dowdn")]
-custom_minimum_size = Vector2(64, 32)
-layout_mode = 2
-offset_left = 170.0
-offset_top = 109.0
-offset_right = 234.0
-offset_bottom = 173.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("6_b513c")
-stretch_mode = 0
-ingredient_name = "frango"
+[node name="ContainerSlot12" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_left = 101.0
+offset_top = 247.0
+offset_right = -1115.0
+offset_bottom = 311.0
+ingredient_id = "queijo"
 
 [node name="DropArea" parent="ScrollContainer/PrepArea" instance=ExtResource("7_vitag")]
 layout_mode = 2
-offset_left = 184.0
-offset_top = 200.0
-offset_right = 334.0
-offset_bottom = 300.0
+offset_left = 192.0
+offset_top = 192.0
+offset_right = 342.0
+offset_bottom = 292.0
 mouse_force_pass_scroll_events = false
-
-[node name="TextureRect2" type="TextureRect" parent="ScrollContainer/PrepArea"]
-layout_mode = 0
-offset_left = 552.0
-offset_top = 128.0
-offset_right = 727.0
-offset_bottom = 303.0
-texture = ExtResource("11_ytfgg")
+texture = ExtResource("11_s610r")
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/PrepArea"]
 layout_mode = 0
@@ -231,23 +215,45 @@ offset_right = 456.0
 offset_bottom = 296.0
 texture = ExtResource("10_tsv3s")
 
-[node name="TextureRect3" type="TextureRect" parent="ScrollContainer/PrepArea"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/PrepArea"]
+custom_minimum_size = Vector2(180, 76)
 layout_mode = 0
-offset_left = 536.0
-offset_top = 24.0
-offset_right = 632.0
-offset_bottom = 120.0
-texture = ExtResource("10_tsv3s")
+offset_left = 552.0
+offset_top = 32.0
+offset_right = 806.0
+offset_bottom = 112.0
+alignment = 1
 
-[node name="TextureRect4" type="TextureRect" parent="ScrollContainer/PrepArea"]
+[node name="Panela" type="TextureRect" parent="ScrollContainer/PrepArea/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("14_s610r")
+script = ExtResource("17_axkwh")
+tool_id = "panela"
+
+[node name="Frigideira" type="TextureRect" parent="ScrollContainer/PrepArea/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("13_5avst")
+script = ExtResource("17_axkwh")
+
+[node name="StoveArea" type="TextureRect" parent="ScrollContainer/PrepArea"]
+custom_minimum_size = Vector2(215, 175)
 layout_mode = 0
-offset_left = 632.0
-offset_top = 24.0
-offset_right = 728.0
-offset_bottom = 120.0
-texture = ExtResource("10_tsv3s")
+offset_left = 552.0
+offset_top = 128.0
+offset_right = 722.0
+offset_bottom = 258.0
+texture = ExtResource("11_ytfgg")
+script = ExtResource("14_ktx3g")
+
+[node name="ToolVisual" type="TextureRect" parent="ScrollContainer/PrepArea/StoveArea"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 77.0
+offset_right = 8.0
+offset_bottom = 77.0
 
 [node name="HUD" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -277,10 +283,10 @@ text = "Modo Preparo"
 
 [node name="FinishButton" type="Button" parent="HUD"]
 layout_mode = 0
-offset_left = 464.0
-offset_top = 304.0
-offset_right = 595.0
-offset_bottom = 335.0
+offset_left = 498.0
+offset_top = 307.0
+offset_right = 629.0
+offset_bottom = 338.0
 text = "Finalizar Pedido"
 
 [node name="FeedbackLabel" type="Label" parent="HUD"]

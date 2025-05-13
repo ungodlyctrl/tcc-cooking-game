@@ -37,7 +37,7 @@ func _process(delta):
 		max_scroll = max(fundo_largura - visivel_largura, 0)
 
 	# Se não está arrastando nada, apenas limita o scroll atual (não faz scroll automático)
-	if not DragManager.is_dragging_ingredient:
+	if DragManager.current_drag_type != DragManager.DragType.INGREDIENT:
 		scroll_container.scroll_horizontal = clamp(scroll_container.scroll_horizontal, 0, max_scroll)
 		return
 

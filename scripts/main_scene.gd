@@ -73,6 +73,7 @@ func show_random_client():
 		preload("res://assets/clients/client_3.png"),
 		preload("res://assets/clients/client_4.png"),
 		preload("res://assets/clients/client_5.png"),
+		preload("res://assets/clients/client_6.png"),
 	]
 
 	var random_texture = client_sprites.pick_random()

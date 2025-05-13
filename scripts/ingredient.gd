@@ -1,28 +1,40 @@
 extends TextureRect
 
-@export var ingredient_name := "massa"
+@export var ingredient_id := "massa"
+@export var state := "raw"  # Estados possíveis: "raw", "cut", "cooked", etc.
 
 func _ready():
-	$Label.text = ingredient_name.capitalize()
+	print("🔍 IngredientDatabase:", IngredientDatabase)
+	print("🍠 Path batata crua:", IngredientDatabase.get_sprite_path("batata", "raw"))
+	_update_visual()
+
+func _update_visual():
+	var path = IngredientDatabase.get_sprite_path(ingredient_id, state)
+	if path != "":
+		texture = load(path)
+	$Label.text = IngredientDatabase.get_display_name(ingredient_id, state)
 
 func _get_drag_data(position):
-	print("🎯 DRAG START:", ingredient_name)
+	print("🎯 DRAG START:", ingredient_id, " (", state, ")")
 	var preview = self.duplicate()
-	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE  # ⚠️ coloque ANTES do return
+	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	set_drag_preview(preview)
-	DragManager.is_dragging_ingredient = true
+
+	DragManager.current_drag_type = DragManager.DragType.INGREDIENT
 	print("🟡 Início do drag!")
-	return ingredient_name
-	
-	
+
+	return {
+		"id": ingredient_id,
+		"state": state
+	}
+
 func _drop_data(position, data):
-	DragManager.is_dragging_ingredient = false
+	DragManager.current_drag_type = DragManager.DragType.NONE
 
 func _notification(what):
 	if what == NOTIFICATION_DRAG_END:
-		DragManager.is_dragging_ingredient = false
-		
+		DragManager.current_drag_type = DragManager.DragType.NONE
+
 func _gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-		DragManager.is_dragging_ingredient = false  # backup se drop não for detectado
-	
+		DragManager.current_drag_type = DragManager.DragType.NONE

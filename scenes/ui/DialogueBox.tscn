@@ -3,18 +3,21 @@
 [ext_resource type="Script" uid="uid://ufe5b0qa0asc" path="res://scenes/ui/dialogue_box.gd" id="1_2c88n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2c88n"]
-bg_color = Color(0.965, 0.506, 0.506, 0.884)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.923236, 0.953929, 0.96407, 1)
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.964706, 0.505882, 0.505882, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 corner_detail = 5
 expand_margin_left = 10.0
+shadow_color = Color(0.227, 0.307, 0.582, 0.89)
+shadow_size = 1
+shadow_offset = Vector2(-1, 1)
 
 [node name="DialogueBox" type="Panel"]
 custom_minimum_size = Vector2(200, 0)
@@ -35,6 +38,7 @@ grow_vertical = 2
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.0570824, 0.0902381, 0.205996, 1)
 text = "Capricha na fritura do pastel, mas sem pimenta dessa vez, beleza?"
 fit_content = true
 scroll_active = false

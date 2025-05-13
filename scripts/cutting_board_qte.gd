@@ -8,21 +8,23 @@ extends Control
 @onready var knife = $Knife
 @onready var feedback = $FeedbackLabel
 
-var pointer_speed := 80  # pixels por segundo (ajuste conforme necessário)
-var max_time := 4.0  # tempo total de movimento
+var pointer_speed := 80
+var max_time := 4.0
 var hit_registered := false
 var score := 0
-var attempts := 3  # número de tentativas permitidas
+var attempts := 3
 
 func _ready():
-	ingredient_sprite.texture = load("res://assets/ingredientes/%s.png" % ingredient_name)
+	var tex_path = IngredientDatabase.get_sprite_path(ingredient_name, "raw")
+	if tex_path == "":
+		push_error("❌ Sprite de ingrediente não encontrado para: %s (raw)" % ingredient_name)
+	else:
+		ingredient_sprite.texture = load(tex_path)
+
 	pointer.position.x = 0
 	knife.modulate.a = 0
 	feedback.text = ""
 	set_process(true)
-	print("Pointer:", pointer)
-	print("Knife:", knife)
-	print("Zones:", zones)
 
 func _process(delta):
 	if hit_registered:
@@ -47,7 +49,7 @@ func _attempt_cut():
 		var zone_end = zone.position.x + zone.size.x
 		if pointer_x >= zone_start and pointer_x <= zone_end:
 			success = true
-			zone.modulate = Color(0.0, 1.0, 0.0, 0.7)  # muda para verde forte
+			zone.modulate = Color(0.0, 1.0, 0.0, 0.7)
 			score += 1
 			break
 
@@ -56,7 +58,6 @@ func _attempt_cut():
 	
 	if attempts <= 0:
 		end_qte()
-
 func _show_knife_effect():
 	var ingredient_pos = ingredient_sprite.position
 	var ingredient_width = ingredient_sprite.size.x
@@ -65,11 +66,10 @@ func _show_knife_effect():
 	var section_index = clamp(3 - attempts, 0, 2)
 	var sections = [0.2, 0.4, 0.65]  # início, meio, fim
 
-	# Calcula a posição base do corte
 	var cut_x = ingredient_pos.x + (ingredient_width * sections[section_index]) - knife.size.x / 2
 	var cut_y = ingredient_pos.y + offset_y
-
 	var cut_pos = Vector2(cut_x, cut_y)
+
 	knife.position = cut_pos
 	knife.modulate.a = 1.0
 
@@ -78,10 +78,35 @@ func _show_knife_effect():
 	tween.tween_property(knife, "modulate:a", 0.0, 0.1).set_delay(0.1)
 
 	await tween.finished
-
+	
 func end_qte():
-	hit_registered = true
-	feedback.text += "\nPontuação: %d/3" % score
-	await get_tree().create_timer(1.5).timeout
-	# Aqui você pode emitir sinal para o sistema principal usar a pontuação
+	set_process(false)
+	var result_text := ""
+	if score == 3:
+		result_text = "🔪 Perfeito!"
+	elif score == 2:
+		result_text = "😄 Bom!"
+	elif score == 1:
+		result_text = "😐 Razoável"
+	else:
+		result_text = "❌ Ruim"
+	_show_result(result_text)
+
+func _show_result(text: String):
+	feedback.text = text
+	await get_tree().create_timer(1.0).timeout
+	_spawn_cut_ingredient()
 	queue_free()
+
+func _spawn_cut_ingredient():
+	var ingredient = preload("res://scenes/ui/ingredient.tscn").instantiate()
+	ingredient.ingredient_id = ingredient_name
+	ingredient.state = "cut"
+
+	# Adiciona no mesmo pai da tábua (ex: 'preparea')
+	var parent_area = get_parent()  # ou get_node("/root/MainScene/Mode_Preparation/PrepArea") se quiser fixo
+	parent_area.add_child(ingredient)
+
+	# Posição relativa à tábua (mantém o local do ingrediente anterior)
+	
+	ingredient.position = self.position

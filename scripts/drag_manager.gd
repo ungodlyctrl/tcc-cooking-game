@@ -1,3 +1,5 @@
 extends Node
 
-var is_dragging_ingredient := false
+enum DragType { NONE, INGREDIENT, TOOL }
+
+var current_drag_type: DragType = DragType.NONE

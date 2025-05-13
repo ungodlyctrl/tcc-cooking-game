@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://q0opr264a6np"]
+[gd_scene load_steps=2 format=3 uid="uid://q0opr264a6np"]
 
-[ext_resource type="Texture2D" uid="uid://cgf02fngi8itp" path="res://assets/massa.png" id="1_aljnp"]
 [ext_resource type="Script" uid="uid://dpauq0rlgw54v" path="res://scripts/ingredient.gd" id="2_32tvu"]
 
 [node name="Ingredient" type="TextureRect"]
@@ -8,7 +7,6 @@ custom_minimum_size = Vector2(64, 64)
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 0
-texture = ExtResource("1_aljnp")
 stretch_mode = 2
 script = ExtResource("2_32tvu")
 

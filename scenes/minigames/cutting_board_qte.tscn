@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://hic04vftrqg1"]
 
 [ext_resource type="Script" uid="uid://bjtnqhcspryur" path="res://scripts/cutting_board_qte.gd" id="1_oc6ur"]
-[ext_resource type="Texture2D" uid="uid://dtdulxo2ea1g8" path="res://assets/tabua.png" id="2_xcm44"]
+[ext_resource type="Texture2D" uid="uid://c7ipg8q1rlbtw" path="res://assets/Desenho 4 (4).png" id="2_xcm44"]
 [ext_resource type="Texture2D" uid="uid://biua8oyqiw8ip" path="res://assets/pointer.png" id="3_lx5pw"]
 [ext_resource type="Texture2D" uid="uid://bv1bdm0dwyuy0" path="res://assets/faca.png" id="4_xcm44"]
 
@@ -44,8 +44,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -75.0
-offset_top = -17.0
+offset_top = 1.0
 offset_right = 75.0
+offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.2, 0.2, 0.2, 0.5)
@@ -55,7 +56,7 @@ custom_minimum_size = Vector2(15, 17)
 layout_mode = 0
 offset_left = 24.0
 offset_right = 39.0
-offset_bottom = 17.0
+offset_bottom = 16.0
 color = Color(0.5, 0.5, 0.5, 0.9)
 
 [node name="Hitzone2" type="ColorRect" parent="QTEBar"]
@@ -63,19 +64,19 @@ custom_minimum_size = Vector2(20, 17)
 layout_mode = 0
 offset_left = 64.0
 offset_right = 84.0
-offset_bottom = 17.0
+offset_bottom = 16.0
 color = Color(0.597, 0.597, 0.597, 0.9)
 
 [node name="Hitzone3" type="ColorRect" parent="QTEBar"]
 custom_minimum_size = Vector2(15, 17)
 layout_mode = 0
 offset_left = 120.0
-offset_right = 133.0
-offset_bottom = 17.0
+offset_right = 135.0
+offset_bottom = 16.0
 color = Color(0.596, 0.596, 0.596, 0.9)
 
 [node name="Pointer" type="TextureRect" parent="QTEBar"]
-custom_minimum_size = Vector2(10, 17)
+custom_minimum_size = Vector2(10, 16)
 layout_mode = 0
 offset_right = 10.0
 offset_bottom = 17.0
@@ -89,9 +90,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -19.0
-offset_top = 3.0
+offset_top = 18.0
 offset_right = 21.0
-offset_bottom = 26.0
+offset_bottom = 41.0
 grow_horizontal = 2
 grow_vertical = 0
 horizontal_alignment = 1
