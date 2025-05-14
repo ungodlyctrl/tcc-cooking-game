@@ -3,7 +3,9 @@ extends Control
 @onready var drop_area := $ScrollContainer/PrepArea/DropArea
 @onready var finalizar_button := $HUD/FinishButton
 
+
 func _on_finish_button_pressed() -> void:
+	get_tree().current_scene.add_money(20)
 	get_tree().current_scene.switch_mode(0)
 
 #Tudo sobre o scroll da tela

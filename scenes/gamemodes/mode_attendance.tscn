@@ -88,6 +88,7 @@ texture = ExtResource("2_kpxur")
 centered = false
 
 [node name="DialogueBox" parent="." instance=ExtResource("3_tpq4o")]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 1
 offset_left = 373.0

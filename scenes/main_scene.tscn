@@ -9,12 +9,16 @@
 script = ExtResource("1_7ykc4")
 
 [node name="Mode_Attendance" parent="." instance=ExtResource("2_pu3yx")]
+unique_name_in_owner = true
 
 [node name="Mode_Preparation" parent="." instance=ExtResource("3_gubc5")]
+unique_name_in_owner = true
 
 [node name="Mode_EndOfDay" parent="." instance=ExtResource("4_pu3yx")]
+unique_name_in_owner = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
 [node name="ColorRect" type="ColorRect" parent="HUD"]
 offset_top = 328.0

@@ -7,7 +7,7 @@ func _ready():
 	var sprite_path = IngredientDatabase.get_container_sprite(ingredient_id)
 	icon.texture = load(sprite_path)
 
-func _get_drag_data(position):
+func _get_drag_data(_position):
 	var preview = preload("res://scenes/ui/ingredient.tscn").instantiate()
 	preview.ingredient_id = ingredient_id
 	preview.state = "raw"
