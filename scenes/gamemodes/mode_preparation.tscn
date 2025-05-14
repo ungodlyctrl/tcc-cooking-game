@@ -1,15 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://d4fehmyo6hugb"]
+[gd_scene load_steps=12 format=3 uid="uid://d4fehmyo6hugb"]
 
 [ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
 [ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
 [ext_resource type="Texture2D" uid="uid://cl0tdi3mgxlmv" path="res://assets/bancada3.png" id="3_axkwh"]
 [ext_resource type="PackedScene" uid="uid://s7x1xuixglw4" path="res://scenes/ui/recipe_panel.tscn" id="3_k3uf0"]
+[ext_resource type="PackedScene" uid="uid://dk286hwgpiw5g" path="res://scenes/ui/cutting_board_area.tscn" id="5_s7btf"]
 [ext_resource type="PackedScene" uid="uid://bey8ivj14oqip" path="res://scenes/ui/drop_area.tscn" id="7_vitag"]
-[ext_resource type="Texture2D" uid="uid://wxlvpsmabcwq" path="res://assets/prato.png" id="10_tsv3s"]
-[ext_resource type="Texture2D" uid="uid://c7ipg8q1rlbtw" path="res://assets/Desenho 4 (4).png" id="11_s610r"]
-[ext_resource type="Texture2D" uid="uid://d26rq8sn4y5jo" path="res://assets/fogão.png" id="11_ytfgg"]
+[ext_resource type="PackedScene" uid="uid://dwip8uhvt1cpv" path="res://scenes/ui/stove_area.tscn" id="11_tsv3s"]
 [ext_resource type="Texture2D" uid="uid://wqnu4k7wqwhv" path="res://assets/utensilios/frigideira.png" id="13_5avst"]
-[ext_resource type="Script" uid="uid://i0hbnj1ok75i" path="res://scripts/stove_drop_area.gd" id="14_ktx3g"]
 [ext_resource type="Texture2D" uid="uid://snf6kl2pdf58" path="res://assets/utensilios/panela.png" id="14_s610r"]
 [ext_resource type="Script" uid="uid://cwysf6owu3ccq" path="res://scripts/tool.gd" id="17_axkwh"]
 [ext_resource type="PackedScene" uid="uid://r122jmxfj5su" path="res://scenes/ui/container_slot.tscn" id="19_7bx2v"]
@@ -24,6 +22,7 @@ grow_vertical = 2
 script = ExtResource("1_dnbch")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
 clip_contents = false
 layout_mode = 0
 offset_right = 40.0
@@ -34,6 +33,7 @@ horizontal_scroll_mode = 3
 vertical_scroll_mode = 0
 
 [node name="PrepArea" type="Control" parent="ScrollContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(1280, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -48,6 +48,7 @@ offset_bottom = 360.0
 texture = ExtResource("3_axkwh")
 
 [node name="ContainerSlot" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 32.0
@@ -198,22 +199,20 @@ offset_right = -1115.0
 offset_bottom = 311.0
 ingredient_id = "queijo"
 
-[node name="DropArea" parent="ScrollContainer/PrepArea" instance=ExtResource("7_vitag")]
-layout_mode = 2
+[node name="CuttingBoardArea" parent="ScrollContainer/PrepArea" instance=ExtResource("5_s7btf")]
+unique_name_in_owner = true
+layout_mode = 0
 offset_left = 192.0
 offset_top = 192.0
 offset_right = 342.0
 offset_bottom = 292.0
-mouse_force_pass_scroll_events = false
-texture = ExtResource("11_s610r")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PrepArea"]
+[node name="DropPlateArea" parent="ScrollContainer/PrepArea" instance=ExtResource("7_vitag")]
 layout_mode = 0
 offset_left = 360.0
 offset_top = 200.0
 offset_right = 456.0
 offset_bottom = 296.0
-texture = ExtResource("10_tsv3s")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/PrepArea"]
 custom_minimum_size = Vector2(180, 76)
@@ -235,24 +234,16 @@ layout_mode = 2
 texture = ExtResource("13_5avst")
 script = ExtResource("17_axkwh")
 
-[node name="StoveArea" type="TextureRect" parent="ScrollContainer/PrepArea"]
-custom_minimum_size = Vector2(215, 175)
+[node name="StoveArea" parent="ScrollContainer/PrepArea" instance=ExtResource("11_tsv3s")]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 552.0
 offset_top = 128.0
-offset_right = 722.0
-offset_bottom = 258.0
-texture = ExtResource("11_ytfgg")
-script = ExtResource("14_ktx3g")
+offset_right = 767.0
+offset_bottom = 303.0
 
-[node name="ToolVisual" type="TextureRect" parent="ScrollContainer/PrepArea/StoveArea"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 77.0
-offset_right = 8.0
-offset_bottom = 77.0
-
-[node name="HUD" type="Control" parent="."]
+[node name="HUDPrep" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -261,14 +252,14 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="RecipePanel" parent="HUD" instance=ExtResource("3_k3uf0")]
+[node name="RecipePanel" parent="HUDPrep" instance=ExtResource("3_k3uf0")]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 48.0
 offset_right = 25.0
 offset_bottom = 79.0
 
-[node name="Label" type="Label" parent="HUD"]
+[node name="Label" type="Label" parent="HUDPrep"]
 visible = false
 layout_mode = 0
 offset_left = 264.0
@@ -280,7 +271,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 text = "Modo Preparo"
 
-[node name="FinishButton" type="Button" parent="HUD"]
+[node name="FinishButton" type="Button" parent="HUDPrep"]
 layout_mode = 0
 offset_left = 498.0
 offset_top = 307.0
@@ -288,11 +279,11 @@ offset_right = 629.0
 offset_bottom = 338.0
 text = "Finalizar Pedido"
 
-[node name="FeedbackLabel" type="Label" parent="HUD"]
+[node name="FeedbackLabel" type="Label" parent="HUDPrep"]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 192.0
 offset_right = 33.0
 offset_bottom = 215.0
 
-[connection signal="pressed" from="HUD/FinishButton" to="." method="_on_finish_button_pressed"]
+[connection signal="pressed" from="HUDPrep/FinishButton" to="." method="_on_finish_button_pressed"]

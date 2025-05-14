@@ -1,7 +1,7 @@
 extends Control
 
-@onready var drop_area := $ScrollContainer/PrepArea/DropArea
-@onready var finalizar_button := $HUD/FinishButton
+@onready var drop_area := $ScrollContainer/PrepArea/DropPlateArea
+@onready var finalizar_button := $HUDPrep/FinishButton
 
 
 func _on_finish_button_pressed() -> void:
@@ -20,13 +20,19 @@ var last_mouse_pos := Vector2.ZERO
 var scroll_margin := 50  # margem da tela onde começa a rolagem
 var scroll_speed := 400  # velocidade da rolagem
 
-func _gui_input(event):
+func _gui_input(event: InputEvent) -> void:
+	# ⛔ Bloqueia o scroll manual se estiver arrastando algo
+	if DragManager.current_drag_type != DragManager.DragType.NONE:
+		dragging = false  # Garante que nada fique "preso"
+		return
+
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			dragging = true
 			last_mouse_pos = event.position
 		else:
 			dragging = false
+
 	elif event is InputEventMouseMotion and dragging:
 		var delta = event.relative
 		scroll_container.scroll_horizontal -= delta.x

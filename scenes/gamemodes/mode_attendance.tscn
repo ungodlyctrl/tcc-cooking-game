@@ -80,6 +80,7 @@ texture = ExtResource("3_y56bg")
 centered = false
 
 [node name="ClientSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 modulate = Color(0.01, 0.00990167, 0.0099, 0)
 position = Vector2(165, 334)
 
@@ -113,6 +114,7 @@ grow_vertical = 0
 text = "Confirmar pedido"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_y56bg")
 }

@@ -1,6 +1,8 @@
 extends Node
 
-var data = {
+# Dicionário com informações dos ingredientes.
+# Cada ingrediente tem um nome de exibição, uma sprite de container e, opcionalmente, estados visuais (raw, cut, cooked, etc.).
+const DATA := {
 	"batata": {
 		"display_name": "Batata",
 		"container": "res://assets/ingredientes/batata/container.png",
@@ -42,7 +44,7 @@ var data = {
 		"container": "res://assets/ingredientes/cuscuz/container.png"
 	},
 	"pao de queijo": {
-		"display_name": "Pao de queijo",
+		"display_name": "Pão de queijo",
 		"container": "res://assets/ingredientes/pao de queijo/container.png"
 	},
 	"presunto": {
@@ -52,21 +54,35 @@ var data = {
 	"salsicha": {
 		"display_name": "Salsicha",
 		"container": "res://assets/ingredientes/salsicha/container.png"
-	},
-	
+	}
 }
 
+
+# Retorna o caminho para o sprite correspondente ao estado do ingrediente (ex: raw, cut, etc.)
 func get_sprite_path(id: String, state: String) -> String:
-	if data.has(id) and data[id].has("states") and data[id]["states"].has(state):
-		return data[id]["states"][state]
+	if DATA.has(id):
+		var states = DATA[id].get("states", {})
+		if state in states:
+			return states[state]
 	return ""
 
-func get_display_name(id: String, state: String = "") -> String:
-	if data.has(id):
-		return data[id].get("display_name", id)
+
+# Retorna o nome amigável (para exibição) do ingrediente.
+func get_display_name(id: String, _state: String = "") -> String:
+	if DATA.has(id):
+		return DATA[id].get("display_name", id)
 	return id
 
+
+# Retorna o caminho da imagem do container do ingrediente.
 func get_container_sprite(id: String) -> String:
-	if data.has(id) and data[id].has("container"):
-		return data[id]["container"]
+	if DATA.has(id):
+		return DATA[id].get("container", "")
 	return ""
+
+
+# Verifica se o ingrediente possui um determinado estado (ex: "cut", "fried", etc.)
+func has_state(id: String, state: String) -> bool:
+	if DATA.has(id):
+		return DATA[id].has("states") and DATA[id]["states"].has(state)
+	return false

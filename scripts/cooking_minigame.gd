@@ -1,29 +1,38 @@
 extends Control
+class_name CookingMinigame
 
-@export var ingredient_name := "cenoura"
-@export var tool_type := "frigideira"  # ou "panela"
+# === Exported Variables ===
+@export var ingredient_name: String = "cenoura"
+@export var tool_type: String = "frigideira"  # ou "panela"
+@export var cook_speed: float = 30.0  # pixels por segundo
 
-@onready var tool_sprite := $ToolSprite
-@onready var ingredient_sprite := $IngredientSprite
-@onready var heat_marker := $HeatBar/HeatMarker
-@onready var zone_cool := $HeatBar/ZoneCool
-@onready var zone_ideal := $HeatBar/ZoneIdeal
-@onready var zone_burn := $HeatBar/ZoneBurn
-@onready var feedback := $FeedbackLabel
+# === OnReady References ===
+@onready var tool_sprite: TextureRect = $ToolSprite
+@onready var ingredient_sprite: TextureRect = $IngredientSprite
+@onready var heat_marker: Control = $HeatBar/HeatMarker
+@onready var heat_bar: Control = $HeatBar
+@onready var zone_cool: Control = $HeatBar/ZoneCool
+@onready var zone_ideal: Control = $HeatBar/ZoneIdeal
+@onready var zone_burn: Control = $HeatBar/ZoneBurn
+@onready var feedback: Label = $FeedbackLabel
 
-var cook_speed := 30.0  # pixels por segundo
+# === Internal Variables ===
 var is_cooking := true
-var marker_start := 0
-var marker_end := 169 # largura da barra - largura do marcador
-var result: String
+var marker_end := 0
+var result: String = ""
 
-func _ready():
+
+func _ready() -> void:
+	# Define até onde o marcador pode ir com base no tamanho da barra
+	marker_end = heat_bar.size.x - heat_marker.size.x
+
 	_load_textures()
-	heat_marker.position.x = marker_start
-	is_cooking = true
+	heat_marker.position.x = 0
 	set_process(true)
+	is_cooking = true
 
-func _process(delta):
+
+func _process(delta: float) -> void:
 	if not is_cooking:
 		return
 
@@ -33,18 +42,18 @@ func _process(delta):
 		heat_marker.position.x = marker_end
 		is_cooking = false
 		_show_result("❌ Queimado!")
-		return
 
-func _gui_input(event):
-	if !is_cooking:
+
+func _gui_input(event: InputEvent) -> void:
+	if not is_cooking:
 		return
 
 	if event is InputEventMouseButton and event.pressed:
-		print("🖱️ gui_input clique detectado")
 		is_cooking = false
 		_evaluate_cook()
 
-func _evaluate_cook():
+
+func _evaluate_cook() -> void:
 	var marker_x = heat_marker.position.x
 
 	var ideal_start = zone_ideal.position.x
@@ -64,26 +73,31 @@ func _evaluate_cook():
 
 	_show_result(result)
 
-func _spawn_result_ingredient():
-	var scene := preload("res://scenes/ui/ingredient.tscn")
-	var ingredient := scene.instantiate()
 
-	ingredient.ingredient_id = ingredient_name
-	ingredient.state = "fried" if tool_type == "frigideira" else "cooked"
-
-	# Posicionar em cima do fogão (fixo na bancada)
-	var parent := get_tree().current_scene.get_node("Mode_Preparation/ScrollContainer/PrepArea")
-	parent.add_child(ingredient)
-
-	# Posiciona visualmente próximo do fogão
-	ingredient.position = self.position + Vector2(0, 40)
-
-func _show_result(text: String):
+func _show_result(text: String) -> void:
 	feedback.text = text
 	await get_tree().create_timer(1.2).timeout
 	_spawn_result_ingredient()
 	queue_free()
 
-func _load_textures():
+
+func _spawn_result_ingredient() -> void:
+	var ingredient := preload("res://scenes/ui/ingredient.tscn").instantiate()
+	ingredient.ingredient_id = ingredient_name
+
+	match tool_type:
+		"frigideira":
+			ingredient.state = "fried"
+		"panela":
+			ingredient.state = "cooked"
+		_:
+			ingredient.state = "cooked"
+
+	var prep_area := get_tree().current_scene.get_node("Mode_Preparation/ScrollContainer/PrepArea")
+	prep_area.add_child(ingredient)
+	ingredient.position = self.position + Vector2(0, 40)
+
+
+func _load_textures() -> void:
 	tool_sprite.texture = load("res://assets/utensilios/%s.png" % tool_type)
 	ingredient_sprite.texture = load("res://assets/ingredientes/%s.png" % ingredient_name)

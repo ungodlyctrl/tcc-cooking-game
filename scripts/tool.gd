@@ -1,9 +1,14 @@
 extends TextureRect
+class_name Tool
 
-@export var tool_id := "frigideira"  # ou "panela"
+## Representa uma ferramenta de preparo (ex: panela, frigideira).
+## Pode ser arrastada para o fogão para iniciar o minigame de cozimento.
+@export var tool_id: String = "frigideira"  # ou "panela"
 
-func _get_drag_data(position):
-	var preview = self.duplicate()
+
+## Inicia o drag da ferramenta, retornando os dados do tipo e estado.
+func _get_drag_data(_event_position: Vector2) -> Dictionary:
+	var preview := self.duplicate()
 	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	set_drag_preview(preview)
 
@@ -14,9 +19,12 @@ func _get_drag_data(position):
 		"state": "tool"
 	}
 
-func _drop_data(position, data):
+
+## Garante que o estado do drag é limpo ao finalizar drop.
+func _drop_data(_event_position: Vector2, _data) -> void:
 	DragManager.current_drag_type = DragManager.DragType.NONE
 
-func _gui_input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+func _notification(what):
+	if what == NOTIFICATION_DRAG_END:
 		DragManager.current_drag_type = DragManager.DragType.NONE
+		get_tree().root.set_input_as_handled()

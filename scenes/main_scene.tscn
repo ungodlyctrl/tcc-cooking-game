@@ -21,12 +21,14 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="ColorRect" type="ColorRect" parent="HUD"]
+unique_name_in_owner = true
 offset_top = 328.0
 offset_right = 640.0
 offset_bottom = 360.0
 color = Color(0.180392, 0.133333, 0.184314, 1)
 
 [node name="ClockLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
 offset_left = 16.0
 offset_top = 331.0
 offset_right = 57.0
@@ -37,6 +39,7 @@ theme_override_constants/outline_size = 3
 text = "08:00"
 
 [node name="MoneyLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
 offset_left = 568.0
 offset_top = 331.0
 offset_right = 624.0
@@ -47,6 +50,7 @@ theme_override_constants/outline_size = 3
 text = "R$: 100"
 
 [node name="DayLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
 offset_left = 304.0
 offset_top = 331.0
 offset_right = 344.0
