@@ -37,6 +37,11 @@ func _drop_data(_position, data):
 		# Iniciar minigame
 		current_ingredient = data["id"]
 		_start_cooking_minigame(current_tool, current_ingredient)
+		
+	# Encontra o nó do ingrediente (se veio por drag)
+	var dragged_node = data.get("source", null)
+	if dragged_node and dragged_node.is_inside_tree():
+		dragged_node.queue_free()
 
 		# Resetar estado
 		current_tool = ""

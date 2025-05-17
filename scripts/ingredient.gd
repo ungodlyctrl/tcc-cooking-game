@@ -26,9 +26,10 @@ func _update_visual() -> void:
 	$Label.text = IngredientDatabase.get_display_name(ingredient_id, state)
 
 
+
 ## Inicia o processo de drag & drop ao clicar no ingrediente.
-func _get_drag_data(_event_position: Vector2) -> Dictionary:
-	var preview := self.duplicate()
+func _get_drag_data(_pos):
+	var preview = self.duplicate()
 	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	set_drag_preview(preview)
 
@@ -36,7 +37,8 @@ func _get_drag_data(_event_position: Vector2) -> Dictionary:
 
 	return {
 		"id": ingredient_id,
-		"state": state
+		"state": state,
+		"source": self  # <- ESSENCIAL
 	}
 
 

@@ -30,7 +30,7 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 	parent_node.add_child(minigame)
 
 	# Posiciona na mesma posição da tábua, convertendo para local do parent
-	minigame.position = self.get_global_position() - parent_node.get_global_position()
+	minigame.position = self.position
 
 	active = true
 
@@ -45,3 +45,6 @@ func notify_result_placed(node: Node) -> void:
 		active = false
 	)
 	
+func notify_ingredient_removed() -> void:
+	current_ingredient = null
+	active = false
