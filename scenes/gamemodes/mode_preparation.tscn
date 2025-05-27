@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d4fehmyo6hugb"]
+[gd_scene load_steps=12 format=3 uid="uid://d4fehmyo6hugb"]
 
 [ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
 [ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dk286hwgpiw5g" path="res://scenes/ui/cutting_board_area.tscn" id="5_s7btf"]
 [ext_resource type="PackedScene" uid="uid://bey8ivj14oqip" path="res://scenes/ui/drop_area.tscn" id="7_vitag"]
 [ext_resource type="PackedScene" uid="uid://dwip8uhvt1cpv" path="res://scenes/ui/stove_area.tscn" id="11_tsv3s"]
-[ext_resource type="Texture2D" uid="uid://dcswptgu401ei" path="res://assets/cesta de pão.png" id="12_tsv3s"]
-[ext_resource type="Texture2D" uid="uid://nbeqeq6h04q3" path="res://assets/ovo.png" id="12_ytfgg"]
 [ext_resource type="Texture2D" uid="uid://wqnu4k7wqwhv" path="res://assets/utensilios/frigideira.png" id="13_5avst"]
 [ext_resource type="Texture2D" uid="uid://snf6kl2pdf58" path="res://assets/utensilios/panela.png" id="14_s610r"]
 [ext_resource type="Script" uid="uid://cwysf6owu3ccq" path="res://scripts/tool.gd" id="17_axkwh"]
@@ -163,6 +161,27 @@ offset_top = 109.0
 offset_right = 425.0
 offset_bottom = 173.0
 
+[node name="ContainerSlot19" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 430.0
+offset_top = 109.0
+offset_right = 495.0
+offset_bottom = 141.0
+grow_horizontal = 1
+grow_vertical = 1
+ingredient_id = "ovo"
+
+[node name="ContainerSlot18" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+layout_mode = 1
+offset_left = 154.0
+offset_top = 40.0
+offset_right = 250.0
+offset_bottom = 104.0
+ingredient_id = "pao"
+
 [node name="ContainerSlot11" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
@@ -203,14 +222,6 @@ offset_left = 552.0
 offset_top = 128.0
 offset_right = 767.0
 offset_bottom = 303.0
-
-[node name="CestaDePão" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-position = Vector2(216, 62)
-texture = ExtResource("12_tsv3s")
-
-[node name="Ovo" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-position = Vector2(464, 128)
-texture = ExtResource("12_ytfgg")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/PrepArea"]
 custom_minimum_size = Vector2(180, 76)

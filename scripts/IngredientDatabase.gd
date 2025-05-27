@@ -25,11 +25,17 @@ const DATA := {
 	},
 	"farofa": {
 		"display_name": "Farofa",
-		"container": "res://assets/ingredientes/farofa/container.png"
+		"container": "res://assets/ingredientes/farofa/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/farofa/raw.png"
+		}
 	},
 	"mortadela": {
 		"display_name": "Mortadela",
-		"container": "res://assets/ingredientes/mortadela/container.png"
+		"container": "res://assets/ingredientes/mortadela/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/mortadela/raw.png"
+		}
 	},
 	"queijo": {
 		"display_name": "Queijo",
@@ -37,15 +43,24 @@ const DATA := {
 	},
 	"arroz": {
 		"display_name": "Arroz",
-		"container": "res://assets/ingredientes/arroz/container.png"
+		"container": "res://assets/ingredientes/arroz/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/arroz/raw.png"
+		}
 	},
 	"cuscuz": {
 		"display_name": "Cuscuz",
-		"container": "res://assets/ingredientes/cuscuz/container.png"
+		"container": "res://assets/ingredientes/cuscuz/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/cuscuz/raw.png"
+		}
 	},
 	"pao de queijo": {
 		"display_name": "Pão de queijo",
-		"container": "res://assets/ingredientes/pao de queijo/container.png"
+		"container": "res://assets/ingredientes/pao de queijo/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/pao de queijo/raw.png"
+		}
 	},
 	"presunto": {
 		"display_name": "Presunto",
@@ -57,12 +72,32 @@ const DATA := {
 	},
 	"feijao": {
 		"display_name": "Feijão",
-		"container": "res://assets/ingredientes/feijao/container.png"
+		"container": "res://assets/ingredientes/feijao/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/feijao/raw.png"
+		}
 	},
 	"pimentao": {
 		"display_name": "Pimentão",
-		"container": "res://assets/ingredientes/pimentao/container.png"
-	}
+		"container": "res://assets/ingredientes/pimentao/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/pimentao/raw.png"
+		}
+	},
+	"pao": {
+		"display_name": "Pão",
+		"container": "res://assets/ingredientes/pao/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/pao/raw.png"
+		}
+	},
+	"ovo": {
+		"display_name": "Ovo",
+		"container": "res://assets/ingredientes/ovo/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/ovo/raw.png"
+		}
+	},
 }
 
 

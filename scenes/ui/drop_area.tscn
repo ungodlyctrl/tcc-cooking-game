@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bey8ivj14oqip"]
 
-[ext_resource type="Texture2D" uid="uid://wxlvpsmabcwq" path="res://assets/prato.png" id="1_j83eq"]
+[ext_resource type="Texture2D" uid="uid://5mkwlyhn5hk1" path="res://assets/prato3.png" id="1_j83eq"]
 [ext_resource type="Script" uid="uid://c4qemhc0j36y2" path="res://scripts/drop_plate_area.gd" id="2_j83eq"]
 
 [node name="DropArea" type="TextureRect"]
@@ -25,10 +25,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "Solte aqui"
 
 [node name="UsedList" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
