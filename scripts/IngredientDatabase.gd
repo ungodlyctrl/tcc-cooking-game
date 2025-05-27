@@ -54,6 +54,14 @@ const DATA := {
 	"salsicha": {
 		"display_name": "Salsicha",
 		"container": "res://assets/ingredientes/salsicha/container.png"
+	},
+	"feijao": {
+		"display_name": "Feijão",
+		"container": "res://assets/ingredientes/feijao/container.png"
+	},
+	"pimentao": {
+		"display_name": "Pimentão",
+		"container": "res://assets/ingredientes/pimentao/container.png"
 	}
 }
 

@@ -10,6 +10,7 @@ class_name ContainerSlot
 
 
 func _ready() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	# Carrega o sprite do container do ingrediente
 	var sprite_path := IngredientDatabase.get_container_sprite(ingredient_id)
 	if sprite_path != "":
@@ -18,10 +19,14 @@ func _ready() -> void:
 
 ## Retorna o dado de drag com o estado "raw" do ingrediente ao ser arrastado.
 func _get_drag_data(_event_position: Vector2) -> Dictionary:
+	if not icon.get_rect().has_point(_event_position):
+		return {}  # Ignora clique fora do ícone
+	
+	# código original abaixo
 	var preview := preload("res://scenes/ui/ingredient.tscn").instantiate()
 	preview.ingredient_id = ingredient_id
 	preview.state = "raw"
-	preview._update_visual()  # Atualiza visual para garantir o sprite correto
+	preview._update_visual()
 	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	set_drag_preview(preview)
