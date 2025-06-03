@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dehkeao1vbiy0"]
+[gd_scene load_steps=11 format=3 uid="uid://dehkeao1vbiy0"]
 
 [ext_resource type="Script" uid="uid://6dn564kkwxms" path="res://scripts/mode_attendance.gd" id="1_jdssm"]
 [ext_resource type="Texture2D" uid="uid://0qin4q4lmblx" path="res://assets/fundos/Foodtruck.png" id="2_kpxur"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bk0iu08dciiqr" path="res://assets/fundos/fundo.png" id="3_y56bg"]
 [ext_resource type="Texture2D" uid="uid://bimj0humej7l2" path="res://assets/fundos/relogio.png" id="5_6enio"]
 [ext_resource type="Texture2D" uid="uid://ca0kg54ynlnfb" path="res://assets/fundos/calendario.png" id="6_k6rd5"]
+[ext_resource type="Texture2D" uid="uid://cqtc1ohqy5uxm" path="res://assets/prato2.png" id="7_k6rd5"]
 
 [sub_resource type="Animation" id="Animation_kpxur"]
 length = 0.001
@@ -126,5 +127,9 @@ texture = ExtResource("5_6enio")
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(320, 180)
 texture = ExtResource("6_k6rd5")
+
+[node name="Prato2" type="Sprite2D" parent="."]
+position = Vector2(320, 266)
+texture = ExtResource("7_k6rd5")
 
 [connection signal="pressed" from="DialogueBox/ConfirmButton" to="." method="_on_confirm_button_pressed"]

@@ -2,9 +2,9 @@ extends Control
 class_name CookingMinigame
 
 # === Exported Variables ===
-@export var ingredient_name: String = "cenoura"
-@export var tool_type: String = "frigideira"  # ou "panela"
-@export var cook_speed: float = 30.0  # pixels por segundo
+@export var tool_type: String = "frigideira"
+@export var cook_speed: float = 30.0
+var ingredient_data_list: Array[Dictionary] = []
 
 # === OnReady References ===
 @onready var tool_sprite: TextureRect = $ToolSprite
@@ -16,20 +16,18 @@ class_name CookingMinigame
 @onready var zone_burn: Control = $HeatBar/ZoneBurn
 @onready var feedback: Label = $FeedbackLabel
 
-# === Internal Variables ===
-var is_cooking := true
-var marker_end := 0
+# === Internal State ===
+var is_cooking: bool = true
+var marker_end: int = 0
 var result: String = ""
 
 
 func _ready() -> void:
-	# Define até onde o marcador pode ir com base no tamanho da barra
 	marker_end = heat_bar.size.x - heat_marker.size.x
-
-	_load_textures()
 	heat_marker.position.x = 0
 	set_process(true)
 	is_cooking = true
+	_load_textures()
 
 
 func _process(delta: float) -> void:
@@ -55,10 +53,8 @@ func _gui_input(event: InputEvent) -> void:
 
 func _evaluate_cook() -> void:
 	var marker_x = heat_marker.position.x
-
 	var ideal_start = zone_ideal.position.x
 	var ideal_end = ideal_start + zone_ideal.size.x
-
 	var cool_end = zone_cool.position.x + zone_cool.size.x
 	var burn_start = zone_burn.position.x
 
@@ -77,27 +73,47 @@ func _evaluate_cook() -> void:
 func _show_result(text: String) -> void:
 	feedback.text = text
 	await get_tree().create_timer(1.2).timeout
-	_spawn_result_ingredient()
+	_spawn_result_ingredients()
 	queue_free()
 
 
-func _spawn_result_ingredient() -> void:
-	var ingredient := preload("res://scenes/ui/ingredient.tscn").instantiate()
-	ingredient.ingredient_id = ingredient_name
+func _spawn_result_ingredients() -> void:
 
-	match tool_type:
-		"frigideira":
-			ingredient.state = "fried"
-		"panela":
-			ingredient.state = "cooked"
-		_:
-			ingredient.state = "cooked"
+	var cooked_tool := preload("res://scenes/ui/cooked_tool.tscn").instantiate()
+	cooked_tool.tool_type = tool_type
+	cooked_tool.cooked_ingredients = []
+
+	# Define o estado final com base na ferramenta usada
+	var final_state := "cooked"
+	if tool_type == "frigideira":
+		final_state = "fried"
+
+	for data in ingredient_data_list:
+		if not data.has("id"):
+			continue
+
+		cooked_tool.cooked_ingredients.append({
+			"id": data["id"],
+			"state": final_state
+		})
 
 	var prep_area := get_tree().current_scene.get_node("Mode_Preparation/ScrollContainer/PrepArea")
-	prep_area.add_child(ingredient)
-	ingredient.position = self.position + Vector2(0, 40)
+	prep_area.add_child(cooked_tool)
+	cooked_tool.position = self.position + Vector2(0, 40)
 
 
 func _load_textures() -> void:
+	# Tool visual
 	tool_sprite.texture = load("res://assets/utensilios/%s.png" % tool_type)
-	ingredient_sprite.texture = load("res://assets/ingredientes/%s.png" % ingredient_name)
+
+	# Carrega o sprite do primeiro ingrediente (se existir) usando o IngredientDatabase
+	if ingredient_data_list.size() > 0:
+		var first_id = ingredient_data_list[0].get("id", "")
+		if first_id != "":
+			var state : String = ingredient_data_list[0].get("state", "raw")
+			var sprite_path := IngredientDatabase.get_sprite_path(first_id, state)
+
+			if sprite_path != "":
+				ingredient_sprite.texture = load(sprite_path)
+			else:
+				print("⚠️ Sprite não encontrado para %s (%s)" % [first_id, state])

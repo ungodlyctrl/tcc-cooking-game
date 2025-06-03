@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uyooeqbij1tx"
-path="res://.godot/imported/raw.png-78dd64a550c0b6df3867343ab62835e8.ctex"
+uid="uid://nih6vwovy5rl"
+path="res://.godot/imported/raw.png-fc30a92996baf37d4308281e3029e33f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ingredientes/farofa/raw.png"
-dest_files=["res://.godot/imported/raw.png-78dd64a550c0b6df3867343ab62835e8.ctex"]
+source_file="res://assets/ingredientes/queijo/raw.png"
+dest_files=["res://.godot/imported/raw.png-fc30a92996baf37d4308281e3029e33f.ctex"]
 
 [params]
 

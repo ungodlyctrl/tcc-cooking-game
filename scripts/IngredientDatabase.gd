@@ -39,7 +39,10 @@ const DATA := {
 	},
 	"queijo": {
 		"display_name": "Queijo",
-		"container": "res://assets/ingredientes/queijo/container.png"
+		"container": "res://assets/ingredientes/queijo/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/queijo/raw.png"
+		}
 	},
 	"arroz": {
 		"display_name": "Arroz",
@@ -64,7 +67,10 @@ const DATA := {
 	},
 	"presunto": {
 		"display_name": "Presunto",
-		"container": "res://assets/ingredientes/presunto/container.png"
+		"container": "res://assets/ingredientes/presunto/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/presunto/raw.png"
+		}
 	},
 	"salsicha": {
 		"display_name": "Salsicha",
@@ -96,6 +102,13 @@ const DATA := {
 		"container": "res://assets/ingredientes/ovo/container.png",
 		"states": {
 			"raw": "res://assets/ingredientes/ovo/raw.png"
+		}
+	},
+	"manteiga": {
+		"display_name": "Manteiga",
+		"container": "res://assets/ingredientes/manteiga/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/manteiga/raw.png"
 		}
 	},
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uyooeqbij1tx"
-path="res://.godot/imported/raw.png-78dd64a550c0b6df3867343ab62835e8.ctex"
+uid="uid://jm7mrqlk1yu3"
+path="res://.godot/imported/tauba arrumada 1.png-7ded3e1a85ccd40b06d4530064a6d77b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ingredientes/farofa/raw.png"
-dest_files=["res://.godot/imported/raw.png-78dd64a550c0b6df3867343ab62835e8.ctex"]
+source_file="res://assets/tauba arrumada 1.png"
+dest_files=["res://.godot/imported/tauba arrumada 1.png-7ded3e1a85ccd40b06d4530064a6d77b.ctex"]
 
 [params]
 

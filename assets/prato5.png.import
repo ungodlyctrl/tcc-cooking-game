@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uyooeqbij1tx"
-path="res://.godot/imported/raw.png-78dd64a550c0b6df3867343ab62835e8.ctex"
+uid="uid://dvnnf8k058pe7"
+path="res://.godot/imported/prato5.png-14d38113be073150b486e56ef5981631.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ingredientes/farofa/raw.png"
-dest_files=["res://.godot/imported/raw.png-78dd64a550c0b6df3867343ab62835e8.ctex"]
+source_file="res://assets/prato5.png"
+dest_files=["res://.godot/imported/prato5.png-14d38113be073150b486e56ef5981631.ctex"]
 
 [params]
 

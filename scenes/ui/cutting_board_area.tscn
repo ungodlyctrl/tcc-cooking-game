@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://dk286hwgpiw5g"]
 
-[ext_resource type="Texture2D" uid="uid://c7ipg8q1rlbtw" path="res://assets/Desenho 4 (4).png" id="1_fw7ln"]
+[ext_resource type="Texture2D" uid="uid://jm7mrqlk1yu3" path="res://assets/tauba arrumada 1.png" id="1_nmhlm"]
 [ext_resource type="Script" uid="uid://dmsc0jo7ibmnl" path="res://scripts/cutting_board_area.gd" id="2_nmhlm"]
 
 [node name="CuttingBoardArea" type="TextureRect"]
 custom_minimum_size = Vector2(150, 100)
 offset_right = 150.0
 offset_bottom = 100.0
-texture = ExtResource("1_fw7ln")
+texture = ExtResource("1_nmhlm")
 script = ExtResource("2_nmhlm")

@@ -17,10 +17,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-RecipeLoader="*res://scripts/RecipeLoader.gd"
 DragManager="*res://scripts/drag_manager.gd"
-IngredientDatabase="*res://scripts/IngredientDatabase.gd"
 ClientManager="*res://scripts/client_manager.gd"
+RecipeManager="*res://scripts/recipe_manager.gd"
+IngredientDatabase="*res://scripts/IngredientDatabase.gd"
 
 [display]
 

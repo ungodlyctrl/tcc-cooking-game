@@ -66,27 +66,27 @@ ingredient_id = "arroz"
 [node name="ContainerSlot5" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
-offset_left = 292.0
+offset_left = 254.0
 offset_top = 40.0
-offset_right = 356.0
+offset_right = 318.0
 offset_bottom = 104.0
 ingredient_id = "presunto"
 
 [node name="ContainerSlot17" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
-offset_left = 430.0
+offset_left = 392.0
 offset_top = 40.0
-offset_right = 494.0
+offset_right = 456.0
 offset_bottom = 104.0
 ingredient_id = "pao de queijo"
 
 [node name="ContainerSlot6" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
-offset_left = 361.0
+offset_left = 323.0
 offset_top = 40.0
-offset_right = 425.0
+offset_right = 387.0
 offset_bottom = 104.0
 ingredient_id = "pimentao"
 
@@ -129,36 +129,36 @@ ingredient_id = "feijao"
 [node name="ContainerSlot13" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
-offset_left = 154.0
-offset_top = 109.0
-offset_right = 218.0
-offset_bottom = 173.0
+offset_left = 240.0
+offset_top = 208.0
+offset_right = 304.0
+offset_bottom = 272.0
 ingredient_id = "salsicha"
 
 [node name="ContainerSlot14" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
-offset_left = 223.0
+offset_left = 254.0
 offset_top = 109.0
-offset_right = 287.0
+offset_right = 318.0
 offset_bottom = 173.0
 ingredient_id = "carne"
 
 [node name="ContainerSlot15" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
-offset_left = 292.0
+offset_left = 323.0
 offset_top = 109.0
-offset_right = 356.0
+offset_right = 387.0
 offset_bottom = 173.0
 ingredient_id = "arroz"
 
 [node name="ContainerSlot16" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
-offset_left = 361.0
+offset_left = 392.0
 offset_top = 109.0
-offset_right = 425.0
+offset_right = 456.0
 offset_bottom = 173.0
 
 [node name="ContainerSlot19" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
@@ -166,13 +166,26 @@ layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 430.0
+offset_left = 164.0
 offset_top = 109.0
-offset_right = 495.0
-offset_bottom = 141.0
+offset_right = 196.0
+offset_bottom = 173.0
 grow_horizontal = 1
 grow_vertical = 1
 ingredient_id = "ovo"
+
+[node name="ContainerSlot20" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 205.0
+offset_top = 109.0
+offset_right = 237.0
+offset_bottom = 173.0
+grow_horizontal = 1
+grow_vertical = 1
+ingredient_id = "manteiga"
 
 [node name="ContainerSlot18" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
 layout_mode = 1
@@ -202,9 +215,9 @@ ingredient_id = "queijo"
 
 [node name="DropPlateArea" parent="ScrollContainer/PrepArea" instance=ExtResource("7_vitag")]
 layout_mode = 0
-offset_left = 400.0
+offset_left = 408.0
 offset_top = 192.0
-offset_right = 496.0
+offset_right = 504.0
 offset_bottom = 288.0
 
 [node name="CuttingBoardArea" parent="ScrollContainer/PrepArea" instance=ExtResource("5_s7btf")]
@@ -244,7 +257,6 @@ texture = ExtResource("13_5avst")
 script = ExtResource("17_axkwh")
 
 [node name="HUDPrep" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

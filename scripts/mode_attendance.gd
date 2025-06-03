@@ -1,13 +1,26 @@
 extends Control
+class_name ModeAttendance
 
-@onready var dialogue_label = $DialogueBox/MarginContainer/RichTextLabel
+# Label onde será exibida a fala do cliente
+@onready var dialogue_label: RichTextLabel = $DialogueBox/MarginContainer/RichTextLabel
 
-var current_recipe: Recipe
+# Receita atual a ser exibida nesse atendimento
+var current_recipe: RecipeResource
 
-func _ready():
-	current_recipe = RecipeLoader.get_random_recipe()
-	var random_line = current_recipe.dialog_lines.pick_random()
-	dialogue_label.text = random_line
-	
+
+## Define a receita do pedido atual e exibe a fala do cliente
+func set_recipe(recipe: RecipeResource) -> void:
+	current_recipe = recipe
+
+	# Obtém os IDs de ingredientes opcionais (se houver)
+	var optional_ids: Array[String] = current_recipe.get_optional_ingredient_ids()
+
+	# Sorteia uma fala com base nas variações, se houver
+	var line: String = current_recipe.get_random_client_line(optional_ids)
+
+	dialogue_label.text = line
+
+
+## Ao clicar no botão de confirmação, avança para o modo de preparo
 func _on_confirm_button_pressed() -> void:
-	get_tree().current_scene.switch_mode(1) # Vai para o modo preparo
+	get_tree().current_scene.switch_mode(1)  # 1 = GameMode.PREPARATION

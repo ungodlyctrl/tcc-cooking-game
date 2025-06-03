@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uyooeqbij1tx"
-path="res://.godot/imported/raw.png-78dd64a550c0b6df3867343ab62835e8.ctex"
+uid="uid://dvur28pcaavd5"
+path="res://.godot/imported/antes.png-b5484e68951d62abad3a1185cdaeb1b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ingredientes/farofa/raw.png"
-dest_files=["res://.godot/imported/raw.png-78dd64a550c0b6df3867343ab62835e8.ctex"]
+source_file="res://assets/ingredientes/pao/antes.png"
+dest_files=["res://.godot/imported/antes.png-b5484e68951d62abad3a1185cdaeb1b3.ctex"]
 
 [params]
 
