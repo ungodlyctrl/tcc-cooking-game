@@ -16,32 +16,30 @@ script = ExtResource("1_nsvnn")
 [node name="Background" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(215, 175)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -8.0
+offset_top = -77.0
+offset_right = 207.0
+offset_bottom = 98.0
 texture = ExtResource("2_nsvnn")
 
 [node name="ToolSprite" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 84.0
-offset_right = 9.0
-offset_bottom = 84.0
 mouse_filter = 0
 
 [node name="IngredientSprite" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 72.0
-offset_right = 64.0
-offset_bottom = 112.0
+offset_left = 18.0
+offset_top = 11.0
+offset_right = 58.0
+offset_bottom = 51.0
 
 [node name="HeatBar" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(175, 16)
 layout_mode = 0
-offset_left = 21.0
-offset_top = 176.0
-offset_right = 196.0
-offset_bottom = 192.0
+offset_left = 12.0
+offset_top = 102.0
+offset_right = 187.0
+offset_bottom = 118.0
 color = Color(0.340339, 0.340339, 0.340339, 0.647)
 
 [node name="ZoneCool" type="ColorRect" parent="HeatBar"]

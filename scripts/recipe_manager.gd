@@ -49,4 +49,28 @@ func get_random_recipe(current_day: int, region: String, time_of_day: String) ->
 		push_warning("Nenhuma receita válida encontrada para %s (%s) - Dia %d" % [region, time_of_day, current_day])
 		return null
 
-	return pool.pick_random()
+	var base_recipe: RecipeResource = pool.pick_random()
+	return apply_variations(base_recipe)
+
+
+func apply_variations(recipe: RecipeResource) -> RecipeResource:
+	var clone := recipe.duplicate(true) as RecipeResource
+	clone.ingredient_requirements = []
+
+	for original_req in recipe.ingredient_requirements:
+		if original_req == null:
+			continue
+
+		var new_req := original_req.duplicate(true) as IngredientRequirement
+
+		if new_req.optional:
+			if randf() > new_req.inclusion_chance:
+				# Não incluir este ingrediente (variação de ausência)
+				continue
+			# Variação de quantidade (se aplicável)
+			if not new_req.variation_quantity_options.is_empty():
+				new_req.quantity = new_req.variation_quantity_options.pick_random()
+
+		clone.ingredient_requirements.append(new_req)
+
+	return clone

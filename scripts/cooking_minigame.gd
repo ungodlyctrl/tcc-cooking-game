@@ -5,6 +5,7 @@ class_name CookingMinigame
 @export var tool_type: String = "frigideira"
 @export var cook_speed: float = 30.0
 var ingredient_data_list: Array[Dictionary] = []
+var tool_global_position: Vector2 = Vector2.ZERO
 
 # === OnReady References ===
 @onready var tool_sprite: TextureRect = $ToolSprite
@@ -23,6 +24,7 @@ var result: String = ""
 
 
 func _ready() -> void:
+	global_position = tool_global_position  # ← Centraliza na posição da ferramenta original
 	marker_end = heat_bar.size.x - heat_marker.size.x
 	heat_marker.position.x = 0
 	set_process(true)
@@ -78,28 +80,35 @@ func _show_result(text: String) -> void:
 
 
 func _spawn_result_ingredients() -> void:
+	var cooked_tool_scene := preload("res://scenes/ui/cooked_tool.tscn")
+	var cooked_tool := cooked_tool_scene.instantiate() as CookedTool
 
-	var cooked_tool := preload("res://scenes/ui/cooked_tool.tscn").instantiate()
+	if cooked_tool == null:
+		push_error("❌ cooked_tool.tscn não está corretamente configurada com o script CookedTool.gd!")
+		return
+
 	cooked_tool.tool_type = tool_type
-	cooked_tool.cooked_ingredients = []
 
 	# Define o estado final com base na ferramenta usada
 	var final_state := "cooked"
 	if tool_type == "frigideira":
 		final_state = "fried"
 
+	var result_ingredients: Array[Dictionary] = []
+
 	for data in ingredient_data_list:
-		if not data.has("id"):
-			continue
+		if data.has("id"):
+			result_ingredients.append({
+				"id": data["id"],
+				"state": final_state
+			})
 
-		cooked_tool.cooked_ingredients.append({
-			"id": data["id"],
-			"state": final_state
-		})
+	cooked_tool.cooked_ingredients = result_ingredients
 
+	# Adiciona na cena
 	var prep_area := get_tree().current_scene.get_node("Mode_Preparation/ScrollContainer/PrepArea")
 	prep_area.add_child(cooked_tool)
-	cooked_tool.position = self.position + Vector2(0, 40)
+	cooked_tool.global_position = tool_global_position
 
 
 func _load_textures() -> void:

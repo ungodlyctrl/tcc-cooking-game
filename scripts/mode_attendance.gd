@@ -12,12 +12,18 @@ var current_recipe: RecipeResource
 func set_recipe(recipe: RecipeResource) -> void:
 	current_recipe = recipe
 
-	# Obtém os IDs de ingredientes opcionais (se houver)
-	var optional_ids: Array[String] = current_recipe.get_optional_ingredient_ids()
+	# Aqui pegamos os ingredientes opcionais que foram incluídos
+	var optional_variants: Array[Dictionary] = []
 
-	# Sorteia uma fala com base nas variações, se houver
-	var line: String = current_recipe.get_random_client_line(optional_ids)
+	for req in current_recipe.ingredient_requirements:
+		if req.optional and req.quantity > 0:
+			optional_variants.append({
+				"id": req.ingredient_id,
+				"quantity": req.quantity
+			})
 
+	# Agora passamos a lista completa dos ingredientes opcionais incluídos
+	var line: String = current_recipe.get_random_client_line(optional_variants)
 	dialogue_label.text = line
 
 

@@ -110,6 +110,8 @@ func load_new_recipe() -> void:
 		push_warning("⚠️ Nenhuma receita encontrada para %s (%s, Dia %d)".format([region, time_of_day, day]))
 		return
 
+	current_recipe = current_recipe.apply_variations()  # <- aplica variações
+
 	mode_attendance.set_recipe(current_recipe)
 	$Mode_Attendance/DialogueBox.adjust_to_content()
 

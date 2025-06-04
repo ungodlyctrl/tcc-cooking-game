@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=4 format=3 uid="uid://c14i6ptmv7fp5"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=7 format=3 uid="uid://c14i6ptmv7fp5"]
 
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_cuovy"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_gh3js"]
@@ -7,10 +7,52 @@
 script = ExtResource("1_cuovy")
 ingredient_id = "pao"
 state = "fried"
-stages = Array[int]([])
+stages = Array[int]([3])
+quantity = 1
+optional = true
+inclusion_chance = 1.0
+variation_quantity_options = Array[int]([])
+variation_line_absent = Array[String]([])
+variation_line_quantity = Array[String]([])
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_gh3js"]
+script = ExtResource("1_cuovy")
+ingredient_id = "queijo"
+state = "fried"
+stages = Array[int]([3])
 quantity = 1
 optional = false
-custom_line = ""
+inclusion_chance = 1.0
+variation_quantity_options = Array[int]([])
+variation_line_absent = Array[String]([])
+variation_line_quantity = Array[String]([])
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_cstgo"]
+script = ExtResource("1_cuovy")
+ingredient_id = "presunto"
+state = "fried"
+stages = Array[int]([3])
+quantity = 1
+optional = false
+inclusion_chance = 1.0
+variation_quantity_options = Array[int]([])
+variation_line_absent = Array[String]([])
+variation_line_quantity = Array[String]([])
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_jy5e2"]
+script = ExtResource("1_cuovy")
+ingredient_id = "queijo"
+state = "fried"
+stages = Array[int]([3])
+quantity = 2
+optional = true
+inclusion_chance = 1.0
+variation_quantity_options = Array[int]([])
+variation_line_absent = Array[String]([])
+variation_line_quantity = Array[String]([])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [resource]
@@ -18,8 +60,7 @@ script = ExtResource("2_gh3js")
 recipe_name = "Misto Quente"
 region = "sudeste"
 min_day = 1
-time_of_day = Array[String](["breakfast", "lunch", "dinner"])
-ingredient_requirements = Array[ExtResource("1_cuovy")]([SubResource("Resource_cuovy")])
+time_of_day = Array[String](["breakfast"])
+ingredient_requirements = Array[ExtResource("1_cuovy")]([SubResource("Resource_cuovy"), SubResource("Resource_gh3js"), SubResource("Resource_cstgo"), SubResource("Resource_jy5e2")])
 client_lines = Array[String]([])
-variation_lines = {}
 metadata/_custom_type_script = "uid://c6xvod46icb2"

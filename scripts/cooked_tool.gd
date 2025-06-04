@@ -1,8 +1,8 @@
 extends Control
 class_name CookedTool
 
-@export var tool_type: String = "panela"
-var cooked_ingredients: Array[Dictionary] = []
+@export var tool_type: String = ""
+@export var cooked_ingredients: Array[Dictionary] = []
 
 @onready var tool_sprite: TextureRect = $ToolSprite
 @onready var ingredients_label: Label = $IngredientsLabel
@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func _get_drag_data(_position: Vector2) -> Dictionary:
 	var preview := self.duplicate()
-	preview.modulate = Color(1, 1, 1, 0.5)
+	preview.modulate = Color(1, 1, 1, 0.8)
 	set_drag_preview(preview)
 
 	DragManager.current_drag_type = DragManager.DragType.TOOL

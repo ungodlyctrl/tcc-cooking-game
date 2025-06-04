@@ -22,7 +22,7 @@ func _can_drop_data(_position, data) -> bool:
 
 	# Sempre aceitar ferramenta se ainda não tem ingrediente
 	if data["id"] in ["panela", "frigideira"] and data["state"] == "tool":
-		return current_tool == ""
+		return not active
 
 	# Só aceitar ingrediente se já tem uma ferramenta
 	if data["state"] in ["raw", "cut"]:
@@ -36,9 +36,9 @@ func _drop_data(_position, data):
 		return
 
 	if data["state"] == "tool":
-		# Substituir ferramenta anterior
 		current_tool = data["id"]
 		_update_tool_visual(current_tool)
+		tool_visual.visible = true
 
 	elif data["state"] in ["raw", "cut"] and current_tool != "":
 		# Adiciona ingrediente à fila
@@ -80,15 +80,17 @@ func _start_cooking_minigame(tool_type: String, ingredient_list: Array[Dictionar
 	var minigame := preload("res://scenes/minigames/cooking_minigame.tscn").instantiate()
 	minigame.tool_type = tool_type
 	minigame.ingredient_data_list = ingredient_list  # <- lista nova
-	minigame.board_area = self  # Vai chamar notify_cooked_result aqui
+	minigame.tool_global_position = tool_visual.global_position  # ← NOVO
 
 	var prep_area := get_parent()
 	prep_area.add_child(minigame)
-	minigame.position = self.position
+	minigame.global_position = tool_visual.global_position  # ← Alinha o minigame
 
 	minigame.tree_exited.connect(func():
+		current_tool = ""
+		active = false
 		tool_visual.visible = false
-	)
+)
 
 
 func notify_cooked_result(result_ingredients: Array[Node]) -> void:
@@ -99,7 +101,7 @@ func notify_cooked_result(result_ingredients: Array[Node]) -> void:
 
 	var prep_area := get_parent()
 	prep_area.add_child(cooked_tool)
-	cooked_tool.global_position = tool_visual.global_position
+	cooked_tool.position = self.position
 
 	# Reset da área
 	current_tool = ""
