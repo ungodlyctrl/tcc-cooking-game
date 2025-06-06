@@ -29,4 +29,6 @@ func set_recipe(recipe: RecipeResource) -> void:
 
 ## Ao clicar no botão de confirmação, avança para o modo de preparo
 func _on_confirm_button_pressed() -> void:
-	get_tree().current_scene.switch_mode(1)  # 1 = GameMode.PREPARATION
+	var main_scene = get_tree().current_scene as MainScene
+	main_scene.prep_start_minutes = main_scene.current_time_minutes
+	main_scene.switch_mode(1) #mode preparation

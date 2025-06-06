@@ -36,27 +36,39 @@ func _drop_data(_position: Vector2, data: Variant) -> void:
 	if not _can_drop_data(_position, data):
 		return
 
-	# Coleta ingredientes de ferramentas (panela/frigideira) ou direto
 	var ingredients_to_add: Array[Dictionary] = []
 
 	if data.has("type") and data["type"] == "cooked_tool":
 		if data.has("ingredients"):
 			ingredients_to_add = data["ingredients"]
 	else:
-		ingredients_to_add.append({
-			"id": data["id"],
-			"state": data["state"]
-		})
+		# Coleta dados extras se existirem
+		var ingredient_data := {
+			"id": data.get("id", ""),
+			"state": data.get("state", "")
+		}
 
-	# Adiciona cada ingrediente à lista local e à interface
-	for ingredient in ingredients_to_add:
-		used_ingredients.append(ingredient)
+		if data.has("result"):
+			ingredient_data["result"] = data["result"]
+
+		# Se o ingrediente veio de um nó com metadados (ex: cortado)
+		var source_node: Control = data.get("source", null)
+		if source_node and source_node.has_meta("qte_hits"):
+			ingredient_data["qte_hits"] = source_node.get_meta("qte_hits")
+
+		ingredients_to_add.append(ingredient_data)
+
+	# Adiciona à lista principal
+	for ing in ingredients_to_add:
+		used_ingredients.append(ing)
 
 	_update_ingredient_list_ui()
+	
+	get_tree().current_scene.update_score_display()
 
-	# Remove a fonte (panela, frigideira, etc) se for necessário
-	var source_node : Control = data.get("source", null)
-	if source_node and source_node is Node:
+	# Remove a origem, como panela ou ingrediente
+	var source_node: Control = data.get("source", null)
+	if source_node and source_node.is_inside_tree():
 		source_node.queue_free()
 
 	DragManager.current_drag_type = DragManager.DragType.NONE
@@ -86,3 +98,20 @@ func _update_ingredient_list_ui() -> void:
 		var label := Label.new()
 		label.text = "- %s (%s) x%d" % [id.capitalize(), state, amount]
 		used_list.add_child(label)
+
+
+func _get_drag_data(_position: Vector2) -> Variant:
+	if used_ingredients.is_empty():
+		return null
+
+	var preview := self.duplicate()
+	preview.modulate = Color(1, 1, 1, 1)
+	set_drag_preview(preview)
+
+	DragManager.current_drag_type = DragManager.DragType.PLATE  # ou um novo tipo, se quiser mais controle
+
+	return {
+		"type": "delivered_plate",
+		"ingredients": used_ingredients.duplicate(true),  # copia profunda
+		"source": self
+	}

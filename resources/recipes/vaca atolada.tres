@@ -1,0 +1,53 @@
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=6 format=3 uid="uid://c4kho504hhpk6"]
+
+[ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_0gaev"]
+[ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_p7gce"]
+
+[sub_resource type="Resource" id="Resource_0gaev"]
+script = ExtResource("1_0gaev")
+ingredient_id = "arroz"
+state = "raw"
+stages = Array[int]([])
+quantity = 1
+optional = false
+inclusion_chance = 1.0
+variation_quantity_options = Array[int]([])
+variation_line_absent = Array[String]([])
+variation_line_quantity = Array[String]([])
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_p7gce"]
+script = ExtResource("1_0gaev")
+ingredient_id = "carne"
+state = "cooked"
+stages = Array[int]([1, 2])
+quantity = 1
+optional = false
+inclusion_chance = 1.0
+variation_quantity_options = Array[int]([])
+variation_line_absent = Array[String]([])
+variation_line_quantity = Array[String]([])
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_7s0de"]
+script = ExtResource("1_0gaev")
+ingredient_id = "batata"
+state = "cooked"
+stages = Array[int]([1, 2])
+quantity = 1
+optional = false
+inclusion_chance = 1.0
+variation_quantity_options = Array[int]([])
+variation_line_absent = Array[String]([])
+variation_line_quantity = Array[String]([])
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[resource]
+script = ExtResource("2_p7gce")
+recipe_name = "Vaca Atolada"
+region = "sudeste"
+min_day = 1
+time_of_day = Array[String](["lunch"])
+ingredient_requirements = Array[ExtResource("1_0gaev")]([SubResource("Resource_0gaev"), SubResource("Resource_p7gce"), SubResource("Resource_7s0de")])
+client_lines = Array[String](["Boa tarde, me vê uma vaca atolada por favor.", "Uma vaca atolada, espero que essa carne esteja bem suculenta.", "E aí, uma vaca atolada por favor!"])
+metadata/_custom_type_script = "uid://c6xvod46icb2"

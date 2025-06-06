@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=7 format=3 uid="uid://c14i6ptmv7fp5"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=6 format=3 uid="uid://c14i6ptmv7fp5"]
 
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_cuovy"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_gh3js"]
@@ -6,7 +6,7 @@
 [sub_resource type="Resource" id="Resource_cuovy"]
 script = ExtResource("1_cuovy")
 ingredient_id = "pao"
-state = "fried"
+state = "raw"
 stages = Array[int]([3])
 quantity = 1
 optional = true
@@ -22,11 +22,11 @@ ingredient_id = "queijo"
 state = "fried"
 stages = Array[int]([3])
 quantity = 1
-optional = false
-inclusion_chance = 1.0
-variation_quantity_options = Array[int]([])
-variation_line_absent = Array[String]([])
-variation_line_quantity = Array[String]([])
+optional = true
+inclusion_chance = 0.7
+variation_quantity_options = Array[int]([1, 2])
+variation_line_absent = Array[String](["Olá, quero um misto sem queijo por favor."])
+variation_line_quantity = Array[String](["Opa, me vê um misto e capricha no queijo!"])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [sub_resource type="Resource" id="Resource_cstgo"]
@@ -35,24 +35,11 @@ ingredient_id = "presunto"
 state = "fried"
 stages = Array[int]([3])
 quantity = 1
-optional = false
-inclusion_chance = 1.0
-variation_quantity_options = Array[int]([])
-variation_line_absent = Array[String]([])
-variation_line_quantity = Array[String]([])
-metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
-
-[sub_resource type="Resource" id="Resource_jy5e2"]
-script = ExtResource("1_cuovy")
-ingredient_id = "queijo"
-state = "fried"
-stages = Array[int]([3])
-quantity = 2
 optional = true
-inclusion_chance = 1.0
-variation_quantity_options = Array[int]([])
-variation_line_absent = Array[String]([])
-variation_line_quantity = Array[String]([])
+inclusion_chance = 0.7
+variation_quantity_options = Array[int]([1, 1, 2])
+variation_line_absent = Array[String](["Olá, quero um misto sem presunto por favor."])
+variation_line_quantity = Array[String](["Opa, me vê um misto com bastante presunto!"])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [resource]
@@ -61,6 +48,6 @@ recipe_name = "Misto Quente"
 region = "sudeste"
 min_day = 1
 time_of_day = Array[String](["breakfast"])
-ingredient_requirements = Array[ExtResource("1_cuovy")]([SubResource("Resource_cuovy"), SubResource("Resource_gh3js"), SubResource("Resource_cstgo"), SubResource("Resource_jy5e2")])
-client_lines = Array[String]([])
+ingredient_requirements = Array[ExtResource("1_cuovy")]([SubResource("Resource_cuovy"), SubResource("Resource_gh3js"), SubResource("Resource_cstgo")])
+client_lines = Array[String](["Bom dia. Gostaria de um misto quente, por favor! ", "Olá, quero um misto sem presunto por favor.", "Eu amo muito misto quente!"])
 metadata/_custom_type_script = "uid://c6xvod46icb2"

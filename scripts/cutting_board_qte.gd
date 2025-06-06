@@ -125,22 +125,24 @@ func _spawn_cut_ingredient() -> void:
 	var ingredient := preload("res://scenes/ui/ingredient.tscn").instantiate()
 	ingredient.ingredient_id = ingredient_name
 	ingredient.state = "cut"
-	ingredient.is_cutting_result = true  # <- usado para lógica exclusiva, se necessário
+	ingredient.is_cutting_result = true  # Pode ser usado futuramente
+
+	# Adiciona metadados que serão usados na avaliação
+	ingredient.set_meta("qte_hits", score)
 
 	if board_area and board_area.is_inside_tree():
 		board_area.add_child(ingredient)
 
-		#  Centraliza o ingrediente na tábua
-		var board_size : Vector2 = board_area.size
-		var ing_size : Vector2 = ingredient.size
+		# Centraliza o ingrediente na tábua
+		var board_size: Vector2 = board_area.size
+		var ing_size: Vector2 = ingredient.size
 		ingredient.position = (board_size / 2.0) - (ing_size / 2.0)
 
-		# Remove referência da tábua quando o ingrediente sair
+		# Sinal para resetar controle visual na tábua
+		if board_area.has_method("notify_result_placed"):
+			board_area.notify_result_placed(ingredient)
+
 		ingredient.tree_exited.connect(func():
 			if board_area.has_method("notify_ingredient_removed"):
 				board_area.notify_ingredient_removed()
 		)
-
-		#  Registra que o ingrediente está presente
-		if board_area.has_method("notify_result_placed"):
-			board_area.notify_result_placed(ingredient)

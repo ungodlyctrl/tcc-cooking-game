@@ -89,10 +89,22 @@ func _spawn_result_ingredients() -> void:
 
 	cooked_tool.tool_type = tool_type
 
-	# Define o estado final com base na ferramenta usada
 	var final_state := "cooked"
 	if tool_type == "frigideira":
 		final_state = "fried"
+
+	var cook_result: String = ""
+
+	if result == "✅ No ponto!":
+		cook_result = "perfect"
+	elif result in ["🔥 Queimado", "❌ Queimado!"]:
+		cook_result = "burnt"
+	elif result == "🧊 Cru":
+		cook_result = "raw"
+	elif result == "😐 Mais ou menos":
+		cook_result = "meh"
+	else:
+		cook_result = "unknown"
 
 	var result_ingredients: Array[Dictionary] = []
 
@@ -100,15 +112,16 @@ func _spawn_result_ingredients() -> void:
 		if data.has("id"):
 			result_ingredients.append({
 				"id": data["id"],
-				"state": final_state
+				"state": final_state,
+				"result": cook_result
 			})
 
 	cooked_tool.cooked_ingredients = result_ingredients
 
-	# Adiciona na cena
 	var prep_area := get_tree().current_scene.get_node("Mode_Preparation/ScrollContainer/PrepArea")
 	prep_area.add_child(cooked_tool)
 	cooked_tool.global_position = tool_global_position
+
 
 
 func _load_textures() -> void:

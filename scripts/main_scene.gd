@@ -15,6 +15,8 @@ const END_OF_DAY_MINUTES := 19 * 60
 # Dados do jogo
 var region: String = "sudeste"
 var current_recipe: RecipeResource
+var prep_start_minutes: int = -1
+var pending_delivery: Array[Dictionary] = []
 
 # Timer de relógio
 var clock_timer: Timer = Timer.new()
@@ -34,7 +36,7 @@ var clock_timer: Timer = Timer.new()
 
 func _ready() -> void:
 	# Inicializa relógio
-	clock_timer.wait_time = 3.0
+	clock_timer.wait_time = 4.0
 	clock_timer.timeout.connect(_on_time_tick)
 	add_child(clock_timer)
 	clock_timer.start()
@@ -64,6 +66,9 @@ func _on_time_tick() -> void:
 		_end_day()
 
 	_update_ui()
+	
+	if current_mode == GameMode.PREPARATION:
+		update_score_display()
 
 
 func _update_ui() -> void:
@@ -86,6 +91,9 @@ func start_new_day() -> void:
 	clock_timer.start()
 	switch_mode(GameMode.ATTENDANCE)
 	_update_ui()
+	prep_start_minutes = -1
+	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
+	score_label.text = "100%"
 
 
 func add_money(amount: int) -> void:
@@ -102,6 +110,20 @@ func get_time_of_day() -> String:
 		return "dinner"
 
 
+func update_score_display() -> void:
+	if current_recipe == null or prep_start_minutes < 0:
+		return
+
+	var elapsed_minutes := current_time_minutes - prep_start_minutes
+	var time_penalty := int(elapsed_minutes / 15)  # 1 ponto a cada 15 minutos do jogo
+
+	var score := 100 - time_penalty
+	score = clamp(score, 0, 100)
+
+	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
+	score_label.text = "%d%%" % score
+
+
 func load_new_recipe() -> void:
 	var time_of_day := get_time_of_day()
 	current_recipe = RecipeManager.get_random_recipe(day, region, time_of_day)
@@ -111,13 +133,19 @@ func load_new_recipe() -> void:
 		return
 
 	current_recipe = current_recipe.apply_variations()  # <- aplica variações
+	prep_start_minutes = current_time_minutes
 
 	mode_attendance.set_recipe(current_recipe)
 	$Mode_Attendance/DialogueBox.adjust_to_content()
+	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
+	score_label.text = "100%"
+	prep_start_minutes = -1
 
 	# Atualiza o painel da receita e a área de preparo
 	$Mode_Preparation/HUDPrep/RecipePanel.show_recipe(current_recipe)
 	drop_plate_area.set_current_recipe(current_recipe)
+	prep_start_minutes = current_time_minutes
+	update_score_display()
 
 	show_random_client()
 
