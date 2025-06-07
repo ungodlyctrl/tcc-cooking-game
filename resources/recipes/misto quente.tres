@@ -46,6 +46,7 @@ metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 script = ExtResource("2_gh3js")
 recipe_name = "Misto Quente"
 region = "sudeste"
+base_price = 22
 min_day = 1
 time_of_day = Array[String](["breakfast"])
 ingredient_requirements = Array[ExtResource("1_cuovy")]([SubResource("Resource_cuovy"), SubResource("Resource_gh3js"), SubResource("Resource_cstgo")])

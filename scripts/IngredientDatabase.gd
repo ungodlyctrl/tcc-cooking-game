@@ -72,10 +72,6 @@ const DATA := {
 			"raw": "res://assets/ingredientes/presunto/raw.png"
 		}
 	},
-	"salsicha": {
-		"display_name": "Salsicha",
-		"container": "res://assets/ingredientes/salsicha/container.png"
-	},
 	"feijao": {
 		"display_name": "Feijão",
 		"container": "res://assets/ingredientes/feijao/container.png",

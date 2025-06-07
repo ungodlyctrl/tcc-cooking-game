@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://bey8ivj14oqip"]
 
-[ext_resource type="Texture2D" uid="uid://btys84kubyeub" path="res://assets/prato7.png" id="1_j83eq"]
-[ext_resource type="Script" uid="uid://c4qemhc0j36y2" path="res://scripts/drop_plate_area.gd" id="2_j83eq"]
+[ext_resource type="Texture2D" uid="uid://btys84kubyeub" path="res://assets/prato7.png" id="1_7p6y8"]
+[ext_resource type="Script" uid="uid://c4qemhc0j36y2" path="res://scripts/drop_plate_area.gd" id="2_nhx5k"]
 
 [node name="DropPlateArea" type="TextureRect"]
 custom_minimum_size = Vector2(96, 96)
 offset_right = 96.0
 offset_bottom = 96.0
-texture = ExtResource("1_j83eq")
-script = ExtResource("2_j83eq")
+texture = ExtResource("1_7p6y8")
+script = ExtResource("2_nhx5k")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

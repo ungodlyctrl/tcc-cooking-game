@@ -102,6 +102,9 @@ func evaluate_plate(
 	else:
 		grade = "Ruim"
 		comment = "Tô decepcionado..."
+		
+
+	
 
 	return {
 		"score": score,

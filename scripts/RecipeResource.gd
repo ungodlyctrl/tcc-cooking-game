@@ -7,6 +7,8 @@ class_name RecipeResource
 @export var recipe_name: String = ""
 @export var region: String = ""
 
+@export var base_price: int = 100
+
 @export var icon: Texture2D
 # Ícone ilustrativo da receita, exibido na interface
 

@@ -32,3 +32,15 @@ func _on_confirm_button_pressed() -> void:
 	var main_scene = get_tree().current_scene as MainScene
 	main_scene.prep_start_minutes = main_scene.current_time_minutes
 	main_scene.switch_mode(1) #mode preparation
+
+
+func show_feedback(text: String) -> void:
+	dialogue_label.text = text
+
+func hide_client() -> void:
+	$AnimationPlayer.play("client_exit")
+	await $AnimationPlayer.animation_finished
+	$ClientSprite.visible = false
+	
+	var main = get_tree().current_scene as MainScene
+	main.load_new_recipe()

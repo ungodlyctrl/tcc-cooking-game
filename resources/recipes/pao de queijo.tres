@@ -20,6 +20,7 @@ metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 script = ExtResource("2_bqi7u")
 recipe_name = "Pão de queijo"
 region = "sudeste"
+base_price = 9
 min_day = 1
 time_of_day = Array[String](["breakfast"])
 ingredient_requirements = Array[ExtResource("1_jcfx5")]([SubResource("Resource_jcfx5")])

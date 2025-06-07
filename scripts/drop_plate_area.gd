@@ -104,8 +104,11 @@ func _get_drag_data(_position: Vector2) -> Variant:
 	if used_ingredients.is_empty():
 		return null
 
-	var preview := self.duplicate()
-	preview.modulate = Color(1, 1, 1, 1)
+	var preview := TextureRect.new()
+	preview.texture = preload("res://assets/prato7.png")
+	preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	preview.stretch_mode = TextureRect.STRETCH_SCALE
+	preview.custom_minimum_size = Vector2(96, 96)
 	set_drag_preview(preview)
 
 	DragManager.current_drag_type = DragManager.DragType.PLATE  # ou um novo tipo, se quiser mais controle

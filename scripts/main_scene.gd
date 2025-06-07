@@ -26,7 +26,9 @@ var clock_timer: Timer = Timer.new()
 @onready var mode_preparation: Control = $Mode_Preparation
 @onready var mode_end_of_day: Control = $Mode_EndOfDay
 @onready var scroll_container: ScrollContainer = $Mode_Preparation/ScrollContainer
-@onready var drop_plate_area: Control = $Mode_Preparation/ScrollContainer/PrepArea/DropPlateArea
+@onready var drop_plate_parent: Node = $Mode_Preparation/ScrollContainer/PrepArea
+@onready var drop_plate_scene: PackedScene = preload("res://scenes/ui/drop_plate_area.tscn")
+var drop_plate_area: Control
 
 # HUD
 @onready var clock_label: Label = $HUD/ClockLabel
@@ -43,6 +45,7 @@ func _ready() -> void:
 
 	switch_mode(GameMode.ATTENDANCE)
 	_update_ui()
+	load_new_recipe()
 
 
 func switch_mode(new_mode: GameMode) -> void:
@@ -53,9 +56,8 @@ func switch_mode(new_mode: GameMode) -> void:
 	mode_end_of_day.visible = new_mode == GameMode.END_OF_DAY
 	$HUD.visible = new_mode != GameMode.END_OF_DAY
 
-	if new_mode == GameMode.ATTENDANCE:
-		load_new_recipe()
-	elif new_mode == GameMode.PREPARATION:
+
+	if new_mode == GameMode.PREPARATION:
 		scroll_container.scroll_horizontal = 0
 
 
@@ -76,7 +78,7 @@ func _update_ui() -> void:
 	var minutes: int = current_time_minutes % 60
 
 	clock_label.text = "%02d:%02d" % [hours, minutes]
-	money_label.text = "R$: " + str(money)
+	money_label.text = "M$: " + str(money)
 	day_label.text = "Dia " + str(day)
 
 
@@ -110,7 +112,13 @@ func get_time_of_day() -> String:
 		return "dinner"
 
 
-func update_score_display() -> void:
+func update_score_display(optional_score: int = -1) -> void:
+	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
+
+	if optional_score >= 0:
+		score_label.text = "%d%%" % optional_score
+		return
+
 	if current_recipe == null or prep_start_minutes < 0:
 		return
 
@@ -120,7 +128,6 @@ func update_score_display() -> void:
 	var score := 100 - time_penalty
 	score = clamp(score, 0, 100)
 
-	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
 	score_label.text = "%d%%" % score
 
 
@@ -143,9 +150,21 @@ func load_new_recipe() -> void:
 
 	# Atualiza o painel da receita e a área de preparo
 	$Mode_Preparation/HUDPrep/RecipePanel.show_recipe(current_recipe)
-	drop_plate_area.set_current_recipe(current_recipe)
 	prep_start_minutes = current_time_minutes
 	update_score_display()
+	# Remove prato anterior, se existir
+	if drop_plate_area and drop_plate_area.is_inside_tree():
+		drop_plate_area.queue_free()
+
+	# Cria um novo prato
+	drop_plate_area = drop_plate_scene.instantiate()
+	drop_plate_parent.add_child(drop_plate_area)
+
+	# Posiciona corretamente (opcional, se precisar)
+	drop_plate_area.position = Vector2(408, 192)  # ajuste conforme o layout da PrepArea
+
+	# Configura a nova receita
+	drop_plate_area.set_current_recipe(current_recipe)
 
 	show_random_client()
 
@@ -157,7 +176,42 @@ func show_random_client() -> void:
 
 	var client_sprite: Sprite2D = $Mode_Attendance/ClientSprite
 	client_sprite.texture = ClientManager.client_sprites.pick_random()
+	client_sprite.visible = true
 	client_sprite.modulate = Color(1, 1, 1, 0)
 	client_sprite.position = Vector2(165, 334)
 
 	$Mode_Attendance/AnimationPlayer.play("client_entrance")
+
+func _spawn_delivered_plate(delivered_plate: Node) -> void:
+	var attendance = $Mode_Attendance
+	attendance.add_child(delivered_plate)
+	delivered_plate.global_position = Vector2(285,231)
+
+
+func finalize_attendance(final_score: int, final_payment: int, comment: String) -> void:
+	# Mostra fala
+	mode_attendance.show_feedback(comment)
+	add_money(final_payment)
+	show_money_gain(final_payment)
+	update_score_display(final_score)
+
+	await get_tree().create_timer(0.5).timeout
+	await mode_attendance.hide_client()
+
+	# Reinicia ciclo com novo pedido
+	switch_mode(GameMode.ATTENDANCE)
+	load_new_recipe()
+	
+func show_money_gain(amount: int) -> void:
+	var gain_label := $HUD/MoneyLabel/MoneyGainLabel
+	gain_label.text = "+%d" % amount
+	gain_label.visible = true
+	gain_label.modulate.a = 1.0
+	gain_label.position = Vector2(25, -20)
+
+	var tween := create_tween()
+	tween.tween_property(gain_label, "position:y", -30, 0.6).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(gain_label, "modulate:a", 0.0, 0.4).set_trans(Tween.TRANS_SINE).set_delay(0.3)
+
+	await tween.finished
+	gain_label.visible = false

@@ -30,6 +30,7 @@ func _get_drag_data(_event_position: Vector2) -> Dictionary:
 	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	set_drag_preview(preview)
+	IngredientCostManager.charge_for_ingredient(get_tree().current_scene, ingredient_id)
 	DragManager.current_drag_type = DragManager.DragType.INGREDIENT
 
 	return {

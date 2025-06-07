@@ -33,6 +33,7 @@ metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 script = ExtResource("2_p4bu2")
 recipe_name = "Tutu de Feijão"
 region = "sudeste"
+base_price = 28
 min_day = 1
 time_of_day = Array[String](["dinner"])
 ingredient_requirements = Array[ExtResource("1_n58do")]([SubResource("Resource_n58do"), SubResource("Resource_p4bu2")])

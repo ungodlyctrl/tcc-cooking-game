@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://tcycjhwb4s7y"]
 
 [ext_resource type="PackedScene" uid="uid://q0opr264a6np" path="res://scenes/ui/ingredient.tscn" id="1_bl13t"]
-[ext_resource type="PackedScene" uid="uid://bey8ivj14oqip" path="res://scenes/ui/drop_area.tscn" id="2_iyx0m"]
+[ext_resource type="PackedScene" uid="uid://bey8ivj14oqip" path="res://scenes/ui/drop_plate_area.tscn" id="2_iyx0m"]
 
 [node name="Test" type="Control"]
 layout_mode = 3

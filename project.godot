@@ -22,6 +22,7 @@ ClientManager="*res://scripts/client_manager.gd"
 RecipeManager="*res://scripts/recipe_manager.gd"
 IngredientDatabase="*res://scripts/IngredientDatabase.gd"
 EvaluationManager="*res://scripts/EvaluationManager.gd"
+IngredientCostManager="*res://scripts/ingredient_cost_manager.gd"
 
 [display]
 

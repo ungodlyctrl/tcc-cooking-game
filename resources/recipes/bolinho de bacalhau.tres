@@ -33,6 +33,7 @@ metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 script = ExtResource("2_786k6")
 recipe_name = "Bolinho de Bacalhau"
 region = "sudeste"
+base_price = 30
 min_day = 1
 time_of_day = Array[String](["dinner"])
 ingredient_requirements = Array[ExtResource("1_or3uk")]([SubResource("Resource_or3uk"), SubResource("Resource_786k6")])

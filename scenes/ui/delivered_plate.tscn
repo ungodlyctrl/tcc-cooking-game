@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbi4ue2afyyh0"]
+
+[ext_resource type="Script" uid="uid://c2dpur1pla6d0" path="res://scripts/delivered_plate.gd" id="1_glq56"]
+[ext_resource type="Texture2D" uid="uid://cqtc1ohqy5uxm" path="res://assets/prato2.png" id="2_fsw14"]
+
+[node name="DeliveredPlate" type="Control"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 70.0
+offset_bottom = 70.0
+script = ExtResource("1_glq56")
+
+[node name="PlateSprite" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_fsw14")
