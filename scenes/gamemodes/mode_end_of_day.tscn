@@ -14,20 +14,59 @@ script = ExtResource("1_xrqmx")
 texture = ExtResource("2_xrqmx")
 centered = false
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 280.0
-offset_top = 104.0
-offset_right = 365.0
-offset_bottom = 127.0
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 1
+offset_left = 277.0
+offset_top = 17.0
+offset_right = 362.0
+offset_bottom = 40.0
 text = "Fim do dia!"
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(250, 280)
+layout_mode = 0
+offset_left = 195.0
+offset_top = 41.0
+offset_right = 445.0
+offset_bottom = 321.0
+
+[node name="SummaryBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 77.0
+
+[node name="IncomeLabel" type="Label" parent="Panel/SummaryBox"]
+layout_mode = 2
+
+[node name="ExpenseLabel" type="Label" parent="Panel/SummaryBox"]
+layout_mode = 2
+
+[node name="ProfitLabel" type="Label" parent="Panel/SummaryBox"]
+layout_mode = 2
+
+[node name="OrdersScroll" type="ScrollContainer" parent="Panel"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 95.07
+offset_right = 100.0
+offset_bottom = 265.07
+grow_horizontal = 2
+horizontal_scroll_mode = 0
+
+[node name="OrdersVBox" type="VBoxContainer" parent="Panel/OrdersScroll"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
 
 [node name="NextDayButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 272.0
-offset_top = 136.0
+offset_top = 324.0
 offset_right = 373.0
-offset_bottom = 167.0
+offset_bottom = 355.0
 text = "Próximo dia"
 
 [connection signal="pressed" from="NextDayButton" to="." method="_on_next_day_button_pressed"]

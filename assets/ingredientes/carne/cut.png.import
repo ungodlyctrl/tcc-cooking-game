@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://muisugj7wadh"
-path="res://.godot/imported/container.png-221a8a5dcdf10eddab6571eec9cca167.ctex"
+uid="uid://c67iu8yjaopf2"
+path="res://.godot/imported/cut.png-dd3630a50784e9657bd382c380d26a8e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ingredientes/carne/container.png"
-dest_files=["res://.godot/imported/container.png-221a8a5dcdf10eddab6571eec9cca167.ctex"]
+source_file="res://assets/ingredientes/carne/cut.png"
+dest_files=["res://.godot/imported/cut.png-dd3630a50784e9657bd382c380d26a8e.ctex"]
 
 [params]
 

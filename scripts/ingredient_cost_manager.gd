@@ -24,4 +24,5 @@ func get_cost(ingredient_id: String) -> int:
 
 func charge_for_ingredient(main_scene: Node, ingredient_id: String, quantity: int = 1) -> void:
 	var total_cost := get_cost(ingredient_id) * quantity
+	main_scene.total_ingredient_expense += total_cost
 	main_scene.add_money(-total_cost)

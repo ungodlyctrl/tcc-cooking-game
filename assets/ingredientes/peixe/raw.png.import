@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://muisugj7wadh"
-path="res://.godot/imported/container.png-221a8a5dcdf10eddab6571eec9cca167.ctex"
+uid="uid://bhkpsegr7vpcv"
+path="res://.godot/imported/raw.png-b399113220d85a2ef7997fd24026d332.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ingredientes/carne/container.png"
-dest_files=["res://.godot/imported/container.png-221a8a5dcdf10eddab6571eec9cca167.ctex"]
+source_file="res://assets/ingredientes/peixe/raw.png"
+dest_files=["res://.godot/imported/raw.png-b399113220d85a2ef7997fd24026d332.ctex"]
 
 [params]
 

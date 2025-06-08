@@ -107,6 +107,20 @@ const DATA := {
 			"raw": "res://assets/ingredientes/manteiga/raw.png"
 		}
 	},
+	"peixe": {
+		"display_name": "Peixe",
+		"container": "res://assets/ingredientes/peixe/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/peixe/raw.png"
+		}
+	},
+	"salsicha": {
+		"display_name": "Salsicha",
+		"container": "res://assets/ingredientes/salsicha/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/salsicha/raw.png"
+		}
+	},
 }
 
 

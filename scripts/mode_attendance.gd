@@ -23,7 +23,7 @@ func set_recipe(recipe: RecipeResource) -> void:
 			})
 
 	# Agora passamos a lista completa dos ingredientes opcionais incluídos
-	var line: String = current_recipe.get_random_client_line(optional_variants)
+	var line: String = current_recipe.get_random_client_line(current_recipe.applied_variants)
 	dialogue_label.text = line
 
 

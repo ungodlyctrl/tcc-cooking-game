@@ -49,52 +49,58 @@ func get_all_ingredient_ids() -> Array[String]:
 			all.append(req.ingredient_id)
 	return all
 
+var applied_variants := []
 
 func apply_variations() -> RecipeResource:
 	var clone := self.duplicate() as RecipeResource
 	var final_ingredients: Array[IngredientRequirement] = []
+	var variant_info: Array[Dictionary] = []
 
 	for req in clone.ingredient_requirements:
 		if req == null:
 			continue
 
+		var included := true
+
 		if req.optional:
 			# Decide inclusão com base na chance
 			if randf() > req.inclusion_chance:
-				continue  # Não incluir essa variação
+				included = false
+			else:
+				# Decide quantidade aleatória (se definido)
+				if req.variation_quantity_options.size() > 0:
+					req.quantity = req.variation_quantity_options.pick_random()
 
-			# Decide quantidade aleatória (se definido)
-			if req.variation_quantity_options.size() > 0:
-				req.quantity = req.variation_quantity_options.pick_random()
-
-		final_ingredients.append(req)
+		if included:
+			final_ingredients.append(req)
+			if req.optional:
+				variant_info.append({
+					"id": req.ingredient_id,
+					"quantity": req.quantity
+				})
 
 	clone.ingredient_requirements = final_ingredients
+	clone.applied_variants = variant_info  # <-- salva as variações usadas
 	return clone
 
 # --- Fala do cliente baseada nas variações aplicadas (ingredientes ativos) ---
 
-func get_random_client_line(active_ingredients: Array[Dictionary]) -> String:
+func get_random_client_line(active_variants: Array[Dictionary]) -> String:
 	for req in ingredient_requirements:
 		if req == null or not req.optional:
 			continue
 
-		var included := active_ingredients.any(func(item):
-			return item.has("id") and item["id"] == req.ingredient_id
+		var variant_data := active_variants.filter(func(v):
+			return v.has("id") and v["id"] == req.ingredient_id
 		)
 
-		if not included and not req.variation_line_absent.is_empty():
-			return req.variation_line_absent.pick_random()
+		if variant_data.is_empty():
+			if not req.variation_line_absent.is_empty():
+				return req.variation_line_absent.pick_random()
+		else:
+			var used_qty : int = variant_data[0].get("quantity", 1)
+			if used_qty > 1 and not req.variation_line_quantity.is_empty():
+				return req.variation_line_quantity.pick_random()
 
-		if included:
-			var found = active_ingredients.filter(func(item):
-				return item.has("id") and item["id"] == req.ingredient_id
-			)
-
-			if found.size() > 0:
-				var used_qty : int = found[0].get("quantity", 1)
-				if used_qty > req.quantity and not req.variation_line_quantity.is_empty():
-					return req.variation_line_quantity.pick_random()
-
-	# Se nenhuma variação for usada, retorna linha genérica
+	# Nenhuma variação foi detectada, retorna linha genérica
 	return client_lines.pick_random() if not client_lines.is_empty() else "..."

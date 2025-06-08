@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=3 uid="uid://byruufncnpedt"]
+
+[ext_resource type="Texture2D" uid="uid://cmkws66l282t5" path="res://assets/massa1.png" id="1_g4gk2"]
+[ext_resource type="Script" uid="uid://doj6lo1en8hy" path="res://scripts/recipe_note_panel.gd" id="1_qh6n2"]
+
+[node name="RecipeNotePanel" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_qh6n2")
+
+[node name="NoteBackground" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(180, 260)
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 260.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+texture = ExtResource("1_g4gk2")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="close_button" type="Button" parent="NoteBackground"]
+modulate = Color(0.996, 0.953, 0.753, 1)
+layout_mode = 2
+offset_left = 180.0
+offset_right = 198.0
+offset_bottom = 31.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.996, 0.953, 0.753, 1)
+theme_override_colors/icon_hover_color = Color(0.996, 0.953, 0.753, 1)
+theme_override_colors/icon_pressed_color = Color(0.994814, 0.939145, 0.683296, 1)
+theme_override_colors/icon_focus_color = Color(0.994814, 0.939145, 0.683296, 1)
+theme_override_colors/icon_normal_color = Color(0.996, 0.953, 0.753, 1)
+text = "V"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="NoteBackground"]
+modulate = Color(0.994814, 0.939145, 0.683296, 1)
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = 3.0
+offset_right = 80.0
+offset_bottom = 243.0
+grow_horizontal = 2
+horizontal_scroll_mode = 0
+
+[node name="ContentBox" type="VBoxContainer" parent="NoteBackground/ScrollContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="recipe_title" type="Label" parent="NoteBackground/ScrollContainer/ContentBox"]
+modulate = Color(0.205117, 0.205117, 0.205117, 1)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 17
+text = "(Sem receita)"
+autowrap_mode = 2
+
+[node name="ingredient_list" type="Label" parent="NoteBackground/ScrollContainer/ContentBox"]
+modulate = Color(0.203922, 0.203922, 0.203922, 1)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 14
+text = "Ingredientes:"
+autowrap_mode = 2
+
+[node name="preparation_steps" type="Label" parent="NoteBackground/ScrollContainer/ContentBox"]
+modulate = Color(0.203922, 0.203922, 0.203922, 1)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 14
+text = "Preparo:"
+autowrap_mode = 2

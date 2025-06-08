@@ -4,6 +4,7 @@ class_name ModePreparation
 @onready var scroll_container: ScrollContainer = $ScrollContainer
 @onready var prep_area: Control = $ScrollContainer/PrepArea
 @onready var fundo: TextureRect = $ScrollContainer/PrepArea/Fundo
+@onready var recipe_note_panel: RecipeNotePanel = $HUDPrep/RecipeNotePanel
 
 const SCROLL_MARGIN := 50
 const SCROLL_SPEED := 400.0
@@ -61,3 +62,14 @@ func _gui_input(event: InputEvent) -> void:
 			scroll_container.scroll_horizontal - delta.x,
 			0, max_scroll
 		)
+
+
+func set_recipe(recipe: RecipeResource) -> void:
+	current_recipe = recipe
+
+
+var current_recipe: RecipeResource
+func _on_recipe_toggle_button_pressed() -> void:
+	if recipe_note_panel and current_recipe:
+		recipe_note_panel.show_recipe(current_recipe)
+		recipe_note_panel.show()
