@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nbabicncrcuh"
-path="res://.godot/imported/client_4.png-a4b804918e3e52a00604695c972afb9b.ctex"
+uid="uid://c45g0av5hubev"
+path="res://.godot/imported/Mulher artista (1).png-df70ed9c9a6d76bd97c906987814e866.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/clients/client_4.png"
-dest_files=["res://.godot/imported/client_4.png-a4b804918e3e52a00604695c972afb9b.ctex"]
+source_file="res://assets/clients/Mulher artista (1).png"
+dest_files=["res://.godot/imported/Mulher artista (1).png-df70ed9c9a6d76bd97c906987814e866.ctex"]
 
 [params]
 

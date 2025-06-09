@@ -11,7 +11,8 @@ class_name Ingredient
 var original_position: Vector2
 
 
-func _ready() -> void:
+func _ready():
+	add_to_group("day_temp")
 	_update_visual()
 	if is_cutting_result:
 		original_position = position

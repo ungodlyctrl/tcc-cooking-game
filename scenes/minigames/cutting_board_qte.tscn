@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bjtnqhcspryur" path="res://scripts/cutting_board_qte.gd" id="1_oc6ur"]
 [ext_resource type="Texture2D" uid="uid://jm7mrqlk1yu3" path="res://assets/tauba arrumada 1.png" id="2_xcm44"]
 [ext_resource type="Texture2D" uid="uid://biua8oyqiw8ip" path="res://assets/pointer.png" id="3_lx5pw"]
-[ext_resource type="Texture2D" uid="uid://bv1bdm0dwyuy0" path="res://assets/faca.png" id="4_xcm44"]
+[ext_resource type="Texture2D" uid="uid://ej8qv10bbgbg" path="res://assets/Faca de ladinho.png" id="4_xcm44"]
 
 [node name="CuttingBoardQTE" type="Control"]
 custom_minimum_size = Vector2(150, 100)
@@ -20,15 +20,19 @@ offset_bottom = 100.0
 texture = ExtResource("2_xcm44")
 
 [node name="IngredientSprite" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -50.0
-offset_right = 50.0
-offset_bottom = 100.0
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -24.0
+offset_right = 21.0
+offset_bottom = 24.0
 grow_horizontal = 2
+grow_vertical = 2
 stretch_mode = 5
 
 [node name="QTEBar" type="ColorRect" parent="."]
@@ -93,9 +97,17 @@ grow_vertical = 0
 horizontal_alignment = 1
 
 [node name="Knife" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(10, 20)
+visible = false
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 32.0
+offset_bottom = 94.0
+texture = ExtResource("4_xcm44")
+stretch_mode = 5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Knife2" type="TextureRect" parent="CanvasLayer"]
+offset_right = 32.0
+offset_bottom = 94.0
 texture = ExtResource("4_xcm44")
 stretch_mode = 5

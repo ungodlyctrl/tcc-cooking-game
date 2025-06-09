@@ -111,7 +111,8 @@ const DATA := {
 		"display_name": "Peixe",
 		"container": "res://assets/ingredientes/peixe/container.png",
 		"states": {
-			"raw": "res://assets/ingredientes/peixe/raw.png"
+			"raw": "res://assets/ingredientes/peixe/raw.png",
+			"cut": "res://assets/ingredientes/peixe/cut.png"
 		}
 	},
 	"salsicha": {
@@ -119,6 +120,13 @@ const DATA := {
 		"container": "res://assets/ingredientes/salsicha/container.png",
 		"states": {
 			"raw": "res://assets/ingredientes/salsicha/raw.png"
+		}
+	},
+	"agua": {
+		"display_name": "Água",
+		"container": "res://assets/ingredientes/agua/container.png",
+		"states": {
+			"raw": "res://assets/ingredientes/agua/raw.png"
 		}
 	},
 }

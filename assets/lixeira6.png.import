@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1es38wtbkpwi"
-path="res://.godot/imported/client_1.png-3ef5d5610cad630fa6392ad2d8691b59.ctex"
+uid="uid://bhdy12eeq16es"
+path="res://.godot/imported/lixeira6.png-f51ab69acba884662c48609c9ee5bdac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/clients/client_1.png"
-dest_files=["res://.godot/imported/client_1.png-3ef5d5610cad630fa6392ad2d8691b59.ctex"]
+source_file="res://assets/lixeira6.png"
+dest_files=["res://.godot/imported/lixeira6.png-f51ab69acba884662c48609c9ee5bdac.ctex"]
 
 [params]
 

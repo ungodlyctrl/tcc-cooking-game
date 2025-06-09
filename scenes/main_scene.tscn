@@ -1,9 +1,61 @@
-[gd_scene load_steps=5 format=3 uid="uid://sqqiy62qf6np"]
+[gd_scene load_steps=12 format=3 uid="uid://sqqiy62qf6np"]
 
 [ext_resource type="Script" uid="uid://cg0pigwrqqh4d" path="res://scripts/main_scene.gd" id="1_7ykc4"]
 [ext_resource type="PackedScene" uid="uid://dehkeao1vbiy0" path="res://scenes/gamemodes/mode_attendance.tscn" id="2_pu3yx"]
 [ext_resource type="PackedScene" uid="uid://d4fehmyo6hugb" path="res://scenes/gamemodes/mode_preparation.tscn" id="3_gubc5"]
 [ext_resource type="PackedScene" uid="uid://ch10a2d2ac4y4" path="res://scenes/gamemodes/mode_end_of_day.tscn" id="4_pu3yx"]
+[ext_resource type="Script" uid="uid://d26mxlbe632t8" path="res://scripts/in_game_options.gd" id="5_gubc5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pu3yx"]
+bg_color = Color(0.796078, 0.858824, 0.988235, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gubc5"]
+bg_color = Color(0.913725, 0.941176, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.913725, 0.941176, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt2n2"]
+bg_color = Color(0.882353, 0.32549, 0.207843, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c16ls"]
+bg_color = Color(0.921569, 0.945098, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_18nlu"]
+bg_color = Color(0.913725, 0.941176, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1pb6"]
+bg_color = Color(0.913725, 0.941176, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_7ykc4")
@@ -17,11 +69,14 @@ unique_name_in_owner = true
 [node name="Mode_EndOfDay" parent="." instance=ExtResource("4_pu3yx")]
 unique_name_in_owner = true
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="Control" parent="."]
 unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
 
 [node name="ColorRect" type="ColorRect" parent="HUD"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_top = 332.0
 offset_right = 640.0
 offset_bottom = 364.0
@@ -29,6 +84,7 @@ color = Color(0.180392, 0.133333, 0.184314, 1)
 
 [node name="ClockLabel" type="Label" parent="HUD"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 16.0
 offset_top = 335.0
 offset_right = 57.0
@@ -40,6 +96,7 @@ text = "08:00"
 
 [node name="MoneyLabel" type="Label" parent="HUD"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 568.0
 offset_top = 335.0
 offset_right = 624.0
@@ -50,7 +107,7 @@ theme_override_constants/outline_size = 3
 text = "M$: 100"
 
 [node name="MoneyGainLabel" type="Label" parent="HUD/MoneyLabel"]
-modulate = Color(0.65098, 0.964706, 0.545098, 1)
+modulate = Color(0.386145, 0.668904, 0.283811, 1)
 layout_mode = 0
 offset_left = 24.0
 offset_right = 83.0
@@ -58,6 +115,7 @@ offset_bottom = 23.0
 
 [node name="DayLabel" type="Label" parent="HUD"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 304.0
 offset_top = 335.0
 offset_right = 344.0
@@ -68,6 +126,7 @@ theme_override_constants/outline_size = 3
 text = "Dia 1"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+layout_mode = 0
 offset_left = 493.0
 offset_top = 327.0
 offset_right = 535.0
@@ -76,3 +135,111 @@ offset_bottom = 367.0
 [node name="ScoreLabel" type="Label" parent="HUD/HBoxContainer"]
 layout_mode = 2
 text = "100%"
+
+[node name="InGameOptions" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("5_gubc5")
+
+[node name="DarkOverlay" type="ColorRect" parent="InGameOptions"]
+process_mode = 3
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 1
+color = Color(0, 0, 0, 0.4)
+
+[node name="OptionsPanel" type="Panel" parent="InGameOptions"]
+process_mode = 3
+custom_minimum_size = Vector2(230, 200)
+layout_mode = 1
+offset_left = 205.0
+offset_top = 58.0
+offset_right = 435.0
+offset_bottom = 258.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pu3yx")
+
+[node name="OptionsTitle" type="Label" parent="InGameOptions/OptionsPanel"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 220.0
+offset_bottom = 29.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
+text = "PAUSA"
+horizontal_alignment = 1
+
+[node name="Volume" type="Label" parent="InGameOptions/OptionsPanel"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 46.0
+offset_right = 220.0
+offset_bottom = 69.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="InGameOptions/OptionsPanel"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+offset_left = 10.0
+offset_top = 78.0
+offset_right = 220.0
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxFlat_gubc5")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_rt2n2")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_rt2n2")
+step = 0.2
+value = 30.0
+
+[node name="ContinueButton" type="Button" parent="InGameOptions/OptionsPanel"]
+custom_minimum_size = Vector2(106, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -37.5
+offset_top = -88.0
+offset_right = 37.5
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/hover = SubResource("StyleBoxFlat_c16ls")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_18nlu")
+theme_override_styles/normal = SubResource("StyleBoxFlat_c1pb6")
+text = "CONTINUAR"
+
+[node name="BackToMenuButton" type="Button" parent="InGameOptions/OptionsPanel"]
+custom_minimum_size = Vector2(106, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -37.5
+offset_top = -44.0
+offset_right = 37.5
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/hover = SubResource("StyleBoxFlat_c16ls")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_18nlu")
+theme_override_styles/normal = SubResource("StyleBoxFlat_c1pb6")
+text = "MENU INICIAL"
+
+[connection signal="pressed" from="InGameOptions/OptionsPanel/ContinueButton" to="InGameOptions" method="_on_continue_button_pressed"]
+[connection signal="pressed" from="InGameOptions/OptionsPanel/BackToMenuButton" to="InGameOptions" method="_on_back_to_menu_button_pressed"]

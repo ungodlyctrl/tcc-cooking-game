@@ -16,7 +16,7 @@ func _ready() -> void:
 	for data in cooked_ingredients:
 		names.append(data.get("id", "???"))
 	ingredients_label.text = "Ingredientes: " + ", ".join(names)
-
+	add_to_group("day_temp")
 
 func _get_drag_data(_position: Vector2) -> Dictionary:
 	var preview := self.duplicate()

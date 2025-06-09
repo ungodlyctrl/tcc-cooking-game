@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2bvngajycjb1"
-path="res://.godot/imported/client_2.png-77e3c2f8d59e09d0c6b099800e0e0b04.ctex"
+uid="uid://c7gmjaph2qfxe"
+path="res://.godot/imported/city_afternoon.png-747aa1042bdde1f4b02fffdcd82d9fc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/clients/client_2.png"
-dest_files=["res://.godot/imported/client_2.png-77e3c2f8d59e09d0c6b099800e0e0b04.ctex"]
+source_file="res://assets/backgrounds/city_afternoon.png"
+dest_files=["res://.godot/imported/city_afternoon.png-747aa1042bdde1f4b02fffdcd82d9fc1.ctex"]
 
 [params]
 

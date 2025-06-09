@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpukuemgj7l15"]
+
+[ext_resource type="Script" uid="uid://c14cbiki6ej2y" path="res://scripts/trash_bin.gd" id="1_ocdo3"]
+[ext_resource type="Texture2D" uid="uid://ce6g0lg0e578p" path="res://assets/lixeira5.png" id="2_oc8f2"]
+[ext_resource type="Texture2D" uid="uid://bhdy12eeq16es" path="res://assets/lixeira6.png" id="3_es4wg"]
+
+[node name="TrashBin" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -640.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ocdo3")
+closed_texture = ExtResource("2_oc8f2")
+open_texture = ExtResource("3_es4wg")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

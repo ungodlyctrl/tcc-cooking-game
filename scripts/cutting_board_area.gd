@@ -33,6 +33,10 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 	minigame.position = self.position
 
 	active = true
+	
+	var bancada_knife = $"../BancadaKnife"
+	if bancada_knife:
+		bancada_knife.visible = false
 
 
 func notify_result_placed(node: Node) -> void:

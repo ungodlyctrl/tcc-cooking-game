@@ -11,7 +11,7 @@ var current_recipe: RecipeResource
 ## Define a receita do pedido atual e exibe a fala do cliente
 func set_recipe(recipe: RecipeResource) -> void:
 	current_recipe = recipe
-
+	
 	# Aqui pegamos os ingredientes opcionais que foram incluídos
 	var optional_variants: Array[Dictionary] = []
 
@@ -44,3 +44,18 @@ func hide_client() -> void:
 	
 	var main = get_tree().current_scene as MainScene
 	main.load_new_recipe()
+
+var time_backgrounds := {
+	"morning": preload("res://assets/backgrounds/city_morning.png"),
+	"afternoon": preload("res://assets/backgrounds/city_afternoon.png"),
+	"night": preload("res://assets/backgrounds/city_night.png")
+}
+
+func update_city_background(visual_time_of_day: String) -> void:
+	print("⌛ Atualizando fundo para:", visual_time_of_day)
+	var texture : Texture2D = time_backgrounds.get(visual_time_of_day, null)
+	if texture == null:
+		push_warning("❌ Fundo não encontrado para: " + visual_time_of_day)
+	else:
+		$CityBackground.texture = texture
+	

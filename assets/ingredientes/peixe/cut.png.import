@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1es38wtbkpwi"
-path="res://.godot/imported/client_1.png-3ef5d5610cad630fa6392ad2d8691b59.ctex"
+uid="uid://qfpwfahr715m"
+path="res://.godot/imported/cut.png-53858de2e86ad2448f00852e867ba6d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/clients/client_1.png"
-dest_files=["res://.godot/imported/client_1.png-3ef5d5610cad630fa6392ad2d8691b59.ctex"]
+source_file="res://assets/ingredientes/peixe/cut.png"
+dest_files=["res://.godot/imported/cut.png-53858de2e86ad2448f00852e867ba6d8.ctex"]
 
 [params]
 

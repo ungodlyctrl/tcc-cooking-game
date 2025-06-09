@@ -9,6 +9,7 @@ class_name DeliveredPlate
 func _ready() -> void:
 	sprite.texture = plate_texture
 	set_process_unhandled_input(true)
+	add_to_group("day_temp")
 
 func _get_drag_data(_pos: Vector2) -> Variant:
 	var preview := self.duplicate()

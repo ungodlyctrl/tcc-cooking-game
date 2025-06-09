@@ -11,6 +11,7 @@ var current_time_minutes: int = 8 * 60
 var day: int = 1
 var money: int = 100
 const END_OF_DAY_MINUTES := 19 * 60
+var last_time_of_day := ""
 
 # Dados do jogo
 var region: String = "sudeste"
@@ -41,7 +42,7 @@ var drop_plate_area: Control
 
 func _ready() -> void:
 	# Inicializa relógio
-	clock_timer.wait_time = 4.0
+	clock_timer.wait_time = 2.0
 	clock_timer.timeout.connect(_on_time_tick)
 	add_child(clock_timer)
 	clock_timer.start()
@@ -49,7 +50,8 @@ func _ready() -> void:
 	switch_mode(GameMode.ATTENDANCE)
 	_update_ui()
 	load_new_recipe()
-
+	last_time_of_day = get_visual_time_of_day()
+	mode_attendance.update_city_background(last_time_of_day)
 
 func switch_mode(new_mode: GameMode) -> void:
 	current_mode = new_mode
@@ -76,6 +78,11 @@ func _on_time_tick() -> void:
 	
 	if current_mode == GameMode.PREPARATION:
 		update_score_display()
+	
+	var visual_time := get_visual_time_of_day()
+	if visual_time != last_time_of_day:
+		last_time_of_day = visual_time
+		mode_attendance.update_city_background(visual_time)
 
 
 func _update_ui() -> void:
@@ -101,18 +108,32 @@ func _end_day() -> void:
 func start_new_day() -> void:
 	day += 1
 	current_time_minutes = 8 * 60
+	day_should_end = false  # <- MUITO IMPORTANTE
+	prep_start_minutes = -1
+	daily_report.clear()
+	total_ingredient_expense = 0
+	pending_delivery.clear()
+	last_time_of_day = get_visual_time_of_day()
+	mode_attendance.update_city_background(last_time_of_day)
+
+	# Remove qualquer prato anterior
+	if drop_plate_area and drop_plate_area.is_inside_tree():
+		drop_plate_area.queue_free()
+	drop_plate_area = null
+
+	# Limpa bancada/ferramentas (garanta que o método exista, corrigimos isso abaixo)
+	var prep_area := $Mode_Preparation/ScrollContainer/PrepArea
+	if prep_area.has_method("clear_day_leftovers"):
+		prep_area.clear_day_leftovers()
+
 	clock_timer.start()
 	switch_mode(GameMode.ATTENDANCE)
+	load_new_recipe()
 	_update_ui()
-	prep_start_minutes = -1
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
 	score_label.text = "100%"
-	# Limpa ferramentas, ingredientes, pratos antigos etc.
-	$Mode_Preparation/ScrollContainer/PrepArea.call_deferred("clear_all_items")
-	# Reinicia dados
-	pending_delivery.clear()
-	drop_plate_area = null
-	total_ingredient_expense = 0
+	
+	
 
 
 func add_money(amount: int) -> void:
@@ -127,6 +148,15 @@ func get_time_of_day() -> String:
 		return "lunch"
 	else:
 		return "dinner"
+
+
+func get_visual_time_of_day() -> String:
+	if current_time_minutes < 16 * 60:
+		return "morning"
+	elif current_time_minutes < 18 * 60:
+		return "afternoon"
+	else:
+		return "night"
 
 
 func update_score_display(optional_score: int = -1) -> void:
@@ -228,6 +258,10 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String) 
 })
 	print("Pedido registrado:", daily_report[-1])
 	
+	var prep_area := $Mode_Preparation/ScrollContainer/PrepArea
+	if prep_area.has_method("clear_day_leftovers"):
+		prep_area.clear_day_leftovers()
+	
 	
 func show_money_gain(amount: int) -> void:
 	var gain_label := $HUD/MoneyLabel/MoneyGainLabel
@@ -257,16 +291,35 @@ func populate_end_of_day_report():
 
 	# Preenche a lista de pedidos
 	for entry in daily_report:
-		var label := Label.new()
-		label.text = "• %s – Nota: %d%% – M$: %d" % [
+		var label := RichTextLabel.new()
+		label.bbcode_enabled = true
+		label.fit_content = true
+		label.scroll_active = false
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		label.custom_minimum_size.y = 20
+		
+		# Estilize como quiser abaixo
+		label.bbcode_text = "[font_size=14][color=fef3c0]%s[/color]  [color=white]%d%%[/color]  [color=62ab48]M$%d[/color][/font_size]" % [
 			entry["recipe_name"],
 			entry["score"],
 			entry["payment"]
-		]
+	]
 		orders_vbox.add_child(label)
 		income += entry["payment"]
 
 	# Atualiza os resumos
 	$Mode_EndOfDay/Panel/SummaryBox/IncomeLabel.text = "Ganhos: M$%d" % income
 	$Mode_EndOfDay/Panel/SummaryBox/ExpenseLabel.text = "Gastos: M$%d" % expenses
-	$Mode_EndOfDay/Panel/SummaryBox/ProfitLabel.text = "Lucro: M$%d" % (income - expenses)
+	$Mode_EndOfDay/Panel/SummaryBox2/ProfitLabel.text = "Lucro: M$%d" % (income - expenses)
+
+
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		var options_panel = $InGameOptions
+		if options_panel.visible:
+			options_panel.hide()
+			get_tree().paused = false
+		else:
+			options_panel.show()
+			get_tree().paused = true
