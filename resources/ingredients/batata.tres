@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=3 format=3 uid="uid://f4je2rnfbe5r"]
+
+[ext_resource type="Texture2D" uid="uid://cq01vct86kjci" path="res://assets/ingredientes/batata/container.png" id="1_4r4mv"]
+[ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_ei2p1"]
+
+[resource]
+script = ExtResource("1_ei2p1")
+id = ""
+display_name = ""
+container = ExtResource("1_4r4mv")
+initial_state = "raw"
+states = Dictionary[String, Texture2D]({})
+metadata/_custom_type_script = "uid://ccubj8or3d2vb"

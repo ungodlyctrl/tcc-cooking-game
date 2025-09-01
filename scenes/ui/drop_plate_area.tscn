@@ -34,3 +34,8 @@ text = "Solte aqui"
 [node name="UsedList" type="VBoxContainer" parent="VBoxContainer"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
+
+[node name="PlateVisual" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
