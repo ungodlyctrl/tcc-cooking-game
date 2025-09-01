@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=3 format=3 uid="uid://r4wrgh7wj"]
+
+[ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_8eth7"]
+[ext_resource type="Texture2D" uid="uid://byvdgda2p1xna" path="res://assets/ingredientes/salsicha/container.png" id="1_gpryc"]
+
+[resource]
+script = ExtResource("1_8eth7")
+id = "salsicha"
+display_name = "Salsicha"
+container = ExtResource("1_gpryc")
+initial_state = "raw"
+states = Dictionary[String, Texture2D]({
+"raw": null
+})
+metadata/_custom_type_script = "uid://ccubj8or3d2vb"

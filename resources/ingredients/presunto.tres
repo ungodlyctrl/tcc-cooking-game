@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=4 format=3 uid="uid://dnmt1j0074gxj"]
+
+[ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_270b4"]
+[ext_resource type="Texture2D" uid="uid://gbelajjo7qrt" path="res://assets/ingredientes/presunto/container.png" id="1_a2aep"]
+[ext_resource type="Texture2D" uid="uid://lk8i1ttuwnqy" path="res://assets/ingredientes/presunto/raw.png" id="3_mrwjm"]
+
+[resource]
+script = ExtResource("1_270b4")
+id = "presunto"
+display_name = "Presunto"
+container = ExtResource("1_a2aep")
+initial_state = "raw"
+states = Dictionary[String, Texture2D]({
+"cooked": null,
+"fried": null,
+"raw": ExtResource("3_mrwjm")
+})
+metadata/_custom_type_script = "uid://ccubj8or3d2vb"

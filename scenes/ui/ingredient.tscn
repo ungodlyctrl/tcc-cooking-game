@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b5s8jol65nok5"]
 
-[ext_resource type="Script" path="res://scripts/ingredient.gd" id="2_32tvu"]
+[ext_resource type="Script" uid="uid://dpauq0rlgw54v" path="res://scripts/ingredient.gd" id="2_32tvu"]
 
 [node name="Ingredient" type="TextureRect"]
 offset_right = 40.0

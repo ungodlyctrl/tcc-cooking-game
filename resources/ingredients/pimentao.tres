@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=4 format=3 uid="uid://nvrpjwi02mln"]
+
+[ext_resource type="Texture2D" uid="uid://4pyft2xfly2b" path="res://assets/ingredientes/pimentao/container.png" id="1_b7qsk"]
+[ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_ih3fw"]
+[ext_resource type="Texture2D" uid="uid://bxigm3gj32k4" path="res://assets/ingredientes/pimentao/raw.png" id="3_up3dg"]
+
+[resource]
+script = ExtResource("1_ih3fw")
+id = "pimentao"
+display_name = "Pimentão"
+container = ExtResource("1_b7qsk")
+initial_state = "raw"
+states = Dictionary[String, Texture2D]({
+"cooked": null,
+"fried": null,
+"raw": ExtResource("3_up3dg")
+})
+metadata/_custom_type_script = "uid://ccubj8or3d2vb"

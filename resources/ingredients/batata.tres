@@ -1,13 +1,20 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=3 format=3 uid="uid://f4je2rnfbe5r"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://f4je2rnfbe5r"]
 
 [ext_resource type="Texture2D" uid="uid://cq01vct86kjci" path="res://assets/ingredientes/batata/container.png" id="1_4r4mv"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_ei2p1"]
+[ext_resource type="Texture2D" uid="uid://dwipom76agdwa" path="res://assets/ingredientes/batata/raw.png" id="3_hm0iv"]
+[ext_resource type="Texture2D" uid="uid://c2fg3q8fc3jhb" path="res://assets/ingredientes/batata/cut.png" id="4_ssoop"]
 
 [resource]
 script = ExtResource("1_ei2p1")
-id = ""
-display_name = ""
+id = "batata"
+display_name = "Batata"
 container = ExtResource("1_4r4mv")
 initial_state = "raw"
-states = Dictionary[String, Texture2D]({})
+states = Dictionary[String, Texture2D]({
+"cooked": null,
+"cut": ExtResource("4_ssoop"),
+"fried": null,
+"raw": ExtResource("3_hm0iv")
+})
 metadata/_custom_type_script = "uid://ccubj8or3d2vb"

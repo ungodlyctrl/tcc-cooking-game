@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://csppvrhxqj4ng"]
+
+[ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_4nb86"]
+[ext_resource type="Texture2D" uid="uid://muisugj7wadh" path="res://assets/ingredientes/carne/container.png" id="1_mprf7"]
+[ext_resource type="Texture2D" uid="uid://djkptup6l6wv6" path="res://assets/ingredientes/carne/raw.png" id="3_f5ltr"]
+[ext_resource type="Texture2D" uid="uid://c67iu8yjaopf2" path="res://assets/ingredientes/carne/cut.png" id="4_tlh4s"]
+
+[resource]
+script = ExtResource("1_4nb86")
+id = "carne"
+display_name = "Carne"
+container = ExtResource("1_mprf7")
+initial_state = "raw"
+states = Dictionary[String, Texture2D]({
+"cooked": null,
+"cut": ExtResource("4_tlh4s"),
+"fried": null,
+"raw": ExtResource("3_f5ltr")
+})
+metadata/_custom_type_script = "uid://ccubj8or3d2vb"

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=4 format=3 uid="uid://0glxrx71t1ju"]
+
+[ext_resource type="Texture2D" uid="uid://bmvk0d8c2p4d0" path="res://assets/ingredientes/agua/container.png" id="1_2w1fd"]
+[ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_vk5qb"]
+[ext_resource type="Texture2D" uid="uid://ctupjlcsehx88" path="res://assets/ingredientes/agua/raw.png" id="3_v20hv"]
+
+[resource]
+script = ExtResource("1_vk5qb")
+id = "agua"
+display_name = "Água"
+container = ExtResource("1_2w1fd")
+initial_state = "raw"
+states = Dictionary[String, Texture2D]({
+"raw": ExtResource("3_v20hv")
+})
+metadata/_custom_type_script = "uid://ccubj8or3d2vb"

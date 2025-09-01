@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpncam464box1"
-path="res://.godot/imported/raw.png-73394ed608d10547cbf0a2e9429b6892.ctex"
+uid="uid://dw53ii0o0eqn5"
+path="res://.godot/imported/cooked.png-d17bc6b24efd8f8ed6a84548af0f10e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ingredientes/arroz/raw.png"
-dest_files=["res://.godot/imported/raw.png-73394ed608d10547cbf0a2e9429b6892.ctex"]
+source_file="res://assets/ingredientes/feijao/cooked.png"
+dest_files=["res://.godot/imported/cooked.png-d17bc6b24efd8f8ed6a84548af0f10e9.ctex"]
 
 [params]
 

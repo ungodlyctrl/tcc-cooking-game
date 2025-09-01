@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=3 format=3 uid="uid://c8w71uoxo511l"]
+
+[ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_igqo6"]
+[ext_resource type="Texture2D" uid="uid://betd4887fcquu" path="res://assets/ingredientes/arroz/container.png" id="1_plfdw"]
+
+[resource]
+script = ExtResource("1_igqo6")
+id = "arroz"
+display_name = "Arroz"
+container = ExtResource("1_plfdw")
+initial_state = "cooked"
+states = Dictionary[String, Texture2D]({})
+metadata/_custom_type_script = "uid://ccubj8or3d2vb"

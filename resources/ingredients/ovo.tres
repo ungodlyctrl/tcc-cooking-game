@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=4 format=3 uid="uid://sebcmd5raimh"]
+
+[ext_resource type="Texture2D" uid="uid://dwwfckkgjx4c2" path="res://assets/ingredientes/ovo/container.png" id="1_hivub"]
+[ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_mcomf"]
+[ext_resource type="Texture2D" uid="uid://c3tqhlns1fd5r" path="res://assets/ingredientes/ovo/raw.png" id="3_tnaqi"]
+
+[resource]
+script = ExtResource("1_mcomf")
+id = "ovo"
+display_name = "Ovo"
+container = ExtResource("1_hivub")
+initial_state = "cooked"
+states = Dictionary[String, Texture2D]({
+"cooked": ExtResource("3_tnaqi")
+})
+metadata/_custom_type_script = "uid://ccubj8or3d2vb"

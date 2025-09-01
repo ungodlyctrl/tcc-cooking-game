@@ -1,36 +1,50 @@
 extends TextureRect
 class_name Ingredient
 
-## Componente de ingrediente interativo que pode ser arrastado pela bancada.
-## Usa IngredientDatabase para definir o sprite e nome, baseado no estado atual (raw, cut, etc.).
+## Nó interativo que representa um ingrediente no jogo.
+## Pode ser arrastado pela bancada e atualizado visualmente
+## de acordo com seu estado (raw, cut, cooked, etc.).
+##
+## Esse script usa o banco de dados IngredientDatabase para
+## carregar as informações do recurso IngredientData associado.
 
+@export var ingredient_id: String
+@export var state: String = "raw"  ## Estado inicial (ex: raw, cut, cooked, fried)
+@export var is_cutting_result: bool = false  ## Se for resultado de minigame de corte
 
-@export var ingredient_id: String = "massa"
-@export var state: String = "raw"  # Ex: "raw", "cut", "cooked", "fried", etc.
-@export var is_cutting_result := false
 var original_position: Vector2
+var data: IngredientData
+
+@onready var label: Label = $Label
 
 
-func _ready():
-	add_to_group("day_temp")
+func _ready() -> void:
+	## Configura o ingrediente ao ser instanciado
+	add_to_group("day_temp")  ## grupo para facilitar limpeza no fim do dia
+	data = IngredientDatabase.get_ingredient(ingredient_id)
 	_update_visual()
+
 	if is_cutting_result:
+		## Guarda a posição para que o ingrediente volte se cair fora da tela
 		original_position = position
 
 
-## Atualiza a aparência visual com base no ingrediente e estado.
 func _update_visual() -> void:
-	var sprite_path := IngredientDatabase.get_sprite_path(ingredient_id, state)
-	if sprite_path != "":
-		texture = load(sprite_path)
-	
-	$Label.text = IngredientDatabase.get_display_name(ingredient_id, state)
+	## Atualiza a aparência do ingrediente com base no estado atual
+	if not data:
+		return
+
+	var tex: Texture2D = data.states.get(state, null)
+	if tex:
+		texture = tex
+
+	label.text = data.display_name
 
 
-
-## Inicia o processo de drag & drop ao clicar no ingrediente.
-func _get_drag_data(_pos):
-	var preview = self.duplicate()
+func _get_drag_data(_pos: Vector2) -> Dictionary:
+	## Inicia o processo de drag & drop.
+	## Retorna um dicionário com os dados do ingrediente.
+	var preview := self.duplicate()
 	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	set_drag_preview(preview)
 
@@ -39,21 +53,17 @@ func _get_drag_data(_pos):
 	return {
 		"id": ingredient_id,
 		"state": state,
-		"source": self  # <- ESSENCIAL
+		"source": self  ## Importante para que outros scripts limpem a origem
 	}
 
 
-## Finaliza o drag & drop ao soltar o ingrediente.
-func _drop_data(_event_position: Vector2, _data: Variant) -> void:
-	DragManager.current_drag_type = DragManager.DragType.NONE
-
-
-## Garante que o tipo de drag seja limpo mesmo que o drop falhe.
 func _notification(what: int) -> void:
+	## Reseta estado de drag ao fim do movimento.
 	if what == NOTIFICATION_DRAG_END:
 		DragManager.current_drag_type = DragManager.DragType.NONE
-	if what == NOTIFICATION_DRAG_END and is_cutting_result:
-		await get_tree().process_frame
-		if not get_global_rect().intersects(get_viewport_rect()):
-			position = original_position  # Volta para a tábua
-		
+
+		## Caso seja um ingrediente de corte, se sair da tela volta para a posição original
+		if is_cutting_result:
+			await get_tree().process_frame
+			if not get_global_rect().intersects(get_viewport_rect()):
+				position = original_position
