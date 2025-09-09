@@ -9,7 +9,7 @@
 script = ExtResource("1_4nb86")
 id = "carne"
 display_name = "Carne"
-container = ExtResource("1_mprf7")
+container_texture = ExtResource("1_mprf7")
 initial_state = "raw"
 states = Dictionary[String, Texture2D]({
 "cooked": null,

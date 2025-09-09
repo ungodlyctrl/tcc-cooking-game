@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwip8uhvt1cpv"]
+
+[ext_resource type="Texture2D" uid="uid://d26rq8sn4y5jo" path="res://assets/fogão.png" id="1_w3vhk"]
+[ext_resource type="Script" uid="uid://i0hbnj1ok75i" path="res://scripts/stove_drop_area.gd" id="2_650sq"]
+
+[node name="StoveArea" type="TextureRect"]
+custom_minimum_size = Vector2(215, 175)
+offset_right = 215.0
+offset_bottom = 175.0
+texture = ExtResource("1_w3vhk")
+script = ExtResource("2_650sq")
+
+[node name="ToolVisual" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 77.0
+offset_right = 8.0
+offset_bottom = 77.0
+
+[node name="StartButton" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -7.5
+offset_top = -7.0
+offset_right = 7.5
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="FeedbackLabel" type="Label" parent="."]
+z_index = 2
+layout_mode = 0
+offset_left = 216.0
+offset_right = 256.0
+offset_bottom = 23.0

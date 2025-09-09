@@ -7,7 +7,7 @@
 script = ExtResource("1_613cy")
 id = "farofa"
 display_name = "Farofa"
-container = ExtResource("1_bvi08")
+container_texture = ExtResource("1_bvi08")
 initial_state = "cooked"
 states = Dictionary[String, Texture2D]({})
 metadata/_custom_type_script = "uid://ccubj8or3d2vb"

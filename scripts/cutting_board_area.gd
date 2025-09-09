@@ -8,10 +8,15 @@ var active: bool = false
 
 func _can_drop_data(_pos: Vector2, data: Variant) -> bool:
 	# Só aceita ingredientes "raw" que tenham uma versão "cut"
-	return typeof(data) == TYPE_DICTIONARY \
-		and data.has("id") and data.has("state") \
-		and data["state"] == "raw" \
-		and IngredientDatabase.has_state(data["id"], "cut")
+	if typeof(data) != TYPE_DICTIONARY:
+		return false
+	if not (data.has("id") and data.has("state")):
+		return false
+	if data["state"] != "raw":
+		return false
+
+	var ingredient: IngredientData = IngredientDatabase.get_ingredient(data["id"])
+	return ingredient != null and ingredient.states.has("cut")
 
 
 func _drop_data(_pos: Vector2, data: Variant) -> void:

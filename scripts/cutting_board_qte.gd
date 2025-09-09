@@ -25,6 +25,7 @@ var hit_registered: bool = false
 
 func _ready() -> void:
 	# Carrega o sprite do ingrediente em estado "raw"
+
 	var tex_path: String = IngredientDatabase.get_sprite_path(ingredient_name, "raw")
 	if tex_path.is_empty():
 		push_error("❌ Sprite não encontrado para: %s (raw)" % ingredient_name)

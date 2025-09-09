@@ -8,7 +8,7 @@
 script = ExtResource("1_1mg55")
 id = "queijo"
 display_name = "Queijo"
-container = ExtResource("1_86ht2")
+container_texture = ExtResource("1_86ht2")
 initial_state = "raw"
 states = Dictionary[String, Texture2D]({
 "cooked": null,

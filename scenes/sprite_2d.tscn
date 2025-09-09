@@ -1,11 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://dffchaflkuoxh"]
+[gd_scene load_steps=3 format=3 uid="uid://do0inukwatmsp"]
 
-[ext_resource type="Texture2D" uid="uid://bwowuoevmwiqh" path="res://mouse.png" id="1_k71pb"]
-[ext_resource type="Script" uid="uid://ceggc24m3epgq" path="res://scenes/sprite_2d.gd" id="2_0daxb"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i4t64"]
+load_path = "res://.godot/imported/mouse.png-696f4cca1b0bcc26fbe121cf2289b53b.ctex"
+
+[sub_resource type="GDScript" id="GDScript_k71pb"]
+script/source = "extends Sprite2D
+
+@export var follow_speed: float = 6.0
+@export var scale_pressed: Vector2 = Vector2(0.035, 0.035)
+@export var scale_default: Vector2 = Vector2(0.04, 0.04)
+
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+
+func _process(delta: float) -> void:
+	global_position = global_position.lerp(get_global_mouse_position(), follow_speed * delta)
+	var is_pressed := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+
+	var desired_scale := scale_pressed if is_pressed else scale_default
+	scale = scale.lerp(desired_scale, follow_speed * delta)
+"
 
 [node name="Sprite2D" type="Sprite2D"]
 z_index = 1475
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_k71pb")
+texture = SubResource("CompressedTexture2D_i4t64")
 offset = Vector2(150, 180)
-script = ExtResource("2_0daxb")
+script = SubResource("GDScript_k71pb")

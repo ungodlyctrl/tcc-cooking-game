@@ -8,7 +8,7 @@
 script = ExtResource("1_mcomf")
 id = "ovo"
 display_name = "Ovo"
-container = ExtResource("1_hivub")
+container_texture = ExtResource("1_hivub")
 initial_state = "cooked"
 states = Dictionary[String, Texture2D]({
 "cooked": ExtResource("3_tnaqi")

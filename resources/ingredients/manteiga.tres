@@ -8,7 +8,7 @@
 script = ExtResource("1_g0td3")
 id = "manteiga"
 display_name = "Manteiga"
-container = ExtResource("1_va6xk")
+container_texture = ExtResource("1_va6xk")
 initial_state = "raw"
 states = Dictionary[String, Texture2D]({
 "fried": null,

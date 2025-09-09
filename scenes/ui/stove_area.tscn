@@ -1,38 +1,54 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwip8uhvt1cpv"]
 
 [ext_resource type="Texture2D" uid="uid://d26rq8sn4y5jo" path="res://assets/fogão.png" id="1_w3vhk"]
-[ext_resource type="Script" uid="uid://i0hbnj1ok75i" path="res://scripts/stove_drop_area.gd" id="2_650sq"]
+[ext_resource type="Script" uid="uid://e0qlc3bjakqj" path="res://scenes/ui/burner_slot.gd" id="3_650sq"]
 
 [node name="StoveArea" type="TextureRect"]
 custom_minimum_size = Vector2(215, 175)
 offset_right = 215.0
 offset_bottom = 175.0
 texture = ExtResource("1_w3vhk")
-script = ExtResource("2_650sq")
 
-[node name="ToolVisual" type="TextureRect" parent="."]
-unique_name_in_owner = true
-layout_mode = 0
+[node name="BurnerSlot1" type="Control" parent="."]
+anchors_preset = 0
 offset_left = 8.0
 offset_top = 77.0
-offset_right = 8.0
-offset_bottom = 77.0
+offset_right = 48.0
+offset_bottom = 117.0
+script = ExtResource("3_650sq")
 
-[node name="StartButton" type="Button" parent="."]
+[node name="ToolAnchor" type="TextureRect" parent="BurnerSlot1"]
+unique_name_in_owner = true
+layout_mode = 0
+
+[node name="StartButton" type="Button" parent="BurnerSlot1"]
 visible = false
 custom_minimum_size = Vector2(15, 15)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -7.5
-offset_top = -7.0
-offset_right = 7.5
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 0
+layout_mode = 0
+offset_left = 40.0
+offset_top = 91.0
+offset_right = 55.0
+offset_bottom = 106.0
+
+[node name="BurnerSlot2" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 109.0
+offset_top = 77.0
+offset_right = 149.0
+offset_bottom = 117.0
+script = ExtResource("3_650sq")
+
+[node name="ToolAnchor" type="TextureRect" parent="BurnerSlot2"]
+layout_mode = 0
+
+[node name="StartButton" type="Button" parent="BurnerSlot2"]
+visible = false
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 0
+offset_left = 40.0
+offset_top = 91.0
+offset_right = 55.0
+offset_bottom = 106.0
 
 [node name="FeedbackLabel" type="Label" parent="."]
 z_index = 2

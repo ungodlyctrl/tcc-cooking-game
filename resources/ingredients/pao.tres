@@ -8,7 +8,7 @@
 script = ExtResource("1_dgsvn")
 id = "pao"
 display_name = "Pão"
-container = ExtResource("1_kox4d")
+container_texture = ExtResource("1_kox4d")
 initial_state = "raw"
 states = Dictionary[String, Texture2D]({
 "fried": null,

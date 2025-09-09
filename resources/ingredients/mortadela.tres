@@ -8,7 +8,7 @@
 script = ExtResource("1_6y75s")
 id = "mortadela"
 display_name = "Mortadela"
-container = ExtResource("1_1vcf3")
+container_texture = ExtResource("1_1vcf3")
 initial_state = "raw"
 states = Dictionary[String, Texture2D]({
 "fried": null,

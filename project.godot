@@ -23,6 +23,7 @@ RecipeManager="*res://scripts/recipe_manager.gd"
 IngredientDatabase="*res://scripts/IngredientDatabase.gd"
 EvaluationManager="*res://scripts/EvaluationManager.gd"
 IngredientCostManager="*res://scripts/ingredient_cost_manager.gd"
+Crt="*res://scenes/crt.tscn"
 
 [display]
 
@@ -32,6 +33,10 @@ window/size/mode=3
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
+
+[gui]
+
+theme/custom_font="uid://cf2dqn11lcj77"
 
 [rendering]
 

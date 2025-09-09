@@ -56,7 +56,7 @@ func _drop_data(_position, data):
 
 # Declaração correta da função logo abaixo
 func _show_ingredient_feedback(data: Dictionary) -> void:
-	var name := IngredientDatabase.get_display_name(data["id"], data.get("state", "raw"))
+	var name : String = IngredientDatabase.get_display_name(data["id"], data.get("state", "raw"))
 	feedback_label.text += "- " + name + "\n"
 
 

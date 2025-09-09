@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://p40c1xu80jva"]
+[gd_scene load_steps=2 format=3 uid="uid://kyg7yn5ivk57"]
 
-[ext_resource type="PackedScene" uid="uid://dth7cd64gem4v" path="res://scenes/ui/ingredient.tscn" id="1_bl13t"]
 [ext_resource type="PackedScene" uid="uid://bey8ivj14oqip" path="res://scenes/ui/drop_plate_area.tscn" id="2_iyx0m"]
 
 [node name="Test" type="Control"]
@@ -8,13 +7,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="Ingredient" parent="." instance=ExtResource("1_bl13t")]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 192.0
-offset_right = 128.0
-offset_bottom = 256.0
 
 [node name="DropArea" parent="." instance=ExtResource("2_iyx0m")]
 layout_mode = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d4fehmyo6hugb"]
+[gd_scene load_steps=14 format=3 uid="uid://d4fehmyo6hugb"]
 
 [ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
 [ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
@@ -6,14 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://bfxrnyjvy3wfb" path="res://assets/bancadaaaa.png" id="4_5avst"]
 [ext_resource type="PackedScene" uid="uid://dk286hwgpiw5g" path="res://scenes/ui/cutting_board_area.tscn" id="5_s7btf"]
 [ext_resource type="PackedScene" uid="uid://bey8ivj14oqip" path="res://scenes/ui/drop_plate_area.tscn" id="7_vitag"]
+[ext_resource type="PackedScene" uid="uid://bimgikpa8sqfn" path="res://scenes/ui/tool.tscn" id="11_b513c"]
 [ext_resource type="PackedScene" uid="uid://dwip8uhvt1cpv" path="res://scenes/ui/stove_area.tscn" id="11_tsv3s"]
 [ext_resource type="PackedScene" uid="uid://byruufncnpedt" path="res://scenes/ui/recipe_note_panel.tscn" id="11_ytfgg"]
 [ext_resource type="Texture2D" uid="uid://bv1bdm0dwyuy0" path="res://assets/faca.png" id="12_b513c"]
 [ext_resource type="Script" uid="uid://dkflfcocvdvnc" path="res://scenes/gamemodes/top_delivery_area.gd" id="12_tsv3s"]
-[ext_resource type="Texture2D" uid="uid://wqnu4k7wqwhv" path="res://assets/utensilios/frigideira.png" id="13_5avst"]
 [ext_resource type="PackedScene" uid="uid://dpukuemgj7l15" path="res://scenes/ui/trash_bin.tscn" id="13_s610r"]
-[ext_resource type="Texture2D" uid="uid://snf6kl2pdf58" path="res://assets/utensilios/panela.png" id="14_s610r"]
-[ext_resource type="Script" uid="uid://cwysf6owu3ccq" path="res://scripts/tool.gd" id="17_axkwh"]
 [ext_resource type="PackedScene" uid="uid://r122jmxfj5su" path="res://scenes/ui/container_slot.tscn" id="19_7bx2v"]
 
 [node name="ModePreparation" type="Control"]
@@ -245,29 +243,24 @@ offset_bottom = 128.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/PrepArea"]
-custom_minimum_size = Vector2(180, 76)
-layout_mode = 0
-offset_left = 552.0
-offset_top = 32.0
-offset_right = 806.0
-offset_bottom = 112.0
-alignment = 1
-
-[node name="Panela" type="TextureRect" parent="ScrollContainer/PrepArea/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("14_s610r")
-script = ExtResource("17_axkwh")
-tool_id = "panela"
-
-[node name="Frigideira" type="TextureRect" parent="ScrollContainer/PrepArea/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("13_5avst")
-script = ExtResource("17_axkwh")
-
 [node name="BancadaKnife" type="Sprite2D" parent="ScrollContainer/PrepArea"]
 position = Vector2(343, 243)
 texture = ExtResource("12_b513c")
+
+[node name="panela" parent="ScrollContainer/PrepArea" instance=ExtResource("11_b513c")]
+layout_mode = 1
+offset_left = 552.0
+offset_top = 32.0
+offset_right = 552.0
+offset_bottom = 32.0
+tool_id = "panela"
+
+[node name="frigideira" parent="ScrollContainer/PrepArea" instance=ExtResource("11_b513c")]
+layout_mode = 1
+offset_left = 656.0
+offset_top = 36.0
+offset_right = 656.0
+offset_bottom = 36.0
 
 [node name="HUDPrep" type="Control" parent="."]
 layout_mode = 1
