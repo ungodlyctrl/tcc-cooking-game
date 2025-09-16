@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3o72sq7ddnun"
-path="res://.godot/imported/frigideira.png-93b234fa934534a71c37f27268f1450d.ctex"
+uid="uid://qa0necp1pxuw"
+path="res://.godot/imported/frigideira (2).png-647e26688bfa7990b788c7bf2fa4825b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/utensilios/frigideira.png"
-dest_files=["res://.godot/imported/frigideira.png-93b234fa934534a71c37f27268f1450d.ctex"]
+source_file="res://assets/frigideira (2).png"
+dest_files=["res://.godot/imported/frigideira (2).png-647e26688bfa7990b788c7bf2fa4825b.ctex"]
 
 [params]
 

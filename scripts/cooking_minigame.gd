@@ -1,22 +1,31 @@
 extends Control
 class_name CookingMinigame
 
+## Minigame de tempo baseado em barra de calor.
+## Dispara o sinal `finished` ao terminar, enviando ingredientes processados.
 signal finished(result_ingredients: Array[Dictionary], tool_type: String, quality: String)
 
-# ---------------- Export ----------------
-@export var tool_type: String = ""   # definido pelo BurnerSlot
-@export var cook_speed: float = 30.0
-@export var show_background: bool = false
 
-# ---------------- Estado ----------------
-var ingredient_data_list: Array[Dictionary] = []
+# ---------------- Constants ----------------
+const STATE_FRIED := "fried"
+const STATE_COOKED := "cooked"
+
+
+# ---------------- Exports ----------------
+@export var tool_type: String = ""          ## Tipo de ferramenta (panela, frigideira)
+@export var cook_speed: float = 30.0        ## Velocidade que a barra avança
+@export var show_background: bool = false   ## Mostrar ou não o background
+
+
+# ---------------- Vars ----------------
+var ingredient_data_list: Array[Dictionary] = []  ## Ingredientes recebidos do BurnerSlot
 var is_cooking: bool = true
 var marker_end: float = 0.0
 var result_label: String = ""
 
-# ---------------- Referência ----------------
-var anchor: Control = null
-var ingredient_list_label: Label
+var anchor: Control = null                  ## Posição da boca do fogão
+var ingredient_list_label: Label = null     ## Label auxiliar para debug
+
 
 # ---------------- Onready ----------------
 @onready var tool_sprite: TextureRect = $ToolSprite
@@ -30,7 +39,7 @@ var ingredient_list_label: Label
 @onready var background: CanvasItem = $Background
 
 
-## Chamado pelo BurnerSlot para fixar o minigame na boca do fogão
+## Anexa o minigame na posição de uma âncora (tool_anchor do BurnerSlot).
 func attach_to_anchor(node: Control) -> void:
 	anchor = node
 	global_position = anchor.global_position   # usa o canto superior esquerdo da âncora
@@ -44,11 +53,13 @@ func _ready() -> void:
 	if background:
 		background.visible = show_background
 
-	# inicialização da barra
+	# Inicializa barra de calor
 	marker_end = float(heat_bar.size.x - heat_marker.size.x)
 	heat_marker.position.x = 0.0
 	is_cooking = true
 	set_process(true)
+
+	# Permite clicar na ferramenta para "desligar o fogo"
 	tool_sprite.mouse_filter = Control.MOUSE_FILTER_STOP
 	tool_sprite.gui_input.connect(_on_tool_clicked)
 
@@ -56,9 +67,10 @@ func _ready() -> void:
 	_load_textures()
 
 
+## Inicializa os dados do minigame.
 func initialize(t_type: String, ingredients: Array[Dictionary]) -> void:
 	tool_type = t_type
-	ingredient_data_list = ingredients
+	ingredient_data_list = ingredients.duplicate(true)  # 🔥 garante que não reutilize lista antiga
 	_load_textures()
 
 
@@ -68,6 +80,7 @@ func _process(delta: float) -> void:
 
 	heat_marker.position.x = minf(heat_marker.position.x + cook_speed * delta, marker_end)
 
+	# Queimado se atingir o fim
 	if is_cooking and is_equal_approx(heat_marker.position.x, marker_end):
 		is_cooking = false
 		_show_result("❌ Queimado!")
@@ -76,12 +89,12 @@ func _process(delta: float) -> void:
 func _gui_input(event: InputEvent) -> void:
 	if not is_cooking:
 		return
-
 	if event is InputEventMouseButton and event.pressed:
 		is_cooking = false
 		_evaluate_cook()
 
 
+## Clique direto na sprite da panela/frigideira também conta.
 func _on_tool_clicked(event: InputEvent) -> void:
 	if not is_cooking:
 		return
@@ -90,12 +103,13 @@ func _on_tool_clicked(event: InputEvent) -> void:
 		_evaluate_cook()
 
 
+## Avalia o ponto de cozimento com base na posição do marcador.
 func _evaluate_cook() -> void:
-	var x := heat_marker.position.x
-	var ideal_start := zone_ideal.position.x
-	var ideal_end := ideal_start + zone_ideal.size.x
-	var cool_end := zone_cool.position.x + zone_cool.size.x
-	var burn_start := zone_burn.position.x
+	var x: float = heat_marker.position.x
+	var ideal_start: float = zone_ideal.position.x
+	var ideal_end: float = ideal_start + zone_ideal.size.x
+	var cool_end: float = zone_cool.position.x + zone_cool.size.x
+	var burn_start: float = zone_burn.position.x
 
 	if x >= ideal_start and x <= ideal_end:
 		result_label = "✅ No ponto!"
@@ -109,12 +123,18 @@ func _evaluate_cook() -> void:
 	_show_result(result_label)
 
 
+## Mostra feedback final e emite os resultados para o BurnerSlot.
 func _show_result(text: String) -> void:
 	feedback.text = text
 	await get_tree().create_timer(1.0).timeout
 
-	var quality := _label_to_quality(result_label)
-	var final_state: String = "fried" if tool_type == "frigideira" else "cooked"
+	var quality: String = _label_to_quality(result_label)
+
+	var final_state: String = ""
+	if tool_type == "frigideira":
+		final_state = STATE_FRIED
+	else:
+		final_state = STATE_COOKED
 
 	var out: Array[Dictionary] = []
 	for d in ingredient_data_list:
@@ -131,6 +151,7 @@ func _show_result(text: String) -> void:
 	queue_free()
 
 
+## Converte o label exibido em uma qualidade de resultado.
 func _label_to_quality(label: String) -> String:
 	match label:
 		"✅ No ponto!":
@@ -148,8 +169,9 @@ func _label_to_quality(label: String) -> String:
 # ------------------------
 # Visual / utilitários
 # ------------------------
+## Carrega os sprites da ferramenta e dos ingredientes.
 func _load_textures() -> void:
-	# Sprite da ferramenta
+	# Ferramenta
 	if tool_type != "":
 		var tool_path: String = "res://assets/utensilios/%s.png" % tool_type
 		tool_sprite.texture = load(tool_path)
@@ -172,6 +194,7 @@ func _load_textures() -> void:
 		ingredient_sprite.texture = data.states.get(st, null)
 
 
+## Monta lista textual de ingredientes (fallback/depuração).
 func _build_ingredient_list_text() -> void:
 	if not ingredient_list_label:
 		return

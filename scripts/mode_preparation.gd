@@ -73,3 +73,10 @@ func _on_recipe_toggle_button_pressed() -> void:
 	if recipe_note_panel and current_recipe:
 		recipe_note_panel.show_recipe(current_recipe)
 		recipe_note_panel.show()
+
+
+func _on_texture_rect_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if recipe_note_panel and current_recipe:
+			recipe_note_panel.show_recipe(current_recipe)
+			recipe_note_panel.show()

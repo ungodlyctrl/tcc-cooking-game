@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3o72sq7ddnun"
-path="res://.godot/imported/frigideira.png-93b234fa934534a71c37f27268f1450d.ctex"
+uid="uid://bcgjjj4vn3sma"
+path="res://.godot/imported/nota tosca.png-194a988f26540493ab9a4be8297b41ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/utensilios/frigideira.png"
-dest_files=["res://.godot/imported/frigideira.png-93b234fa934534a71c37f27268f1450d.ctex"]
+source_file="res://nota tosca.png"
+dest_files=["res://.godot/imported/nota tosca.png-194a988f26540493ab9a4be8297b41ab.ctex"]
 
 [params]
 

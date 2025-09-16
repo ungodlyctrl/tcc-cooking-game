@@ -208,7 +208,7 @@ func load_new_recipe() -> void:
 	drop_plate_parent.add_child(drop_plate_area)
 
 	# Posiciona corretamente (opcional, se precisar)
-	drop_plate_area.position = Vector2(408, 192)  # ajuste conforme o layout da PrepArea
+	drop_plate_area.position = Vector2(384, 192)  # ajuste conforme o layout da PrepArea
 
 	# Configura a nova receita
 	drop_plate_area.set_current_recipe(current_recipe)

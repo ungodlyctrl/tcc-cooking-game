@@ -1,39 +1,47 @@
 extends Control
 class_name CuttingBoardQTE
 
-@export var ingredient_name: String = "cenoura"
+## Minigame de corte (QTE - Quick Time Event).
+## O jogador precisa acertar zonas na barra para cortar bem o ingrediente.
+## No fim, um ingrediente no estado "cut" é gerado e colocado na CuttingBoardArea.
 
+
+# ---------------- Constants ----------------
+const POINTER_SPEED: float = 80.0           ## Velocidade que o ponteiro percorre a barra
+const KNIFE_SECTIONS: Array[float] = [0.2, 0.4, 0.65]  ## Posições relativas de cortes
+const KNIFE_OFFSET_Y: float = -15.0         ## Ajuste vertical da faca
+
+
+# ---------------- Exports ----------------
+@export var ingredient_name: String = ""    ## Ingrediente em preparo (ex: "cenoura")
+
+
+# ---------------- Vars ----------------
+var board_area: CuttingBoardArea = null     ## Referência à área da tábua
+var attempts: int = 3                       ## Número de tentativas
+var score: int = 0                          ## Quantidade de acertos
+var hit_registered: bool = false            ## Marca se já terminou
+
+
+# ---------------- Onready ----------------
 @onready var ingredient_sprite: TextureRect = $IngredientSprite
 @onready var pointer: TextureRect = $QTEBar/Pointer
 @onready var zones: Array[Control] = [$QTEBar/Hitzone1, $QTEBar/Hitzone2, $QTEBar/Hitzone3]
 @onready var knife: TextureRect = $CanvasLayer/Knife2
 @onready var feedback: Label = $FeedbackLabel
 
-# Referência à área da tábua, para posicionar corretamente o ingrediente cortado
-var board_area: Node = null
 
-# Constantes de configuração
-const POINTER_SPEED: float = 80.0  # ligeiramente mais rápido
-const KNIFE_SECTIONS: Array[float] = [0.2, 0.4, 0.65]
-const KNIFE_OFFSET_Y: float = -15.0
-
-# Estados do minigame
-var attempts: int = 3
-var score: int = 0
-var hit_registered: bool = false
-
-
+# ---------------- Lifecycle ----------------
 func _ready() -> void:
-	# Carrega o sprite do ingrediente em estado "raw"
-
-	var tex_path: String = IngredientDatabase.get_sprite_path(ingredient_name, "raw")
-	if tex_path.is_empty():
+	## Carrega sprite do ingrediente cru
+	var tex: Texture2D = IngredientDatabase.get_sprite(ingredient_name, "raw")
+	if tex == null:
 		push_error("❌ Sprite não encontrado para: %s (raw)" % ingredient_name)
 	else:
-		ingredient_sprite.texture = load(tex_path)
-	
+		ingredient_sprite.texture = tex
+
+	## Config inicial
 	knife.texture = preload("res://assets/Faca de ladinho.png")
-	
 	pointer.position.x = 0
 	knife.modulate.a = 0
 	feedback.text = ""
@@ -44,23 +52,25 @@ func _process(delta: float) -> void:
 	if hit_registered:
 		return
 
-	var bar_width = $QTEBar.size.x
-	var pointer_width = pointer.size.x
+	## Avança ponteiro
 	pointer.position.x += POINTER_SPEED * delta
+	var bar_width: float = $QTEBar.size.x
+	var pointer_width: float = pointer.size.x
 
+	## Se chegou ao fim, encerra
 	if pointer.position.x + pointer_width >= bar_width:
 		pointer.position.x = bar_width - pointer_width
 		end_qte()
 
 
 func _input(event: InputEvent) -> void:
-	if not is_instance_valid(event) or not is_cooking():
+	if not is_cooking():
 		return
-
 	if event is InputEventMouseButton and event.pressed:
 		_attempt_cut()
 
 
+# ---------------- Core Logic ----------------
 func is_cooking() -> bool:
 	return not hit_registered and attempts > 0
 
@@ -81,7 +91,11 @@ func _attempt_cut() -> void:
 			score += 1
 			break
 
-	feedback.text = "Corte bom!" if success else "Fora da zona"
+	if success:
+		feedback.text = "Corte bom!"
+	else:
+		feedback.text = "Fora da zona"
+
 	_show_knife_effect()
 
 	if attempts <= 0:
@@ -89,73 +103,71 @@ func _attempt_cut() -> void:
 
 
 func _show_knife_effect() -> void:
-	print("🔪 Chamando _show_knife_effect()")
-
+	## Mostra animação da faca em cima do ingrediente
 	var section_index: int = clamp(3 - attempts, 0, 2)
-
-	var ingredient_pos := ingredient_sprite.get_global_position()
-	var knife_start := Vector2(
+	var ingredient_pos: Vector2 = ingredient_sprite.get_global_position()
+	var knife_start: Vector2 = Vector2(
 		ingredient_pos.x + ingredient_sprite.size.x * KNIFE_SECTIONS[section_index] - knife.size.x / 2,
 		ingredient_pos.y + KNIFE_OFFSET_Y
 	)
 
-	print("🔪 Knife Pos: ", knife_start)
 	knife.visible = true
 	knife.modulate.a = 1.0
 	knife.position = knife_start
 	knife.z_index = 100
 
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(knife, "position", knife_start + Vector2(6, 6), 0.08).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(knife, "modulate:a", 0.0, 0.08).set_delay(0.08)
 
 	await tween.finished
-	print("🔪 Tween finalizado")
 
 
 func end_qte() -> void:
 	set_process(false)
-	
+	hit_registered = true
+
+	## Avalia resultado
 	var result_text: String = ""
 	match score:
 		3: result_text = "Perfeito!"
 		2: result_text = "Bom!"
 		1: result_text = "Razoável"
 		_: result_text = "Ruim"
-
 	feedback.text = result_text
+
+	## Espera e gera ingrediente cortado
 	await get_tree().create_timer(1.0).timeout
 	_spawn_cut_ingredient()
-	var bancada_knife = $"../BancadaKnife"
+
+	## Restaura faca da bancada
+	var bancada_knife: Node = $"../BancadaKnife"
 	if bancada_knife:
 		bancada_knife.visible = true
+
 	queue_free()
-	
 
 
 func _spawn_cut_ingredient() -> void:
-	var ingredient := preload("res://scenes/ui/ingredient.tscn").instantiate()
+	## Cria ingrediente cortado
+	var ingredient: Node = preload("res://scenes/ui/ingredient.tscn").instantiate()
 	ingredient.ingredient_id = ingredient_name
 	ingredient.state = "cut"
-	ingredient.is_cutting_result = true  # Pode ser usado futuramente
-
-	# Adiciona metadados que serão usados na avaliação
+	ingredient.is_cutting_result = true
 	ingredient.set_meta("qte_hits", score)
 
 	if board_area and board_area.is_inside_tree():
 		board_area.add_child(ingredient)
 
-		# Centraliza o ingrediente na tábua
+		## Centraliza na tábua
 		var board_size: Vector2 = board_area.size
 		var ing_size: Vector2 = ingredient.size
 		ingredient.position = (board_size / 2.0) - (ing_size / 2.0)
 
-		# Sinal para resetar controle visual na tábua
+		## Notifica área da tábua
 		if board_area.has_method("notify_result_placed"):
 			board_area.notify_result_placed(ingredient)
 
 		ingredient.tree_exited.connect(func():
 			if board_area.has_method("notify_ingredient_removed"):
-				board_area.notify_ingredient_removed()
-		)
-	
+				board_area.notify_ingredient_removed())

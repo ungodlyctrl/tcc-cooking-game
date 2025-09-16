@@ -96,14 +96,6 @@ grow_horizontal = 2
 grow_vertical = 0
 horizontal_alignment = 1
 
-[node name="Knife" type="TextureRect" parent="."]
-visible = false
-layout_mode = 0
-offset_right = 32.0
-offset_bottom = 94.0
-texture = ExtResource("4_xcm44")
-stretch_mode = 5
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Knife2" type="TextureRect" parent="CanvasLayer"]
