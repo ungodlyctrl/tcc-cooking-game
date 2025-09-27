@@ -6,14 +6,6 @@
 [sub_resource type="Resource" id="Resource_0gaev"]
 script = ExtResource("1_0gaev")
 ingredient_id = "arroz"
-state = "raw"
-stages = Array[int]([])
-quantity = 1
-optional = false
-inclusion_chance = 1.0
-variation_quantity_options = Array[int]([])
-variation_line_absent = Array[String]([])
-variation_line_quantity = Array[String]([])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [sub_resource type="Resource" id="Resource_p7gce"]
@@ -21,12 +13,6 @@ script = ExtResource("1_0gaev")
 ingredient_id = "carne"
 state = "cooked"
 stages = Array[int]([1, 2])
-quantity = 1
-optional = false
-inclusion_chance = 1.0
-variation_quantity_options = Array[int]([])
-variation_line_absent = Array[String]([])
-variation_line_quantity = Array[String]([])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [sub_resource type="Resource" id="Resource_7s0de"]
@@ -34,12 +20,6 @@ script = ExtResource("1_0gaev")
 ingredient_id = "batata"
 state = "cooked"
 stages = Array[int]([1, 2])
-quantity = 1
-optional = false
-inclusion_chance = 1.0
-variation_quantity_options = Array[int]([])
-variation_line_absent = Array[String]([])
-variation_line_quantity = Array[String]([])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [resource]
@@ -47,7 +27,6 @@ script = ExtResource("2_p7gce")
 recipe_name = "Vaca Atolada"
 region = "sudeste"
 base_price = 38
-min_day = 1
 time_of_day = Array[String](["lunch"])
 ingredient_requirements = Array[ExtResource("1_0gaev")]([SubResource("Resource_0gaev"), SubResource("Resource_p7gce"), SubResource("Resource_7s0de")])
 client_lines = Array[String](["Boa tarde, me vê uma vaca atolada por favor.", "Uma vaca atolada, espero que essa carne esteja bem suculenta.", "E aí, uma vaca atolada por favor!"])

@@ -32,20 +32,6 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c16ls"]
-bg_color = Color(0.921569, 0.945098, 1, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-expand_margin_left = 4.0
-expand_margin_top = 4.0
-expand_margin_right = 4.0
-expand_margin_bottom = 4.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_18nlu"]
-bg_color = Color(0.913725, 0.941176, 1, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1pb6"]
 bg_color = Color(0.913725, 0.941176, 1, 1)
 corner_radius_top_left = 5
@@ -56,6 +42,20 @@ expand_margin_left = 3.0
 expand_margin_top = 3.0
 expand_margin_right = 3.0
 expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_18nlu"]
+bg_color = Color(0.913725, 0.941176, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c16ls"]
+bg_color = Color(0.921569, 0.945098, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_7ykc4")
@@ -71,11 +71,13 @@ unique_name_in_owner = true
 
 [node name="HUD" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 
 [node name="ColorRect" type="ColorRect" parent="HUD"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_top = 332.0
 offset_right = 640.0
@@ -84,6 +86,7 @@ color = Color(0.180392, 0.133333, 0.184314, 1)
 
 [node name="ClockLabel" type="Label" parent="HUD"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 16.0
 offset_top = 335.0
@@ -96,6 +99,7 @@ text = "08:00"
 
 [node name="MoneyLabel" type="Label" parent="HUD"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 568.0
 offset_top = 335.0
@@ -115,6 +119,7 @@ offset_bottom = 23.0
 
 [node name="DayLabel" type="Label" parent="HUD"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 304.0
 offset_top = 335.0
@@ -126,6 +131,7 @@ theme_override_constants/outline_size = 3
 text = "Dia 1"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+visible = false
 layout_mode = 0
 offset_left = 493.0
 offset_top = 327.0
@@ -138,6 +144,7 @@ text = "100%"
 
 [node name="InGameOptions" type="Control" parent="."]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("5_gubc5")
@@ -159,7 +166,7 @@ offset_bottom = 258.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pu3yx")
 
 [node name="OptionsTitle" type="Label" parent="InGameOptions/OptionsPanel"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 10.0
 offset_top = 6.0
 offset_right = 220.0
@@ -170,7 +177,7 @@ text = "PAUSA"
 horizontal_alignment = 1
 
 [node name="Volume" type="Label" parent="InGameOptions/OptionsPanel"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 10.0
 offset_top = 46.0
 offset_right = 220.0
@@ -182,7 +189,7 @@ horizontal_alignment = 1
 
 [node name="VolumeSlider" type="HSlider" parent="InGameOptions/OptionsPanel"]
 custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
+layout_mode = 0
 offset_left = 10.0
 offset_top = 78.0
 offset_right = 220.0
@@ -209,13 +216,13 @@ offset_right = 37.5
 offset_bottom = -58.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_font_sizes/font_size = 15
-theme_override_styles/hover = SubResource("StyleBoxFlat_c16ls")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_18nlu")
 theme_override_styles/normal = SubResource("StyleBoxFlat_c1pb6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_18nlu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_c16ls")
 text = "CONTINUAR"
 
 [node name="BackToMenuButton" type="Button" parent="InGameOptions/OptionsPanel"]
@@ -232,13 +239,13 @@ offset_right = 37.5
 offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_font_sizes/font_size = 15
-theme_override_styles/hover = SubResource("StyleBoxFlat_c16ls")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_18nlu")
 theme_override_styles/normal = SubResource("StyleBoxFlat_c1pb6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_18nlu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_c16ls")
 text = "MENU INICIAL"
 
 [connection signal="pressed" from="InGameOptions/OptionsPanel/ContinueButton" to="InGameOptions" method="_on_continue_button_pressed"]

@@ -9,21 +9,17 @@ var current_recipe: RecipeResource
 
 
 ## Define a receita do pedido atual e exibe a fala do cliente
-func set_recipe(recipe: RecipeResource) -> void:
+func set_recipe(recipe: RecipeResource, client_lines: Array[String] = []) -> void:
 	current_recipe = recipe
-	
-	# Aqui pegamos os ingredientes opcionais que foram incluídos
-	var optional_variants: Array[Dictionary] = []
 
-	for req in current_recipe.ingredient_requirements:
-		if req.optional and req.quantity > 0:
-			optional_variants.append({
-				"id": req.ingredient_id,
-				"quantity": req.quantity
-			})
+	var line: String = "..."
+	if not client_lines.is_empty():
+		# junta as falas num texto só (se tiver mais de uma)
+		line = ", ".join(client_lines)
+	elif not recipe.client_lines.is_empty():
+		# fallback para falas genéricas
+		line = recipe.client_lines.pick_random()
 
-	# Agora passamos a lista completa dos ingredientes opcionais incluídos
-	var line: String = current_recipe.get_random_client_line(current_recipe.applied_variants)
 	dialogue_label.text = line
 
 

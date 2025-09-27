@@ -6,14 +6,10 @@
 [sub_resource type="Resource" id="Resource_jcfx5"]
 script = ExtResource("1_jcfx5")
 ingredient_id = "pao de queijo"
-state = "raw"
-stages = Array[int]([])
-quantity = 1
-optional = true
-inclusion_chance = 1.0
-variation_quantity_options = Array[int]([1, 3, 3, 3])
-variation_line_absent = Array[String]([])
-variation_line_quantity = Array[String](["Me desenrola três pães de queijo aí! "])
+state = "cooked"
+variation_quantity_options = Array[int]([1, 2, 3])
+variation_quantity_weights = Array[float]([0.3, 0.4, 0.3])
+variation_line_quantity = Array[String](["Ah, um pão de queijo só é muito pouco!"])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [resource]
@@ -21,7 +17,6 @@ script = ExtResource("2_bqi7u")
 recipe_name = "Pão de queijo"
 region = "sudeste"
 base_price = 9
-min_day = 1
 time_of_day = Array[String](["breakfast"])
 ingredient_requirements = Array[ExtResource("1_jcfx5")]([SubResource("Resource_jcfx5")])
 client_lines = Array[String](["Opa, bom? Me vê um pão de queijo quentinho por favor.", "Pão de queijo por favor, é macio e fofinho!", "Pão e queijo, pão de queijo!"])

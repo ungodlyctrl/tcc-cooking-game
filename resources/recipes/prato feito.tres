@@ -6,27 +6,16 @@
 [sub_resource type="Resource" id="Resource_hesue"]
 script = ExtResource("1_hesue")
 ingredient_id = "arroz"
-state = "raw"
-stages = Array[int]([])
-quantity = 1
-optional = false
-inclusion_chance = 1.0
-variation_quantity_options = Array[int]([])
-variation_line_absent = Array[String]([])
-variation_line_quantity = Array[String]([])
+state = "cooked"
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [sub_resource type="Resource" id="Resource_55mys"]
 script = ExtResource("1_hesue")
 ingredient_id = "feijao"
-state = "raw"
-stages = Array[int]([])
-quantity = 1
-optional = false
-inclusion_chance = 1.0
-variation_quantity_options = Array[int]([])
-variation_line_absent = Array[String]([])
-variation_line_quantity = Array[String]([])
+state = "cooked"
+variation_quantity_options = Array[int]([1, 2])
+variation_quantity_weights = Array[float]([0.7, 0.3])
+variation_line_quantity = Array[String](["Bota bastante feijão, por favor."])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [sub_resource type="Resource" id="Resource_hkkxw"]
@@ -34,25 +23,18 @@ script = ExtResource("1_hesue")
 ingredient_id = "carne"
 state = "fried"
 stages = Array[int]([3])
-quantity = 1
-optional = false
-inclusion_chance = 1.0
-variation_quantity_options = Array[int]([])
-variation_line_absent = Array[String]([])
-variation_line_quantity = Array[String]([])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [sub_resource type="Resource" id="Resource_qba60"]
 script = ExtResource("1_hesue")
 ingredient_id = "batata"
 state = "fried"
-stages = Array[int]([])
-quantity = 1
 optional = true
-inclusion_chance = 0.75
-variation_quantity_options = Array[int]([1, 1, 2])
-variation_line_absent = Array[String](["Boa tarde, um prato feito, mas sem batata por favor. "])
-variation_line_quantity = Array[String](["Que fome! Me vê um prato feito por favor! E com fritas extra!"])
+inclusion_chance = 0.8
+variation_quantity_options = Array[int]([1, 2])
+variation_quantity_weights = Array[float]([0.7, 0.3])
+variation_line_absent = Array[String](["Hoje sem batata, por favor!"])
+variation_line_quantity = Array[String](["Fritas extra por favor!"])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [resource]
@@ -60,8 +42,7 @@ script = ExtResource("2_55mys")
 recipe_name = "Prato Feito"
 region = "sudeste"
 base_price = 36
-min_day = 1
 time_of_day = Array[String](["lunch"])
 ingredient_requirements = Array[ExtResource("1_hesue")]([SubResource("Resource_hesue"), SubResource("Resource_55mys"), SubResource("Resource_hkkxw"), SubResource("Resource_qba60")])
-client_lines = Array[String](["Que fome! Me vê um prato feito por favor!", "Oi, por hoje eu quero um PF. ", "Boa tarde, um prato feito. Espero que as fritas sejam boas."])
+client_lines = Array[String](["Que fome! Me vê um prato feito por favor!", "Oi, por hoje eu quero um PF. ", "Boa tarde, um prato feito. Espero que as fritas sejam boas.", "Capricha no PF aí, tô morrendo de fome."])
 metadata/_custom_type_script = "uid://c6xvod46icb2"

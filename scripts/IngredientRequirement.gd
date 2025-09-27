@@ -16,7 +16,10 @@ enum Stage {
 @export var quantity: int = 1
 @export var optional: bool = false
 @export var inclusion_chance: float = 1.0
+
+## Suporte a quantidades variáveis
 @export var variation_quantity_options: Array[int] = []
+@export var variation_quantity_weights: Array[float] = []  ## mesmo tamanho de options
 
 # Fala se o ingrediente for OMITIDO
 @export var variation_line_absent: Array[String] = []

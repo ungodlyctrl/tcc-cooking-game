@@ -7,13 +7,6 @@
 script = ExtResource("1_or3uk")
 ingredient_id = "batata"
 state = "cooked"
-stages = Array[int]([])
-quantity = 1
-optional = false
-inclusion_chance = 1.0
-variation_quantity_options = Array[int]([])
-variation_line_absent = Array[String]([])
-variation_line_quantity = Array[String]([])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [sub_resource type="Resource" id="Resource_786k6"]
@@ -21,12 +14,6 @@ script = ExtResource("1_or3uk")
 ingredient_id = "peixe"
 state = "cooked"
 stages = Array[int]([1, 2])
-quantity = 1
-optional = false
-inclusion_chance = 1.0
-variation_quantity_options = Array[int]([])
-variation_line_absent = Array[String]([])
-variation_line_quantity = Array[String]([])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [resource]
@@ -34,7 +21,6 @@ script = ExtResource("2_786k6")
 recipe_name = "Bolinho de Bacalhau"
 region = "sudeste"
 base_price = 30
-min_day = 1
 time_of_day = Array[String](["dinner"])
 ingredient_requirements = Array[ExtResource("1_or3uk")]([SubResource("Resource_or3uk"), SubResource("Resource_786k6")])
 client_lines = Array[String](["Boa noite. Algo frito e saboroso. Certo, um bolinho de bacalhau. ", "Gostaria de um bolinho de bacalhau. Valeu!", "Olá, um bolinho de bacalhau no capricho por favor."])

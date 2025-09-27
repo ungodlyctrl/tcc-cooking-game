@@ -6,14 +6,6 @@
 [sub_resource type="Resource" id="Resource_sbib0"]
 script = ExtResource("1_sbib0")
 ingredient_id = "pao"
-state = "raw"
-stages = Array[int]([])
-quantity = 1
-optional = false
-inclusion_chance = 1.0
-variation_quantity_options = Array[int]([])
-variation_line_absent = Array[String]([])
-variation_line_quantity = Array[String]([])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [sub_resource type="Resource" id="Resource_h5mvj"]
@@ -21,12 +13,10 @@ script = ExtResource("1_sbib0")
 ingredient_id = "mortadela"
 state = "fried"
 stages = Array[int]([3])
-quantity = 1
 optional = true
-inclusion_chance = 1.0
-variation_quantity_options = Array[int]([1, 2, 2])
-variation_line_absent = Array[String]([])
-variation_line_quantity = Array[String](["Um pão com mortadela. Simples e divino. Ah, mas com bastante mortadela hein!"])
+variation_quantity_options = Array[int]([1, 2, 3])
+variation_quantity_weights = Array[float]([0.5, 0.4, 0.1])
+variation_line_quantity = Array[String](["Capricha na mortadela!", "Manda aquele pão lotado de mortadela."])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [resource]
@@ -34,7 +24,6 @@ script = ExtResource("2_h5mvj")
 recipe_name = "Pão com mortadela"
 region = "sudeste"
 base_price = 18
-min_day = 1
 time_of_day = Array[String](["breakfast"])
 ingredient_requirements = Array[ExtResource("1_sbib0")]([SubResource("Resource_sbib0"), SubResource("Resource_h5mvj")])
 client_lines = Array[String](["E aí, poderia me ver um pão com mortadela, por favor?", "Bom dia, me vê um pão com mortadela? Ouvi dizer que é tão bom que é patrimônio nacional, sabia?", "Bom dia, me vê um pão com mortadela?", "Um pão com mortadela. Simples e divino."])

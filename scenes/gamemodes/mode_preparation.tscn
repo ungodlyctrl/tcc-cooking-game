@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d4fehmyo6hugb"]
+[gd_scene load_steps=16 format=3 uid="uid://d4fehmyo6hugb"]
 
 [ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
 [ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
@@ -11,9 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://byruufncnpedt" path="res://scenes/ui/recipe_note_panel.tscn" id="11_ytfgg"]
 [ext_resource type="Texture2D" uid="uid://bcgjjj4vn3sma" path="res://nota tosca.png" id="12_5avst"]
 [ext_resource type="Texture2D" uid="uid://bv1bdm0dwyuy0" path="res://assets/faca.png" id="12_b513c"]
-[ext_resource type="Texture2D" uid="uid://bn80cpiec2ow8" path="res://assets/utensilios/panela.png" id="12_ktx3g"]
 [ext_resource type="Script" uid="uid://dkflfcocvdvnc" path="res://scenes/gamemodes/top_delivery_area.gd" id="12_tsv3s"]
-[ext_resource type="Texture2D" uid="uid://qa0necp1pxuw" path="res://assets/frigideira (2).png" id="13_axkwh"]
 [ext_resource type="PackedScene" uid="uid://dpukuemgj7l15" path="res://scenes/ui/trash_bin.tscn" id="13_s610r"]
 [ext_resource type="Texture2D" uid="uid://da0bcgvpli0am" path="res://assets/Misto render.png" id="15_5avst"]
 [ext_resource type="PackedScene" uid="uid://r122jmxfj5su" path="res://scenes/ui/container_slot.tscn" id="19_7bx2v"]
@@ -267,19 +265,7 @@ offset_top = 30.0
 offset_right = 574.0
 offset_bottom = 30.0
 
-[node name="Panela" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-visible = false
-position = Vector2(564, 160.5)
-texture = ExtResource("12_ktx3g")
-
-[node name="Frigideira" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-visible = false
-modulate = Color(1, 1, 1, 0.469)
-position = Vector2(587, 162)
-texture = ExtResource("13_axkwh")
-
 [node name="HUDPrep" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -303,6 +289,7 @@ icon_alignment = 1
 
 [node name="RecipeNotePanel" parent="HUDPrep" instance=ExtResource("11_ytfgg")]
 visible = false
+layout_mode = 0
 offset_left = 10.0
 offset_top = 72.0
 offset_right = 10.0
