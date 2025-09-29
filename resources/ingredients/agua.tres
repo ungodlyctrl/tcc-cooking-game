@@ -9,7 +9,6 @@ script = ExtResource("1_vk5qb")
 id = "agua"
 display_name = "Água"
 container_texture = ExtResource("1_2w1fd")
-initial_state = "raw"
 states = Dictionary[String, Texture2D]({
 "raw": ExtResource("3_v20hv")
 })

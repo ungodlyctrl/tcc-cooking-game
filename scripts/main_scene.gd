@@ -191,8 +191,9 @@ func load_new_recipe() -> void:
 
 	prep_start_minutes = current_time_minutes
 
-	mode_attendance.set_recipe(current_recipe)  ## 🔥 agora passa só a receita
-	$Mode_Attendance/DialogueBox.adjust_to_content()
+	# 🔥 passa receita e falas direto pro DialogueBox
+	mode_attendance.set_recipe(current_recipe, current_client_lines)
+
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
 	score_label.text = "100%"
 	prep_start_minutes = -1
@@ -210,6 +211,7 @@ func load_new_recipe() -> void:
 	drop_plate_area.set_current_recipe(current_recipe)
 
 	show_random_client()
+
 
 
 func show_random_client() -> void:

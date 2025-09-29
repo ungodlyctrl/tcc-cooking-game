@@ -71,13 +71,11 @@ unique_name_in_owner = true
 
 [node name="HUD" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 0
 
 [node name="ColorRect" type="ColorRect" parent="HUD"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 0
 offset_top = 332.0
 offset_right = 640.0
@@ -86,7 +84,6 @@ color = Color(0.180392, 0.133333, 0.184314, 1)
 
 [node name="ClockLabel" type="Label" parent="HUD"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 0
 offset_left = 16.0
 offset_top = 335.0
@@ -94,20 +91,16 @@ offset_right = 57.0
 offset_bottom = 358.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
 text = "08:00"
 
 [node name="MoneyLabel" type="Label" parent="HUD"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 0
 offset_left = 568.0
 offset_top = 335.0
 offset_right = 624.0
 offset_bottom = 358.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
 text = "M$: 100"
 
 [node name="MoneyGainLabel" type="Label" parent="HUD/MoneyLabel"]
@@ -119,24 +112,20 @@ offset_bottom = 23.0
 
 [node name="DayLabel" type="Label" parent="HUD"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 0
 offset_left = 304.0
 offset_top = 335.0
 offset_right = 344.0
 offset_bottom = 358.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
 text = "Dia 1"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
-visible = false
 layout_mode = 0
 offset_left = 493.0
-offset_top = 327.0
+offset_top = 324.0
 offset_right = 535.0
-offset_bottom = 367.0
+offset_bottom = 364.0
 
 [node name="ScoreLabel" type="Label" parent="HUD/HBoxContainer"]
 layout_mode = 2

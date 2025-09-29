@@ -55,7 +55,7 @@ func apply_variations(recipe: RecipeResource) -> Dictionary:
 	var clone := recipe.duplicate(true) as RecipeResource
 	var final_reqs: Array[IngredientRequirement] = []
 	var variants: Array[Dictionary] = []
-	var lines: Array[String] = []
+	var variation_lines: Array[String] = []
 
 	for req in recipe.ingredient_requirements:
 		if req == null:
@@ -85,20 +85,26 @@ func apply_variations(recipe: RecipeResource) -> Dictionary:
 
 		# gera falas de acordo com variação
 		if not included and not req.variation_line_absent.is_empty():
-			lines.append(req.variation_line_absent.pick_random())
+			variation_lines.append(req.variation_line_absent.pick_random())
 		elif final_qty > 1 and not req.variation_line_quantity.is_empty():
-			lines.append(req.variation_line_quantity.pick_random())
+			variation_lines.append(req.variation_line_quantity.pick_random())
 
 	clone.ingredient_requirements = final_reqs
 
-	# fallback: se não houve falas específicas
-	if lines.is_empty() and not recipe.client_lines.is_empty():
-		lines.append(recipe.client_lines.pick_random())
+	# 🔥 monta falas finais: sempre começa com a fala base
+	var final_lines: Array[String] = []
+	if not recipe.client_lines.is_empty():
+		final_lines.append(recipe.client_lines.pick_random())  # fala base
+	final_lines.append_array(variation_lines)  # depois as falas de variação (se houver)
+
+	# fallback se nem fala base existir (caso extremo)
+	if final_lines.is_empty():
+		final_lines.append("...")
 
 	return {
 		"recipe": clone,
 		"variants": variants,
-		"client_lines": lines
+		"client_lines": final_lines
 	}
 
 

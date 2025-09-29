@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://6dn564kkwxms" path="res://scripts/mode_attendance.gd" id="1_jdssm"]
 [ext_resource type="Texture2D" uid="uid://0qin4q4lmblx" path="res://assets/fundos/Foodtruck.png" id="2_kpxur"]
 [ext_resource type="Script" uid="uid://f8ltra48a5fx" path="res://scripts/client_drop_area.gd" id="3_k6rd5"]
-[ext_resource type="PackedScene" uid="uid://blgvyh35rltdl" path="res://scenes/ui/DialogueBox.tscn" id="3_tpq4o"]
+[ext_resource type="PackedScene" uid="uid://idosu0ea81b0" path="res://scenes/ui/dialogue_box.tscn" id="3_tdh31"]
 [ext_resource type="Texture2D" uid="uid://bimj0humej7l2" path="res://assets/fundos/relogio.png" id="5_6enio"]
 [ext_resource type="Texture2D" uid="uid://ca0kg54ynlnfb" path="res://assets/fundos/calendario.png" id="6_k6rd5"]
 [ext_resource type="Texture2D" uid="uid://bajd32jdwarvc" path="res://moio (1).png" id="7_k6rd5"]
@@ -125,31 +125,6 @@ script = ExtResource("3_k6rd5")
 texture = ExtResource("2_kpxur")
 centered = false
 
-[node name="DialogueBox" parent="." instance=ExtResource("3_tpq4o")]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(170, 0)
-layout_mode = 1
-offset_left = 373.0
-offset_top = 54.0
-offset_right = 543.0
-offset_bottom = 54.0
-
-[node name="ConfirmButton" type="Button" parent="DialogueBox"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -150.0
-offset_top = 5.0
-offset_right = -5.0
-offset_bottom = 36.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Confirmar pedido"
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
@@ -168,4 +143,14 @@ texture = ExtResource("6_k6rd5")
 position = Vector2(320, 180)
 texture = ExtResource("7_k6rd5")
 
-[connection signal="pressed" from="DialogueBox/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[node name="DialogueBox" parent="." instance=ExtResource("3_tdh31")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 402.0
+offset_top = 60.0
+offset_right = 402.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
