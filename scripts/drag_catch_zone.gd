@@ -6,3 +6,4 @@ func _can_drop_data(position, data):
 
 func _drop_data(position, data):
 	pass  # Não faz nada, só serve pra evitar o cursor bloqueado
+	

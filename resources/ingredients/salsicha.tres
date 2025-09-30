@@ -7,8 +7,8 @@
 script = ExtResource("1_8eth7")
 id = "salsicha"
 display_name = "Salsicha"
+min_day = 5
 container_texture = ExtResource("1_gpryc")
-initial_state = "raw"
 states = Dictionary[String, Texture2D]({
 "raw": null
 })

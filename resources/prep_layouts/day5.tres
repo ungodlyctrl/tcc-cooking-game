@@ -1,0 +1,156 @@
+[gd_resource type="Resource" script_class="PrepLayoutResource" load_steps=27 format=3 uid="uid://cl2w1py5ndu5a"]
+
+[ext_resource type="Script" uid="uid://dckho2cxrnnua" path="res://scripts/prep/prep_layout_resource.gd" id="1_nvpwj"]
+[ext_resource type="Script" uid="uid://cechr0x3jl21b" path="res://scripts/prep/slot_entry.gd" id="2_jd6mm"]
+[ext_resource type="Script" uid="uid://bojulivybbvsu" path="res://scripts/prep/utensil_entry.gd" id="3_jd6mm"]
+
+[sub_resource type="Resource" id="Resource_cfgkr"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "pimentao"
+pos = Vector2(16, 40)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_3jokg"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "cuscuz"
+pos = Vector2(16, 109)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_72gvw"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "ovo"
+pos = Vector2(16, 178)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_y4n83"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "arroz"
+pos = Vector2(16, 247)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_63nkx"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "salsicha"
+pos = Vector2(85, 40)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_380kp"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "farofa"
+pos = Vector2(85, 109)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_nvpwj"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "batata"
+pos = Vector2(85, 178)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_jd6mm"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "feijao"
+pos = Vector2(85, 247)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_56ib2"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "carne"
+pos = Vector2(154, 40)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_kpfmh"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "peixe"
+pos = Vector2(154, 109)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_6ius7"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "mortadela"
+pos = Vector2(223, 40)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_7tb10"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "presunto"
+pos = Vector2(223, 109)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_p06hb"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "pao de queijo"
+pos = Vector2(292, 40)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_ieooj"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "queijo"
+pos = Vector2(292, 109)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_xq1ea"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "pao"
+pos = Vector2(361, 40)
+size = Vector2(96, 64)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_8ycal"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "manteiga"
+pos = Vector2(361, 111)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_xv4v3"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "agua"
+pos = Vector2(406, 111)
+size = Vector2(28, 48)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_oqa8x"]
+script = ExtResource("3_jd6mm")
+node_name = "CuttingBoardArea"
+pos = Vector2(177, 192)
+size = Vector2(150, 100)
+metadata/_custom_type_script = "uid://bojulivybbvsu"
+
+[sub_resource type="Resource" id="Resource_dpma0"]
+script = ExtResource("3_jd6mm")
+node_name = "StoveArea"
+pos = Vector2(512, 128)
+size = Vector2(105, 175)
+metadata/_custom_type_script = "uid://bojulivybbvsu"
+
+[sub_resource type="Resource" id="Resource_x4vt3"]
+script = ExtResource("3_jd6mm")
+node_name = "DropPlateArea"
+pos = Vector2(384, 192)
+size = Vector2(96, 96)
+metadata/_custom_type_script = "uid://bojulivybbvsu"
+
+[sub_resource type="Resource" id="Resource_dr17f"]
+script = ExtResource("3_jd6mm")
+node_name = "TrashBin"
+pos = Vector2(675, 128)
+metadata/_custom_type_script = "uid://bojulivybbvsu"
+
+[sub_resource type="Resource" id="Resource_l88oh"]
+script = ExtResource("3_jd6mm")
+node_name = "panela"
+pos = Vector2(479, 32)
+metadata/_custom_type_script = "uid://bojulivybbvsu"
+
+[sub_resource type="Resource" id="Resource_dm67n"]
+script = ExtResource("3_jd6mm")
+node_name = "frigideira"
+pos = Vector2(574, 30)
+metadata/_custom_type_script = "uid://bojulivybbvsu"
+
+[resource]
+script = ExtResource("1_nvpwj")
+min_day = 5
+slots = Array[ExtResource("2_jd6mm")]([SubResource("Resource_cfgkr"), SubResource("Resource_3jokg"), SubResource("Resource_72gvw"), SubResource("Resource_y4n83"), SubResource("Resource_63nkx"), SubResource("Resource_380kp"), SubResource("Resource_nvpwj"), SubResource("Resource_jd6mm"), SubResource("Resource_56ib2"), SubResource("Resource_kpfmh"), SubResource("Resource_6ius7"), SubResource("Resource_7tb10"), SubResource("Resource_p06hb"), SubResource("Resource_ieooj"), SubResource("Resource_xq1ea"), SubResource("Resource_8ycal"), SubResource("Resource_xv4v3")])
+utensils = Array[ExtResource("3_jd6mm")]([SubResource("Resource_oqa8x"), SubResource("Resource_dpma0"), SubResource("Resource_x4vt3"), SubResource("Resource_dr17f"), SubResource("Resource_l88oh"), SubResource("Resource_dm67n")])
+background_min_height = 360
+metadata/_custom_type_script = "uid://dckho2cxrnnua"

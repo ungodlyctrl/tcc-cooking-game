@@ -8,8 +8,8 @@
 script = ExtResource("1_ih3fw")
 id = "pimentao"
 display_name = "Pimentão"
+min_day = 5
 container_texture = ExtResource("1_b7qsk")
-initial_state = "raw"
 states = Dictionary[String, Texture2D]({
 "cooked": null,
 "fried": null,

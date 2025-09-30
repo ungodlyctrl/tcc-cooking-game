@@ -5,13 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://bhdy12eeq16es" path="res://assets/lixeira6.png" id="3_es4wg"]
 
 [node name="TrashBin" type="TextureRect"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -640.0
-offset_bottom = -360.0
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("1_ocdo3")
 closed_texture = ExtResource("2_oc8f2")
 open_texture = ExtResource("3_es4wg")

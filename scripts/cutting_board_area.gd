@@ -47,7 +47,7 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 	active = true
 
 	# Esconde faca da bancada enquanto minigame roda
-	var bancada_knife: Node = $"../BancadaKnife"
+	var bancada_knife: Node = $BancadaKnife
 	if bancada_knife:
 		bancada_knife.visible = false
 

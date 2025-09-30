@@ -8,8 +8,8 @@
 script = ExtResource("1_ysqmc")
 id = "cuscuz"
 display_name = "Cuscuz"
+min_day = 5
 container_texture = ExtResource("1_bhgnd")
-initial_state = "raw"
 states = Dictionary[String, Texture2D]({
 "cooked": null,
 "raw": ExtResource("3_diuw0")

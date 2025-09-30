@@ -42,7 +42,7 @@ var drop_plate_area: Control = null
 
 
 func _ready() -> void:
-	clock_timer.wait_time = 2.0
+	clock_timer.wait_time = 1.0
 	clock_timer.timeout.connect(_on_time_tick)
 	add_child(clock_timer)
 	clock_timer.start()
@@ -52,6 +52,9 @@ func _ready() -> void:
 	load_new_recipe()
 	last_time_of_day = get_visual_time_of_day()
 	mode_attendance.update_city_background(last_time_of_day)
+	var prep_area_node := $Mode_Preparation/ScrollContainer/PrepArea
+	if prep_area_node and prep_area_node.has_method("update_ingredients_for_day"):
+		prep_area_node.update_ingredients_for_day(day)
 
 
 func switch_mode(new_mode: GameMode) -> void:
@@ -134,6 +137,9 @@ func start_new_day() -> void:
 	_update_ui()
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
 	score_label.text = "100%"
+	var prep_area_node := $Mode_Preparation/ScrollContainer/PrepArea
+	if prep_area_node and prep_area_node.has_method("update_ingredients_for_day"):
+		prep_area_node.update_ingredients_for_day(day)	
 
 
 func add_money(amount: int) -> void:

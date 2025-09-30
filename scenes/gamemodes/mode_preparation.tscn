@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://d4fehmyo6hugb"]
+[gd_scene load_steps=17 format=3 uid="uid://d4fehmyo6hugb"]
 
 [ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
 [ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
-[ext_resource type="Script" uid="uid://b3ofom06qty2d" path="res://scripts/prep_area.gd" id="3_s610r"]
+[ext_resource type="Script" uid="uid://ds0cqhfcadbgw" path="res://scripts/prep/prep_area.gd" id="3_s610r"]
 [ext_resource type="Texture2D" uid="uid://bfxrnyjvy3wfb" path="res://assets/bancadaaaa.png" id="4_5avst"]
+[ext_resource type="Texture2D" uid="uid://dtos62q0gwx8h" path="res://fundoteste1.png" id="5_ktx3g"]
 [ext_resource type="PackedScene" uid="uid://dk286hwgpiw5g" path="res://scenes/ui/cutting_board_area.tscn" id="5_s7btf"]
 [ext_resource type="PackedScene" uid="uid://bey8ivj14oqip" path="res://scenes/ui/drop_plate_area.tscn" id="7_vitag"]
 [ext_resource type="PackedScene" uid="uid://bimgikpa8sqfn" path="res://scenes/ui/tool.tscn" id="11_b513c"]
@@ -39,19 +40,91 @@ script = ExtResource("2_vitag")
 
 [node name="PrepArea" type="Control" parent="ScrollContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 360)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("3_s610r")
 
-[node name="Fundo" type="TextureRect" parent="ScrollContainer/PrepArea"]
+[node name="Fundodsaf" type="TextureRect" parent="ScrollContainer/PrepArea"]
+visible = false
 layout_mode = 0
 offset_right = 951.0
 offset_bottom = 360.0
 texture = ExtResource("4_5avst")
 
+[node name="Fundo" type="NinePatchRect" parent="ScrollContainer/PrepArea"]
+layout_mode = 1
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("5_ktx3g")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="SlotsParent" type="Control" parent="ScrollContainer/PrepArea"]
+layout_mode = 1
+anchors_preset = 0
+
+[node name="UtensilsParent" type="Control" parent="ScrollContainer/PrepArea"]
+anchors_preset = 0
+
+[node name="CuttingBoardArea" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("5_s7btf")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 97.0
+offset_top = 192.0
+offset_right = 247.0
+offset_bottom = 292.0
+
+[node name="BancadaKnife" type="Sprite2D" parent="ScrollContainer/PrepArea/UtensilsParent/CuttingBoardArea"]
+position = Vector2(166, 51)
+texture = ExtResource("12_b513c")
+
+[node name="StoveArea" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("11_tsv3s")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 432.0
+offset_top = 128.0
+offset_right = 537.0
+offset_bottom = 303.0
+
+[node name="DropPlateArea" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("7_vitag")]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 192.0
+offset_right = 400.0
+offset_bottom = 288.0
+
+[node name="TrashBin" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("13_s610r")]
+layout_mode = 0
+offset_left = 573.0
+offset_top = 128.0
+offset_right = 573.0
+offset_bottom = 128.0
+
+[node name="panela" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("11_b513c")]
+layout_mode = 1
+offset_left = 399.0
+offset_top = 32.0
+offset_right = 399.0
+offset_bottom = 32.0
+tool_id = "panela"
+
+[node name="frigideira" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("11_b513c")]
+layout_mode = 1
+offset_left = 494.0
+offset_top = 30.0
+offset_right = 494.0
+offset_bottom = 30.0
+
 [node name="ContainerSlot" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 16.0
@@ -61,6 +134,7 @@ offset_bottom = 104.0
 ingredient_id = "pimentao"
 
 [node name="ContainerSlot2" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 85.0
@@ -70,6 +144,7 @@ offset_bottom = 104.0
 ingredient_id = "salsicha"
 
 [node name="ContainerSlot5" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 154.0
@@ -79,6 +154,7 @@ offset_bottom = 104.0
 ingredient_id = "carne"
 
 [node name="ContainerSlot17" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 292.0
@@ -88,6 +164,7 @@ offset_bottom = 104.0
 ingredient_id = "pao de queijo"
 
 [node name="ContainerSlot19" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 292.0
@@ -97,6 +174,7 @@ offset_bottom = 173.0
 ingredient_id = "queijo"
 
 [node name="ContainerSlot6" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 223.0
@@ -106,6 +184,7 @@ offset_bottom = 104.0
 ingredient_id = "mortadela"
 
 [node name="ContainerSlot7" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 16.0
@@ -115,6 +194,7 @@ offset_bottom = 173.0
 ingredient_id = "cuscuz"
 
 [node name="ContainerSlot8" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 16.0
@@ -124,6 +204,7 @@ offset_bottom = 242.0
 ingredient_id = "ovo"
 
 [node name="ContainerSlot9" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 16.0
@@ -133,6 +214,7 @@ offset_bottom = 311.0
 ingredient_id = "arroz"
 
 [node name="ContainerSlot10" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 85.0
@@ -142,6 +224,7 @@ offset_bottom = 173.0
 ingredient_id = "farofa"
 
 [node name="ContainerSlot13" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 154.0
@@ -151,6 +234,7 @@ offset_bottom = 173.0
 ingredient_id = "peixe"
 
 [node name="ContainerSlot14" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 223.0
@@ -160,32 +244,25 @@ offset_bottom = 173.0
 ingredient_id = "presunto"
 
 [node name="ContainerSlot20" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 layout_mode = 1
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_left = 361.0
 offset_top = 111.0
 offset_right = 393.0
 offset_bottom = 175.0
-grow_horizontal = 1
-grow_vertical = 1
 ingredient_id = "manteiga"
 
 [node name="ContainerSlot21" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 layout_mode = 1
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_left = 406.0
 offset_top = 111.0
 offset_right = 434.0
 offset_bottom = 159.0
-grow_horizontal = 1
-grow_vertical = 1
 ingredient_id = "agua"
 
 [node name="ContainerSlot18" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 layout_mode = 1
 offset_left = 361.0
 offset_top = 40.0
@@ -194,6 +271,7 @@ offset_bottom = 104.0
 ingredient_id = "pao"
 
 [node name="ContainerSlot11" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 85.0
@@ -202,6 +280,7 @@ offset_right = 149.0
 offset_bottom = 242.0
 
 [node name="ContainerSlot12" parent="ScrollContainer/PrepArea" instance=ExtResource("19_7bx2v")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_left = 85.0
@@ -209,61 +288,6 @@ offset_top = 247.0
 offset_right = 149.0
 offset_bottom = 311.0
 ingredient_id = "feijao"
-
-[node name="CuttingBoardArea" parent="ScrollContainer/PrepArea" instance=ExtResource("5_s7btf")]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 177.0
-offset_top = 192.0
-offset_right = 327.0
-offset_bottom = 292.0
-
-[node name="StoveArea" parent="ScrollContainer/PrepArea" instance=ExtResource("11_tsv3s")]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 512.0
-offset_top = 128.0
-offset_right = 617.0
-offset_bottom = 303.0
-
-[node name="BancadaKnife" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-position = Vector2(343, 243)
-texture = ExtResource("12_b513c")
-
-[node name="DropPlateArea" parent="ScrollContainer/PrepArea" instance=ExtResource("7_vitag")]
-visible = false
-layout_mode = 0
-offset_left = 384.0
-offset_top = 192.0
-offset_right = 480.0
-offset_bottom = 288.0
-
-[node name="TrashBin" parent="ScrollContainer/PrepArea" instance=ExtResource("13_s610r")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 728.0
-offset_top = 128.0
-offset_right = 728.0
-offset_bottom = 128.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="panela" parent="ScrollContainer/PrepArea" instance=ExtResource("11_b513c")]
-layout_mode = 1
-offset_left = 479.0
-offset_top = 32.0
-offset_right = 479.0
-offset_bottom = 32.0
-tool_id = "panela"
-
-[node name="frigideira" parent="ScrollContainer/PrepArea" instance=ExtResource("11_b513c")]
-layout_mode = 1
-offset_left = 574.0
-offset_top = 30.0
-offset_right = 574.0
-offset_bottom = 30.0
 
 [node name="HUDPrep" type="Control" parent="."]
 layout_mode = 1
