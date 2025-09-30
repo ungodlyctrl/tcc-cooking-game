@@ -42,7 +42,7 @@ var drop_plate_area: Control = null
 
 
 func _ready() -> void:
-	clock_timer.wait_time = 1.0
+	clock_timer.wait_time = 0.5
 	clock_timer.timeout.connect(_on_time_tick)
 	add_child(clock_timer)
 	clock_timer.start()
