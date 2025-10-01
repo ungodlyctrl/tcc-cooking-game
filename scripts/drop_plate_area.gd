@@ -71,7 +71,7 @@ func _drop_data(_position: Vector2, data: Variant) -> void:
 
 	var ingredients_to_add: Array[Dictionary] = []
 
-	# Caso 1: veio de um utensílio (panela, frigideira etc.)
+	# Caso 1: utensílio cozinhado
 	if data.has("type") and data["type"] == "cooked_tool":
 		if data.has("ingredients"):
 			ingredients_to_add = data["ingredients"]
@@ -82,7 +82,6 @@ func _drop_data(_position: Vector2, data: Variant) -> void:
 			"id": data.get("id", ""),
 			"state": data.get("state", "")
 		}
-
 		if data.has("result"):
 			ingredient_data["result"] = data["result"]
 
@@ -98,12 +97,13 @@ func _drop_data(_position: Vector2, data: Variant) -> void:
 	# Atualiza score
 	get_tree().current_scene.update_score_display()
 
-	# Remove origem (ingrediente ou utensílio)
+	# Remove origem (só se não for o prato)
 	var source_node: Control = data.get("source", null)
-	if source_node and source_node.is_inside_tree():
+	if source_node and source_node.is_inside_tree() and source_node != self:
 		source_node.queue_free()
 
 	DragManager.current_drag_type = DragManager.DragType.NONE
+
 
 
 func _get_drag_data(_position: Vector2) -> Variant:

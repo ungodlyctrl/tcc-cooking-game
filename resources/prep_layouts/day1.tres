@@ -95,6 +95,6 @@ metadata/_custom_type_script = "uid://bojulivybbvsu"
 [resource]
 script = ExtResource("1_cfgkr")
 slots = Array[ExtResource("2_3jokg")]([SubResource("Resource_cfgkr"), SubResource("Resource_3jokg"), SubResource("Resource_72gvw"), SubResource("Resource_y4n83"), SubResource("Resource_63nkx"), SubResource("Resource_380kp"), SubResource("Resource_56ib2"), SubResource("Resource_kpfmh")])
-utensils = [SubResource("Resource_oqa8x"), SubResource("Resource_dpma0"), SubResource("Resource_x4vt3"), SubResource("Resource_dr17f"), SubResource("Resource_l88oh"), SubResource("Resource_dm67n")]
+utensils = Array[ExtResource("3_3jokg")]([SubResource("Resource_oqa8x"), SubResource("Resource_dpma0"), SubResource("Resource_x4vt3"), SubResource("Resource_dr17f"), SubResource("Resource_l88oh"), SubResource("Resource_dm67n")])
 background_min_height = 360
 metadata/_custom_type_script = "uid://dckho2cxrnnua"

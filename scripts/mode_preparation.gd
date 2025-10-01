@@ -2,7 +2,7 @@ extends Control
 class_name ModePreparation
 
 @onready var scroll_container: ScrollContainer = $ScrollContainer
-@onready var prep_area: Control = $ScrollContainer/PrepArea
+@onready var prep_area: PrepArea = $ScrollContainer/PrepArea
 @onready var fundo: NinePatchRect = $ScrollContainer/PrepArea/Fundo
 @onready var recipe_note_panel: RecipeNotePanel = $HUDPrep/RecipeNotePanel
 
@@ -12,25 +12,30 @@ const SCROLL_SPEED := 400.0
 var max_scroll := 0
 var dragging := false
 var last_mouse_pos := Vector2.ZERO
+var current_recipe: RecipeResource
+
 
 func _ready() -> void:
 	await get_tree().process_frame
 	_update_scroll_area()
 	scroll_container.gui_input.connect(_on_scroll_gui_input)
 
+
+## Atualiza a largura máxima de scroll com base no fundo
 func _update_scroll_area() -> void:
 	var fundo_width: int = int(prep_area.custom_minimum_size.x)
-	var viewport_width = scroll_container.get_viewport_rect().size.x
+	var viewport_width := scroll_container.get_viewport_rect().size.x
 
 	max_scroll = max(fundo_width - viewport_width, 0)
 	scroll_container.scroll_horizontal = clamp(scroll_container.scroll_horizontal, 0, max_scroll)
 
+
 func _process(delta: float) -> void:
-	# Scroll automático nas bordas durante drag de ingrediente
+	# Scroll automático nas bordas durante qualquer drag
 	if DragManager.current_drag_type != DragManager.DragType.NONE:
-		var mouse_x = get_viewport().get_mouse_position().x
-		var screen_width = get_viewport().get_visible_rect().size.x
-		var scroll_val = scroll_container.scroll_horizontal
+		var mouse_x := get_viewport().get_mouse_position().x
+		var screen_width := get_viewport().get_visible_rect().size.x
+		var scroll_val := scroll_container.scroll_horizontal
 
 		if mouse_x >= screen_width - SCROLL_MARGIN:
 			scroll_val += SCROLL_SPEED * delta
@@ -39,6 +44,8 @@ func _process(delta: float) -> void:
 
 		scroll_container.scroll_horizontal = clamp(scroll_val, 0, max_scroll)
 
+
+## Scroll manual com clique e arraste
 func _on_scroll_gui_input(event: InputEvent) -> void:
 	if DragManager.current_drag_type != DragManager.DragType.NONE:
 		dragging = false
@@ -48,20 +55,22 @@ func _on_scroll_gui_input(event: InputEvent) -> void:
 		dragging = event.pressed
 		last_mouse_pos = event.position
 	elif event is InputEventMouseMotion and dragging:
-		var delta = event.relative
 		scroll_container.scroll_horizontal = clamp(
-			scroll_container.scroll_horizontal - delta.x,
+			scroll_container.scroll_horizontal - event.relative.x,
 			0, max_scroll
 		)
 
+
+## Define a receita atual
 func set_recipe(recipe: RecipeResource) -> void:
 	current_recipe = recipe
 
-var current_recipe: RecipeResource
+
 func _on_recipe_toggle_button_pressed() -> void:
 	if recipe_note_panel and current_recipe:
 		recipe_note_panel.show_recipe(current_recipe)
 		recipe_note_panel.show()
+
 
 func _on_texture_rect_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:

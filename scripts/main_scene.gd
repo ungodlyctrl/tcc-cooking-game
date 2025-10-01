@@ -26,21 +26,19 @@ var total_ingredient_expense: int = 0
 # Timer
 var clock_timer: Timer = Timer.new()
 
-# ---------------- Onready (refs da cena) ----------------
+# ---------------- Onready ----------------
 @onready var mode_attendance: ModeAttendance = $Mode_Attendance
-@onready var mode_preparation: Control = $Mode_Preparation
+@onready var mode_preparation: ModePreparation = $Mode_Preparation
 @onready var mode_end_of_day: Control = $Mode_EndOfDay
 @onready var scroll_container: ScrollContainer = $Mode_Preparation/ScrollContainer
-@onready var drop_plate_parent: Node = $Mode_Preparation/ScrollContainer/PrepArea
-@onready var drop_plate_scene: PackedScene = preload("res://scenes/ui/drop_plate_area.tscn")
-var drop_plate_area: Control = null
+@onready var prep_area: PrepArea = $Mode_Preparation/ScrollContainer/PrepArea
 
 # HUD
 @onready var clock_label: Label = $HUD/ClockLabel
 @onready var money_label: Label = $HUD/MoneyLabel
 @onready var day_label: Label = $HUD/DayLabel
 
-
+# ---------------- Ready ----------------
 func _ready() -> void:
 	clock_timer.wait_time = 0.5
 	clock_timer.timeout.connect(_on_time_tick)
@@ -52,11 +50,9 @@ func _ready() -> void:
 	load_new_recipe()
 	last_time_of_day = get_visual_time_of_day()
 	mode_attendance.update_city_background(last_time_of_day)
-	var prep_area_node := $Mode_Preparation/ScrollContainer/PrepArea
-	if prep_area_node and prep_area_node.has_method("update_ingredients_for_day"):
-		prep_area_node.update_ingredients_for_day(day)
+	prep_area.update_ingredients_for_day(day)
 
-
+# ---------------- Mode Switch ----------------
 func switch_mode(new_mode: GameMode) -> void:
 	current_mode = new_mode
 
@@ -70,9 +66,8 @@ func switch_mode(new_mode: GameMode) -> void:
 	if new_mode == GameMode.PREPARATION:
 		scroll_container.scroll_horizontal = 0
 
-
+# ---------------- Tick / Time ----------------
 var day_should_end: bool = false
-
 
 func _on_time_tick() -> void:
 	current_time_minutes += 15
@@ -90,7 +85,6 @@ func _on_time_tick() -> void:
 		last_time_of_day = visual_time
 		mode_attendance.update_city_background(visual_time)
 
-
 func _update_ui() -> void:
 	var hours: int = current_time_minutes / 60
 	var minutes: int = current_time_minutes % 60
@@ -104,12 +98,11 @@ func _update_ui() -> void:
 	else:
 		clock_label.remove_theme_color_override("font_color")
 
-
+# ---------------- Day Cycle ----------------
 func _end_day() -> void:
 	clock_timer.stop()
 	populate_end_of_day_report()
 	switch_mode(GameMode.END_OF_DAY)
-
 
 func start_new_day() -> void:
 	day += 1
@@ -122,30 +115,22 @@ func start_new_day() -> void:
 	last_time_of_day = get_visual_time_of_day()
 	mode_attendance.update_city_background(last_time_of_day)
 
-	for child in drop_plate_parent.get_children():
-		if child is DropPlateArea:
-			child.queue_free()
-	drop_plate_area = null
-
-	var prep_area := $Mode_Preparation/ScrollContainer/PrepArea
-	if prep_area.has_method("clear_day_leftovers"):
-		prep_area.clear_day_leftovers()
+	# 🔥 limpa bancada no começo do dia
+	prep_area.clear_day_leftovers()
 
 	clock_timer.start()
 	switch_mode(GameMode.ATTENDANCE)
 	load_new_recipe()
 	_update_ui()
+
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
 	score_label.text = "100%"
-	var prep_area_node := $Mode_Preparation/ScrollContainer/PrepArea
-	if prep_area_node and prep_area_node.has_method("update_ingredients_for_day"):
-		prep_area_node.update_ingredients_for_day(day)	
+	prep_area.update_ingredients_for_day(day)
 
-
+# ---------------- Gameplay ----------------
 func add_money(amount: int) -> void:
 	money += amount
 	_update_ui()
-
 
 func get_time_of_day() -> String:
 	if current_time_minutes < 12 * 60:
@@ -155,7 +140,6 @@ func get_time_of_day() -> String:
 	else:
 		return "dinner"
 
-
 func get_visual_time_of_day() -> String:
 	if current_time_minutes < 16 * 60:
 		return "morning"
@@ -163,7 +147,6 @@ func get_visual_time_of_day() -> String:
 		return "afternoon"
 	else:
 		return "night"
-
 
 func update_score_display(optional_score: int = -1) -> void:
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
@@ -183,7 +166,6 @@ func update_score_display(optional_score: int = -1) -> void:
 
 	score_label.text = "%d%%" % score
 
-
 func load_new_recipe() -> void:
 	var time_of_day := get_time_of_day()
 	var result := RecipeManager.get_random_recipe(day, region, time_of_day)
@@ -193,11 +175,9 @@ func load_new_recipe() -> void:
 		return
 
 	current_recipe = result["recipe"]
-	current_client_lines = result["client_lines"]  ## 🔥 guardamos aqui
+	current_client_lines = result["client_lines"]
 
 	prep_start_minutes = current_time_minutes
-
-	# 🔥 passa receita e falas direto pro DialogueBox
 	mode_attendance.set_recipe(current_recipe, current_client_lines)
 
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
@@ -208,18 +188,12 @@ func load_new_recipe() -> void:
 	prep_start_minutes = current_time_minutes
 	update_score_display()
 
-	if drop_plate_area and drop_plate_area.is_inside_tree():
-		drop_plate_area.queue_free()
-
-	drop_plate_area = drop_plate_scene.instantiate()
-	drop_plate_parent.add_child(drop_plate_area)
-	drop_plate_area.position = Vector2(384, 192)
-	drop_plate_area.set_current_recipe(current_recipe)
+	# 🔥 recria bancada (ingredientes + utensílios fixos)
+	prep_area.update_ingredients_for_day(day)
 
 	show_random_client()
 
-
-
+# ---------------- Attendance ----------------
 func show_random_client() -> void:
 	if ClientManager.client_sprites.is_empty():
 		push_warning("Nenhum sprite de cliente carregado!")
@@ -233,12 +207,10 @@ func show_random_client() -> void:
 
 	$Mode_Attendance/AnimationPlayer.play("client_entrance")
 
-
 func _spawn_delivered_plate(delivered_plate: Node) -> void:
 	var attendance: Node = $Mode_Attendance
 	attendance.add_child(delivered_plate)
 	delivered_plate.global_position = Vector2(285, 231)
-
 
 func finalize_attendance(final_score: int, final_payment: int, comment: String) -> void:
 	mode_attendance.show_feedback(comment)
@@ -262,11 +234,10 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String) 
 	})
 	print("Pedido registrado:", daily_report[-1])
 
-	var prep_area: Node = $Mode_Preparation/ScrollContainer/PrepArea
-	if prep_area.has_method("clear_day_leftovers"):
-		prep_area.clear_day_leftovers()
-
-
+	# 🔥 bancada limpa ao finalizar pedido
+	prep_area.clear_day_leftovers()
+	prep_area.update_ingredients_for_day(day)
+# ---------------- UI ----------------
 func show_money_gain(amount: int) -> void:
 	var gain_label: Label = $HUD/MoneyLabel/MoneyGainLabel
 	gain_label.text = "+%d" % amount
@@ -280,7 +251,6 @@ func show_money_gain(amount: int) -> void:
 
 	await tween.finished
 	gain_label.visible = false
-
 
 func populate_end_of_day_report() -> void:
 	var income: int = 0
@@ -312,7 +282,7 @@ func populate_end_of_day_report() -> void:
 	$Mode_EndOfDay/Panel/SummaryBox/ExpenseLabel.text = "Gastos: M$%d" % expenses
 	$Mode_EndOfDay/Panel/SummaryBox2/ProfitLabel.text = "Lucro: M$%d" % (income - expenses)
 
-
+# ---------------- Input ----------------
 func _input(event) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		var options_panel: Control = $InGameOptions
