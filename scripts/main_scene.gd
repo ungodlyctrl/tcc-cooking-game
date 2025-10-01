@@ -50,7 +50,10 @@ func _ready() -> void:
 	load_new_recipe()
 	last_time_of_day = get_visual_time_of_day()
 	mode_attendance.update_city_background(last_time_of_day)
+
+	# garante bancada + prato no load inicial
 	prep_area.update_ingredients_for_day(day)
+	# (update_ingredients_for_day já chama ensure_plate_for_day internamente)
 
 # ---------------- Mode Switch ----------------
 func switch_mode(new_mode: GameMode) -> void:
@@ -65,6 +68,8 @@ func switch_mode(new_mode: GameMode) -> void:
 
 	if new_mode == GameMode.PREPARATION:
 		scroll_container.scroll_horizontal = 0
+		# garante que o prato esteja correto para o dia quando abrimos preparação
+		prep_area.ensure_plate_for_day(day)
 
 # ---------------- Tick / Time ----------------
 var day_should_end: bool = false
@@ -125,7 +130,11 @@ func start_new_day() -> void:
 
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
 	score_label.text = "100%"
+
+	# recria bancada (ingredientes + utensílios fixos) e garante prato na posição do dia
 	prep_area.update_ingredients_for_day(day)
+	# update_ingredients_for_day chama ensure_plate_for_day -- redundância segura:
+	prep_area.ensure_plate_for_day(day)
 
 # ---------------- Gameplay ----------------
 func add_money(amount: int) -> void:
@@ -190,6 +199,7 @@ func load_new_recipe() -> void:
 
 	# 🔥 recria bancada (ingredientes + utensílios fixos)
 	prep_area.update_ingredients_for_day(day)
+	prep_area.ensure_plate_for_day(day)
 
 	show_random_client()
 
@@ -234,9 +244,11 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String) 
 	})
 	print("Pedido registrado:", daily_report[-1])
 
-	# 🔥 bancada limpa ao finalizar pedido
+	# 🔥 bancada limpa ao finalizar pedido e garante prato na posição do dia quando voltar
 	prep_area.clear_day_leftovers()
 	prep_area.update_ingredients_for_day(day)
+	prep_area.ensure_plate_for_day(day)
+
 # ---------------- UI ----------------
 func show_money_gain(amount: int) -> void:
 	var gain_label: Label = $HUD/MoneyLabel/MoneyGainLabel
