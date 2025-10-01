@@ -22,6 +22,7 @@ script = ExtResource("2_p4bu2")
 recipe_name = "Tutu de Feijão"
 region = "sudeste"
 base_price = 28
+min_day = 5
 time_of_day = Array[String](["dinner"])
 ingredient_requirements = Array[ExtResource("1_n58do")]([SubResource("Resource_n58do"), SubResource("Resource_p4bu2")])
 client_lines = Array[String](["Boa noite, queria um tutu de feijão!", "Tutu de feijão, apenas. Obrigado.", "Como vai? Um tutu de feijão por favor.", "Como é o nome daquele de feijão e farinha de milho?"])

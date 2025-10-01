@@ -24,6 +24,7 @@ IngredientDatabase="*res://scripts/IngredientDatabase.gd"
 EvaluationManager="*res://scripts/EvaluationManager.gd"
 IngredientCostManager="*res://scripts/ingredient_cost_manager.gd"
 Crt="*res://scenes/crt.tscn"
+Managers="*res://scenes/managers.tscn"
 
 [display]
 

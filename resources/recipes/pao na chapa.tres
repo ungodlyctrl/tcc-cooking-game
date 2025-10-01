@@ -22,6 +22,7 @@ script = ExtResource("2_db24g")
 recipe_name = "Pão na chapa"
 region = "sudeste"
 base_price = 16
+min_day = 5
 time_of_day = Array[String](["breakfast"])
 ingredient_requirements = Array[ExtResource("1_q14fl")]([SubResource("Resource_gacoo"), SubResource("Resource_6clnh")])
 client_lines = Array[String](["Quero um pão na chapa.", "Bom dia. Me vê um pão na chapa, por favor!", "E aí mano, um pão na chapa.", "Quero um pão na chapa bem tostadinho, tio!"])

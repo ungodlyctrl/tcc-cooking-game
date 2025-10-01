@@ -40,20 +40,26 @@ var clock_timer: Timer = Timer.new()
 
 # ---------------- Ready ----------------
 func _ready() -> void:
-	clock_timer.wait_time = 0.5
+	print("Managers:", Managers)
+	print("RecipeManager:", Managers.recipe_manager)
+
+	clock_timer.wait_time = 2.0
 	clock_timer.timeout.connect(_on_time_tick)
 	add_child(clock_timer)
 	clock_timer.start()
 
 	switch_mode(GameMode.ATTENDANCE)
 	_update_ui()
+
+	# ⚠️ espera um frame para garantir que Managers inicializou
+	await get_tree().process_frame
 	load_new_recipe()
+
 	last_time_of_day = get_visual_time_of_day()
 	mode_attendance.update_city_background(last_time_of_day)
 
 	# garante bancada + prato no load inicial
 	prep_area.update_ingredients_for_day(day)
-	# (update_ingredients_for_day já chama ensure_plate_for_day internamente)
 
 # ---------------- Mode Switch ----------------
 func switch_mode(new_mode: GameMode) -> void:
@@ -68,7 +74,6 @@ func switch_mode(new_mode: GameMode) -> void:
 
 	if new_mode == GameMode.PREPARATION:
 		scroll_container.scroll_horizontal = 0
-		# garante que o prato esteja correto para o dia quando abrimos preparação
 		prep_area.ensure_plate_for_day(day)
 
 # ---------------- Tick / Time ----------------
@@ -120,20 +125,18 @@ func start_new_day() -> void:
 	last_time_of_day = get_visual_time_of_day()
 	mode_attendance.update_city_background(last_time_of_day)
 
-	# 🔥 limpa bancada no começo do dia
 	prep_area.clear_day_leftovers()
-
 	clock_timer.start()
 	switch_mode(GameMode.ATTENDANCE)
+
+	await get_tree().process_frame
 	load_new_recipe()
 	_update_ui()
 
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
 	score_label.text = "100%"
 
-	# recria bancada (ingredientes + utensílios fixos) e garante prato na posição do dia
 	prep_area.update_ingredients_for_day(day)
-	# update_ingredients_for_day chama ensure_plate_for_day -- redundância segura:
 	prep_area.ensure_plate_for_day(day)
 
 # ---------------- Gameplay ----------------
@@ -176,8 +179,16 @@ func update_score_display(optional_score: int = -1) -> void:
 	score_label.text = "%d%%" % score
 
 func load_new_recipe() -> void:
+	# segurança extra
+	if Managers.recipe_manager == null:
+		push_warning("⚠️ RecipeManager ainda não carregado, aguardando...")
+		await get_tree().process_frame
+		if Managers.recipe_manager == null:
+			push_error("❌ RecipeManager não inicializado!")
+			return
+
 	var time_of_day := get_time_of_day()
-	var result := RecipeManager.get_random_recipe(day, region, time_of_day)
+	var result : Dictionary = Managers.recipe_manager.get_random_recipe(day, region, time_of_day)
 
 	if result.is_empty():
 		push_warning("⚠️ Nenhuma receita encontrada para %s (%s, Dia %d)" % [region, time_of_day, day])
@@ -197,7 +208,6 @@ func load_new_recipe() -> void:
 	prep_start_minutes = current_time_minutes
 	update_score_display()
 
-	# 🔥 recria bancada (ingredientes + utensílios fixos)
 	prep_area.update_ingredients_for_day(day)
 	prep_area.ensure_plate_for_day(day)
 
@@ -205,12 +215,12 @@ func load_new_recipe() -> void:
 
 # ---------------- Attendance ----------------
 func show_random_client() -> void:
-	if ClientManager.client_sprites.is_empty():
+	if Managers.client_manager.client_sprites.is_empty():
 		push_warning("Nenhum sprite de cliente carregado!")
 		return
 
 	var client_sprite: Sprite2D = $Mode_Attendance/ClientSprite
-	client_sprite.texture = ClientManager.client_sprites.pick_random()
+	client_sprite.texture = Managers.client_manager.client_sprites.pick_random()
 	client_sprite.visible = true
 	client_sprite.modulate = Color(1, 1, 1, 0)
 	client_sprite.position = Vector2(165, 334)
@@ -235,6 +245,7 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String) 
 		_end_day()
 	else:
 		switch_mode(GameMode.ATTENDANCE)
+		await get_tree().process_frame
 		load_new_recipe()
 
 	daily_report.append({
@@ -244,7 +255,6 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String) 
 	})
 	print("Pedido registrado:", daily_report[-1])
 
-	# 🔥 bancada limpa ao finalizar pedido e garante prato na posição do dia quando voltar
 	prep_area.clear_day_leftovers()
 	prep_area.update_ingredients_for_day(day)
 	prep_area.ensure_plate_for_day(day)

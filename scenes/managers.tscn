@@ -1,0 +1,63 @@
+[gd_scene load_steps=47 format=3 uid="uid://busp1jxgd1yo"]
+
+[ext_resource type="Script" uid="uid://b1cw8wj6np025" path="res://scenes/managers.gd" id="1_eubx1"]
+[ext_resource type="Script" uid="uid://b8x6uvbe45tpd" path="res://scripts/client_manager.gd" id="1_osspy"]
+[ext_resource type="Texture2D" uid="uid://b1es38wtbkpwi" path="res://assets/clients/client_1.png" id="2_eubx1"]
+[ext_resource type="Texture2D" uid="uid://h6kny24iha4n" path="res://assets/clients/client_8.png" id="3_152b3"]
+[ext_resource type="Texture2D" uid="uid://ttb1lgq7twyj" path="res://assets/clients/client_9.png" id="4_rmo1q"]
+[ext_resource type="Texture2D" uid="uid://covn0rokyxvwo" path="res://assets/clients/client_10.png" id="5_rrdc0"]
+[ext_resource type="Texture2D" uid="uid://ds8felwrsq7bk" path="res://assets/clients/eu (1).png" id="6_52da1"]
+[ext_resource type="Texture2D" uid="uid://de62vdfqb54rs" path="res://assets/clients/homem bombado.png" id="7_b8u1i"]
+[ext_resource type="Texture2D" uid="uid://bu2q2pb564jhy" path="res://assets/clients/homemsus_3.png" id="8_emnlt"]
+[ext_resource type="Texture2D" uid="uid://c45g0av5hubev" path="res://assets/clients/Mulher artista (1).png" id="9_dbtig"]
+[ext_resource type="Texture2D" uid="uid://c6i80w5bqueg2" path="res://assets/clients/Mulher Produtora.png" id="10_c6xmk"]
+[ext_resource type="Texture2D" uid="uid://exarj48tbpis" path="res://assets/clients/personagen1.png" id="11_11yci"]
+[ext_resource type="Texture2D" uid="uid://co1kmqe5ejdem" path="res://assets/clients/personagen2.png" id="12_lkxab"]
+[ext_resource type="Script" uid="uid://na7np5wkwimw" path="res://scripts/recipe_manager.gd" id="13_tjrm2"]
+[ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="14_4m8qx"]
+[ext_resource type="Resource" uid="uid://cn5tl61fvyxog" path="res://resources/recipes/bolinho de bacalhau.tres" id="15_ocmb6"]
+[ext_resource type="Resource" uid="uid://3g63wrh5tmqq" path="res://resources/recipes/cuscuz paulista.tres" id="16_fecln"]
+[ext_resource type="Resource" uid="uid://op4gaj7yrofn" path="res://resources/recipes/feijoada.tres" id="17_rfal5"]
+[ext_resource type="Resource" uid="uid://c5osvsrm6mm6d" path="res://resources/recipes/filé oswaldo aranha.tres" id="18_l5n31"]
+[ext_resource type="Resource" uid="uid://c14i6ptmv7fp5" path="res://resources/recipes/misto quente.tres" id="19_sn6px"]
+[ext_resource type="Resource" uid="uid://co0pamtmfao81" path="res://resources/recipes/moqueca.tres" id="20_vkttu"]
+[ext_resource type="Resource" uid="uid://76qn8eienky0" path="res://resources/recipes/pao com mortadela.tres" id="21_h6v6t"]
+[ext_resource type="Resource" uid="uid://d2tyt7o6iotlo" path="res://resources/recipes/pao de queijo.tres" id="22_h4sy6"]
+[ext_resource type="Resource" uid="uid://c58yfwumkfobg" path="res://resources/recipes/pao na chapa.tres" id="23_8q7ow"]
+[ext_resource type="Resource" uid="uid://cxce7ity5redu" path="res://resources/recipes/prato feito.tres" id="24_dgfrh"]
+[ext_resource type="Resource" uid="uid://dvuwoccnego32" path="res://resources/recipes/tutu de feijão.tres" id="25_3u53g"]
+[ext_resource type="Resource" uid="uid://c4kho504hhpk6" path="res://resources/recipes/vaca atolada.tres" id="26_5mawo"]
+[ext_resource type="Script" uid="uid://c6nvqshgxjsx7" path="res://scripts/IngredientDatabase.gd" id="27_jxyry"]
+[ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="28_6jetn"]
+[ext_resource type="Resource" uid="uid://0glxrx71t1ju" path="res://resources/ingredients/agua.tres" id="29_2l7ur"]
+[ext_resource type="Resource" uid="uid://c8w71uoxo511l" path="res://resources/ingredients/arroz.tres" id="30_gjllj"]
+[ext_resource type="Resource" uid="uid://f4je2rnfbe5r" path="res://resources/ingredients/batata.tres" id="31_vqhob"]
+[ext_resource type="Resource" uid="uid://csppvrhxqj4ng" path="res://resources/ingredients/carne.tres" id="32_75lyh"]
+[ext_resource type="Resource" uid="uid://bmybqunnhl12v" path="res://resources/ingredients/cuscuz.tres" id="33_a8prd"]
+[ext_resource type="Resource" uid="uid://cl5fvpk0ugy0n" path="res://resources/ingredients/farofa.tres" id="34_lmnp6"]
+[ext_resource type="Resource" uid="uid://dcigg377cndry" path="res://resources/ingredients/feijao.tres" id="35_fd81x"]
+[ext_resource type="Resource" uid="uid://c4vjan0ovxi50" path="res://resources/ingredients/manteiga.tres" id="36_tbw62"]
+[ext_resource type="Resource" uid="uid://dypvp3p014tpl" path="res://resources/ingredients/mortadela.tres" id="37_v5pq0"]
+[ext_resource type="Resource" uid="uid://sebcmd5raimh" path="res://resources/ingredients/ovo.tres" id="38_p3c4h"]
+[ext_resource type="Resource" uid="uid://bumww64d3ymy0" path="res://resources/ingredients/pao de queijo.tres" id="39_xq3wl"]
+[ext_resource type="Resource" uid="uid://dbyepd4ejgvom" path="res://resources/ingredients/pao.tres" id="40_ckbyc"]
+[ext_resource type="Resource" uid="uid://si0gtg2ngnt" path="res://resources/ingredients/peixe.tres" id="41_ss10b"]
+[ext_resource type="Resource" uid="uid://nvrpjwi02mln" path="res://resources/ingredients/pimentao.tres" id="42_et0nk"]
+[ext_resource type="Resource" uid="uid://dnmt1j0074gxj" path="res://resources/ingredients/presunto.tres" id="43_q2mbl"]
+[ext_resource type="Resource" uid="uid://dglbfet6fj6kh" path="res://resources/ingredients/queijo.tres" id="44_8a70s"]
+[ext_resource type="Resource" uid="uid://r4wrgh7wj" path="res://resources/ingredients/salsicha.tres" id="45_5q5o7"]
+
+[node name="Managers" type="Node"]
+script = ExtResource("1_eubx1")
+
+[node name="ClientManager" type="Node" parent="."]
+script = ExtResource("1_osspy")
+client_sprites = Array[Texture2D]([ExtResource("2_eubx1"), ExtResource("3_152b3"), ExtResource("4_rmo1q"), ExtResource("5_rrdc0"), ExtResource("6_52da1"), ExtResource("7_b8u1i"), ExtResource("8_emnlt"), ExtResource("9_dbtig"), ExtResource("10_c6xmk"), ExtResource("11_11yci"), ExtResource("12_lkxab")])
+
+[node name="RecipeManager" type="Node" parent="."]
+script = ExtResource("13_tjrm2")
+all_recipes = Array[ExtResource("14_4m8qx")]([ExtResource("15_ocmb6"), ExtResource("16_fecln"), ExtResource("17_rfal5"), ExtResource("18_l5n31"), ExtResource("19_sn6px"), ExtResource("20_vkttu"), ExtResource("21_h6v6t"), ExtResource("22_h4sy6"), ExtResource("23_8q7ow"), ExtResource("24_dgfrh"), ExtResource("25_3u53g"), ExtResource("26_5mawo")])
+
+[node name="IngredientDatabase" type="Node" parent="."]
+script = ExtResource("27_jxyry")
+ingredient_list = Array[ExtResource("28_6jetn")]([ExtResource("29_2l7ur"), ExtResource("30_gjllj"), ExtResource("31_vqhob"), ExtResource("32_75lyh"), ExtResource("33_a8prd"), ExtResource("34_lmnp6"), ExtResource("35_fd81x"), ExtResource("36_tbw62"), ExtResource("37_v5pq0"), ExtResource("38_p3c4h"), ExtResource("39_xq3wl"), ExtResource("40_ckbyc"), ExtResource("41_ss10b"), ExtResource("42_et0nk"), ExtResource("43_q2mbl"), ExtResource("44_8a70s"), ExtResource("45_5q5o7")])

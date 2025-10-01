@@ -21,6 +21,7 @@ script = ExtResource("2_786k6")
 recipe_name = "Bolinho de Bacalhau"
 region = "sudeste"
 base_price = 30
+min_day = 5
 time_of_day = Array[String](["dinner"])
 ingredient_requirements = Array[ExtResource("1_or3uk")]([SubResource("Resource_or3uk"), SubResource("Resource_786k6")])
 client_lines = Array[String](["Boa noite. Algo frito e saboroso. Certo, um bolinho de bacalhau. ", "Gostaria de um bolinho de bacalhau. Valeu!", "Olá, um bolinho de bacalhau no capricho por favor."])

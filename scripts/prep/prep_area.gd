@@ -3,14 +3,14 @@ class_name PrepArea
 
 # ---------------- Config ----------------
 @export var slot_scene: PackedScene = preload("res://scenes/ui/container_slot.tscn")
-@export var layouts_folder: String = "res://resources/prep_layouts"
-@export var end_margin: float = 20.0   ## margem extra depois do último elemento
+@export var prep_layouts: Array[PrepLayoutResource] = []   # <<< arraste seus 3 .tres aqui
+@export var end_margin: float = 20.0
 
 # Plate config
 @export var plate_scene: PackedScene = preload("res://scenes/ui/drop_plate_area.tscn")
 @export var plate_early_pos: Vector2 = Vector2(304, 192)  # dias 1..4
 @export var plate_late_pos: Vector2 = Vector2(384, 192)   # dia >= threshold_day
-@export var plate_threshold_day: int = 5                  # 5 -> a partir do dia 5 usa plate_late_pos
+@export var plate_threshold_day: int = 5
 
 # ---------------- Refs ----------------
 @onready var fundo: NinePatchRect = $Fundo
@@ -23,33 +23,28 @@ var current_plate: Node = null
 # ---------------- Public ----------------
 func update_ingredients_for_day(current_day: int) -> void:
 	clear_day_leftovers()
-	var chosen_preset: Resource = _find_best_preset_for_day(current_day)
-	if chosen_preset and chosen_preset is PrepLayoutResource:
-		_apply_preset(chosen_preset as PrepLayoutResource, current_day)
+	var chosen_preset: PrepLayoutResource = _find_best_preset_for_day(current_day)
+	if chosen_preset:
+		# ⚠️ espera Managers estar pronto antes de aplicar o preset
+		await _apply_preset(chosen_preset, current_day)
 	call_deferred("_reflow")
-
 	ensure_plate_for_day(current_day)
 
 
 func clear_day_leftovers() -> void:
-	# Remove prato antigo
 	if current_plate and current_plate.is_inside_tree():
 		current_plate.queue_free()
 	current_plate = null
 
-	# limpa apenas slots de ingredientes
 	for s in slots_parent.get_children():
-		if not (s is Control): continue
-		s.queue_free()
-
-	# ⚠️ não mexe mais nos utensílios!
+		if s is Control:
+			s.queue_free()
+	# utensílios não são apagados
 
 
 # ---------------- Internals ----------------
 func ensure_plate_for_day(current_day: int) -> void:
-	var target_world_pos: Vector2 = plate_early_pos
-	if current_day >= plate_threshold_day:
-		target_world_pos = plate_late_pos
+	var target_world_pos: Vector2 = plate_early_pos if current_day < plate_threshold_day else plate_late_pos
 
 	if current_plate and current_plate.is_inside_tree():
 		if current_plate is Control:
@@ -57,9 +52,7 @@ func ensure_plate_for_day(current_day: int) -> void:
 			current_plate.anchor_top = 0
 			current_plate.anchor_right = 0
 			current_plate.anchor_bottom = 0
-			current_plate.position = target_world_pos - utensils_parent.position
-		else:
-			current_plate.position = target_world_pos - utensils_parent.position
+		current_plate.position = target_world_pos - utensils_parent.position
 		return
 
 	if plate_scene == null:
@@ -76,55 +69,43 @@ func ensure_plate_for_day(current_day: int) -> void:
 		plate_node.anchor_top = 0
 		plate_node.anchor_right = 0
 		plate_node.anchor_bottom = 0
-		plate_node.position = target_world_pos - utensils_parent.position
-	else:
-		plate_node.position = target_world_pos - utensils_parent.position
+	plate_node.position = target_world_pos - utensils_parent.position
 
 	utensils_parent.add_child(plate_node)
 	current_plate = plate_node
 
+
 func _find_best_preset_for_day(current_day: int) -> PrepLayoutResource:
 	var best: PrepLayoutResource = null
-	var dir := DirAccess.open(layouts_folder)
-	if dir == null:
-		push_warning("PrepArea: não foi possível abrir pasta de layouts: %s" % layouts_folder)
-		return null
-
-	dir.list_dir_begin()
-	var fname: String = dir.get_next()
-	while fname != "":
-		if fname.to_lower().ends_with(".tres"):
-			var path := layouts_folder
-			if not path.ends_with("/"):
-				path += "/"
-			path += fname
-			var res: Resource = load(path)
-			if res is PrepLayoutResource:
-				var pr := res as PrepLayoutResource
-				if pr.min_day <= current_day:
-					if best == null or pr.min_day > best.min_day:
-						best = pr
-		fname = dir.get_next()
-	dir.list_dir_end()
+	for pr in prep_layouts:
+		if pr and pr.min_day <= current_day:
+			if best == null or pr.min_day > best.min_day:
+				best = pr
 	return best
 
+
 func _apply_preset(preset: PrepLayoutResource, current_day: int) -> void:
+	# ⚠️ garante que o ingredient_database existe
+	if Managers.ingredient_database == null:
+		await get_tree().process_frame
+		if Managers.ingredient_database == null:
+			push_error("❌ IngredientDatabase não inicializado!")
+			return
+
 	for se in preset.slots:
 		if se == null or se.ingredient_id == "":
 			continue
-		var data: IngredientData = IngredientDatabase.get_ingredient(se.ingredient_id)
+		var data: IngredientData = Managers.ingredient_database.get_ingredient(se.ingredient_id)
 		if data == null or current_day < data.min_day:
 			continue
 		_instantiate_slot(se.ingredient_id, se.pos, se.size)
 
-	# utensílios não são mais apagados, só movidos se já existirem
 	for ue in preset.utensils:
 		if ue == null or ue.node_name == "":
 			continue
 		var target: Control = utensils_parent.get_node_or_null(ue.node_name)
 		if target == null:
 			continue
-
 		target.anchor_left = 0
 		target.anchor_top = 0
 		target.anchor_right = 0

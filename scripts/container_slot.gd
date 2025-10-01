@@ -16,7 +16,7 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	## Carrega os dados do ingrediente a partir do banco de dados.
-	var data: IngredientData = IngredientDatabase.get_ingredient(ingredient_id)
+	var data: IngredientData = Managers.ingredient_database.get_ingredient(ingredient_id)
 	if data and data.container_texture:
 		icon.texture = data.container_texture
 
@@ -27,7 +27,7 @@ func _get_drag_data(event_position: Vector2) -> Dictionary:
 		return {}  
 
 	## Pega os dados do ingrediente (com fallback).
-	var data: IngredientData = IngredientDatabase.get_ingredient(ingredient_id)
+	var data: IngredientData = Managers.ingredient_database.get_ingredient(ingredient_id)
 	if data == null:
 		push_warning("⚠️ Ingrediente '%s' não encontrado no IngredientDatabase" % ingredient_id)
 		return {}
