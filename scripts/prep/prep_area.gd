@@ -166,6 +166,3 @@ func _reflow() -> void:
 	var parent_modeprep := get_parent().get_parent()
 	if parent_modeprep is ModePreparation:
 		parent_modeprep._update_scroll_area()
-
-	# depois do reflow atualiza z_index dos utensílios baseado na Y global
-	call_deferred("_update_z_indexes")

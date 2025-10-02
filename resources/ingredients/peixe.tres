@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://si0gtg2ngnt"]
 
-[ext_resource type="Texture2D" uid="uid://cx3l48dhmqk1o" path="res://assets/ingredientes/peixe/container.png" id="1_ih8bh"]
+[ext_resource type="Texture2D" uid="uid://dl7iusc78woxb" path="res://assets/ingredientes/peixe/peixe 2 .png" id="1_ih8bh"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_p1sa1"]
-[ext_resource type="Texture2D" uid="uid://bhkpsegr7vpcv" path="res://assets/ingredientes/peixe/raw.png" id="3_onhh4"]
 [ext_resource type="Texture2D" uid="uid://qfpwfahr715m" path="res://assets/ingredientes/peixe/cut.png" id="4_3nnve"]
+[ext_resource type="Texture2D" uid="uid://c7oqc5ekbcreo" path="res://assets/ingredientes/peixe/peixe unico 2.png" id="4_onhh4"]
 
 [resource]
 script = ExtResource("1_p1sa1")
@@ -15,6 +15,6 @@ states = Dictionary[String, Texture2D]({
 "cooked": null,
 "cut": ExtResource("4_3nnve"),
 "fried": null,
-"raw": ExtResource("3_onhh4")
+"raw": ExtResource("4_onhh4")
 })
 metadata/_custom_type_script = "uid://ccubj8or3d2vb"

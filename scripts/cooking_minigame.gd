@@ -110,12 +110,12 @@ func _show_result(text: String) -> void:
 	await get_tree().create_timer(1.0).timeout
 
 	var quality: String = _label_to_quality(result_label)
-
 	var final_state: String = ""
 	if tool_type == "frigideira":
 		final_state = STATE_FRIED
 	else:
 		final_state = STATE_COOKED
+
 
 	var out: Array[Dictionary] = []
 	for d in ingredient_data_list:
@@ -134,26 +134,21 @@ func _show_result(text: String) -> void:
 
 func _label_to_quality(label: String) -> String:
 	match label:
-		"✅ No ponto!":
-			return "perfect"
-		"🔥 Queimado", "❌ Queimado!":
-			return "burnt"
-		"🧊 Cru":
-			return "raw"
-		"😐 Mais ou menos":
-			return "meh"
-		_:
-			return "unknown"
+		"✅ No ponto!": return "perfect"
+		"🔥 Queimado", "❌ Queimado!": return "burnt"
+		"🧊 Cru": return "raw"
+		"😐 Mais ou menos": return "meh"
+		_: return "unknown"
 
 
+# ------------------------
 # Visual / utilitários
+# ------------------------
 func _load_textures() -> void:
-	# Ferramenta
 	if tool_type != "":
 		var tool_path: String = "res://assets/utensilios/%s.png" % tool_type
 		tool_sprite.texture = load(tool_path)
 
-	# Ingredientes
 	if ingredient_data_list.is_empty():
 		if ingredient_list_label:
 			ingredient_list_label.text = "(Nenhum ingrediente)"
@@ -166,8 +161,6 @@ func _load_textures() -> void:
 		return
 
 	var st: String = ingredient_data_list[0].get("state", "raw")
-
-	# usa Managers.ingredient_database (fallback seguro)
 	var data: IngredientData = null
 	if Managers.ingredient_database:
 		data = Managers.ingredient_database.get_ingredient(first_id)

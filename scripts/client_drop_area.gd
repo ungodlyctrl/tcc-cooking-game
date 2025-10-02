@@ -8,39 +8,26 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 	if not _can_drop_data(_pos, data):
 		return
 
-	var main := get_tree().current_scene
-	var recipe : RecipeResource = main.current_recipe
-	
+	var main := get_tree().current_scene as MainScene
+	var recipe: RecipeResource = main.current_recipe
 
-	# Avaliação do prato
+	# Avalia usando o Manager (que já devolve pagamento)
 	var result := EvaluationManager.evaluate_plate(
 		recipe,
 		data["ingredients"],
 		main.prep_start_minutes,
 		main.current_time_minutes,
-		{}
+		{}  # qte_results pode ser preenchido depois
 	)
-	var final_score : int = result.get("score", 0)
-	var comment : String = result.get("comment", "")
-	
-	var base_price : int = recipe.base_price
-	var final_payment := base_price
 
-	if final_score >= 90:
-		final_payment = int(base_price * 1.15)  # +15%
-	elif final_score >= 75:
-		final_payment = base_price  # normal
-	elif final_score >= 50:
-		final_payment = int(base_price * 0.9)  # -10%
-	else:
-		final_payment = int(base_price * 0.6)  # -40%
-
-	
+	var final_score: int = result["score"]
+	var comment: String = result["comment"]
+	var final_payment: int = result["payment"]
 
 	# Remove prato visual
-	var plate : Node = data.get("source", null)
-	if plate and plate is Node:
+	var plate: Node = data.get("source", null)
+	if plate and plate.is_inside_tree():
 		plate.queue_free()
 
-	# Agora delega para a função de finalização controlada na MainScene
+	# Agora delega finalização
 	main.finalize_attendance(final_score, final_payment, comment)

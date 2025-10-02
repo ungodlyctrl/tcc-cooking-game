@@ -10,7 +10,7 @@ enum GameMode { ATTENDANCE, PREPARATION, END_OF_DAY }
 var current_mode: GameMode = GameMode.ATTENDANCE
 
 var current_time_minutes: int = 8 * 60
-var day: int = 1
+var day: int = 5
 var money: int = 100
 const END_OF_DAY_MINUTES: int = 19 * 60
 var last_time_of_day: String = ""
@@ -232,11 +232,19 @@ func _spawn_delivered_plate(delivered_plate: Node) -> void:
 	attendance.add_child(delivered_plate)
 	delivered_plate.global_position = Vector2(285, 231)
 
-func finalize_attendance(final_score: int, final_payment: int, comment: String) -> void:
+func finalize_attendance(final_score: int, final_payment: int, comment: String, grade: String = "") -> void:
 	mode_attendance.show_feedback(comment)
+
 	add_money(final_payment)
 	show_money_gain(final_payment)
 	update_score_display(final_score)
+
+	# Mostra grade na HUD se disponível
+	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
+	if grade != "":
+		score_label.text = "%d%% (%s)" % [final_score, grade]
+	else:
+		score_label.text = "%d%%" % final_score
 
 	await get_tree().create_timer(0.5).timeout
 	await mode_attendance.hide_client()
@@ -251,13 +259,16 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String) 
 	daily_report.append({
 		"recipe_name": current_recipe.recipe_name,
 		"score": final_score,
-		"payment": final_payment
+		"payment": final_payment,
+		"grade": grade
 	})
+
 	print("Pedido registrado:", daily_report[-1])
 
 	prep_area.clear_day_leftovers()
 	prep_area.update_ingredients_for_day(day)
 	prep_area.ensure_plate_for_day(day)
+
 
 # ---------------- UI ----------------
 func show_money_gain(amount: int) -> void:
