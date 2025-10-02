@@ -13,20 +13,25 @@ var active: bool = false              ## Marca se já há um minigame ou ingredi
 
 # ---------------- Core Logic ----------------
 func _can_drop_data(_pos: Vector2, data: Variant) -> bool:
-	## Verifica se pode aceitar o dado arrastado
 	if typeof(data) != TYPE_DICTIONARY:
 		return false
 	if not (data.has("id") and data.has("state")):
 		return false
+	
+	# só aceita ingredientes crus
 	if data["state"] != "raw":
 		return false
-
-	var ingredient: IngredientData = IngredientDatabase.get_ingredient(data["id"])
-	return ingredient != null and ingredient.states.has("cut")
+	
+	# usa IngredientDatabase via Managers
+	var ingredient: IngredientData = Managers.ingredient_database.get_ingredient(data["id"])
+	if ingredient == null:
+		return false
+	
+	# ingrediente só é válido se tiver estado "cut"
+	return ingredient.states.has("cut")
 
 
 func _drop_data(_pos: Vector2, data: Variant) -> void:
-	## Recebe o drop de ingrediente e inicia o minigame de corte
 	if active:
 		return
 	if not _can_drop_data(_pos, data):
@@ -53,10 +58,8 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 
 
 func notify_result_placed(node: Node) -> void:
-	## Notificado pelo minigame quando ingrediente cortado é criado
 	current_ingredient = node
 
-	# Quando ingrediente sair da cena (drag/delete), libera a tábua
 	current_ingredient.tree_exited.connect(func():
 		current_ingredient = null
 		active = false
@@ -64,6 +67,5 @@ func notify_result_placed(node: Node) -> void:
 
 
 func notify_ingredient_removed() -> void:
-	## Chamado caso ingrediente seja removido manualmente
 	current_ingredient = null
 	active = false

@@ -25,7 +25,6 @@ func update_ingredients_for_day(current_day: int) -> void:
 	clear_day_leftovers()
 	var chosen_preset: PrepLayoutResource = _find_best_preset_for_day(current_day)
 	if chosen_preset:
-		# ⚠️ espera Managers estar pronto antes de aplicar o preset
 		await _apply_preset(chosen_preset, current_day)
 	call_deferred("_reflow")
 	ensure_plate_for_day(current_day)
@@ -85,7 +84,7 @@ func _find_best_preset_for_day(current_day: int) -> PrepLayoutResource:
 
 
 func _apply_preset(preset: PrepLayoutResource, current_day: int) -> void:
-	# ⚠️ garante que o ingredient_database existe
+	# garante que o ingredient_database existe
 	if Managers.ingredient_database == null:
 		await get_tree().process_frame
 		if Managers.ingredient_database == null:
@@ -114,6 +113,8 @@ func _apply_preset(preset: PrepLayoutResource, current_day: int) -> void:
 		if ue.size != Vector2.ZERO:
 			target.custom_minimum_size = ue.size
 		target.visible = ue.visible
+		# marque como fixo (se necessário)
+		target.set_meta("is_fixed", true)
 
 
 func _instantiate_slot(ingredient_id: String, pos: Vector2, size: Vector2) -> void:
@@ -165,3 +166,6 @@ func _reflow() -> void:
 	var parent_modeprep := get_parent().get_parent()
 	if parent_modeprep is ModePreparation:
 		parent_modeprep._update_scroll_area()
+
+	# depois do reflow atualiza z_index dos utensílios baseado na Y global
+	call_deferred("_update_z_indexes")

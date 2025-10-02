@@ -1,19 +1,20 @@
-extends TextureRect
+extends TextureRect 
 class_name Ingredient
 
 ## Nó interativo que representa um ingrediente no jogo.
 ## Pode ser arrastado pela bancada e atualizado visualmente
 ## de acordo com seu estado (raw, cut, cooked, etc.).
-##
-## Esse script usa o banco de dados IngredientDatabase para
-## carregar as informações do recurso IngredientData associado.
+## Usa Managers.ingredient_database para sprites/dados.
 
 @export var ingredient_id: String
-@export var state: String = "raw"  ## Estado inicial (ex: raw, cut, cooked, fried)
+@export var state: String = "raw"  ## Estado inicial
 @export var is_cutting_result: bool = false  ## Se for resultado de minigame de corte
 
 var original_position: Vector2
 var data: IngredientData
+
+# preview manual adicionado ao gui_drag_overlay enquanto arrasta
+var _overlay_preview: TextureRect = null
 
 @onready var label: Label = $Label
 
@@ -21,7 +22,14 @@ var data: IngredientData
 func _ready() -> void:
 	## Configura o ingrediente ao ser instanciado
 	add_to_group("day_temp")  ## grupo para facilitar limpeza no fim do dia
-	data = IngredientDatabase.get_ingredient(ingredient_id)
+
+	# usa Managers em vez de IngredientDatabase direto
+	if Managers.ingredient_database:
+		data = Managers.ingredient_database.get_ingredient(ingredient_id)
+	else:
+		push_error("❌ IngredientDatabase não inicializado!")
+		data = null
+
 	_update_visual()
 
 	if is_cutting_result:
@@ -38,22 +46,67 @@ func _update_visual() -> void:
 	if tex:
 		texture = tex
 
-	label.text = data.display_name
+	label.text = data.display_name if data.display_name != "" else ingredient_id.capitalize()
+
+
+func _process(delta: float) -> void:
+	# move preview overlay junto com mouse (se existir)
+	if _overlay_preview and _overlay_preview.is_inside_tree():
+		var mpos: Vector2 = get_viewport().get_mouse_position()
+		var size: Vector2 = _overlay_preview.get_combined_minimum_size()
+		_overlay_preview.global_position = mpos - (size / 2.0)
 
 
 func _get_drag_data(_pos: Vector2) -> Dictionary:
 	## Inicia o processo de drag & drop.
-	## Retorna um dicionário com os dados do ingrediente.
-	var preview := self.duplicate()
+	## Criamos um preview manual no overlay para garantir que fique acima de tudo.
+
+	var tex: Texture2D = null
+	if Managers.ingredient_database:
+		tex = Managers.ingredient_database.get_sprite(ingredient_id, state)
+
+	var preview := TextureRect.new()
+	if tex:
+		preview.texture = tex
+		# tenta usar tamanho do texture se disponível
+		# Texture2D costuma expor get_size() — se não, fallback no custom_minimum_size
+		if tex.has_method("get_size"):
+			preview.custom_minimum_size = tex.get_size()
+		else:
+			preview.custom_minimum_size = Vector2(64, 64)
+	else:
+		preview.custom_minimum_size = Vector2(64, 64)
+
 	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	set_drag_preview(preview)
+	preview.stretch_mode = TextureRect.STRETCH_SCALE
+	preview.name = "drag_preview_%s" % ingredient_id
+
+	# adiciona no overlay do viewport (topo) — cast explícito para Control
+	var overlay: Control = get_viewport().gui_drag_overlay
+	if overlay:
+		overlay.canvas_layer = 100  # força acima de todos os outros layers
+		overlay.add_child(preview)
+		preview.z_index = 0
+		_overlay_preview = preview
+		# posiciona inicialmente centrado no mouse
+		var mpos := get_viewport().get_mouse_position()
+		preview.global_position = mpos - (preview.get_combined_minimum_size() / 2.0)
+	else:
+		# fallback: adiciona na raiz da cena atual (se overlay não existir por algum motivo)
+		var root := get_tree().current_scene
+		if root:
+			root.add_child(preview)
+			preview.z_index = 100000
+			_overlay_preview = preview
+			var mpos2 := get_viewport().get_mouse_position()
+			preview.global_position = mpos2 - (preview.get_combined_minimum_size() / 2.0)
 
 	DragManager.current_drag_type = DragManager.DragType.INGREDIENT
 
 	return {
 		"id": ingredient_id,
 		"state": state,
-		"source": self  ## Importante para que outros scripts limpem a origem
+		"source": self
 	}
 
 
@@ -61,6 +114,12 @@ func _notification(what: int) -> void:
 	## Reseta estado de drag ao fim do movimento.
 	if what == NOTIFICATION_DRAG_END:
 		DragManager.current_drag_type = DragManager.DragType.NONE
+
+		## remove preview overlay se existir
+		if _overlay_preview and _overlay_preview.is_inside_tree():
+			_overlay_preview.queue_free()
+		_overlay_preview = null
+		set_process(false)
 
 		## Caso seja um ingrediente de corte, se sair da tela volta para a posição original
 		if is_cutting_result:

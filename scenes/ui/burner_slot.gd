@@ -26,29 +26,44 @@ func _ready() -> void:
 	start_button.pressed.connect(_on_start_pressed)
 	_update_ui()
 
+
 func _can_drop_data(_pos: Vector2, data: Variant) -> bool:
-	if typeof(data) != TYPE_DICTIONARY: return false
+	if typeof(data) != TYPE_DICTIONARY:
+		return false
+
+	# Caso 1: é uma tool (panela / frigideira)
 	if data.get(KEY_STATE, "") == STATE_TOOL:
-		return data.get(KEY_ID, "") in TOOL_IDS and state == State.EMPTY
-	if state != State.COOKING and current_tool_id != "":
+		# pode se o slot estiver vazio OU já tiver uma tool carregada (mas não cozinhando)
+		return data.get(KEY_ID, "") in TOOL_IDS and state != State.COOKING
+
+	# Caso 2: é ingrediente
+	if state == State.LOADED and current_tool_id != "":
 		return data.get(KEY_STATE, "") != ""
+
 	return false
 
 func _drop_data(_pos: Vector2, data: Variant) -> void:
-	if not _can_drop_data(_pos, data): return
+	if not _can_drop_data(_pos, data):
+		return
 
 	if data.get(KEY_STATE, "") == STATE_TOOL:
+		# Substituir tool atual (se existir)
+		if current_tool_id != "":
+			_clear_tool()
+
 		current_tool_id = data.get(KEY_ID, "")
 		_show_tool(current_tool_id)
 		state = State.LOADED
 		_update_ui()
 	else:
+		# adiciona ingrediente
 		ingredient_queue.append({
 			KEY_ID: data.get(KEY_ID, ""),
 			KEY_STATE: data.get(KEY_STATE, "")
 		})
 		_update_ui()
 
+	# remove origem
 	var src: Node = data.get(KEY_SOURCE, null)
 	if src and src.is_inside_tree():
 		src.queue_free()
@@ -62,6 +77,14 @@ func _show_tool(tool_id: String) -> void:
 	var path: String = "res://assets/utensilios/%s.png" % tool_id
 	tool_anchor.texture = load(path)
 	tool_anchor.visible = true
+
+
+func _clear_tool() -> void:
+	ingredient_queue.clear()
+	current_tool_id = ""
+	tool_anchor.texture = null
+	tool_anchor.visible = false
+	state = State.EMPTY
 
 func _update_ui() -> void:
 	start_button.visible = (state == State.LOADED and not ingredient_queue.is_empty())
@@ -85,27 +108,15 @@ func _start_minigame() -> void:
 	tool_anchor.visible = false
 
 func _on_minigame_finished(result_ingredients: Array[Dictionary], tool_type: String, quality: String) -> void:
-	# Instancia o CookedTool
 	var cooked: CookedTool = cooked_tool_scene.instantiate() as CookedTool
-
-	# Configura os dados antes de adicionar à cena
 	cooked.tool_type = tool_type
 	cooked.cooked_ingredients = result_ingredients
 
-	# Adiciona no PrepArea (procura nó atual da cena)
 	var prep_area: Control = get_node("/root/%s/Mode_Preparation/ScrollContainer/PrepArea" % get_tree().current_scene.name)
 	if prep_area:
-		# marca como dinâmico para a limpeza automática
 		cooked.set_meta("is_dynamic", true)
 		prep_area.add_child(cooked)
-
-		# Posiciona no mesmo lugar da âncora
 		cooked.global_position = tool_anchor.global_position
 
-	# Reset do slot
-	current_tool_id = ""
-	ingredient_queue.clear()
-	state = State.EMPTY
-	tool_anchor.visible = false
-	tool_anchor.texture = null
+	_clear_tool()
 	_update_ui()

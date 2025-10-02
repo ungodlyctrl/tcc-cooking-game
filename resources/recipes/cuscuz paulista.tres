@@ -30,6 +30,7 @@ script = ExtResource("2_k5hbk")
 recipe_name = "Cuscuz Paulista"
 region = "sudeste"
 base_price = 24
+min_day = 5
 time_of_day = Array[String](["lunch"])
 ingredient_requirements = Array[ExtResource("1_xt4fu")]([SubResource("Resource_xt4fu"), SubResource("Resource_k5hbk"), SubResource("Resource_ncd7f")])
 client_lines = Array[String](["Olá, gostaria de um cuscuz paulista por favor. ", "Boa tarde, um cuscuz paulista. Apenas isso.", "Ovo, pimentão e flocão, eu quero um cuscuz paulista!"])

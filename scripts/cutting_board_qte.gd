@@ -34,7 +34,7 @@ var hit_registered: bool = false            ## Marca se já terminou
 # ---------------- Lifecycle ----------------
 func _ready() -> void:
 	## Carrega sprite do ingrediente cru
-	var tex: Texture2D = IngredientDatabase.get_sprite(ingredient_name, "raw")
+	var tex: Texture2D = Managers.ingredient_database.get_sprite(ingredient_name, "raw")
 	if tex == null:
 		push_error("❌ Sprite não encontrado para: %s (raw)" % ingredient_name)
 	else:
@@ -141,7 +141,7 @@ func end_qte() -> void:
 	_spawn_cut_ingredient()
 
 	## Restaura faca da bancada
-	var bancada_knife: Node = $"../BancadaKnife"
+	var bancada_knife: Node = $ScrollContainer/PrepArea/UtensilsParent/CuttingBoardArea/BancadaKnife
 	if bancada_knife:
 		bancada_knife.visible = true
 
