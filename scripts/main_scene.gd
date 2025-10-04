@@ -3,16 +3,19 @@ class_name MainScene
 
 ## Gerencia modos do jogo e ciclo de dias / receitas.
 
-# ---------------- Enums ----------------
 enum GameMode { ATTENDANCE, PREPARATION, END_OF_DAY }
 
-# ---------------- Vars ----------------
 var current_mode: GameMode = GameMode.ATTENDANCE
 
+## Relógio visível
 var current_time_minutes: int = 8 * 60
+## Relógio real (não congela, usado só para penalidades e score)
+var absolute_minutes: int = 8 * 60
+
 var day: int = 5
 var money: int = 100
 const END_OF_DAY_MINUTES: int = 19 * 60
+const HARD_LIMIT_MINUTES: int = 20 * 60   ## 🔥 limite máximo visual (20h)
 var last_time_of_day: String = ""
 
 var region: String = "sudeste"
@@ -22,6 +25,9 @@ var prep_start_minutes: int = -1
 var pending_delivery: Array[Dictionary] = []
 var daily_report: Array = []
 var total_ingredient_expense: int = 0
+
+## Cliente atual
+var current_client: ClientData = null
 
 # Timer
 var clock_timer: Timer = Timer.new()
@@ -43,7 +49,7 @@ func _ready() -> void:
 	print("Managers:", Managers)
 	print("RecipeManager:", Managers.recipe_manager)
 
-	clock_timer.wait_time = 2.0
+	clock_timer.wait_time = 2.5
 	clock_timer.timeout.connect(_on_time_tick)
 	add_child(clock_timer)
 	clock_timer.start()
@@ -80,9 +86,17 @@ func switch_mode(new_mode: GameMode) -> void:
 var day_should_end: bool = false
 
 func _on_time_tick() -> void:
-	current_time_minutes += 15
+	# Avança sempre o tempo real (para penalidades)
+	absolute_minutes += 15
 
-	if current_time_minutes >= END_OF_DAY_MINUTES:
+	# Avança o relógio visível até no máximo 20h
+	if current_time_minutes < HARD_LIMIT_MINUTES:
+		current_time_minutes += 15
+	if current_time_minutes > HARD_LIMIT_MINUTES:
+		current_time_minutes = HARD_LIMIT_MINUTES
+
+	# Marca o dia como pronto para terminar quando der 19h ou mais
+	if absolute_minutes >= END_OF_DAY_MINUTES:
 		day_should_end = true
 
 	_update_ui()
@@ -103,7 +117,7 @@ func _update_ui() -> void:
 	money_label.text = "M$: " + str(money)
 	day_label.text = "Dia " + str(day)
 
-	if current_time_minutes >= END_OF_DAY_MINUTES and not (current_mode == GameMode.END_OF_DAY):
+	if absolute_minutes >= END_OF_DAY_MINUTES and not (current_mode == GameMode.END_OF_DAY):
 		clock_label.add_theme_color_override("font_color", Color.RED)
 	else:
 		clock_label.remove_theme_color_override("font_color")
@@ -117,6 +131,7 @@ func _end_day() -> void:
 func start_new_day() -> void:
 	day += 1
 	current_time_minutes = 8 * 60
+	absolute_minutes = 8 * 60
 	day_should_end = false
 	prep_start_minutes = -1
 	daily_report.clear()
@@ -170,7 +185,8 @@ func update_score_display(optional_score: int = -1) -> void:
 	if current_recipe == null or prep_start_minutes < 0:
 		return
 
-	var elapsed_minutes: int = current_time_minutes - prep_start_minutes
+	## 🔥 Agora usa o tempo real acumulado
+	var elapsed_minutes: int = absolute_minutes - prep_start_minutes
 	var time_penalty: int = int(elapsed_minutes / 15)
 
 	var score: int = 100 - time_penalty
@@ -197,7 +213,7 @@ func load_new_recipe() -> void:
 	current_recipe = result["recipe"]
 	current_client_lines = result["client_lines"]
 
-	prep_start_minutes = current_time_minutes
+	prep_start_minutes = absolute_minutes
 	mode_attendance.set_recipe(current_recipe, current_client_lines)
 
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
@@ -205,7 +221,7 @@ func load_new_recipe() -> void:
 	prep_start_minutes = -1
 
 	mode_preparation.set_recipe(current_recipe)
-	prep_start_minutes = current_time_minutes
+	prep_start_minutes = absolute_minutes
 	update_score_display()
 
 	prep_area.update_ingredients_for_day(day)
@@ -215,17 +231,12 @@ func load_new_recipe() -> void:
 
 # ---------------- Attendance ----------------
 func show_random_client() -> void:
-	if Managers.client_manager.client_sprites.is_empty():
-		push_warning("Nenhum sprite de cliente carregado!")
+	current_client = Managers.client_manager.pick_random_client()
+	if current_client == null:
+		push_warning("Nenhum cliente disponível!")
 		return
 
-	var client_sprite: Sprite2D = $Mode_Attendance/ClientSprite
-	client_sprite.texture = Managers.client_manager.client_sprites.pick_random()
-	client_sprite.visible = true
-	client_sprite.modulate = Color(1, 1, 1, 0)
-	client_sprite.position = Vector2(165, 334)
-
-	$Mode_Attendance/AnimationPlayer.play("client_entrance")
+	mode_attendance.show_client(current_client)
 
 func _spawn_delivered_plate(delivered_plate: Node) -> void:
 	var attendance: Node = $Mode_Attendance
@@ -233,7 +244,7 @@ func _spawn_delivered_plate(delivered_plate: Node) -> void:
 	delivered_plate.global_position = Vector2(285, 231)
 
 func finalize_attendance(final_score: int, final_payment: int, comment: String, grade: String = "") -> void:
-	mode_attendance.show_feedback(comment)
+	mode_attendance.show_feedback(comment, grade, current_client)
 
 	add_money(final_payment)
 	show_money_gain(final_payment)
@@ -242,11 +253,16 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String, 
 	# Mostra grade na HUD se disponível
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
 	if grade != "":
-		score_label.text = "%d%% (%s)" % [final_score, grade]
+		score_label.text = "%d%%" % final_score
 	else:
 		score_label.text = "%d%%" % final_score
 
-	await get_tree().create_timer(0.5).timeout
+	# ⏳ tempo de espera baseado no tamanho do comentário
+	var base_time := 0.8   # tempo mínimo
+	var extra_time := float(comment.length()) / 40.0
+	var wait_time : float = clamp(base_time + extra_time, 0.8, 4.0)
+
+	await get_tree().create_timer(wait_time).timeout
 	await mode_attendance.hide_client()
 
 	if day_should_end:
@@ -268,7 +284,6 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String, 
 	prep_area.clear_day_leftovers()
 	prep_area.update_ingredients_for_day(day)
 	prep_area.ensure_plate_for_day(day)
-
 
 # ---------------- UI ----------------
 func show_money_gain(amount: int) -> void:

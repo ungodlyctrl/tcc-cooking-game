@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bimgikpa8sqfn" path="res://scenes/ui/tool.tscn" id="11_r4kth"]
 [ext_resource type="Texture2D" uid="uid://bcgjjj4vn3sma" path="res://nota tosca.png" id="12_hgqj1"]
 [ext_resource type="PackedScene" uid="uid://byruufncnpedt" path="res://scenes/ui/recipe_note_panel.tscn" id="13_m6q4x"]
-[ext_resource type="Script" uid="uid://dkflfcocvdvnc" path="res://scenes/gamemodes/top_delivery_area.gd" id="14_qrd44"]
+[ext_resource type="Script" uid="uid://dkflfcocvdvnc" path="res://scripts/top_delivery_area.gd" id="14_qrd44"]
 [ext_resource type="Texture2D" uid="uid://da0bcgvpli0am" path="res://assets/Misto render.png" id="15_o25jj"]
 
 [node name="ModePreparation" type="Control"]

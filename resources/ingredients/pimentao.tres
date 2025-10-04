@@ -15,4 +15,5 @@ states = Dictionary[String, Texture2D]({
 "fried": null,
 "raw": ExtResource("3_up3dg")
 })
+gender = "m"
 metadata/_custom_type_script = "uid://ccubj8or3d2vb"

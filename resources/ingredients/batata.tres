@@ -10,7 +10,6 @@ script = ExtResource("1_ei2p1")
 id = "batata"
 display_name = "Batata"
 container_texture = ExtResource("1_4r4mv")
-initial_state = "raw"
 states = Dictionary[String, Texture2D]({
 "cooked": null,
 "cut": ExtResource("4_ssoop"),

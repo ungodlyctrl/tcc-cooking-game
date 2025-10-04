@@ -8,3 +8,8 @@ class_name IngredientData
 @export var initial_state: String = "raw"
 @export var states: Dictionary[String, Texture2D] = {} 
 ## Exemplo: { "raw": Texture2D, "cut": Texture2D, "cooked": Texture2D }
+
+@export_enum("m", "f") var gender: String = "f"
+## "m" → masculino | "f" → feminino
+## usado pelo EvaluationManager para gerar feedbacks corretos:
+## "carne queimada", "mortadela frita", "pão cru"

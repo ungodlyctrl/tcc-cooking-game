@@ -68,38 +68,13 @@ func _get_drag_data(_pos: Vector2) -> Dictionary:
 	var preview := TextureRect.new()
 	if tex:
 		preview.texture = tex
-		# tenta usar tamanho do texture se disponível
-		# Texture2D costuma expor get_size() — se não, fallback no custom_minimum_size
-		if tex.has_method("get_size"):
-			preview.custom_minimum_size = tex.get_size()
-		else:
-			preview.custom_minimum_size = Vector2(64, 64)
-	else:
-		preview.custom_minimum_size = Vector2(64, 64)
 
 	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	preview.stretch_mode = TextureRect.STRETCH_SCALE
 	preview.name = "drag_preview_%s" % ingredient_id
-
+	set_drag_preview(preview)
 	# adiciona no overlay do viewport (topo) — cast explícito para Control
-	var overlay: Control = get_viewport().gui_drag_overlay
-	if overlay:
-		overlay.canvas_layer = 100  # força acima de todos os outros layers
-		overlay.add_child(preview)
-		preview.z_index = 0
-		_overlay_preview = preview
-		# posiciona inicialmente centrado no mouse
-		var mpos := get_viewport().get_mouse_position()
-		preview.global_position = mpos - (preview.get_combined_minimum_size() / 2.0)
-	else:
-		# fallback: adiciona na raiz da cena atual (se overlay não existir por algum motivo)
-		var root := get_tree().current_scene
-		if root:
-			root.add_child(preview)
-			preview.z_index = 100000
-			_overlay_preview = preview
-			var mpos2 := get_viewport().get_mouse_position()
-			preview.global_position = mpos2 - (preview.get_combined_minimum_size() / 2.0)
+
 
 	DragManager.current_drag_type = DragManager.DragType.INGREDIENT
 

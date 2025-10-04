@@ -2,6 +2,7 @@ extends Control
 class_name ModeAttendance
 
 @onready var dialogue_box: DialogueBox = $DialogueBox
+@onready var client_sprite: Sprite2D = $ClientSprite
 var current_recipe: RecipeResource
 
 func _ready() -> void:
@@ -26,7 +27,27 @@ func _on_confirm_button_pressed() -> void:
 	main_scene.prep_start_minutes = main_scene.current_time_minutes
 	main_scene.switch_mode(MainScene.GameMode.PREPARATION)
 
-func show_feedback(text: String) -> void:
+## Mostra o cliente ao entrar (recebe o ClientData)
+func show_client(client: ClientData) -> void:
+	if client == null:
+		return
+	client_sprite.texture = client.neutral
+	client_sprite.visible = true
+	client_sprite.modulate = Color(1, 1, 1, 0)
+	client_sprite.position = Vector2(165, 334)
+	$AnimationPlayer.play("client_entrance")
+
+## Mostra feedback + reação do cliente
+func show_feedback(text: String, grade: String, client: ClientData) -> void:
+	if client != null:
+		match grade:
+			"Excelente", "Bom":
+				client_sprite.texture = client.happy if client.happy != null else client.neutral
+			"Ruim":
+				client_sprite.texture = client.angry if client.angry != null else client.neutral
+			_:
+				client_sprite.texture = client.neutral
+
 	dialogue_box.show_box()
 	dialogue_box.set_lines([text], false)  # 🔥 feedback → sem confirmar
 

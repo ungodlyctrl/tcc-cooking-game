@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://byruufncnpedt" path="res://scenes/ui/recipe_note_panel.tscn" id="11_ytfgg"]
 [ext_resource type="Texture2D" uid="uid://bcgjjj4vn3sma" path="res://nota tosca.png" id="12_5avst"]
 [ext_resource type="Texture2D" uid="uid://bv1bdm0dwyuy0" path="res://assets/faca.png" id="12_b513c"]
-[ext_resource type="Script" uid="uid://dkflfcocvdvnc" path="res://scenes/gamemodes/top_delivery_area.gd" id="12_tsv3s"]
+[ext_resource type="Script" uid="uid://dkflfcocvdvnc" path="res://scripts/top_delivery_area.gd" id="12_tsv3s"]
 [ext_resource type="PackedScene" uid="uid://dpukuemgj7l15" path="res://scenes/ui/trash_bin.tscn" id="13_s610r"]
 [ext_resource type="Texture2D" uid="uid://da0bcgvpli0am" path="res://assets/Misto render.png" id="15_5avst"]
 

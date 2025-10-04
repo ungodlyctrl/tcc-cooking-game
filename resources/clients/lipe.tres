@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ClientData" load_steps=5 format=3 uid="uid://c0kaxp0qpk12m"]
+
+[ext_resource type="Script" uid="uid://c1roybtu8ul0l" path="res://scripts/client_data.gd" id="1_d6npx"]
+[ext_resource type="Texture2D" uid="uid://dbgq3mhhdy53j" path="res://assets/clients/lipe ruim.png" id="1_yrs83"]
+[ext_resource type="Texture2D" uid="uid://klvjvp4m27mr" path="res://assets/clients/lipe bom.png" id="2_4q4ag"]
+[ext_resource type="Texture2D" uid="uid://dtv6icrc0cipb" path="res://assets/clients/lipe.png" id="3_c0lmh"]
+
+[resource]
+script = ExtResource("1_d6npx")
+neutral = ExtResource("3_c0lmh")
+happy = ExtResource("2_4q4ag")
+angry = ExtResource("1_yrs83")
+metadata/_custom_type_script = "uid://c1roybtu8ul0l"

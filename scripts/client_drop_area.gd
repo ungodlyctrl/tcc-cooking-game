@@ -11,18 +11,19 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 	var main := get_tree().current_scene as MainScene
 	var recipe: RecipeResource = main.current_recipe
 
-	# Avalia usando o Manager (que já devolve pagamento)
+	# Avalia usando o Manager (com tempo REAL para penalidades)
 	var result := EvaluationManager.evaluate_plate(
 		recipe,
 		data["ingredients"],
 		main.prep_start_minutes,
-		main.current_time_minutes,
-		{}  # qte_results pode ser preenchido depois
+		main.absolute_minutes,   ## 🔥 tempo real, não o travado
+		{}
 	)
 
 	var final_score: int = result["score"]
 	var comment: String = result["comment"]
 	var final_payment: int = result["payment"]
+	var grade: String = result["grade"]
 
 	# Remove prato visual
 	var plate: Node = data.get("source", null)
@@ -30,4 +31,4 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 		plate.queue_free()
 
 	# Agora delega finalização
-	main.finalize_attendance(final_score, final_payment, comment)
+	main.finalize_attendance(final_score, final_payment, comment, grade)

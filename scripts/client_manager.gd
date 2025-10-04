@@ -1,15 +1,25 @@
 extends Node
 
-# Arraste os sprites dos clientes aqui no Inspector
-@export var client_sprites: Array[Texture2D] = []
+## Lista de clientes (arraste ClientData.tres aqui no Inspector)
+@export var clients: Array[ClientData] = []
+
+var last_index: int = -1
 
 func _ready() -> void:
-	if client_sprites.is_empty():
-		push_warning("⚠️ ClientManager: nenhuma sprite configurada em client_sprites.")
+	if clients.is_empty():
+		push_warning("⚠️ ClientManager: nenhum ClientData configurado.")
 	else:
-		print("ClientManager carregou %d sprites" % client_sprites.size())
+		print("ClientManager carregou %d clientes" % clients.size())
 
-func pick_random_sprite() -> Texture2D:
-	if client_sprites.is_empty():
+func pick_random_client() -> ClientData:
+	if clients.is_empty():
 		return null
-	return client_sprites.pick_random()
+	if clients.size() == 1:
+		return clients[0]
+
+	var index := randi_range(0, clients.size() - 1)
+	while index == last_index:
+		index = randi_range(0, clients.size() - 1)
+
+	last_index = index
+	return clients[index]

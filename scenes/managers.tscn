@@ -1,21 +1,15 @@
-[gd_scene load_steps=47 format=3 uid="uid://busp1jxgd1yo"]
+[gd_scene load_steps=41 format=3 uid="uid://busp1jxgd1yo"]
 
-[ext_resource type="Script" uid="uid://b1cw8wj6np025" path="res://scenes/managers.gd" id="1_eubx1"]
+[ext_resource type="Script" uid="uid://b1cw8wj6np025" path="res://scripts/managers.gd" id="1_eubx1"]
 [ext_resource type="Script" uid="uid://b8x6uvbe45tpd" path="res://scripts/client_manager.gd" id="1_osspy"]
-[ext_resource type="Texture2D" uid="uid://b1es38wtbkpwi" path="res://assets/clients/client_1.png" id="2_eubx1"]
-[ext_resource type="Texture2D" uid="uid://h6kny24iha4n" path="res://assets/clients/client_8.png" id="3_152b3"]
-[ext_resource type="Texture2D" uid="uid://ttb1lgq7twyj" path="res://assets/clients/client_9.png" id="4_rmo1q"]
-[ext_resource type="Texture2D" uid="uid://covn0rokyxvwo" path="res://assets/clients/client_10.png" id="5_rrdc0"]
-[ext_resource type="Texture2D" uid="uid://ds8felwrsq7bk" path="res://assets/clients/eu (1).png" id="6_52da1"]
-[ext_resource type="Texture2D" uid="uid://de62vdfqb54rs" path="res://assets/clients/homem bombado.png" id="7_b8u1i"]
-[ext_resource type="Texture2D" uid="uid://bu2q2pb564jhy" path="res://assets/clients/homemsus_3.png" id="8_emnlt"]
-[ext_resource type="Texture2D" uid="uid://c45g0av5hubev" path="res://assets/clients/Mulher artista (1).png" id="9_dbtig"]
-[ext_resource type="Texture2D" uid="uid://c6i80w5bqueg2" path="res://assets/clients/Mulher Produtora.png" id="10_c6xmk"]
-[ext_resource type="Texture2D" uid="uid://exarj48tbpis" path="res://assets/clients/personagen1.png" id="11_11yci"]
-[ext_resource type="Texture2D" uid="uid://co1kmqe5ejdem" path="res://assets/clients/personagen2.png" id="12_lkxab"]
+[ext_resource type="Resource" uid="uid://d0iof0ctr0kfu" path="res://resources/feedback_config.tres" id="2_152b3"]
+[ext_resource type="Script" uid="uid://c1roybtu8ul0l" path="res://scripts/client_data.gd" id="4_xl2cx"]
+[ext_resource type="Resource" uid="uid://j0you2eiypm8" path="res://resources/clients/menina.tres" id="5_110ma"]
+[ext_resource type="Resource" uid="uid://vik0d5npu7sq" path="res://resources/clients/bia.tres" id="7_52da1"]
 [ext_resource type="Script" uid="uid://na7np5wkwimw" path="res://scripts/recipe_manager.gd" id="13_tjrm2"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="14_4m8qx"]
 [ext_resource type="Resource" uid="uid://cn5tl61fvyxog" path="res://resources/recipes/bolinho de bacalhau.tres" id="15_ocmb6"]
+[ext_resource type="Resource" uid="uid://hu05oudhmj8o" path="res://resources/clients/vein.tres" id="15_tjrm2"]
 [ext_resource type="Resource" uid="uid://3g63wrh5tmqq" path="res://resources/recipes/cuscuz paulista.tres" id="16_fecln"]
 [ext_resource type="Resource" uid="uid://op4gaj7yrofn" path="res://resources/recipes/feijoada.tres" id="17_rfal5"]
 [ext_resource type="Resource" uid="uid://c5osvsrm6mm6d" path="res://resources/recipes/filé oswaldo aranha.tres" id="18_l5n31"]
@@ -49,10 +43,11 @@
 
 [node name="Managers" type="Node"]
 script = ExtResource("1_eubx1")
+feedback_config = ExtResource("2_152b3")
 
 [node name="ClientManager" type="Node" parent="."]
 script = ExtResource("1_osspy")
-client_sprites = Array[Texture2D]([ExtResource("2_eubx1"), ExtResource("3_152b3"), ExtResource("4_rmo1q"), ExtResource("5_rrdc0"), ExtResource("6_52da1"), ExtResource("7_b8u1i"), ExtResource("8_emnlt"), ExtResource("9_dbtig"), ExtResource("10_c6xmk"), ExtResource("11_11yci"), ExtResource("12_lkxab")])
+clients = Array[ExtResource("4_xl2cx")]([ExtResource("7_52da1"), ExtResource("5_110ma"), ExtResource("15_tjrm2")])
 
 [node name="RecipeManager" type="Node" parent="."]
 script = ExtResource("13_tjrm2")

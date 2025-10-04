@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ClientData" load_steps=5 format=3 uid="uid://kidgqhou1d5q"]
+
+[ext_resource type="Texture2D" uid="uid://ddwh1tlc2p61o" path="res://assets/clients/bea ruim.png" id="1_0mqqk"]
+[ext_resource type="Script" uid="uid://c1roybtu8ul0l" path="res://scripts/client_data.gd" id="1_3xxa3"]
+[ext_resource type="Texture2D" uid="uid://c7ocwgbqdhvky" path="res://assets/clients/bea bom.png" id="2_2jwgm"]
+[ext_resource type="Texture2D" uid="uid://jmdjnmdmocls" path="res://assets/clients/bea.png" id="3_rdb7y"]
+
+[resource]
+script = ExtResource("1_3xxa3")
+neutral = ExtResource("3_rdb7y")
+happy = ExtResource("2_2jwgm")
+angry = ExtResource("1_0mqqk")
+metadata/_custom_type_script = "uid://c1roybtu8ul0l"

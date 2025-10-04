@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FeedbackConfig" load_steps=2 format=3 uid="uid://d0iof0ctr0kfu"]
+
+[ext_resource type="Script" uid="uid://ctuq5snd63q7t" path="res://scripts/feedback_config.gd" id="1_okbet"]
+
+[resource]
+script = ExtResource("1_okbet")
+excelente = Array[String](["Está perfeito!", "Maravilhoso!", "Não poderia estar melhor!", "Perfeito!"])
+fallback = Array[String](["Nada a reclamar.", "Tá tudo certo.", "Sem problemas.", ""])
+metadata/_custom_type_script = "uid://ctuq5snd63q7t"

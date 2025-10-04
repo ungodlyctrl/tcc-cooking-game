@@ -9,5 +9,5 @@ id = "feijao"
 display_name = "Feijão"
 container_texture = ExtResource("1_37p6i")
 initial_state = "cooked"
-states = Dictionary[String, Texture2D]({})
+gender = "m"
 metadata/_custom_type_script = "uid://ccubj8or3d2vb"
