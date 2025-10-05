@@ -39,7 +39,7 @@ func _clear_orders() -> void:
 func _create_order_row(entry: Dictionary) -> HBoxContainer:
 	var row := HBoxContainer.new()
 	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.custom_minimum_size.y = 26  # 🔹 mais compacto
+	row.custom_minimum_size.y = 20  # 🔹 mais compacto
 	row.add_theme_constant_override("separation", 8)  # 🔹 menos espaço entre colunas
 
 	# Nome
@@ -53,7 +53,7 @@ func _create_order_row(entry: Dictionary) -> HBoxContainer:
 	var score_label := Label.new()
 	score_label.text = "%3d%%" % int(entry.get("score", 0))
 	score_label.size_flags_horizontal = Control.SIZE_SHRINK_END
-	score_label.custom_minimum_size.x = 60  # 🔹 mais perto do dinheiro
+	score_label.custom_minimum_size.x = 58  # 🔹 mais perto do dinheiro
 	score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	score_label.add_theme_color_override("font_color", Color(0.85, 0.85, 0.85))
 

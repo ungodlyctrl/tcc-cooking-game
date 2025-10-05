@@ -6,6 +6,7 @@ class_name ModePreparation
 @onready var fundo: NinePatchRect = $ScrollContainer/PrepArea/Fundo
 @onready var recipe_note_panel: RecipeNotePanel = $HUDPrep/RecipeNotePanel
 
+
 const SCROLL_MARGIN := 50
 const SCROLL_SPEED := 400.0
 
@@ -64,6 +65,8 @@ func _on_scroll_gui_input(event: InputEvent) -> void:
 ## Define a receita atual
 func set_recipe(recipe: RecipeResource) -> void:
 	current_recipe = recipe
+	if recipe_note_panel:
+		recipe_note_panel.set_recipe(recipe)
 
 
 func _on_recipe_toggle_button_pressed() -> void:

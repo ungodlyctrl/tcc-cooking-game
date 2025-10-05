@@ -15,3 +15,5 @@ class_name RecipeResource
 
 @export var ingredient_requirements: Array[IngredientRequirement] = []
 @export var client_lines: Array[String] = []  # Falas genéricas
+
+@export var display_steps: Array[String] = []  # << opcional: passos manuais (string por passo)

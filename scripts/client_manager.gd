@@ -3,7 +3,9 @@ extends Node
 ## Lista de clientes (arraste ClientData.tres aqui no Inspector)
 @export var clients: Array[ClientData] = []
 
-var last_index: int = -1
+## Guarda os últimos clientes mostrados (para evitar repetições)
+var recent_clients: Array[int] = []
+const RECENT_LIMIT: int = 3  # quantidade de clientes que devem ser diferentes antes de repetir
 
 func _ready() -> void:
 	if clients.is_empty():
@@ -17,9 +19,22 @@ func pick_random_client() -> ClientData:
 	if clients.size() == 1:
 		return clients[0]
 
-	var index := randi_range(0, clients.size() - 1)
-	while index == last_index:
-		index = randi_range(0, clients.size() - 1)
+	var available_indices: Array[int] = []
+	for i in range(clients.size()):
+		if not recent_clients.has(i):
+			available_indices.append(i)
 
-	last_index = index
+	# Se todos já apareceram recentemente, limpa a lista e recomeça
+	if available_indices.is_empty():
+		recent_clients.clear()
+		for i in range(clients.size()):
+			available_indices.append(i)
+
+	var index : int = available_indices.pick_random()
+	recent_clients.append(index)
+
+	# Mantém o histórico no tamanho máximo
+	if recent_clients.size() > RECENT_LIMIT:
+		recent_clients.pop_front()
+
 	return clients[index]

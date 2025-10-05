@@ -59,7 +59,7 @@ func _update_ingredients_label() -> void:
 func _get_drag_data(_pos: Vector2) -> Dictionary:
 	# Prévia visual
 	var preview: Control = self.duplicate()
-	preview.modulate = Color(1, 1, 1, 0.85)
+	preview.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	set_drag_preview(preview)
 
 	# Marca tipo de drag
