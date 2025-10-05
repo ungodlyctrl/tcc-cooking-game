@@ -29,7 +29,7 @@ var clock_timer: Timer = Timer.new()
 var day_should_end: bool = false
 
 # AUTO-NOTE: abrir só na primeira receita do day inicial
-var initial_day_at_start: int = 0
+var initial_day_at_start: int = 1
 var has_shown_note_first_day: bool = false
 
 # ---------------- Onready ----------------
@@ -46,7 +46,6 @@ var has_shown_note_first_day: bool = false
 
 # ---------------- Ready ----------------
 func _ready() -> void:
-	initial_day_at_start = day
 	print("Managers:", Managers)
 	print("RecipeManager:", Managers.recipe_manager)
 
@@ -77,11 +76,16 @@ func switch_mode(new_mode: GameMode) -> void:
 	mode_end_of_day.visible = (new_mode == GameMode.END_OF_DAY)
 	$HUD.visible = (new_mode != GameMode.END_OF_DAY)
 
-	$Mode_Preparation/HUDPrep/RecipeNotePanel.hide()
+	# ⚠️ NÃO esconder nota aqui, só no modo END_OF_DAY
+	if new_mode == GameMode.END_OF_DAY:
+		$Mode_Preparation/HUDPrep/RecipeNotePanel.hide()
+	else:
+		$Mode_Preparation/HUDPrep/RecipeNotePanel.show()
 
 	if new_mode == GameMode.PREPARATION:
 		scroll_container.scroll_horizontal = 0
 		prep_area.ensure_plate_for_day(day)
+
 
 # ---------------- Tick / Time ----------------
 func _on_time_tick() -> void:
@@ -104,6 +108,7 @@ func _on_time_tick() -> void:
 		last_time_of_day = visual_time
 		mode_attendance.update_city_background(visual_time)
 
+
 func _update_ui() -> void:
 	var hours: int = current_time_minutes / 60
 	var minutes: int = current_time_minutes % 60
@@ -117,6 +122,7 @@ func _update_ui() -> void:
 	else:
 		clock_label.remove_theme_color_override("font_color")
 
+
 # ---------------- Day Cycle ----------------
 func _end_day() -> void:
 	clock_timer.stop()
@@ -128,6 +134,7 @@ func _end_day() -> void:
 		push_warning("⚠️ mode_end_of_day.populate() não encontrado!")
 
 	switch_mode(GameMode.END_OF_DAY)
+
 
 func start_new_day() -> void:
 	print("🔹 Iniciando novo dia…")
@@ -157,10 +164,12 @@ func start_new_day() -> void:
 	prep_area.update_ingredients_for_day(day)
 	prep_area.ensure_plate_for_day(day)
 
+
 # ---------------- Gameplay ----------------
 func add_money(amount: int) -> void:
 	money += amount
 	_update_ui()
+
 
 func get_time_of_day() -> String:
 	if current_time_minutes < 12 * 60:
@@ -170,6 +179,7 @@ func get_time_of_day() -> String:
 	else:
 		return "dinner"
 
+
 func get_visual_time_of_day() -> String:
 	if current_time_minutes < 16 * 60:
 		return "morning"
@@ -177,6 +187,7 @@ func get_visual_time_of_day() -> String:
 		return "afternoon"
 	else:
 		return "night"
+
 
 func update_score_display(optional_score: int = -1) -> void:
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
@@ -192,6 +203,7 @@ func update_score_display(optional_score: int = -1) -> void:
 	var time_penalty: int = int(elapsed_minutes / 15)
 	var score: int = clamp(100 - time_penalty, 0, 100)
 	score_label.text = "%d%%" % score
+
 
 # ---------------- Recipe Loading ----------------
 func load_new_recipe() -> void:
@@ -223,7 +235,6 @@ func load_new_recipe() -> void:
 
 	# Avisa o ModePreparation e o painel da receita (se disponível)
 	mode_preparation.set_recipe(current_recipe)
-	# se o painel estiver disponível, passe também as variants para filtragem das display_steps
 	if mode_preparation and mode_preparation.recipe_note_panel:
 		mode_preparation.recipe_note_panel.set_recipe(current_recipe, current_recipe_variants)
 
@@ -232,13 +243,15 @@ func load_new_recipe() -> void:
 	prep_area.update_ingredients_for_day(day)
 	prep_area.ensure_plate_for_day(day)
 
-	# Abrir nota automaticamente apenas na primeira receita do dia inicial
+	# 🔹 Abre nota automaticamente apenas na primeira receita do primeiro dia
 	if not has_shown_note_first_day and day == initial_day_at_start:
+		await get_tree().process_frame
 		if mode_preparation and mode_preparation.recipe_note_panel:
-			mode_preparation.recipe_note_panel.open()
+			mode_preparation.recipe_note_panel._animate_open()
 			has_shown_note_first_day = true
 
 	show_random_client()
+
 
 # ---------------- Attendance ----------------
 func show_random_client() -> void:
@@ -248,10 +261,12 @@ func show_random_client() -> void:
 		return
 	mode_attendance.show_client(current_client)
 
+
 func _spawn_delivered_plate(delivered_plate: Node) -> void:
 	var attendance: Node = $Mode_Attendance
 	attendance.add_child(delivered_plate)
 	delivered_plate.global_position = Vector2(285, 231)
+
 
 func finalize_attendance(final_score: int, final_payment: int, comment: String, grade: String = "") -> void:
 	# 🔹 salva imediatamente os dados atuais da receita
@@ -296,6 +311,7 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String, 
 		await get_tree().process_frame
 		load_new_recipe()
 
+
 # ---------------- UI ----------------
 func show_money_gain(amount: int) -> void:
 	var gain_label: Label = $HUD/MoneyLabel/MoneyGainLabel
@@ -309,6 +325,7 @@ func show_money_gain(amount: int) -> void:
 	tween.tween_property(gain_label, "modulate:a", 0.0, 0.4).set_trans(Tween.TRANS_SINE).set_delay(0.3)
 	await tween.finished
 	gain_label.visible = false
+
 
 # ---------------- Input ----------------
 func _input(event) -> void:

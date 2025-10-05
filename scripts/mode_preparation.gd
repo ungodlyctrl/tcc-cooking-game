@@ -6,7 +6,6 @@ class_name ModePreparation
 @onready var fundo: NinePatchRect = $ScrollContainer/PrepArea/Fundo
 @onready var recipe_note_panel: RecipeNotePanel = $HUDPrep/RecipeNotePanel
 
-
 const SCROLL_MARGIN := 50
 const SCROLL_SPEED := 400.0
 
@@ -15,24 +14,24 @@ var dragging := false
 var last_mouse_pos := Vector2.ZERO
 var current_recipe: RecipeResource
 
-
 func _ready() -> void:
 	await get_tree().process_frame
 	_update_scroll_area()
 	scroll_container.gui_input.connect(_on_scroll_gui_input)
+	if recipe_note_panel:
+		recipe_note_panel.visible = true
+		recipe_note_panel.modulate.a = 1.0
+		print("🟢 RecipeNotePanel detectado no ModePreparation.")
 
 
-## Atualiza a largura máxima de scroll com base no fundo
 func _update_scroll_area() -> void:
 	var fundo_width: int = int(prep_area.custom_minimum_size.x)
 	var viewport_width := scroll_container.get_viewport_rect().size.x
-
 	max_scroll = max(fundo_width - viewport_width, 0)
 	scroll_container.scroll_horizontal = clamp(scroll_container.scroll_horizontal, 0, max_scroll)
 
 
 func _process(delta: float) -> void:
-	# Scroll automático nas bordas durante qualquer drag
 	if DragManager.current_drag_type != DragManager.DragType.NONE:
 		var mouse_x := get_viewport().get_mouse_position().x
 		var screen_width := get_viewport().get_visible_rect().size.x
@@ -46,7 +45,6 @@ func _process(delta: float) -> void:
 		scroll_container.scroll_horizontal = clamp(scroll_val, 0, max_scroll)
 
 
-## Scroll manual com clique e arraste
 func _on_scroll_gui_input(event: InputEvent) -> void:
 	if DragManager.current_drag_type != DragManager.DragType.NONE:
 		dragging = false
@@ -62,7 +60,6 @@ func _on_scroll_gui_input(event: InputEvent) -> void:
 		)
 
 
-## Define a receita atual
 func set_recipe(recipe: RecipeResource) -> void:
 	current_recipe = recipe
 	if recipe_note_panel:

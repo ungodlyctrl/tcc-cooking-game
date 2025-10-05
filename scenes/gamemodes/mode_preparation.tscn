@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d4fehmyo6hugb"]
+[gd_scene load_steps=18 format=3 uid="uid://d4fehmyo6hugb"]
 
 [ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
 [ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
@@ -12,8 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bey8ivj14oqip" path="res://scenes/ui/drop_plate_area.tscn" id="7_vitag"]
 [ext_resource type="PackedScene" uid="uid://bimgikpa8sqfn" path="res://scenes/ui/tool.tscn" id="11_b513c"]
 [ext_resource type="PackedScene" uid="uid://dwip8uhvt1cpv" path="res://scenes/ui/stove_area.tscn" id="11_tsv3s"]
-[ext_resource type="PackedScene" uid="uid://byruufncnpedt" path="res://scenes/ui/recipe_note_panel1111.tscn" id="11_ytfgg"]
-[ext_resource type="Texture2D" uid="uid://bcgjjj4vn3sma" path="res://nota tosca.png" id="12_5avst"]
+[ext_resource type="PackedScene" uid="uid://coeukigyvkutw" path="res://scenes/ui/recipe_note_panel.tscn" id="11_ytfgg"]
 [ext_resource type="Texture2D" uid="uid://bv1bdm0dwyuy0" path="res://assets/faca.png" id="12_b513c"]
 [ext_resource type="Script" uid="uid://dkflfcocvdvnc" path="res://scripts/top_delivery_area.gd" id="12_tsv3s"]
 [ext_resource type="PackedScene" uid="uid://dpukuemgj7l15" path="res://scenes/ui/trash_bin.tscn" id="13_s610r"]
@@ -119,6 +118,14 @@ offset_top = 30.0
 offset_right = 494.0
 offset_bottom = 30.0
 
+[node name="TopDeliveryArea" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_top = -8.0
+offset_right = 640.0
+offset_bottom = 32.0
+script = ExtResource("12_tsv3s")
+
 [node name="HUDPrep" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -128,42 +135,10 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="RecipeToggleButton" type="Button" parent="HUDPrep"]
-visible = false
-layout_mode = 0
-offset_left = 200.0
-offset_top = 352.0
-offset_right = 388.0
-offset_bottom = 390.0
-rotation = 3.14159
-text = "
-"
-icon = ExtResource("12_5avst")
-icon_alignment = 1
-
 [node name="RecipeNotePanel" parent="HUDPrep" instance=ExtResource("11_ytfgg")]
-visible = false
-layout_mode = 0
-offset_left = 10.0
-offset_top = 72.0
-offset_right = 10.0
-offset_bottom = 72.0
-
-[node name="TextureRect" type="TextureRect" parent="HUDPrep"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 320.0
-offset_right = 190.0
-offset_bottom = 360.0
-texture = ExtResource("12_5avst")
-
-[node name="TopDeliveryArea" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_top = -8.0
-offset_right = 640.0
-offset_bottom = 32.0
-script = ExtResource("12_tsv3s")
+layout_mode = 1
+offset_left = -190.0
+offset_right = -190.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -220,7 +195,3 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.4)
 text = "CLIQUE EM QUALQUER LUGAR PARA FECHAR"
-
-[connection signal="pressed" from="HUDPrep/RecipeToggleButton" to="." method="_on_recipe_toggle_button_pressed"]
-[connection signal="gui_input" from="HUDPrep/TextureRect" to="." method="_on_texture_rect_gui_input"]
-[connection signal="mouse_entered" from="HUDPrep/TextureRect" to="." method="_on_texture_rect_mouse_entered"]
