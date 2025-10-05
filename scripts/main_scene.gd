@@ -2,40 +2,35 @@ extends Node2D
 class_name MainScene
 
 ## Gerencia modos do jogo e ciclo de dias / receitas.
-
 enum GameMode { ATTENDANCE, PREPARATION, END_OF_DAY }
 
+# ---------------- Variáveis principais ----------------
 var current_mode: GameMode = GameMode.ATTENDANCE
-
-## Relógio visível
 var current_time_minutes: int = 8 * 60
-## Relógio real (não congela, usado só para penalidades e score)
 var absolute_minutes: int = 8 * 60
-
 var day: int = 5
 var money: int = 100
+
 const END_OF_DAY_MINUTES: int = 19 * 60
-const HARD_LIMIT_MINUTES: int = 20 * 60   ## 🔥 limite máximo visual (20h)
+const HARD_LIMIT_MINUTES: int = 20 * 60
 var last_time_of_day: String = ""
 
 var region: String = "sudeste"
 var current_recipe: RecipeResource = null
-var current_client_lines: Array[String] = []   ## 🔥 guarda falas separadamente
+var current_client_lines: Array[String] = []
 var prep_start_minutes: int = -1
 var pending_delivery: Array[Dictionary] = []
 var daily_report: Array = []
 var total_ingredient_expense: int = 0
-
-## Cliente atual
 var current_client: ClientData = null
 
-# Timer
 var clock_timer: Timer = Timer.new()
+var day_should_end: bool = false
 
 # ---------------- Onready ----------------
 @onready var mode_attendance: ModeAttendance = $Mode_Attendance
 @onready var mode_preparation: ModePreparation = $Mode_Preparation
-@onready var mode_end_of_day: Control = $Mode_EndOfDay
+@onready var mode_end_of_day: ModeEndOfDay = $ModeEndOfDay
 @onready var scroll_container: ScrollContainer = $Mode_Preparation/ScrollContainer
 @onready var prep_area: PrepArea = $Mode_Preparation/ScrollContainer/PrepArea
 
@@ -44,12 +39,13 @@ var clock_timer: Timer = Timer.new()
 @onready var money_label: Label = $HUD/MoneyLabel
 @onready var day_label: Label = $HUD/DayLabel
 
+
 # ---------------- Ready ----------------
 func _ready() -> void:
 	print("Managers:", Managers)
 	print("RecipeManager:", Managers.recipe_manager)
 
-	clock_timer.wait_time = 2.5
+	clock_timer.wait_time = 0.5
 	clock_timer.timeout.connect(_on_time_tick)
 	add_child(clock_timer)
 	clock_timer.start()
@@ -57,15 +53,16 @@ func _ready() -> void:
 	switch_mode(GameMode.ATTENDANCE)
 	_update_ui()
 
-	# ⚠️ espera um frame para garantir que Managers inicializou
+	# Espera managers carregarem
 	await get_tree().process_frame
 	load_new_recipe()
 
 	last_time_of_day = get_visual_time_of_day()
 	mode_attendance.update_city_background(last_time_of_day)
 
-	# garante bancada + prato no load inicial
+	# Garante bancada inicial
 	prep_area.update_ingredients_for_day(day)
+
 
 # ---------------- Mode Switch ----------------
 func switch_mode(new_mode: GameMode) -> void:
@@ -82,20 +79,15 @@ func switch_mode(new_mode: GameMode) -> void:
 		scroll_container.scroll_horizontal = 0
 		prep_area.ensure_plate_for_day(day)
 
-# ---------------- Tick / Time ----------------
-var day_should_end: bool = false
 
+# ---------------- Tick / Time ----------------
 func _on_time_tick() -> void:
-	# Avança sempre o tempo real (para penalidades)
 	absolute_minutes += 15
 
-	# Avança o relógio visível até no máximo 20h
 	if current_time_minutes < HARD_LIMIT_MINUTES:
 		current_time_minutes += 15
-	if current_time_minutes > HARD_LIMIT_MINUTES:
-		current_time_minutes = HARD_LIMIT_MINUTES
+	current_time_minutes = min(current_time_minutes, HARD_LIMIT_MINUTES)
 
-	# Marca o dia como pronto para terminar quando der 19h ou mais
 	if absolute_minutes >= END_OF_DAY_MINUTES:
 		day_should_end = true
 
@@ -108,6 +100,7 @@ func _on_time_tick() -> void:
 	if visual_time != last_time_of_day:
 		last_time_of_day = visual_time
 		mode_attendance.update_city_background(visual_time)
+
 
 func _update_ui() -> void:
 	var hours: int = current_time_minutes / 60
@@ -122,13 +115,22 @@ func _update_ui() -> void:
 	else:
 		clock_label.remove_theme_color_override("font_color")
 
+
 # ---------------- Day Cycle ----------------
 func _end_day() -> void:
 	clock_timer.stop()
-	populate_end_of_day_report()
+	print("🔹 Fim do dia — Gerando relatório…")
+
+	if mode_end_of_day and mode_end_of_day.has_method("populate"):
+		mode_end_of_day.populate(daily_report, total_ingredient_expense, day)
+	else:
+		push_warning("⚠️ mode_end_of_day.populate() não encontrado!")
+
 	switch_mode(GameMode.END_OF_DAY)
 
+
 func start_new_day() -> void:
+	print("🔹 Iniciando novo dia…")
 	day += 1
 	current_time_minutes = 8 * 60
 	absolute_minutes = 8 * 60
@@ -137,10 +139,11 @@ func start_new_day() -> void:
 	daily_report.clear()
 	total_ingredient_expense = 0
 	pending_delivery.clear()
+
 	last_time_of_day = get_visual_time_of_day()
 	mode_attendance.update_city_background(last_time_of_day)
-
 	prep_area.clear_day_leftovers()
+
 	clock_timer.start()
 	switch_mode(GameMode.ATTENDANCE)
 
@@ -154,10 +157,12 @@ func start_new_day() -> void:
 	prep_area.update_ingredients_for_day(day)
 	prep_area.ensure_plate_for_day(day)
 
+
 # ---------------- Gameplay ----------------
 func add_money(amount: int) -> void:
 	money += amount
 	_update_ui()
+
 
 func get_time_of_day() -> String:
 	if current_time_minutes < 12 * 60:
@@ -167,6 +172,7 @@ func get_time_of_day() -> String:
 	else:
 		return "dinner"
 
+
 func get_visual_time_of_day() -> String:
 	if current_time_minutes < 16 * 60:
 		return "morning"
@@ -174,6 +180,7 @@ func get_visual_time_of_day() -> String:
 		return "afternoon"
 	else:
 		return "night"
+
 
 func update_score_display(optional_score: int = -1) -> void:
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
@@ -185,17 +192,14 @@ func update_score_display(optional_score: int = -1) -> void:
 	if current_recipe == null or prep_start_minutes < 0:
 		return
 
-	## 🔥 Agora usa o tempo real acumulado
 	var elapsed_minutes: int = absolute_minutes - prep_start_minutes
 	var time_penalty: int = int(elapsed_minutes / 15)
-
-	var score: int = 100 - time_penalty
-	score = clamp(score, 0, 100)
-
+	var score: int = clamp(100 - time_penalty, 0, 100)
 	score_label.text = "%d%%" % score
 
+
+# ---------------- Recipe Loading ----------------
 func load_new_recipe() -> void:
-	# segurança extra
 	if Managers.recipe_manager == null:
 		push_warning("⚠️ RecipeManager ainda não carregado, aguardando...")
 		await get_tree().process_frame
@@ -212,16 +216,14 @@ func load_new_recipe() -> void:
 
 	current_recipe = result["recipe"]
 	current_client_lines = result["client_lines"]
-
 	prep_start_minutes = absolute_minutes
+
 	mode_attendance.set_recipe(current_recipe, current_client_lines)
 
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
 	score_label.text = "100%"
-	prep_start_minutes = -1
 
 	mode_preparation.set_recipe(current_recipe)
-	prep_start_minutes = absolute_minutes
 	update_score_display()
 
 	prep_area.update_ingredients_for_day(day)
@@ -229,19 +231,21 @@ func load_new_recipe() -> void:
 
 	show_random_client()
 
+
 # ---------------- Attendance ----------------
 func show_random_client() -> void:
 	current_client = Managers.client_manager.pick_random_client()
 	if current_client == null:
 		push_warning("Nenhum cliente disponível!")
 		return
-
 	mode_attendance.show_client(current_client)
+
 
 func _spawn_delivered_plate(delivered_plate: Node) -> void:
 	var attendance: Node = $Mode_Attendance
 	attendance.add_child(delivered_plate)
 	delivered_plate.global_position = Vector2(285, 231)
+
 
 func finalize_attendance(final_score: int, final_payment: int, comment: String, grade: String = "") -> void:
 	mode_attendance.show_feedback(comment, grade, current_client)
@@ -250,20 +254,32 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String, 
 	show_money_gain(final_payment)
 	update_score_display(final_score)
 
-	# Mostra grade na HUD se disponível
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
-	if grade != "":
-		score_label.text = "%d%%" % final_score
-	else:
-		score_label.text = "%d%%" % final_score
+	score_label.text = "%d%%" % final_score
 
-	# ⏳ tempo de espera baseado no tamanho do comentário
-	var base_time := 0.8   # tempo mínimo
+	# Tempo de exibição da fala
+	var base_time := 0.8
 	var extra_time := float(comment.length()) / 40.0
 	var wait_time : float = clamp(base_time + extra_time, 0.8, 4.0)
 
 	await get_tree().create_timer(wait_time).timeout
 	await mode_attendance.hide_client()
+
+	# 🔹 salva o pedido antes de alterar current_recipe
+	var recipe_name := current_recipe.recipe_name if current_recipe else "—"
+	daily_report.append({
+		"recipe_name": str(recipe_name),
+		"score": int(final_score),
+		"payment": int(final_payment),
+		"grade": str(grade)
+	}.duplicate(true))
+
+	print("Pedido registrado:", daily_report[-1])
+
+	# 🔹 limpa a bancada antes da próxima receita
+	prep_area.clear_day_leftovers()
+	prep_area.update_ingredients_for_day(day)
+	prep_area.ensure_plate_for_day(day)
 
 	if day_should_end:
 		_end_day()
@@ -272,18 +288,6 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String, 
 		await get_tree().process_frame
 		load_new_recipe()
 
-	daily_report.append({
-		"recipe_name": current_recipe.recipe_name,
-		"score": final_score,
-		"payment": final_payment,
-		"grade": grade
-	})
-
-	print("Pedido registrado:", daily_report[-1])
-
-	prep_area.clear_day_leftovers()
-	prep_area.update_ingredients_for_day(day)
-	prep_area.ensure_plate_for_day(day)
 
 # ---------------- UI ----------------
 func show_money_gain(amount: int) -> void:
@@ -296,47 +300,13 @@ func show_money_gain(amount: int) -> void:
 	var tween := create_tween()
 	tween.tween_property(gain_label, "position:y", -30, 0.6).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(gain_label, "modulate:a", 0.0, 0.4).set_trans(Tween.TRANS_SINE).set_delay(0.3)
-
 	await tween.finished
 	gain_label.visible = false
 
-func populate_end_of_day_report() -> void:
-	var income: int = 0
-	var orders_vbox: VBoxContainer = $Mode_EndOfDay/Panel/OrdersScroll/OrdersVBox
-	var expenses: int = total_ingredient_expense
-	print("Pedidos registrados hoje: ", daily_report.size())
-
-	for child in orders_vbox.get_children():
-		child.queue_free()
-
-	for entry in daily_report:
-		var label := RichTextLabel.new()
-		label.bbcode_enabled = true
-		label.fit_content = true
-		label.scroll_active = false
-		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		label.custom_minimum_size.y = 20
-
-		label.bbcode_text = "[font_size=14][color=fef3c0]%s[/color]  [color=white]%d%%[/color]  [color=62ab48]M$%d[/color][/font_size]" % [
-			entry["recipe_name"],
-			entry["score"],
-			entry["payment"]
-		]
-		orders_vbox.add_child(label)
-		income += entry["payment"]
-
-	$Mode_EndOfDay/Panel/SummaryBox/IncomeLabel.text = "Ganhos: M$%d" % income
-	$Mode_EndOfDay/Panel/SummaryBox/ExpenseLabel.text = "Gastos: M$%d" % expenses
-	$Mode_EndOfDay/Panel/SummaryBox2/ProfitLabel.text = "Lucro: M$%d" % (income - expenses)
 
 # ---------------- Input ----------------
 func _input(event) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		var options_panel: Control = $InGameOptions
-		if options_panel.visible:
-			options_panel.hide()
-			get_tree().paused = false
-		else:
-			options_panel.show()
-			get_tree().paused = true
+		options_panel.visible = not options_panel.visible
+		get_tree().paused = options_panel.visible

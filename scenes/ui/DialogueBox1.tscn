@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://blgvyh35rltdl"]
-
-[ext_resource type="Script" uid="uid://ufe5b0qa0asc" path="res://scenes/ui/dialogue_box1.gd" id="1_2c88n"]
+[gd_scene load_steps=3 format=3 uid="uid://rydxvth1upd3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2c88n"]
 bg_color = Color(1, 1, 1, 1)
@@ -19,12 +17,26 @@ shadow_color = Color(0.227, 0.307, 0.582, 0.89)
 shadow_size = 1
 shadow_offset = Vector2(-1, 1)
 
+[sub_resource type="GDScript" id="GDScript_ajcdc"]
+script/source = "extends Panel
+
+@onready var label := $MarginContainer/RichTextLabel
+
+func _ready():
+	await get_tree().process_frame
+	adjust_to_content()
+
+func adjust_to_content():
+	var text_size = label.get_combined_minimum_size()
+	custom_minimum_size = text_size + Vector2(10, 10) # margem
+"
+
 [node name="DialogueBox" type="Panel"]
 custom_minimum_size = Vector2(200, 0)
 offset_right = 200.0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_2c88n")
-script = ExtResource("1_2c88n")
+script = SubResource("GDScript_ajcdc")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

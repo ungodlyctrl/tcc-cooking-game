@@ -1,13 +1,21 @@
-[gd_scene load_steps=41 format=3 uid="uid://busp1jxgd1yo"]
+[gd_scene load_steps=49 format=3 uid="uid://busp1jxgd1yo"]
 
 [ext_resource type="Script" uid="uid://b1cw8wj6np025" path="res://scripts/managers.gd" id="1_eubx1"]
 [ext_resource type="Script" uid="uid://b8x6uvbe45tpd" path="res://scripts/client_manager.gd" id="1_osspy"]
 [ext_resource type="Resource" uid="uid://d0iof0ctr0kfu" path="res://resources/feedback_config.tres" id="2_152b3"]
 [ext_resource type="Script" uid="uid://c1roybtu8ul0l" path="res://scripts/client_data.gd" id="4_xl2cx"]
 [ext_resource type="Resource" uid="uid://j0you2eiypm8" path="res://resources/clients/menina.tres" id="5_110ma"]
+[ext_resource type="Resource" uid="uid://cg004qv7yfein" path="res://resources/clients/alana.tres" id="5_rmo1q"]
+[ext_resource type="Resource" uid="uid://kidgqhou1d5q" path="res://resources/clients/bea.tres" id="6_rrdc0"]
 [ext_resource type="Resource" uid="uid://vik0d5npu7sq" path="res://resources/clients/bia.tres" id="7_52da1"]
+[ext_resource type="Resource" uid="uid://n7tert0ivkno" path="res://resources/clients/diva cunty.tres" id="8_52da1"]
+[ext_resource type="Resource" uid="uid://da67vv6oygibd" path="res://resources/clients/homem bombado.tres" id="9_b8u1i"]
+[ext_resource type="Resource" uid="uid://bpup6duocs3xp" path="res://resources/clients/homem sus.tres" id="10_emnlt"]
+[ext_resource type="Resource" uid="uid://c0kaxp0qpk12m" path="res://resources/clients/lipe.tres" id="11_dbtig"]
+[ext_resource type="Resource" uid="uid://bgahbd5je3ptj" path="res://resources/clients/mulher roxa.tres" id="13_c6xmk"]
 [ext_resource type="Script" uid="uid://na7np5wkwimw" path="res://scripts/recipe_manager.gd" id="13_tjrm2"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="14_4m8qx"]
+[ext_resource type="Resource" uid="uid://bq4weex875umr" path="res://resources/clients/mulher verde.tres" id="14_11yci"]
 [ext_resource type="Resource" uid="uid://cn5tl61fvyxog" path="res://resources/recipes/bolinho de bacalhau.tres" id="15_ocmb6"]
 [ext_resource type="Resource" uid="uid://hu05oudhmj8o" path="res://resources/clients/vein.tres" id="15_tjrm2"]
 [ext_resource type="Resource" uid="uid://3g63wrh5tmqq" path="res://resources/recipes/cuscuz paulista.tres" id="16_fecln"]
@@ -47,7 +55,7 @@ feedback_config = ExtResource("2_152b3")
 
 [node name="ClientManager" type="Node" parent="."]
 script = ExtResource("1_osspy")
-clients = Array[ExtResource("4_xl2cx")]([ExtResource("7_52da1"), ExtResource("5_110ma"), ExtResource("15_tjrm2")])
+clients = Array[ExtResource("4_xl2cx")]([ExtResource("5_rmo1q"), ExtResource("6_rrdc0"), ExtResource("7_52da1"), ExtResource("8_52da1"), ExtResource("9_b8u1i"), ExtResource("10_emnlt"), ExtResource("11_dbtig"), ExtResource("5_110ma"), ExtResource("13_c6xmk"), ExtResource("14_11yci"), ExtResource("15_tjrm2")])
 
 [node name="RecipeManager" type="Node" parent="."]
 script = ExtResource("13_tjrm2")

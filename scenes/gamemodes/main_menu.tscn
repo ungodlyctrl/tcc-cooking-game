@@ -3,20 +3,6 @@
 [ext_resource type="Script" uid="uid://cidbmcw2jvpgw" path="res://scripts/main_menu.gd" id="1_1lf7f"]
 [ext_resource type="Texture2D" uid="uid://nelvbo5bhms0" path="res://assets/backgrounds/CDS_2.png" id="2_guywi"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lf7f"]
-bg_color = Color(0.921569, 0.945098, 1, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-expand_margin_left = 4.0
-expand_margin_top = 4.0
-expand_margin_right = 4.0
-expand_margin_bottom = 4.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_guywi"]
-bg_color = Color(0.913725, 0.941176, 1, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37v3f"]
 bg_color = Color(0.913725, 0.941176, 1, 1)
 corner_radius_top_left = 5
@@ -30,6 +16,20 @@ expand_margin_bottom = 3.0
 shadow_color = Color(0, 0, 0, 0.072)
 shadow_size = 4
 shadow_offset = Vector2(0, 4.09)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_guywi"]
+bg_color = Color(0.913725, 0.941176, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lf7f"]
+bg_color = Color(0.921569, 0.945098, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewhso"]
 bg_color = Color(0.796078, 0.858824, 0.988235, 1)
@@ -102,76 +102,76 @@ theme_override_constants/separation = 12
 [node name="PlayButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
-theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_font_sizes/font_size = 15
-theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_guywi")
 theme_override_styles/normal = SubResource("StyleBoxFlat_37v3f")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_guywi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
 text = "JOGAR"
 
 [node name="OptionsButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
-theme_override_colors/font_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_normal_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_outline_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_outline_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_normal_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_font_sizes/font_size = 15
-theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
 theme_override_styles/normal = SubResource("StyleBoxFlat_37v3f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
 text = "OPÇÕES"
 
 [node name="CreditsButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
-theme_override_colors/font_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_normal_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_outline_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_outline_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_normal_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_font_sizes/font_size = 15
-theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
 theme_override_styles/normal = SubResource("StyleBoxFlat_37v3f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
 text = "CRÉDITOS"
 
 [node name="QuitButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
-theme_override_colors/font_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_normal_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_outline_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_outline_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_normal_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_font_sizes/font_size = 15
-theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
 theme_override_styles/normal = SubResource("StyleBoxFlat_37v3f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
 text = "SAIR"
 
 [node name="OverlayDarkener" type="ColorRect" parent="."]
@@ -212,6 +212,7 @@ offset_bottom = 27.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
 text = "OPÇÕES"
+horizontal_alignment = 1
 
 [node name="Volume" type="Label" parent="OptionsPanel"]
 layout_mode = 1
@@ -225,6 +226,7 @@ offset_bottom = 101.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
 text = "Volume"
+horizontal_alignment = 1
 
 [node name="VolumeSlider" type="HSlider" parent="OptionsPanel"]
 custom_minimum_size = Vector2(200, 0)
@@ -259,21 +261,21 @@ offset_right = 37.5
 offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_normal_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_outline_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
+theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_outline_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_normal_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_w1q6q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
 text = "FECHAR"
 
 [node name="CreditsPanel" type="Panel" parent="."]
@@ -347,21 +349,21 @@ offset_right = 37.5
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_normal_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_outline_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
+theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/font_outline_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_normal_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
+theme_override_colors/icon_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_w1q6q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
 text = "FECHAR"
 
 [connection signal="pressed" from="HBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

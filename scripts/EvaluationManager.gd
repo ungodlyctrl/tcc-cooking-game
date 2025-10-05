@@ -8,7 +8,7 @@ const PENALTIES: Dictionary = {
 	"wrong_state": 10,
 	"bad_cook": 8,
 	"meh_cook": 5,
-	"extra": 6,
+	"extra": 8,
 	"qte_miss": 2,
 	"time": 1
 }
@@ -31,7 +31,6 @@ const STATE_LABELS: Dictionary = {
 	"perfect": {"m": "no ponto", "f": "no ponto"}
 }
 
-## Tradução de resultados de minigames (quality → label por gênero)
 const RESULT_LABELS: Dictionary = {
 	"burnt": {"m": "queimado", "f": "queimada"},
 	"raw": {"m": "cru", "f": "crua"},
@@ -39,7 +38,6 @@ const RESULT_LABELS: Dictionary = {
 	"perfect": {"m": "no ponto", "f": "no ponto"}
 }
 
-## Frases padrões caso não exista Managers.feedback_config
 const DEFAULT_FEEDBACK_OPENINGS: Dictionary = {
 	"Excelente": ["Perfeito!", "Maravilhoso!", "Isso ficou ótimo!"],
 	"Bom": ["Tá bom!", "Gostei bastante.", "Mandou bem!"],
@@ -49,29 +47,30 @@ const DEFAULT_FEEDBACK_OPENINGS: Dictionary = {
 
 const DEFAULT_FALLBACKS: Array = ["Nada a reclamar.", "Sem problemas."]
 
-## --- Função utilitária para gerar frases mais naturais ---
+## --- Gerador de comentários naturais ---
 func _build_comment(grade: String, opening: String, feedbacks: Array[String]) -> String:
 	if feedbacks.is_empty():
-		var fallback_phrase: String = DEFAULT_FALLBACKS.pick_random()
-		return opening + " " + fallback_phrase
+		return opening + " " + DEFAULT_FALLBACKS.pick_random()
 
-	# Agrupamento básico
+	# Separar categorias
 	var burnt: Array[String] = []
 	var raw: Array[String] = []
-	var wrong_state: Array[String] = []
 	var extras: Array[String] = []
+	var missing: Array[String] = []
+	var wrong_state: Array[String] = []
 	var others: Array[String] = []
 
 	for f in feedbacks:
 		if "queim" in f: burnt.append(f)
 		elif "cru" in f: raw.append(f)
-		elif "não estava" in f: wrong_state.append(f)
 		elif "não fazia parte" in f: extras.append(f)
+		elif "faltou" in f: missing.append(f)
+		elif "não estava" in f: wrong_state.append(f)
 		else: others.append(f)
 
 	var phrases: Array[String] = []
 
-	# Agrupamento inteligente
+	# 🔹 Agrupamentos naturais
 	if burnt.size() > 1:
 		phrases.append("Alguns ingredientes queimaram")
 	elif burnt.size() == 1:
@@ -82,23 +81,44 @@ func _build_comment(grade: String, opening: String, feedbacks: Array[String]) ->
 	elif raw.size() == 1:
 		phrases.append(raw[0])
 
-	phrases += wrong_state
-	phrases += extras
-	phrases += others
+	# ⚙️ Fix: concatenar arrays sem quebrar tipagem
+	for group in [wrong_state, extras, missing, others]:
+		for phrase in group:
+			phrases.append(phrase)
 
-	# Limitar quantidade de críticas para não ficar repetitivo
+	# 🔹 Caso de “receita errada”
+	if (extras.size() + missing.size()) >= 2:
+		var cfg: FeedbackConfig = Managers.feedback_config if Managers and Managers.feedback_config != null else null
+		var confused_lines: Array[String] = []
+		if cfg and cfg.recipe_confused.size() > 0:
+			confused_lines = cfg.recipe_confused
+		else:
+			confused_lines = [
+				"Não foi isso que eu pedi.",
+				"Acho que você confundiu o pedido.",
+				"Isso não é o que eu pedi.",
+				"Você fez outra coisa."
+			]
+		return confused_lines.pick_random()
+
+	# 🔹 Chance de comentário curto (sem detalhes)
+	if randf() < 0.25:
+		return opening
+
+	# 🔹 Limitar número de críticas
 	if phrases.size() > 2:
 		phrases = phrases.slice(0, 2)
-		phrases.append("e outras coisas menores")
+		phrases.append("e outras coisinhas")
 
-	# Suavizar se a nota for alta
-	if grade == "Excelente" or grade == "Bom":
+	# 🔹 Suavizar se nota for alta
+	if grade in ["Excelente", "Bom"]:
 		for i in range(phrases.size()):
 			phrases[i] = "Só cuidado, " + phrases[i]
 
 	return opening + " " + ". ".join(phrases) + "."
 
-## --- Avalia um prato entregue ---
+
+## --- Avaliação do prato ---
 func evaluate_plate(
 	recipe: RecipeResource,
 	delivered_ingredients: Array,
@@ -120,13 +140,13 @@ func evaluate_plate(
 	}
 	var feedbacks: Array[String] = []
 
-	## Esperados
+	# Ingredientes esperados
 	var expected: Array = recipe.ingredient_requirements.duplicate() if recipe else []
 	var expected_ids: Array[String] = []
 	for req in expected:
 		if req and req.ingredient_id != "": expected_ids.append(req.ingredient_id)
 
-	## Agrupa entregues
+	# Agrupar entregues
 	var delivered: Dictionary = {}
 	for item in delivered_ingredients:
 		if typeof(item) != TYPE_DICTIONARY: continue
@@ -138,7 +158,7 @@ func evaluate_plate(
 		delivered[id]["states"].append(item.get("state", ""))
 		delivered[id]["results"].append(item.get("result", ""))
 
-	## Verifica requisitos
+	# Verificar
 	for req in expected:
 		if req == null: continue
 		var id: String = req.ingredient_id
@@ -159,7 +179,6 @@ func evaluate_plate(
 				feedbacks.append("Faltou %s" % ing_name)
 			continue
 
-		# Quantidade
 		var used_qty: int = int(delivered_info["count"])
 		if used_qty < needed:
 			var miss: int = needed - used_qty
@@ -172,7 +191,6 @@ func evaluate_plate(
 			breakdown["extra_qty"] += extra_q
 			feedbacks.append("%s a mais" % ing_name)
 
-		# Estado
 		for state in delivered_info["states"]:
 			if state != req.state:
 				breakdown["wrong_state"] += 1
@@ -183,7 +201,6 @@ func evaluate_plate(
 					if lbls.has(gender): readable_state = lbls[gender]
 				feedbacks.append("%s não estava %s" % [ing_name, readable_state])
 
-		# Resultados
 		for result in delivered_info["results"]:
 			var readable_result: String = result
 			if RESULT_LABELS.has(result):
@@ -203,7 +220,7 @@ func evaluate_plate(
 				score -= PENALTIES["meh_cook"]
 				feedbacks.append("%s ficou %s" % [ing_name, readable_result])
 
-	## Ingredientes extras
+	# Ingredientes extras
 	for id_key in delivered.keys():
 		if not expected_ids.has(id_key):
 			var extra_data: IngredientData = Managers.ingredient_database.get_ingredient(id_key) if Managers and Managers.ingredient_database else null
@@ -212,7 +229,7 @@ func evaluate_plate(
 			score -= PENALTIES["extra"]
 			feedbacks.append("%s não fazia parte da receita" % extra_name)
 
-	## QTE
+	# QTE
 	for ing_id in qte_results.keys():
 		var hits: int = int(qte_results[ing_id])
 		var penalty: int = max(0, 5 - hits) * PENALTIES["qte_miss"]
@@ -223,24 +240,23 @@ func evaluate_plate(
 			var q_name: String = q_data.display_name if q_data and q_data.display_name != "" else ing_id.capitalize()
 			feedbacks.append("%s foi mal cortado" % q_name)
 
-	## Tempo
+	# Tempo
 	var elapsed_minutes: int = int(current_time_minutes - order_start_minutes)
 	var time_penalty: int = int(elapsed_minutes / 15) * PENALTIES["time"]
 	score -= time_penalty
 	breakdown["time_penalty"] = time_penalty
 	if time_penalty > 12:
-		feedbacks.append("Demorou um pouco para entregar")
+		feedbacks.append("demorou um pouco para entregar")
 
-	## Clamp
 	score = clamp(score, 0, 100)
 
-	## Nota
+	# Nota
 	var grade: String = "Ruim"
 	if score >= 90: grade = "Excelente"
 	elif score >= 75: grade = "Bom"
 	elif score >= 50: grade = "Médio"
 
-	## Abertura
+	# Frase inicial
 	var opening: String = ""
 	var cfg: FeedbackConfig = Managers.feedback_config if Managers and Managers.feedback_config != null else null
 	if cfg != null:
@@ -253,10 +269,10 @@ func evaluate_plate(
 	else:
 		opening = DEFAULT_FEEDBACK_OPENINGS[grade].pick_random()
 
-	## Comentário final usando gerador natural
+	# Comentário final
 	var comment: String = _build_comment(grade, opening, feedbacks)
 
-	## Pagamento
+	# Pagamento
 	var base_price: int = recipe.base_price if recipe else 0
 	var final_payment: int = int(base_price * PAYMENT_MULTIPLIERS.get(grade, 1.0))
 

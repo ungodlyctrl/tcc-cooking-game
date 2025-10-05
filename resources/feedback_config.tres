@@ -5,5 +5,6 @@
 [resource]
 script = ExtResource("1_okbet")
 excelente = Array[String](["Está perfeito!", "Maravilhoso!", "Não poderia estar melhor!", "Perfeito!"])
+recipe_confused = Array[String](["Não foi isso que eu pedi.", "Acho que você confundiu o pedido.", "Isso não é o que eu pedi.", "Você fez outra coisa.", "Isso tá bem diferente do que eu pedi.", "Esse não foi o meu pedido."])
 fallback = Array[String](["Nada a reclamar.", "Tá tudo certo.", "Sem problemas.", ""])
 metadata/_custom_type_script = "uid://ctuq5snd63q7t"

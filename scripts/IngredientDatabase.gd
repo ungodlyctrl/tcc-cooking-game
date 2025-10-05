@@ -12,7 +12,7 @@ func _ready() -> void:
 			if d and d is IngredientData and d.id != "":
 				ingredients[d.id] = d
 	else:
-		push_warning("⚠️ IngredientDatabase: nenhuma ingredient_list atribuída no Inspector!")
+		print("⚠️ IngredientDatabase: nenhuma ingredient_list atribuída no Inspector!")
 
 func get_ingredient(id: String) -> IngredientData:
 	return ingredients.get(id, null)

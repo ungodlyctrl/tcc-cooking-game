@@ -7,5 +7,14 @@ class_name FeedbackConfig
 @export var medio: Array[String] = ["Tá ok...", "Aceitável, mas pode melhorar.", "Não tá ruim, mas..."]
 @export var ruim: Array[String] = ["Tá ruim...", "Não gostei.", "Isso foi decepcionante."]
 
+## Falas para caso de erro de receita (ingredientes errados/faltando)
+@export var recipe_confused: Array[String] = [
+	"Não foi isso que eu pedi.",
+	"Acho que você confundiu o pedido.",
+	"Isso não é o que eu pedi.",
+	"Você fez outra coisa.",
+	"Isso tá bem diferente do que eu pedi."
+]
+
 ## Frase final genérica caso não haja feedbacks específicos
 @export var fallback: Array[String] = ["Nada a reclamar.", "Tá tudo certo.", "Sem problemas."]
