@@ -5,6 +5,17 @@ extends Node
 
 ## Guarda a última receita realmente sorteada (para evitar repetição imediata)
 var last_recipe_id: String = ""
+## Guarda as últimas receitas sorteadas por período do dia (para evitar repetições dentro da manhã, almoço, jantar)
+var recent_recipes_by_period: Dictionary = {
+	"breakfast": [],
+	"lunch": [],
+	"dinner": []
+}
+
+## Quantas receitas manter em memória por período
+const MAX_RECENT_RECIPES_PER_PERIOD: int = 2
+
+
 
 func _ready() -> void:
 	if all_recipes.is_empty():
@@ -36,16 +47,29 @@ func get_random_recipe(current_day: int, region: String, time_of_day: String) ->
 		push_warning("Nenhuma receita válida para %s (%s) - Dia %d" % [region, time_of_day, current_day])
 		return {}
 
-	# 🔹 Evita repetir a mesma receita imediatamente
-	var chosen: RecipeResource = pool.pick_random()
-	var safety := 0
-	while chosen.resource_path == last_recipe_id and pool.size() > 1 and safety < 10:
-		chosen = pool.pick_random()
-		safety += 1
+	# 🔹 evita repetir receitas recentes nesse mesmo período (ex: várias manhãs seguidas iguais)
+	var recent : Array = recent_recipes_by_period.get(time_of_day, [])
+	var available := []
+	for r in pool:
+		if r.resource_path not in recent:
+			available.append(r)
+
+	# se todas estão em 'recent', libera o pool completo de novo
+	if available.is_empty():
+		available = pool.duplicate()
+
+	var chosen: RecipeResource = available.pick_random()
+
+	# registra no histórico desse período
+	recent.append(chosen.resource_path)
+	if recent.size() > MAX_RECENT_RECIPES_PER_PERIOD:
+		recent.pop_front()
+	recent_recipes_by_period[time_of_day] = recent
 
 	last_recipe_id = chosen.resource_path
 
 	return apply_variations(chosen)
+
 
 
 # ---------------- Aplicação de Variações ----------------

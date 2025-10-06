@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d4fehmyo6hugb"]
+[gd_scene load_steps=19 format=3 uid="uid://d4fehmyo6hugb"]
 
 [ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
 [ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://dkflfcocvdvnc" path="res://scripts/top_delivery_area.gd" id="12_tsv3s"]
 [ext_resource type="PackedScene" uid="uid://dpukuemgj7l15" path="res://scenes/ui/trash_bin.tscn" id="13_s610r"]
 [ext_resource type="Texture2D" uid="uid://da0bcgvpli0am" path="res://assets/Misto render.png" id="15_5avst"]
+[ext_resource type="Texture2D" uid="uid://btwh8huwkila" path="res://entrega 2.png" id="15_axkwh"]
 
 [node name="ModePreparation" type="Control"]
 layout_mode = 3
@@ -118,12 +119,13 @@ offset_top = 30.0
 offset_right = 494.0
 offset_bottom = 30.0
 
-[node name="TopDeliveryArea" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0)
+[node name="TopDeliveryArea" type="TextureRect" parent="ScrollContainer/PrepArea"]
 layout_mode = 0
-offset_top = -8.0
-offset_right = 640.0
-offset_bottom = 32.0
+offset_left = 32.0
+offset_top = -20.0
+offset_right = 352.0
+offset_bottom = 30.0
+texture = ExtResource("15_axkwh")
 script = ExtResource("12_tsv3s")
 
 [node name="HUDPrep" type="Control" parent="."]

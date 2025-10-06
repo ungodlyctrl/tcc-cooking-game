@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=3 format=3 uid="uid://bumww64d3ymy0"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=4 format=3 uid="uid://bumww64d3ymy0"]
 
 [ext_resource type="Texture2D" uid="uid://bkln2mad42j22" path="res://assets/ingredientes/pao de queijo/container.png" id="1_fgnwl"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="2_66lru"]
+[ext_resource type="Texture2D" uid="uid://ejumco2qb38y" path="res://assets/ingredientes/pao de queijo/pao de queijo uncio3.png" id="3_66lru"]
 
 [resource]
 script = ExtResource("2_66lru")
@@ -9,5 +10,8 @@ id = "pao de queijo"
 display_name = "Pão de queijo"
 container_texture = ExtResource("1_fgnwl")
 initial_state = "cooked"
+states = Dictionary[String, Texture2D]({
+"cooked": ExtResource("3_66lru")
+})
 gender = "m"
 metadata/_custom_type_script = "uid://ccubj8or3d2vb"

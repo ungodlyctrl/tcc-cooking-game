@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=3 format=3 uid="uid://dcigg377cndry"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=4 format=3 uid="uid://dcigg377cndry"]
 
 [ext_resource type="Texture2D" uid="uid://jrr0sahf4qyi" path="res://assets/ingredientes/feijao/container.png" id="1_37p6i"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_87f4n"]
+[ext_resource type="Texture2D" uid="uid://dw53ii0o0eqn5" path="res://assets/ingredientes/feijao/cooked.png" id="3_gloc7"]
 
 [resource]
 script = ExtResource("1_87f4n")
@@ -9,5 +10,8 @@ id = "feijao"
 display_name = "Feijão"
 container_texture = ExtResource("1_37p6i")
 initial_state = "cooked"
+states = Dictionary[String, Texture2D]({
+"cooked": ExtResource("3_gloc7")
+})
 gender = "m"
 metadata/_custom_type_script = "uid://ccubj8or3d2vb"

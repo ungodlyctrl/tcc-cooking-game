@@ -18,9 +18,11 @@ func _ready() -> void:
 	await get_tree().process_frame
 	_update_scroll_area()
 	scroll_container.gui_input.connect(_on_scroll_gui_input)
+
+	# Se existir, deixa o painel visível (ele controla seu estado interno)
 	if recipe_note_panel:
 		recipe_note_panel.visible = true
-		recipe_note_panel.modulate.a = 1.0
+		# não obrigamos a abrir aqui; o panel decide quando abrir
 		print("🟢 RecipeNotePanel detectado no ModePreparation.")
 
 
@@ -54,26 +56,24 @@ func _on_scroll_gui_input(event: InputEvent) -> void:
 		dragging = event.pressed
 		last_mouse_pos = event.position
 	elif event is InputEventMouseMotion and dragging:
-		scroll_container.scroll_horizontal = clamp(
-			scroll_container.scroll_horizontal - event.relative.x,
-			0, max_scroll
-		)
+		scroll_container.scroll_horizontal = clamp(scroll_container.scroll_horizontal - event.relative.x, 0, max_scroll)
 
 
-func set_recipe(recipe: RecipeResource) -> void:
+## Define a receita atual (recebe opcional variants e encaminha ao painel)
+func set_recipe(recipe: RecipeResource, variants: Array = []) -> void:
 	current_recipe = recipe
 	if recipe_note_panel:
-		recipe_note_panel.set_recipe(recipe)
+		recipe_note_panel.set_recipe(recipe, variants)
 
 
 func _on_recipe_toggle_button_pressed() -> void:
 	if recipe_note_panel and current_recipe:
-		recipe_note_panel.show_recipe(current_recipe)
-		recipe_note_panel.show()
+		recipe_note_panel.set_recipe(current_recipe)
+		recipe_note_panel._toggle_open()
 
 
 func _on_texture_rect_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if recipe_note_panel and current_recipe:
-			recipe_note_panel.show_recipe(current_recipe)
-			recipe_note_panel.show()
+			recipe_note_panel.set_recipe(current_recipe)
+			recipe_note_panel._toggle_open()

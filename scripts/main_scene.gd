@@ -8,7 +8,7 @@ enum GameMode { ATTENDANCE, PREPARATION, END_OF_DAY }
 var current_mode: GameMode = GameMode.ATTENDANCE
 var current_time_minutes: int = 8 * 60
 var absolute_minutes: int = 8 * 60
-var day: int = 5
+var day: int = 1
 var money: int = 100
 
 const END_OF_DAY_MINUTES: int = 19 * 60
@@ -49,7 +49,7 @@ func _ready() -> void:
 	print("Managers:", Managers)
 	print("RecipeManager:", Managers.recipe_manager)
 
-	clock_timer.wait_time = 2.5
+	clock_timer.wait_time = 3.7
 	clock_timer.timeout.connect(_on_time_tick)
 	add_child(clock_timer)
 	clock_timer.start()
@@ -67,6 +67,7 @@ func _ready() -> void:
 	# Garante bancada inicial
 	prep_area.update_ingredients_for_day(day)
 
+
 # ---------------- Mode Switch ----------------
 func switch_mode(new_mode: GameMode) -> void:
 	current_mode = new_mode
@@ -76,7 +77,8 @@ func switch_mode(new_mode: GameMode) -> void:
 	mode_end_of_day.visible = (new_mode == GameMode.END_OF_DAY)
 	$HUD.visible = (new_mode != GameMode.END_OF_DAY)
 
-	# ⚠️ NÃO esconder nota aqui, só no modo END_OF_DAY
+	# ⚠️ NÃO esconder nota aqui (o painel é responsável pelo seu estado),
+	# apenas escondemos no END_OF_DAY
 	if new_mode == GameMode.END_OF_DAY:
 		$Mode_Preparation/HUDPrep/RecipeNotePanel.hide()
 	else:
@@ -234,11 +236,8 @@ func load_new_recipe() -> void:
 	score_label.text = "100%"
 
 	# Avisa o ModePreparation e o painel da receita (se disponível)
-	mode_preparation.set_recipe(current_recipe)
-	await get_tree().process_frame  # garante que o node já está pronto
-
+	mode_preparation.set_recipe(current_recipe, current_recipe_variants)
 	if mode_preparation and mode_preparation.recipe_note_panel:
-		print("🧾 Enviando receita para RecipeNotePanel:", current_recipe.recipe_name)
 		mode_preparation.recipe_note_panel.set_recipe(current_recipe, current_recipe_variants)
 
 	update_score_display()
@@ -246,11 +245,11 @@ func load_new_recipe() -> void:
 	prep_area.update_ingredients_for_day(day)
 	prep_area.ensure_plate_for_day(day)
 
-	# 🔹 Abre nota automaticamente apenas na primeira receita do primeiro dia
+	# Abrir nota automaticamente apenas na primeira receita do primeiro dia
 	if not has_shown_note_first_day and day == initial_day_at_start:
 		await get_tree().process_frame
 		if mode_preparation and mode_preparation.recipe_note_panel:
-			mode_preparation.recipe_note_panel._animate_open()
+			mode_preparation.recipe_note_panel._animate_open()  # usa animação já dentro do painel
 			has_shown_note_first_day = true
 
 	show_random_client()

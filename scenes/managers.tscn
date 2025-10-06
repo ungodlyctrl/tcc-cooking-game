@@ -57,10 +57,10 @@ feedback_config = ExtResource("2_152b3")
 script = ExtResource("1_osspy")
 clients = Array[ExtResource("4_xl2cx")]([ExtResource("5_rmo1q"), ExtResource("6_rrdc0"), ExtResource("7_52da1"), ExtResource("8_52da1"), ExtResource("9_b8u1i"), ExtResource("10_emnlt"), ExtResource("11_dbtig"), ExtResource("5_110ma"), ExtResource("13_c6xmk"), ExtResource("14_11yci"), ExtResource("15_tjrm2")])
 
-[node name="RecipeManager" type="Node" parent="."]
-script = ExtResource("13_tjrm2")
-all_recipes = Array[ExtResource("14_4m8qx")]([ExtResource("15_ocmb6"), ExtResource("16_fecln"), ExtResource("17_rfal5"), ExtResource("18_l5n31"), ExtResource("19_sn6px"), ExtResource("20_vkttu"), ExtResource("21_h6v6t"), ExtResource("22_h4sy6"), ExtResource("23_8q7ow"), ExtResource("24_dgfrh"), ExtResource("25_3u53g"), ExtResource("26_5mawo")])
-
 [node name="IngredientDatabase" type="Node" parent="."]
 script = ExtResource("27_jxyry")
 ingredient_list = Array[ExtResource("28_6jetn")]([ExtResource("29_2l7ur"), ExtResource("30_gjllj"), ExtResource("31_vqhob"), ExtResource("32_75lyh"), ExtResource("33_a8prd"), ExtResource("34_lmnp6"), ExtResource("35_fd81x"), ExtResource("36_tbw62"), ExtResource("37_v5pq0"), ExtResource("38_p3c4h"), ExtResource("39_xq3wl"), ExtResource("40_ckbyc"), ExtResource("41_ss10b"), ExtResource("42_et0nk"), ExtResource("43_q2mbl"), ExtResource("44_8a70s"), ExtResource("45_5q5o7")])
+
+[node name="RecipeManager" type="Node" parent="."]
+script = ExtResource("13_tjrm2")
+all_recipes = Array[ExtResource("14_4m8qx")]([ExtResource("15_ocmb6"), ExtResource("16_fecln"), ExtResource("17_rfal5"), ExtResource("18_l5n31"), ExtResource("19_sn6px"), ExtResource("20_vkttu"), ExtResource("21_h6v6t"), ExtResource("22_h4sy6"), ExtResource("23_8q7ow"), ExtResource("24_dgfrh"), ExtResource("25_3u53g"), ExtResource("26_5mawo")])
