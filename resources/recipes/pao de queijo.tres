@@ -7,6 +7,7 @@
 script = ExtResource("1_jcfx5")
 ingredient_id = "pao de queijo"
 state = "cooked"
+stages = Array[int]([2])
 variation_quantity_options = Array[int]([1, 2, 3])
 variation_quantity_weights = Array[float]([0.3, 0.4, 0.3])
 variation_line_quantity = Array[String](["Ah, um pão de queijo só é muito pouco!"])

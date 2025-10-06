@@ -235,7 +235,10 @@ func load_new_recipe() -> void:
 
 	# Avisa o ModePreparation e o painel da receita (se disponível)
 	mode_preparation.set_recipe(current_recipe)
+	await get_tree().process_frame  # garante que o node já está pronto
+
 	if mode_preparation and mode_preparation.recipe_note_panel:
+		print("🧾 Enviando receita para RecipeNotePanel:", current_recipe.recipe_name)
 		mode_preparation.recipe_note_panel.set_recipe(current_recipe, current_recipe_variants)
 
 	update_score_display()
