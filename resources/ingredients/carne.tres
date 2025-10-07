@@ -10,11 +10,11 @@ script = ExtResource("1_4nb86")
 id = "carne"
 display_name = "Carne"
 container_texture = ExtResource("1_mprf7")
-initial_state = "raw"
 states = Dictionary[String, Texture2D]({
 "cooked": null,
 "cut": ExtResource("4_tlh4s"),
 "fried": null,
 "raw": ExtResource("3_f5ltr")
 })
+drag_offset = Vector2(-4, -2)
 metadata/_custom_type_script = "uid://ccubj8or3d2vb"

@@ -7,12 +7,14 @@
 script = ExtResource("1_hesue")
 ingredient_id = "arroz"
 state = "cooked"
+stages = Array[int]([2])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [sub_resource type="Resource" id="Resource_55mys"]
 script = ExtResource("1_hesue")
 ingredient_id = "feijao"
 state = "cooked"
+stages = Array[int]([2])
 variation_quantity_options = Array[int]([1, 2])
 variation_quantity_weights = Array[float]([0.7, 0.3])
 variation_line_quantity = Array[String](["Bota bastante feijão, por favor."])

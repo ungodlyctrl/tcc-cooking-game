@@ -4,6 +4,7 @@ class_name ContainerSlot
 @export var ingredient_id: String = "batata"
 @onready var icon: TextureRect = $Icon
 
+
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
 
@@ -49,11 +50,23 @@ func _get_drag_data(_pos: Vector2) -> Variant:
 		sprite_texture = icon.texture
 		push_warning("⚠️ ContainerSlot: sprite não encontrado para '%s' (state: %s), usando ícone do container." % [ingredient_id, start_state])
 
-	# 🔹 Cria o preview visual
+	# 🔹 Cria o preview visual com suporte a offset customizado
 	var preview := TextureRect.new()
 	preview.texture = sprite_texture
-	preview.modulate.a = 1.0  # leve transparência
-	set_drag_preview(preview)
+	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	# Se o ingrediente tiver offset configurado no IngredientData, aplicamos
+	var offset := Vector2.ZERO
+	if data and data.drag_offset != Vector2.ZERO:
+		offset = data.drag_offset
+
+	# Usamos um wrapper pra poder aplicar o offset visual
+	var preview_wrapper := Control.new()
+	preview_wrapper.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	preview_wrapper.add_child(preview)
+	preview.position = offset
+
+	set_drag_preview(preview_wrapper)
 
 	# Cobra o custo do ingrediente (econômico)
 	IngredientCostManager.charge_for_ingredient(get_tree().current_scene, ingredient_id)
@@ -77,12 +90,14 @@ func _get_tooltip_node() -> Node:
 		return scene_root.get_node("HUD/Tooltip")
 	return null
 
+
 func _on_slot_mouse_entered() -> void:
 	var data: IngredientData = Managers.ingredient_database.get_ingredient(ingredient_id)
 	var name := data.display_name if data and data.display_name != "" else ingredient_id.capitalize()
 	var tt := _get_tooltip_node()
 	if tt:
 		tt.show_tooltip(name, true)
+
 
 func _on_slot_mouse_exited() -> void:
 	var tt := _get_tooltip_node()

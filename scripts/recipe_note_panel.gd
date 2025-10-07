@@ -178,16 +178,22 @@ func _line_mentions_excluded(line: String, excluded_ids: Array) -> bool:
 func _verb_for_stage(stage_value: int, req: IngredientRequirement, ing_data: IngredientData) -> String:
 	match stage_value:
 		IngredientRequirement.Stage.COOKING:
-			if _ingredient_is_in_state(ing_data, "cooked"): return "Adicionar"
+			# checa se já vem cozido
+			var idlow := req.ingredient_id.to_lower()
+			if _ingredient_is_in_state(ing_data, "cooked", req):
+				return "Adicionar"
+			if "arroz" in idlow: return "Adicionar"
+			if "feijao" in idlow or "feijão" in idlow: return "Adicionar"
 			return "Cozinhar"
 		IngredientRequirement.Stage.FRYING:
 			var idlow := req.ingredient_id.to_lower()
 			if "pao" in idlow or "pão" in idlow or "bread" in idlow: return "Tostar"
 			if "queijo" in idlow or "cheese" in idlow: return "Dourar / Derreter"
-			if "mortadela" in idlow or "mortadela" in idlow: return "Tostar"
+			if "mortadela" in idlow: return "Tostar"
 			return "Fritar"
 		IngredientRequirement.Stage.CUTTING:
-			if _ingredient_is_in_state(ing_data, "cut"): return "Adicionar"
+			if _ingredient_is_in_state(ing_data, "cut", req):
+				return "Adicionar"
 			return "Cortar"
 		IngredientRequirement.Stage.MIXING:
 			return "Misturar"
@@ -205,13 +211,22 @@ func _verb_for_state(state: String, req: IngredientRequirement, ing_data: Ingred
 
 
 # ---------------------------------------------------------
-func _ingredient_is_in_state(ing_data: IngredientData, needed_state: String) -> bool:
-	if ing_data == null:
-		return false
-	var s: String = str(ing_data.initial_state)
-	if s == "":
-		return false
-	return s == needed_state
+func _ingredient_is_in_state(ing_data: IngredientData, needed_state: String, req: IngredientRequirement = null) -> bool:
+	if ing_data and str(ing_data.initial_state) == needed_state:
+		return true
+
+	# fallback — tenta recuperar do banco de dados caso ing_data tenha vindo null
+	if (ing_data == null or ing_data.initial_state == "") and Managers and Managers.ingredient_database:
+		var check_data: IngredientData = Managers.ingredient_database.get_ingredient(req.ingredient_id) if req else null
+		if check_data and str(check_data.initial_state) == needed_state:
+			return true
+
+	# fallback extra — se o próprio req guarda algo como "initial_state" em metadata (às vezes acontece)
+	if req and req.has_meta("initial_state") and str(req.get_meta("initial_state")) == needed_state:
+		return true
+
+	return false
+
 
 
 func _get_display_name(id: String) -> String:

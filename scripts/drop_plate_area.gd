@@ -1,67 +1,41 @@
 extends TextureRect
 class_name DropPlateArea
 
-## DropPlateArea (Prato principal onde os ingredientes são montados)
-## Responsável por:
-## - Receber ingredientes/utensílios arrastados.
-## - Manter lista de ingredientes usados.
-## - Mostrar lista (texto temporário) ou sprite final (futuro).
-## - Permitir arrastar o prato completo para entrega.
+## Prato principal (área de montagem e entrega)
 
-# -------------------------------
-# NÓS DA CENA
-# -------------------------------
 @onready var used_list: VBoxContainer = $VBoxContainer/UsedList
-# No futuro: adicionar um TextureRect aqui para sprites do prato final
 
-# -------------------------------
-# VARIÁVEIS PRINCIPAIS
-# -------------------------------
-var used_ingredients: Array[Dictionary] = []     ## Ingredientes usados no prato
-var expected_recipe: RecipeResource              ## Receita atual recebida do MainScene
+# 🔹 Offset de preview para o prato (ajusta sprite no cursor)
+const PLATE_DRAG_OFFSET := Vector2(-40, -30)
+
+var used_ingredients: Array[Dictionary] = []
+var expected_recipe: RecipeResource
 
 
-# -------------------------------
-# CONFIGURAÇÃO INICIAL
-# -------------------------------
 func set_current_recipe(recipe: RecipeResource) -> void:
-	## Define a receita e limpa o prato
 	expected_recipe = recipe
 	clear_ingredients()
 
 
-# -------------------------------
-# GESTÃO DE INGREDIENTES
-# -------------------------------
 func clear_ingredients() -> void:
-	## Limpa todos os ingredientes do prato
 	used_ingredients.clear()
 	for child in used_list.get_children():
 		child.queue_free()
-	# Futuro: resetar sprite do prato também
 
 
 func add_ingredients(ingredients: Array[Dictionary]) -> void:
-	## Adiciona ingredientes e atualiza visualização
 	for ing in ingredients:
 		used_ingredients.append(ing)
 	_update_ingredient_list_ui()
-	# Futuro: atualizar sprite aqui
 
 
-# -------------------------------
-# DRAG & DROP
-# -------------------------------
 func _can_drop_data(_position: Vector2, data: Variant) -> bool:
 	if typeof(data) != TYPE_DICTIONARY:
 		return false
-
 	if data.has("type") and data["type"] == "cooked_tool":
 		return true
-
 	if data.has("id") and data.has("state") and data["state"]:
 		return true
-
 	return false
 
 
@@ -71,12 +45,9 @@ func _drop_data(_position: Vector2, data: Variant) -> void:
 
 	var ingredients_to_add: Array[Dictionary] = []
 
-	# Caso 1: utensílio cozinhado
 	if data.has("type") and data["type"] == "cooked_tool":
 		if data.has("ingredients"):
 			ingredients_to_add = data["ingredients"]
-
-	# Caso 2: ingrediente individual
 	else:
 		var ingredient_data := {
 			"id": data.get("id", ""),
@@ -91,13 +62,9 @@ func _drop_data(_position: Vector2, data: Variant) -> void:
 
 		ingredients_to_add.append(ingredient_data)
 
-	# Adiciona ao prato
 	add_ingredients(ingredients_to_add)
-
-	# Atualiza score
 	get_tree().current_scene.update_score_display()
 
-	# Remove origem (só se não for o prato)
 	var source_node: Control = data.get("source", null)
 	if source_node and source_node.is_inside_tree() and source_node != self:
 		source_node.queue_free()
@@ -105,26 +72,28 @@ func _drop_data(_position: Vector2, data: Variant) -> void:
 	DragManager.current_drag_type = DragManager.DragType.NONE
 
 
-
 func _get_drag_data(_position: Vector2) -> Variant:
-	## Permite arrastar o prato inteiro para entregar
 	if used_ingredients.is_empty():
 		return null
 
 	var preview := TextureRect.new()
-	preview.texture = preload("res://assets/prato7.png")  # sprite genérico temporário
-	preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	preview.stretch_mode = TextureRect.STRETCH_SCALE
-	preview.custom_minimum_size = Vector2(96, 96)
-	set_drag_preview(preview)
+	preview.texture = preload("res://assets/prato7.png")
+	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
+	var wrapper := Control.new()
+	wrapper.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	wrapper.add_child(preview)
+	preview.position = PLATE_DRAG_OFFSET
+
+	set_drag_preview(wrapper)
 	DragManager.current_drag_type = DragManager.DragType.PLATE
 
 	return {
 		"type": "delivered_plate",
-		"ingredients": used_ingredients.duplicate(true),  ## cópia profunda
+		"ingredients": used_ingredients.duplicate(true),
 		"source": self
 	}
+
 
 
 # -------------------------------

@@ -15,4 +15,5 @@ states = Dictionary[String, Texture2D]({
 "raw": ExtResource("3_diuw0")
 })
 gender = "m"
+drag_offset = Vector2(-7, -13)
 metadata/_custom_type_script = "uid://ccubj8or3d2vb"
