@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://c04d3smbkrjhr"]
+
+[ext_resource type="Script" uid="uid://b7mox8ktd8uiq" path="res://tooltip.gd" id="1_mtwet"]
+
+[node name="Tooltip" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_mtwet")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 17.0

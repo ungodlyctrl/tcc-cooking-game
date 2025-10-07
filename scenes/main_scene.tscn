@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://sqqiy62qf6np"]
+[gd_scene load_steps=13 format=3 uid="uid://sqqiy62qf6np"]
 
 [ext_resource type="Script" uid="uid://cg0pigwrqqh4d" path="res://scripts/main_scene.gd" id="1_7ykc4"]
 [ext_resource type="PackedScene" uid="uid://dehkeao1vbiy0" path="res://scenes/gamemodes/mode_attendance.tscn" id="2_pu3yx"]
 [ext_resource type="PackedScene" uid="uid://d4fehmyo6hugb" path="res://scenes/gamemodes/mode_preparation.tscn" id="3_gubc5"]
 [ext_resource type="PackedScene" uid="uid://f4o0q8rd5fsb" path="res://scenes/gamemodes/mode_end_of_day.tscn" id="4_pu3yx"]
 [ext_resource type="Script" uid="uid://d26mxlbe632t8" path="res://scripts/in_game_options.gd" id="5_gubc5"]
+[ext_resource type="PackedScene" uid="uid://c04d3smbkrjhr" path="res://scenes/ui/tooltip.tscn" id="5_rt2n2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pu3yx"]
 bg_color = Color(0.796078, 0.858824, 0.988235, 1)
@@ -138,6 +139,9 @@ offset_bottom = 364.0
 [node name="ScoreLabel" type="Label" parent="HUD/HBoxContainer"]
 layout_mode = 2
 text = "100%"
+
+[node name="Tooltip" parent="HUD" instance=ExtResource("5_rt2n2")]
+layout_mode = 0
 
 [node name="InGameOptions" type="Control" parent="."]
 process_mode = 3
