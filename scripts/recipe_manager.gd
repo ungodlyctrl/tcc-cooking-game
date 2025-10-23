@@ -16,15 +16,15 @@ var recent_recipes_by_period: Dictionary = {
 const MAX_RECENT_RECIPES_PER_PERIOD: int = 2
 
 
-
+# ---------------- READY ----------------
 func _ready() -> void:
 	if all_recipes.is_empty():
 		push_warning("⚠️ RecipeManager: nenhuma receita atribuída no Inspector!")
 	else:
-		print("RecipeManager carregou %d receitas" % all_recipes.size())
+		print("✅ RecipeManager carregou %d receitas" % all_recipes.size())
 
 
-# ---------------- Filtragem ----------------
+# ---------------- FILTRAGEM ----------------
 func get_available_recipes(current_day: int, region: String, time_of_day: String) -> Array[RecipeResource]:
 	var valid: Array[RecipeResource] = []
 	for recipe in all_recipes:
@@ -40,21 +40,21 @@ func get_available_recipes(current_day: int, region: String, time_of_day: String
 	return valid
 
 
-# ---------------- Sorteio de Receita ----------------
+# ---------------- SORTEIO DE RECEITA ----------------
 func get_random_recipe(current_day: int, region: String, time_of_day: String) -> Dictionary:
 	var pool: Array[RecipeResource] = get_available_recipes(current_day, region, time_of_day)
 	if pool.is_empty():
-		push_warning("Nenhuma receita válida para %s (%s) - Dia %d" % [region, time_of_day, current_day])
+		push_warning("⚠️ Nenhuma receita válida para %s (%s) - Dia %d" % [region, time_of_day, current_day])
 		return {}
 
-	# 🔹 evita repetir receitas recentes nesse mesmo período (ex: várias manhãs seguidas iguais)
-	var recent : Array = recent_recipes_by_period.get(time_of_day, [])
+	# evita repetir receitas recentes no mesmo período
+	var recent: Array = recent_recipes_by_period.get(time_of_day, [])
 	var available := []
 	for r in pool:
 		if r.resource_path not in recent:
 			available.append(r)
 
-	# se todas estão em 'recent', libera o pool completo de novo
+	# se todas estão em 'recent', libera o pool completo novamente
 	if available.is_empty():
 		available = pool.duplicate()
 
@@ -71,10 +71,45 @@ func get_random_recipe(current_day: int, region: String, time_of_day: String) ->
 	return apply_variations(chosen)
 
 
-
-# ---------------- Aplicação de Variações ----------------
+# ---------------- APLICAÇÃO DE VARIAÇÕES ----------------
 func apply_variations(recipe: RecipeResource) -> Dictionary:
-	var clone := recipe.duplicate(true) as RecipeResource
+	# Duplicação manual (para não perder sub-recursos nem texturas)
+	var clone := RecipeResource.new()
+	clone.recipe_name = recipe.recipe_name
+	clone.region = recipe.region
+	clone.base_price = recipe.base_price
+	clone.icon = recipe.icon
+	clone.min_day = recipe.min_day
+	clone.time_of_day = recipe.time_of_day.duplicate()
+	clone.client_lines = recipe.client_lines.duplicate()
+	clone.display_steps = recipe.display_steps.duplicate()
+	clone.final_plate_sprite = recipe.final_plate_sprite
+	clone.delivered_plate_sprite = recipe.delivered_plate_sprite
+
+	# 🔹 Duplicar manualmente os visuais do prato (mantendo texturas e estados)
+	clone.plate_ingredient_visuals = []
+	for vis in recipe.plate_ingredient_visuals:
+		if vis == null:
+			continue
+
+		var new_vis := PlateIngredientVisual.new()
+		new_vis.ingredient_id = vis.ingredient_id
+		new_vis.offset = vis.offset
+		new_vis.z_index = vis.z_index
+
+		var new_sprites: Array[IngredientStateSprite] = []
+		for entry in vis.state_sprites:
+			if entry == null:
+				continue
+			var new_entry := IngredientStateSprite.new()
+			new_entry.state = entry.state
+			new_entry.texture = entry.texture  # mantém referência à textura original
+			new_sprites.append(new_entry)
+
+		new_vis.state_sprites = new_sprites
+		clone.plate_ingredient_visuals.append(new_vis)
+
+	# 🔹 Clonar ingredientes com variações
 	var final_reqs: Array[IngredientRequirement] = []
 	var variants: Array[Dictionary] = []
 	var variation_lines: Array[String] = []
@@ -86,12 +121,11 @@ func apply_variations(recipe: RecipeResource) -> Dictionary:
 		var included := true
 		var final_qty := req.quantity
 
-		# 🔹 Inclusão opcional
-		if req.optional:
-			if randf() > req.inclusion_chance:
-				included = false
+		# Inclusão opcional
+		if req.optional and randf() > req.inclusion_chance:
+			included = false
 
-		# 🔹 Aplica variação de quantidade
+		# Aplica variação de quantidade
 		if included:
 			if not req.variation_quantity_options.is_empty():
 				final_qty = _pick_weighted(req.variation_quantity_options, req.variation_quantity_weights)
@@ -106,7 +140,7 @@ func apply_variations(recipe: RecipeResource) -> Dictionary:
 			"quantity": final_qty
 		})
 
-		# 🔹 Linhas de variação do cliente
+		# Linhas de variação do cliente
 		if not included and not req.variation_line_absent.is_empty():
 			variation_lines.append(req.variation_line_absent.pick_random())
 		elif final_qty > 1 and not req.variation_line_quantity.is_empty():
@@ -129,7 +163,7 @@ func apply_variations(recipe: RecipeResource) -> Dictionary:
 	}
 
 
-# ---------------- Sorteio Ponderado ----------------
+# ---------------- SORTEIO PONDERADO ----------------
 func _pick_weighted(options: Array, weights: Array) -> Variant:
 	if weights.is_empty() or options.size() != weights.size():
 		return options.pick_random()

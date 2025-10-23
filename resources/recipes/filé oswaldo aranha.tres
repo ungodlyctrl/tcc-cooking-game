@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=7 format=3 uid="uid://c5osvsrm6mm6d"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=8 format=3 uid="uid://c5osvsrm6mm6d"]
 
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_gcvmf"]
+[ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_k2pes"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_vblu1"]
 
 [sub_resource type="Resource" id="Resource_gcvmf"]

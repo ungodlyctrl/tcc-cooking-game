@@ -12,18 +12,24 @@ const SCROLL_SPEED := 400.0
 var max_scroll := 0
 var dragging := false
 var last_mouse_pos := Vector2.ZERO
-var current_recipe: RecipeResource
+var current_recipe: RecipeResource = null
+var _ready_finished := false
+
 
 func _ready() -> void:
 	await get_tree().process_frame
+	_ready_finished = true
 	_update_scroll_area()
 	scroll_container.gui_input.connect(_on_scroll_gui_input)
-
-	# Se existir, deixa o painel visível (ele controla seu estado interno)
+	
 	if recipe_note_panel:
 		recipe_note_panel.visible = true
-		# não obrigamos a abrir aqui; o panel decide quando abrir
 		print("🟢 RecipeNotePanel detectado no ModePreparation.")
+
+	print("🟢 ModePreparation pronto.")
+	if current_recipe:
+		print("🔁 Receita já estava setada:", current_recipe.recipe_name)
+		_set_drop_plate_recipe(current_recipe)
 
 
 func _update_scroll_area() -> void:
@@ -59,13 +65,34 @@ func _on_scroll_gui_input(event: InputEvent) -> void:
 		scroll_container.scroll_horizontal = clamp(scroll_container.scroll_horizontal - event.relative.x, 0, max_scroll)
 
 
-## Define a receita atual (recebe opcional variants e encaminha ao painel)
+# ---------------------- RECEITA ----------------------
 func set_recipe(recipe: RecipeResource, variants: Array = []) -> void:
 	current_recipe = recipe
+
 	if recipe_note_panel:
 		recipe_note_panel.set_recipe(recipe, variants)
 
+	if _ready_finished:
+		_set_drop_plate_recipe(recipe)
+	else:
+		await ready
+		_set_drop_plate_recipe(recipe)
 
+
+func _set_drop_plate_recipe(recipe: RecipeResource) -> void:
+	if not prep_area:
+		push_warning("⚠️ PrepArea não encontrado no ModePreparation!")
+		return
+
+	var dpa: DropPlateArea = prep_area.get_node_or_null("UtensilsParent/DropPlateArea")
+	if dpa:
+		print("✅ DropPlateArea encontrado no ModePreparation:", dpa.name)
+		dpa.set_current_recipe(recipe)
+	else:
+		print("❌ DropPlateArea não encontrado dentro de PrepArea!")
+
+
+# ---------------------- UI / TOGGLE ----------------------
 func _on_recipe_toggle_button_pressed() -> void:
 	if recipe_note_panel and current_recipe:
 		recipe_note_panel.set_recipe(current_recipe)

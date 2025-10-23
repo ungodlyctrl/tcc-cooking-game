@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func _get_drag_data(_pos: Vector2) -> Variant:
 	var preview := self.duplicate()
-	preview.modulate.a = 0.6
+	preview.modulate.a = 1.0
 	set_drag_preview(preview)
 
 	DragManager.current_drag_type = DragManager.DragType.PLATE

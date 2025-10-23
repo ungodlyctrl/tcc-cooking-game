@@ -49,7 +49,7 @@ func _ready() -> void:
 	print("Managers:", Managers)
 	print("RecipeManager:", Managers.recipe_manager)
 
-	clock_timer.wait_time = 3.7
+	clock_timer.wait_time = 2.7
 	clock_timer.timeout.connect(_on_time_tick)
 	add_child(clock_timer)
 	clock_timer.start()
@@ -218,16 +218,13 @@ func load_new_recipe() -> void:
 
 	var time_of_day := get_time_of_day()
 	var result : Dictionary = Managers.recipe_manager.get_random_recipe(day, region, time_of_day)
-
 	if result.is_empty():
 		push_warning("⚠️ Nenhuma receita encontrada para %s (%s, Dia %d)" % [region, time_of_day, day])
 		return
 
-	# Guarda recipe + variants (se existir) + client_lines
 	current_recipe = result.get("recipe", null)
 	current_recipe_variants = result.get("variants", [])
 	current_client_lines = result.get("client_lines", [])
-
 	prep_start_minutes = absolute_minutes
 
 	mode_attendance.set_recipe(current_recipe, current_client_lines)
@@ -235,24 +232,32 @@ func load_new_recipe() -> void:
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
 	score_label.text = "100%"
 
-	# Avisa o ModePreparation e o painel da receita (se disponível)
+	print("🧾 Enviando receita para RecipeNotePanel:", current_recipe.recipe_name)
 	mode_preparation.set_recipe(current_recipe, current_recipe_variants)
-	if mode_preparation and mode_preparation.recipe_note_panel:
-		mode_preparation.recipe_note_panel.set_recipe(current_recipe, current_recipe_variants)
+
+	# ⚙️ Aguardar DropPlateArea pronto antes de setar receita
+	await get_tree().process_frame
+	if prep_area:
+		var dpa: DropPlateArea = prep_area.get_node_or_null("UtensilsParent/DropPlateArea")
+		if dpa:
+			await get_tree().process_frame
+			print("✅ DropPlateArea encontrado e configurado")
+			dpa.set_current_recipe(current_recipe)
+		else:
+			print("❌ DropPlateArea não encontrado em PrepArea!")
 
 	update_score_display()
-
 	prep_area.update_ingredients_for_day(day)
 	prep_area.ensure_plate_for_day(day)
 
-	# Abrir nota automaticamente apenas na primeira receita do primeiro dia
 	if not has_shown_note_first_day and day == initial_day_at_start:
 		await get_tree().process_frame
 		if mode_preparation and mode_preparation.recipe_note_panel:
-			mode_preparation.recipe_note_panel._animate_open()  # usa animação já dentro do painel
+			mode_preparation.recipe_note_panel._animate_open()
 			has_shown_note_first_day = true
 
 	show_random_client()
+
 
 
 # ---------------- Attendance ----------------

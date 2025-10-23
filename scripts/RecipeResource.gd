@@ -17,3 +17,7 @@ class_name RecipeResource
 @export var client_lines: Array[String] = []  # Falas genéricas
 
 @export var display_steps: Array[String] = []  # << opcional: passos manuais (string por passo)
+
+@export var plate_ingredient_visuals: Array[PlateIngredientVisual] = []
+@export var final_plate_sprite: Texture2D  # sprite vista de cima do prato finalizado (preparação)
+@export var delivered_plate_sprite: Texture2D  # sprite da entrega (perspectiva cliente)
