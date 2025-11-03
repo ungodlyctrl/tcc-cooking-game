@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=17 format=3 uid="uid://76qn8eienky0"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=21 format=3 uid="uid://76qn8eienky0"]
 
-[ext_resource type="Texture2D" uid="uid://dxxgc5edc0lka" path="res://resources/recipes/prato pao cm mortadela.png" id="1_p2weg"]
+[ext_resource type="Texture2D" uid="uid://dxxgc5edc0lka" path="res://assets/prato pao cm mortadela.png" id="1_gd1ir"]
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_sbib0"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_gacoo"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_h5mvj"]
-[ext_resource type="Texture2D" uid="uid://ct06miopqr6ql" path="res://resources/recipes/p morta4.1.png" id="2_vbg1g"]
-[ext_resource type="Texture2D" uid="uid://dgimcorgugr34" path="res://resources/recipes/p morta1.1.png" id="5_gd1ir"]
+[ext_resource type="Texture2D" uid="uid://ct06miopqr6ql" path="res://assets/p morta4.1.png" id="2_r4qv6"]
 [ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="5_r4qv6"]
-[ext_resource type="Texture2D" uid="uid://da1d5a5e88hla" path="res://resources/recipes/p morta2.1.png" id="6_vbg1g"]
+[ext_resource type="Texture2D" uid="uid://dgimcorgugr34" path="res://assets/p morta1.1.png" id="6_3ewag"]
+[ext_resource type="Texture2D" uid="uid://da1d5a5e88hla" path="res://assets/p morta2.1.png" id="7_ot5o0"]
+[ext_resource type="Texture2D" uid="uid://cf8dthfqchsk3" path="res://assets/p morta3.1.png" id="8_r4qv6"]
 
 [sub_resource type="Resource" id="Resource_sbib0"]
 script = ExtResource("1_sbib0")
@@ -27,13 +28,13 @@ metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [sub_resource type="Resource" id="Resource_gd1ir"]
 script = ExtResource("5_r4qv6")
-texture = ExtResource("5_gd1ir")
+texture = ExtResource("6_3ewag")
 metadata/_custom_type_script = "uid://hs2a32jl4pas"
 
 [sub_resource type="Resource" id="Resource_r4qv6"]
 script = ExtResource("5_r4qv6")
 state = "raw"
-texture = ExtResource("5_gd1ir")
+texture = ExtResource("6_3ewag")
 metadata/_custom_type_script = "uid://hs2a32jl4pas"
 
 [sub_resource type="Resource" id="Resource_3ewag"]
@@ -42,21 +43,40 @@ ingredient_id = "pao"
 state_sprites = Array[ExtResource("5_r4qv6")]([SubResource("Resource_gd1ir"), SubResource("Resource_r4qv6")])
 metadata/_custom_type_script = "uid://mwsanke8s50t"
 
-[sub_resource type="Resource" id="Resource_ot5o0"]
-script = ExtResource("5_r4qv6")
-state = "raw"
-texture = ExtResource("6_vbg1g")
-metadata/_custom_type_script = "uid://hs2a32jl4pas"
-
 [sub_resource type="Resource" id="Resource_bmldn"]
 script = ExtResource("5_r4qv6")
-texture = ExtResource("6_vbg1g")
+texture = ExtResource("7_ot5o0")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_ot5o0"]
+script = ExtResource("5_r4qv6")
+state = "fried_1"
+texture = ExtResource("7_ot5o0")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_omlki"]
+script = ExtResource("5_r4qv6")
+state = "fried_2"
+texture = ExtResource("8_r4qv6")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_ify08"]
+script = ExtResource("5_r4qv6")
+state = "raw_1"
+texture = ExtResource("7_ot5o0")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_abk6c"]
+script = ExtResource("5_r4qv6")
+state = "raw_2"
+texture = ExtResource("8_r4qv6")
 metadata/_custom_type_script = "uid://hs2a32jl4pas"
 
 [sub_resource type="Resource" id="Resource_mcsga"]
 script = ExtResource("2_gacoo")
 ingredient_id = "mortadela"
-state_sprites = Array[ExtResource("5_r4qv6")]([SubResource("Resource_ot5o0"), SubResource("Resource_bmldn")])
+state_sprites = Array[ExtResource("5_r4qv6")]([SubResource("Resource_bmldn"), SubResource("Resource_ot5o0"), SubResource("Resource_omlki"), SubResource("Resource_ify08"), SubResource("Resource_abk6c")])
+z_index = 1
 metadata/_custom_type_script = "uid://mwsanke8s50t"
 
 [resource]
@@ -68,5 +88,5 @@ time_of_day = Array[String](["breakfast"])
 ingredient_requirements = Array[ExtResource("1_sbib0")]([SubResource("Resource_sbib0"), SubResource("Resource_h5mvj")])
 client_lines = Array[String](["E aí, poderia me ver um pão com mortadela, por favor?", "Bom dia, me vê um pão com mortadela? Ouvi dizer que é tão bom que é patrimônio nacional, sabia?", "Bom dia, me vê um pão com mortadela?", "Um pão com mortadela. Simples e divino."])
 plate_ingredient_visuals = Array[ExtResource("2_gacoo")]([SubResource("Resource_3ewag"), SubResource("Resource_mcsga")])
-final_plate_sprite = ExtResource("2_vbg1g")
-delivered_plate_sprite = ExtResource("1_p2weg")
+final_plate_sprite = ExtResource("2_r4qv6")
+delivered_plate_sprite = ExtResource("1_gd1ir")

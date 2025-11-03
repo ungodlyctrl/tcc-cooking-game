@@ -6,7 +6,6 @@ class_name CookedTool
 
 const STATE_COOKED_TOOL := "cooked_tool"
 
-# 🔹 Offsets de preview por tipo de utensílio
 const TOOL_DRAG_OFFSETS := {
 	"panela": Vector2(-32, -16),
 	"frigideira": Vector2(-24, -12)
@@ -52,7 +51,7 @@ func _get_drag_data(_pos: Vector2) -> Dictionary:
 	preview.texture = preview_tex
 	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	var offset : Vector2 = TOOL_DRAG_OFFSETS.get(tool_type, Vector2.ZERO)
+	var offset: Vector2 = TOOL_DRAG_OFFSETS.get(tool_type, Vector2.ZERO)
 	var wrapper := Control.new()
 	wrapper.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	wrapper.add_child(preview)

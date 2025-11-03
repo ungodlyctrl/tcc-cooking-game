@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://coucan28i2vhl"]
+
+[ext_resource type="Shader" uid="uid://co10guqy3mo4c" path="res://scenes/ui/outline_blink.gdshader" id="1_0y75r"]
+[ext_resource type="Texture2D" uid="uid://btwh8huwkila" path="res://entrega 2.png" id="1_tkpe1"]
+[ext_resource type="Script" uid="uid://dkflfcocvdvnc" path="res://scripts/top_delivery_area.gd" id="2_0y75r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v06dp"]
+shader = ExtResource("1_0y75r")
+
+[node name="TopDeliveryArea" type="TextureRect"]
+material = SubResource("ShaderMaterial_v06dp")
+offset_right = 320.0
+offset_bottom = 50.0
+texture = ExtResource("1_tkpe1")
+script = ExtResource("2_0y75r")

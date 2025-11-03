@@ -17,7 +17,6 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-DragManager="*res://scripts/drag_manager.gd"
 ClientManager="*res://scripts/client_manager.gd"
 RecipeManager="*res://scripts/recipe_manager.gd"
 IngredientDatabase="*res://scripts/IngredientDatabase.gd"
@@ -25,6 +24,7 @@ EvaluationManager="*res://scripts/EvaluationManager.gd"
 IngredientCostManager="*res://scripts/ingredient_cost_manager.gd"
 Crt="*res://scenes/crt.tscn"
 Managers="*res://scenes/managers.tscn"
+DragManager="*res://scripts/drag_manager.gd"
 
 [display]
 

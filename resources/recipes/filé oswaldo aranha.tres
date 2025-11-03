@@ -1,8 +1,14 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=8 format=3 uid="uid://c5osvsrm6mm6d"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=24 format=3 uid="uid://c5osvsrm6mm6d"]
 
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_gcvmf"]
+[ext_resource type="Texture2D" uid="uid://bvi7pa2fw0pqa" path="res://assets/owa 3.1.png" id="1_k01y2"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_k2pes"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_vblu1"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="3_nrj08"]
+[ext_resource type="Texture2D" uid="uid://c5mrhtlcyrj2b" path="res://assets/arroz.png" id="4_k01y2"]
+[ext_resource type="Texture2D" uid="uid://djt3ahpt8etfq" path="res://assets/carne (1).png" id="5_105i3"]
+[ext_resource type="Texture2D" uid="uid://bem5643p1r62y" path="res://assets/batata (1).png" id="6_b7iyh"]
+[ext_resource type="Texture2D" uid="uid://8tvjdce78mec" path="res://assets/farofa (1).png" id="7_3tcv6"]
 
 [sub_resource type="Resource" id="Resource_gcvmf"]
 script = ExtResource("1_gcvmf")
@@ -31,6 +37,67 @@ ingredient_id = "batata"
 state = "fried"
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
+[sub_resource type="Resource" id="Resource_2p3ww"]
+script = ExtResource("3_nrj08")
+state = "cooked"
+texture = ExtResource("4_k01y2")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_kcf00"]
+script = ExtResource("3_nrj08")
+texture = ExtResource("4_k01y2")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_rnit5"]
+script = ExtResource("2_k2pes")
+ingredient_id = "arroz"
+state_sprites = Array[ExtResource("3_nrj08")]([SubResource("Resource_2p3ww"), SubResource("Resource_kcf00")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_u0308"]
+script = ExtResource("3_nrj08")
+state = "fried"
+texture = ExtResource("5_105i3")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_1r7qi"]
+script = ExtResource("2_k2pes")
+ingredient_id = "carne"
+state_sprites = Array[ExtResource("3_nrj08")]([SubResource("Resource_u0308")])
+z_index = 1
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_4ncqp"]
+script = ExtResource("3_nrj08")
+state = "fried"
+texture = ExtResource("6_b7iyh")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_scgq2"]
+script = ExtResource("2_k2pes")
+ingredient_id = "batata"
+state_sprites = Array[ExtResource("3_nrj08")]([SubResource("Resource_4ncqp")])
+z_index = 2
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_ihn8u"]
+script = ExtResource("3_nrj08")
+state = "cooked"
+texture = ExtResource("7_3tcv6")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_x23d0"]
+script = ExtResource("3_nrj08")
+texture = ExtResource("7_3tcv6")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_hj3wa"]
+script = ExtResource("2_k2pes")
+ingredient_id = "farofa"
+state_sprites = Array[ExtResource("3_nrj08")]([SubResource("Resource_ihn8u"), SubResource("Resource_x23d0")])
+z_index = 3
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
 [resource]
 script = ExtResource("2_vblu1")
 recipe_name = "Filé Oswaldo Aranha"
@@ -39,4 +106,6 @@ base_price = 40
 time_of_day = Array[String](["dinner"])
 ingredient_requirements = Array[ExtResource("1_gcvmf")]([SubResource("Resource_gcvmf"), SubResource("Resource_vblu1"), SubResource("Resource_k2pes"), SubResource("Resource_frm77")])
 client_lines = Array[String](["Olá, boa noite. Um filé Oswaldo Aranha.", "Oswaldo Aranha, apenas o filé, sem aranhas desta vez.", "Opa, me vê um filé Oswaldo Aranha!"])
+plate_ingredient_visuals = Array[ExtResource("2_k2pes")]([SubResource("Resource_rnit5"), SubResource("Resource_1r7qi"), SubResource("Resource_scgq2"), SubResource("Resource_hj3wa")])
+final_plate_sprite = ExtResource("1_k01y2")
 metadata/_custom_type_script = "uid://c6xvod46icb2"

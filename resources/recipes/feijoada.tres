@@ -1,8 +1,13 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=7 format=3 uid="uid://op4gaj7yrofn"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=18 format=3 uid="uid://op4gaj7yrofn"]
 
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_tjqf5"]
+[ext_resource type="Texture2D" uid="uid://deccuj6ovh5p5" path="res://assets/feiju 1.1.png" id="1_vf75x"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_7c4my"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_gm1fx"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="3_k16df"]
+[ext_resource type="Texture2D" uid="uid://cier2niboxwna" path="res://assets/feiju 2.1.png" id="4_vf75x"]
+[ext_resource type="Texture2D" uid="uid://cqv7p5hgw7rda" path="res://assets/feijao.png" id="5_6r2q5"]
+[ext_resource type="Texture2D" uid="uid://bkwgkklbbtf1i" path="res://assets/farofa.png" id="6_ca615"]
 
 [sub_resource type="Resource" id="Resource_tjqf5"]
 script = ExtResource("1_tjqf5")
@@ -25,6 +30,43 @@ ingredient_id = "farofa"
 state = "cooked"
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
+[sub_resource type="Resource" id="Resource_mvt60"]
+script = ExtResource("3_k16df")
+state = "cooked"
+texture = ExtResource("4_vf75x")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_5nye8"]
+script = ExtResource("2_gm1fx")
+ingredient_id = "arroz"
+state_sprites = Array[ExtResource("3_k16df")]([SubResource("Resource_mvt60")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_ghue2"]
+script = ExtResource("3_k16df")
+state = "cooked"
+texture = ExtResource("5_6r2q5")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_eqvum"]
+script = ExtResource("2_gm1fx")
+ingredient_id = "feijao"
+state_sprites = Array[ExtResource("3_k16df")]([SubResource("Resource_ghue2")])
+z_index = 1
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_yo15o"]
+script = ExtResource("3_k16df")
+texture = ExtResource("6_ca615")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_quwp1"]
+script = ExtResource("2_gm1fx")
+ingredient_id = "farofa"
+state_sprites = Array[ExtResource("3_k16df")]([SubResource("Resource_yo15o")])
+z_index = 2
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
 [resource]
 script = ExtResource("2_7c4my")
 recipe_name = "Feijoada"
@@ -33,4 +75,6 @@ base_price = 26
 time_of_day = Array[String](["lunch"])
 ingredient_requirements = Array[ExtResource("1_tjqf5")]([SubResource("Resource_tjqf5"), SubResource("Resource_7c4my"), SubResource("Resource_gm1fx")])
 client_lines = Array[String](["Arroz e feijão bem temperado, é isso que quero. uma feijoada por favor! Não esquece a farofa chefe.", "Opa, me vê uma feijoada no capricho.", "Olá, gostaria de uma feijoada!"])
+plate_ingredient_visuals = Array[ExtResource("2_gm1fx")]([SubResource("Resource_5nye8"), SubResource("Resource_eqvum"), SubResource("Resource_quwp1")])
+final_plate_sprite = ExtResource("1_vf75x")
 metadata/_custom_type_script = "uid://c6xvod46icb2"

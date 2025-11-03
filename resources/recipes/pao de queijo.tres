@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=5 format=3 uid="uid://d2tyt7o6iotlo"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=9 format=3 uid="uid://d2tyt7o6iotlo"]
 
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_jcfx5"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_bqi7u"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_h5gvi"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="3_p6f63"]
+[ext_resource type="Texture2D" uid="uid://bwayqyilc6r0u" path="res://assets/Cópia de prato pao de queijo 1.1.png" id="4_fpevk"]
 
 [sub_resource type="Resource" id="Resource_jcfx5"]
 script = ExtResource("1_jcfx5")
@@ -14,6 +16,17 @@ variation_quantity_weights = Array[float]([0.3, 0.4, 0.3])
 variation_line_quantity = Array[String](["Ah, um pão de queijo só é muito pouco!"])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
+[sub_resource type="Resource" id="Resource_dcxbh"]
+script = ExtResource("3_p6f63")
+texture = ExtResource("4_fpevk")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_cpdue"]
+script = ExtResource("2_h5gvi")
+ingredient_id = "pao de queijo"
+state_sprites = Array[ExtResource("3_p6f63")]([SubResource("Resource_dcxbh")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
 [resource]
 script = ExtResource("2_bqi7u")
 recipe_name = "Pão de queijo"
@@ -22,4 +35,5 @@ base_price = 9
 time_of_day = Array[String](["breakfast"])
 ingredient_requirements = Array[ExtResource("1_jcfx5")]([SubResource("Resource_jcfx5")])
 client_lines = Array[String](["Opa, bom? Me vê um pão de queijo quentinho por favor.", "Pão de queijo por favor, é macio e fofinho!", "Pão e queijo, pão de queijo!"])
+plate_ingredient_visuals = Array[ExtResource("2_h5gvi")]([SubResource("Resource_cpdue")])
 metadata/_custom_type_script = "uid://c6xvod46icb2"

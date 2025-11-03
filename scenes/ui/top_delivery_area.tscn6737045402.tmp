@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://coucan28i2vhl"]
+
+[ext_resource type="Texture2D" uid="uid://btwh8huwkila" path="res://entrega 2.png" id="1_tkpe1"]
+[ext_resource type="Script" uid="uid://dkflfcocvdvnc" path="res://scripts/top_delivery_area.gd" id="2_0y75r"]
+
+[node name="TopDeliveryArea" type="TextureRect"]
+offset_right = 320.0
+offset_bottom = 50.0
+texture = ExtResource("1_tkpe1")
+script = ExtResource("2_0y75r")
+
+[node name="OutlineHighlight" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.9782159, 0.48444444, 0.51380676, 1)

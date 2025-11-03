@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://coucan28i2vhl"]
+
+[ext_resource type="Shader" uid="uid://co10guqy3mo4c" path="res://scenes/ui/outline_blink.gdshader" id="1_0y75r"]
+[ext_resource type="Texture2D" uid="uid://btwh8huwkila" path="res://entrega 2.png" id="1_tkpe1"]
+[ext_resource type="Script" uid="uid://dkflfcocvdvnc" path="res://scripts/top_delivery_area.gd" id="2_0y75r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v06dp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0y75r"]
+shader = ExtResource("1_0y75r")
+shader_parameter/show_outline = true
+shader_parameter/outline_color = Color(1, 0.85, 0.3, 1)
+shader_parameter/thickness = 0.01200000057
+shader_parameter/margin = 0.0110000005225
+shader_parameter/blink_speed = 1.00000004424012
+
+[node name="TopDeliveryArea" type="TextureRect"]
+material = SubResource("ShaderMaterial_v06dp")
+offset_right = 320.0
+offset_bottom = 50.0
+texture = ExtResource("1_tkpe1")
+script = ExtResource("2_0y75r")
+
+[node name="OutlineEffect" type="ColorRect" parent="."]
+z_index = 4
+material = SubResource("ShaderMaterial_0y75r")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -14.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

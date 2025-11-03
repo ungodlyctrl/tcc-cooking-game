@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgimcorgugr34"
-path="res://.godot/imported/p morta1.1.png-5dde0c9777054f118f9b95a181da78e9.ctex"
+uid="uid://c13qjgykwgdx5"
+path="res://.godot/imported/feiju 1.png-a64caa3ffc03914603d7d8afe8ee670f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/recipes/p morta1.1.png"
-dest_files=["res://.godot/imported/p morta1.1.png-5dde0c9777054f118f9b95a181da78e9.ctex"]
+source_file="res://assets/feiju 1.png"
+dest_files=["res://.godot/imported/feiju 1.png-a64caa3ffc03914603d7d8afe8ee670f.ctex"]
 
 [params]
 

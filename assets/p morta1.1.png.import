@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cf8dthfqchsk3"
-path="res://.godot/imported/p morta3.1.png-1f99fc381d436ec5e4d614400b71ec0e.ctex"
+uid="uid://dgimcorgugr34"
+path="res://.godot/imported/p morta1.1.png-5dc8c82be17a60df81b1b96b0de3e597.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/recipes/p morta3.1.png"
-dest_files=["res://.godot/imported/p morta3.1.png-1f99fc381d436ec5e4d614400b71ec0e.ctex"]
+source_file="res://assets/p morta1.1.png"
+dest_files=["res://.godot/imported/p morta1.1.png-5dc8c82be17a60df81b1b96b0de3e597.ctex"]
 
 [params]
 

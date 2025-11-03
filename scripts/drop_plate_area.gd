@@ -1,10 +1,10 @@
-# DropPlateArea.gd
 extends TextureRect
 class_name DropPlateArea
 
 ## Área onde o jogador monta o prato com sprites modulares.
 ## Mostra sprites específicos definidos na receita (RecipeResource.plate_ingredient_visuals)
 ## e, se faltar algo, usa fallback da IngredientDatabase.
+## Agora o prato pode ser arrastado com preview visual e muda os sprites conforme a quantidade.
 
 @onready var used_list: VBoxContainer = $VBoxContainer/UsedList
 @onready var visual_container: Control = $VisualContainer
@@ -24,7 +24,6 @@ func _ready() -> void:
 	_ready_finished = true
 	print("🟢 DropPlateArea pronto.")
 	if expected_recipe:
-		# safe print (expected_recipe não é nulo)
 		print("🔁 Receita já estava setada:", expected_recipe.recipe_name)
 		_update_plate_visuals()
 	else:
@@ -41,7 +40,6 @@ func set_current_recipe(recipe: RecipeResource) -> void:
 	else:
 		print("⚠️ DropPlateArea recebeu receita nula.")
 
-	# marcaremos ready e forçamos atualização visual (se possível)
 	_ready_finished = true
 	_update_plate_visuals()
 
@@ -58,7 +56,6 @@ func clear_ingredients() -> void:
 
 # ---------------------- ADIÇÃO DE INGREDIENTES ----------------------
 func add_ingredients(ingredients: Array[Dictionary]) -> void:
-	# Se não houver receita configurada, tenta recuperar automaticamente do MainScene
 	if expected_recipe == null:
 		print("⚠️ DropPlateArea.add_ingredients(): receita ainda não definida! Tentando recuperar...")
 		_try_recover_recipe()
@@ -75,76 +72,61 @@ func add_ingredients(ingredients: Array[Dictionary]) -> void:
 
 
 func _try_recover_recipe() -> void:
-	# tentativa 1: pegar de get_tree().current_scene.current_recipe (MainScene guarda current_recipe)
 	var ms := get_tree().current_scene
-	if ms:
-		# usamos get() para evitar chamadas diretas que podem causar erro
+	if ms != null:
 		var maybe : Variant = null
-		# Em muitas cenas, get("current_recipe") retorna null se não existir; tentamos com segurança.
-		# Nota: se sua MainScene usa outro nome, adapte aqui.
-		maybe = ms.get("current_recipe") if ms.has_method("get") else null
+		if ms.has_method("get"):
+			maybe = ms.get("current_recipe")
 		if maybe:
 			expected_recipe = maybe
 			print("♻️ Receita recuperada automaticamente do MainScene:", expected_recipe.recipe_name)
 			return
 
-	# tentativa 2: se houver um Manager global com receita atual (opcional, caso você tenha)
-	if Managers and Managers.has_method("get_current_recipe"):
+	if Managers != null and Managers.has_method("get_current_recipe"):
 		var mr : Variant = Managers.get_current_recipe()
 		if mr:
 			expected_recipe = mr
 			print("♻️ Receita recuperada automaticamente do Managers.")
 			return
 
-	# falha
 	print("⚠️ _try_recover_recipe(): não foi possível recuperar recipe automaticamente.")
 
 
 # ---------------------- BUSCA DE SPRITES ----------------------
-func _get_plate_sprite_for(id: String, state: String) -> Texture2D:
+## agora aceita quantidade como parâmetro e tenta encontrar o sprite correto
+func _get_plate_sprite_for(id: String, state: String, quantity: int = 1) -> Texture2D:
 	var st := (state if state != null else "").to_lower()
 	var id_lower := (id if id != null else "").to_lower()
 
-	# 1️⃣ Sprite definido na receita (caso exista)
+	var quantity_suffixes := [
+		"%s_%d" % [st, quantity],
+		"qty%d" % quantity,
+		"count%d" % quantity,
+		st
+	]
+
 	if expected_recipe and expected_recipe.plate_ingredient_visuals:
 		for vis in expected_recipe.plate_ingredient_visuals:
-			if vis == null:
-				continue
-			if vis.ingredient_id == "":
+			if vis == null or vis.ingredient_id == "":
 				continue
 			if vis.ingredient_id.to_lower() == id_lower:
-				# percorre lista de IngredientStateSprite (state + texture)
 				for entry in vis.state_sprites:
-					if entry == null:
+					if entry == null or entry.texture == null:
 						continue
-					# entry.texture pode ser nulo
-					if entry.state.to_lower() == st and entry.texture:
-						print("🎨 Sprite da receita encontrado:", id, "state:", st)
-						return entry.texture
-				# fallback default
-				for entry in vis.state_sprites:
-					if entry and entry.state.to_lower() == "default" and entry.texture:
-						print("🎨 Sprite da receita (default) usado para:", id)
-						return entry.texture
-				# fallback: primeiro disponível
-				for entry in vis.state_sprites:
-					if entry and entry.texture:
-						print("🎨 Sprite da receita (primeiro disponível) usado:", id)
-						return entry.texture
+					var state_name := entry.state.to_lower()
+					for variant in quantity_suffixes:
+						if state_name == variant:
+							print("🎨 Sprite encontrado para", id, "state:", state_name)
+							return entry.texture
 
-	# 2️⃣ Fallback: IngredientDatabase (caso exista)
+	# fallback: IngredientDatabase (caso exista)
 	if Managers and Managers.ingredient_database:
-		var tex := Managers.ingredient_database.get_sprite(id, st)
-		if tex:
-			print("⚙️ Sprite da IngredientDatabase usado para:", id, "state:", st)
-			return tex
-		var tex2 := Managers.ingredient_database.get_sprite(id, state)
-		if tex2:
-			print("⚙️ Sprite da IngredientDatabase (fallback sem lower) usado:", id)
-			return tex2
+		for variant in quantity_suffixes:
+			var tex := Managers.ingredient_database.get_sprite(id, variant)
+			if tex:
+				return tex
 
-	# 3️⃣ Falha total
-	print("❌ Nenhum sprite encontrado para:", id, "state:", st)
+	print("❌ Nenhum sprite encontrado para:", id, "state:", st, "qtd:", quantity)
 	return null
 
 
@@ -154,78 +136,58 @@ func _update_plate_visuals() -> void:
 		print("⚠️ _update_plate_visuals() chamado sem receita.")
 		return
 
-	# safe-read do nome para log
-	var rname := "(sem nome)"
-	if expected_recipe and expected_recipe.has_method("get") == false:
-		# some Resources não expõem has_method("get") - apenas tentamos acessar com segurança
-		rname = str(expected_recipe.recipe_name) if expected_recipe else rname
-	else:
-		# tentativa mais direta
-		rname = expected_recipe.recipe_name if expected_recipe else rname
-
-	print("🎨 Atualizando visuais do prato — receita:", rname)
-	print("🍽 Ingredientes atuais:", used_ingredients)
-
-	if not visual_container:
-		print("❌ visual_container não encontrado!")
-		return
-	else:
-		print("✅ visual_container encontrado:", visual_container.name)
-
-	# Limpa visuais anteriores
 	for n in _visual_nodes:
 		if n and n.is_inside_tree():
 			n.queue_free()
 	_visual_nodes.clear()
 
-	# Prato completo → mostra sprite finalizado
+	var has_sprites := false
+
+	# prato final completo
 	if _is_recipe_fulfilled() and expected_recipe.final_plate_sprite:
 		var spr := TextureRect.new()
 		spr.texture = expected_recipe.final_plate_sprite
 		spr.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		spr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		spr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		spr.custom_minimum_size = PLATE_SPRITE_SIZE
 		spr.size = PLATE_SPRITE_SIZE
 		spr.position = await _center_visual_position_for(spr)
 		visual_container.add_child(spr)
 		_visual_nodes.append(spr)
-		print("✅ Sprite final do prato exibido.")
-		return
+		has_sprites = true
+	else:
+		# conta quantidades de cada ingrediente (por id + state)
+		var qty_map := {}
+		for ing in used_ingredients:
+			var key := "%s|%s" % [ing["id"], ing["state"]]
+			qty_map[key] = qty_map.get(key, 0) + 1
 
-	# Caso contrário, mostra sprites modulares dos ingredientes (ordem)
-	var idx := 0
-	for ing in used_ingredients:
-		# garantir tipos corretos
-		var id: String = str(ing.get("id", ""))
-		var st: String = str(ing.get("state", ""))
-		var tex: Texture2D = _get_plate_sprite_for(id, st)
-		if tex == null:
-			print("⚠️ Sprite não encontrado para", id, "state:", st, "- pulando.")
-			continue
+		for key in qty_map.keys():
+			var parts : PackedStringArray = key.split("|")
+			var id : String = parts[0]
+			var st : String = parts[1]
+			var count : int = qty_map[key]
+			var tex := _get_plate_sprite_for(id, st, count)
+			if tex == null:
+				continue
 
-		var node := TextureRect.new()
-		node.texture = tex
-		node.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		node.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		node.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		node.custom_minimum_size = PLATE_SPRITE_SIZE
-		node.size = PLATE_SPRITE_SIZE
+			var node := TextureRect.new()
+			node.texture = tex
+			node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			node.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			node.custom_minimum_size = PLATE_SPRITE_SIZE
+			node.size = PLATE_SPRITE_SIZE
+			node.position = await _center_visual_position_for(node) + _get_offset_for(id)
+			node.z_index = _get_z_for(id, 0)
+			visual_container.add_child(node)
+			_visual_nodes.append(node)
+			has_sprites = true
 
-		# centraliza + offset
-		node.position = await _center_visual_position_for(node) + _get_offset_for(id)
-		node.z_index = _get_z_for(id, idx)
-
-		visual_container.add_child(node)
-		_visual_nodes.append(node)
-
-		print("✅ Sprite adicionado ao prato:", id, "state:", st)
-		idx += 1
+	used_list.visible = not has_sprites
 
 
 # ---------------------- CENTRALIZAÇÃO ----------------------
 func _center_visual_position_for(node: Control) -> Vector2:
-	# espera frame para garantir sizes corretos
 	await get_tree().process_frame
 	var vc_size := visual_container.size
 	if vc_size == Vector2.ZERO:
@@ -279,45 +241,88 @@ func _is_recipe_fulfilled() -> bool:
 
 
 # ---------------------- DRAG & DROP ----------------------
+func _get_drag_data(_pos: Vector2) -> Variant:
+	if used_ingredients.is_empty() and not _is_recipe_fulfilled():
+		print("⚠️ Nenhum ingrediente no prato — não arrastando.")
+		return null
+
+	print("🍽 Iniciando drag de prato...")
+
+	# ✅ força o registro do drag tipo PRATO
+	if Engine.has_singleton("DragManager"):
+		print("🟢 DragManager encontrado.")
+		DragManager.current_drag_type = DragManager.DragType.PLATE
+	else:
+		print("❌ DragManager não encontrado como autoload! Verifique Project Settings > Autoload.")
+
+	var wrapper := Control.new()
+	wrapper.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	# prato de fundo
+	var plate_tex := texture
+	if plate_tex:
+		var plate_sprite := TextureRect.new()
+		plate_sprite.texture = plate_tex
+		plate_sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		plate_sprite.size = PLATE_SPRITE_SIZE
+		wrapper.add_child(plate_sprite)
+
+	# ingredientes visuais (já respeitando quantidades)
+	for node in _visual_nodes:
+		if node and node.texture:
+			var clone := TextureRect.new()
+			clone.texture = node.texture
+			clone.stretch_mode = node.stretch_mode
+			clone.size = node.size
+			clone.position = node.position
+			clone.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			wrapper.add_child(clone)
+
+	wrapper.position = PLATE_DRAG_OFFSET
+	set_drag_preview(wrapper)
+
+	print("📦 DragData criada para prato:", used_ingredients)
+
+	return {
+		"type": "plate",
+		"ingredients": used_ingredients.duplicate(true),
+		"source": self
+	}
+
+
+
+
+
 func _can_drop_data(_position: Vector2, data: Variant) -> bool:
-	if typeof(data) != TYPE_DICTIONARY:
-		return false
-	if data.has("type") and data["type"] == "cooked_tool":
-		return true
-	if data.has("id") and data.has("state"):
-		return true
-	return false
+	return typeof(data) == TYPE_DICTIONARY and (
+		(data.has("type") and data["type"] == "cooked_tool") or
+		(data.has("id") and data.has("state"))
+	)
 
 
 func _drop_data(_position: Vector2, data: Variant) -> void:
-	print("🍞 DropPlateArea recebeu drop:", data)
-
 	if not _can_drop_data(_position, data):
 		return
 
 	var ingredients_to_add: Array[Dictionary] = []
-
 	if data.has("type") and data["type"] == "cooked_tool":
 		if data.has("ingredients"):
 			ingredients_to_add = data["ingredients"]
+		var src: Control = data.get("source", null)
+		if src and src.is_inside_tree():
+			src.queue_free()
 	else:
 		ingredients_to_add.append({
 			"id": data.get("id", ""),
 			"state": data.get("state", "")
 		})
 
-	# mostra feedback visual de ingrediente inválido (aguarda se necessário)
-	for ing in ingredients_to_add:
-		if not _ingredient_is_expected(ing):
-			await _flash_wrong_ing_visual(ing)
-
 	add_ingredients(ingredients_to_add)
-	# atualiza placar
-	if get_tree().current_scene and get_tree().current_scene.has_method("update_score_display"):
-		get_tree().current_scene.update_score_display()
-	else:
-		# tentativa segura (MainScene costuma ter update_score_display)
-		pass
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_DRAG_END:
+		DragManager.current_drag_type = DragManager.DragType.NONE
 
 
 # ---------------------- VISUAL DE ERRO ----------------------
@@ -337,7 +342,6 @@ func _flash_wrong_ing_visual(ing: Dictionary) -> void:
 	node.size = PLATE_SPRITE_SIZE
 	node.position = await _center_visual_position_for(node)
 	visual_container.add_child(node)
-
 	await get_tree().create_timer(0.25).timeout
 	if node.is_inside_tree():
 		node.queue_free()
@@ -345,7 +349,6 @@ func _flash_wrong_ing_visual(ing: Dictionary) -> void:
 
 # ---------------------- LISTAGEM TEXTUAL ----------------------
 func _update_ingredient_list_ui() -> void:
-	# limpa lista textual
 	for c in used_list.get_children():
 		c.queue_free()
 
@@ -363,13 +366,11 @@ func _update_ingredient_list_ui() -> void:
 		label.text = "- %s (%s) x%d" % [id.capitalize(), state, amount]
 		used_list.add_child(label)
 
-	# atualiza visuais após montar a lista
-	_update_plate_visuals()
+	used_list.visible = _visual_nodes.is_empty()
 
 
 # ---------------------- UTILITÁRIO ----------------------
 func _ingredient_is_expected(ing: Dictionary) -> bool:
-	# se não houver receita definida aceitamos (compatibilidade)
 	if expected_recipe == null:
 		return true
 	for req in expected_recipe.ingredient_requirements:
