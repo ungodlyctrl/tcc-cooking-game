@@ -1,62 +1,87 @@
 extends TextureRect
 class_name TopDeliveryArea
 
-## Exibe um contorno piscante (anel oco/duplo) quando o jogador está arrastando um PRATO.
+## Exibe um contorno piscante (anel oco) em volta da área de entrega
+## quando o jogador está arrastando um prato.
 
-@onready var outline_effect: ColorRect = $OutlineEffect
-@onready var shader_mat: ShaderMaterial = null
+@export var outline_color: Color = Color(1.0, 0.9, 0.3, 1.0)
+@export var outline_thickness: float = 4.0        # pixels
+@export var outline_margin: float = 8.0           # pixels de afastamento
+@export var blink_speed: float = 2.0              # velocidade da piscada
 
 var _is_highlight_active: bool = false
+var _blink_time: float = 0.0
 
 
 func _ready() -> void:
-	# material pode estar no ColorRect ou no próprio TextureRect: preferimos no OutlineEffect
-	if outline_effect:
-		shader_mat = outline_effect.material if outline_effect.material is ShaderMaterial else null
-	if not shader_mat:
-		push_error("❌ TopDeliveryArea: ShaderMaterial não encontrado no OutlineEffect. O highlight não funcionará.")
-	else:
-		shader_mat.set_shader_parameter("show_outline", false)
-	_print_ready()
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	z_index = max(z_index, 10)
+	print("🟢 TopDeliveryArea pronto.")
+	_enable_highlight(true)
 
 
-func _print_ready() -> void:
-	print("🟢 TopDeliveryArea pronto. OutlineEffect:", outline_effect != null, " Shader:", shader_mat != null)
+func _process(delta: float) -> void:
+	_blink_time += delta
 
-
-func _process(_delta: float) -> void:
-	if shader_mat == null:
-		return
-
-	var dragging_plate := false
-
-	if typeof(DragManager) != TYPE_NIL and "current_drag_type" in DragManager:
-		dragging_plate = DragManager.current_drag_type == DragManager.DragType.PLATE
+	var dragging_plate := _is_dragging_plate()
 
 	if dragging_plate and not _is_highlight_active:
-		print("✨ Highlight ativado (drag de prato).")
 		_enable_highlight(true)
 	elif not dragging_plate and _is_highlight_active:
-		print("✨ Highlight desativado.")
 		_enable_highlight(false)
 
+	if _is_highlight_active:
+		queue_redraw()
+
+
+func _is_dragging_plate() -> bool:
+	# Tenta acessar via Managers primeiro
+	if Managers != null and Managers.drag_manager != null:
+		return Managers.drag_manager.current_drag_type == Managers.drag_manager.DragType.PLATE
+
+	# fallback — tenta autoload direto
+	if typeof(DragManager) != TYPE_NIL:
+		return DragManager.current_drag_type == DragManager.DragType.PLATE
+
+	# fallback extremo — busca nó na árvore
+	var dm: Node = get_node_or_null("/root/DragManager")
+	if dm != null and dm.has_method("get"):
+		var cur: Variant = dm.get("current_drag_type")
+		if cur != null:
+			return int(cur) == 3
+
+	return false
 
 
 func _enable_highlight(enable: bool) -> void:
 	_is_highlight_active = enable
-	if shader_mat == null:
-		return
-	shader_mat.set_shader_parameter("show_outline", enable)
-	# opcional — log pra debug
 	if enable:
-		print("🌟 TopDeliveryArea: outline ON")
+		print("🌟 Outline ON")
 	else:
-		print("💤 TopDeliveryArea: outline OFF")
+		print("💤 Outline OFF")
+
+
+func _draw() -> void:
+	if not _is_highlight_active:
+		return
+
+	var blink := (sin(_blink_time * blink_speed * TAU) * 0.5 + 0.5)
+	var alpha :Variant = clamp(0.2 + blink * 0.8, 0.0, 1.0)
+	var col: Color = Color(outline_color.r, outline_color.g, outline_color.b, alpha)
+
+	var rect := Rect2(
+		-Vector2.ONE * outline_margin,
+		size + Vector2.ONE * outline_margin * 2.0
+	)
+
+	draw_rect(rect, col, false, outline_thickness)
 
 
 # ---------------------- DROP ----------------------
 func _can_drop_data(_pos: Vector2, data: Variant) -> bool:
-	return typeof(data) == TYPE_DICTIONARY and data.has("type") and data["type"] == "plate"
+	return typeof(data) == TYPE_DICTIONARY \
+		and data.has("type") \
+		and data["type"] == "plate"
 
 
 func _drop_data(_pos: Vector2, data: Variant) -> void:
@@ -78,6 +103,8 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 	if source_node and source_node is DropPlateArea:
 		source_node.clear_ingredients()
 
-	main.switch_mode(main.GameMode.ATTENDANCE)
-	main.call_deferred("_spawn_delivered_plate", delivered_plate)
-	main.mode_attendance.dialogue_box.hide_box()
+	if main:
+		main.switch_mode(main.GameMode.ATTENDANCE)
+		main.call_deferred("_spawn_delivered_plate", delivered_plate)
+		if main.mode_attendance and main.mode_attendance.dialogue_box:
+			main.mode_attendance.dialogue_box.hide_box()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://busp1jxgd1yo"]
+[gd_scene load_steps=50 format=3 uid="uid://busp1jxgd1yo"]
 
 [ext_resource type="Script" uid="uid://b1cw8wj6np025" path="res://scripts/managers.gd" id="1_eubx1"]
 [ext_resource type="Script" uid="uid://b8x6uvbe45tpd" path="res://scripts/client_manager.gd" id="1_osspy"]
@@ -48,6 +48,7 @@
 [ext_resource type="Resource" uid="uid://dnmt1j0074gxj" path="res://resources/ingredients/presunto.tres" id="43_q2mbl"]
 [ext_resource type="Resource" uid="uid://dglbfet6fj6kh" path="res://resources/ingredients/queijo.tres" id="44_8a70s"]
 [ext_resource type="Resource" uid="uid://r4wrgh7wj" path="res://resources/ingredients/salsicha.tres" id="45_5q5o7"]
+[ext_resource type="Script" uid="uid://b42matis0s41g" path="res://scripts/drag_manager.gd" id="49_rrdc0"]
 
 [node name="Managers" type="Node"]
 script = ExtResource("1_eubx1")
@@ -64,3 +65,6 @@ ingredient_list = Array[ExtResource("28_6jetn")]([ExtResource("29_2l7ur"), ExtRe
 [node name="RecipeManager" type="Node" parent="."]
 script = ExtResource("13_tjrm2")
 all_recipes = Array[ExtResource("14_4m8qx")]([ExtResource("15_ocmb6"), ExtResource("16_fecln"), ExtResource("17_rfal5"), ExtResource("18_l5n31"), ExtResource("19_sn6px"), ExtResource("20_vkttu"), ExtResource("21_h6v6t"), ExtResource("22_h4sy6"), ExtResource("23_8q7ow"), ExtResource("24_dgfrh"), ExtResource("25_3u53g"), ExtResource("26_5mawo")])
+
+[node name="DragManager" type="Node" parent="."]
+script = ExtResource("49_rrdc0")

@@ -248,12 +248,7 @@ func _get_drag_data(_pos: Vector2) -> Variant:
 
 	print("🍽 Iniciando drag de prato...")
 
-	# ✅ força o registro do drag tipo PRATO
-	if Engine.has_singleton("DragManager"):
-		print("🟢 DragManager encontrado.")
-		DragManager.current_drag_type = DragManager.DragType.PLATE
-	else:
-		print("❌ DragManager não encontrado como autoload! Verifique Project Settings > Autoload.")
+	DragManager.current_drag_type = DragManager.DragType.PLATE
 
 	var wrapper := Control.new()
 	wrapper.mouse_filter = Control.MOUSE_FILTER_IGNORE

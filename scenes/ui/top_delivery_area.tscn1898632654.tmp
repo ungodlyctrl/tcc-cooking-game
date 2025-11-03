@@ -11,9 +11,6 @@ offset_right = 320.0
 offset_bottom = 50.0
 texture = ExtResource("1_tkpe1")
 script = ExtResource("2_0y75r")
-outline_thickness = 2.0
-outline_margin = 6.0
-blink_speed = 1.0
 
 [node name="OutlineContainer" type="Control" parent="."]
 layout_mode = 1
