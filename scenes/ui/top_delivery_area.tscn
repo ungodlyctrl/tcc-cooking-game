@@ -14,6 +14,7 @@ script = ExtResource("2_0y75r")
 outline_thickness = 2.0
 outline_margin = 6.0
 blink_speed = 1.0
+always_visible_for_debug = true
 
 [node name="OutlineContainer" type="Control" parent="."]
 layout_mode = 1

@@ -23,11 +23,34 @@ func _ready() -> void:
 	await get_tree().process_frame
 	_ready_finished = true
 	print("🟢 DropPlateArea pronto.")
+	
+	# 🔧 Garante reset de estado de drag ao iniciar
+	if typeof(DragManager) != TYPE_NIL:
+		DragManager.current_drag_type = DragManager.DragType.NONE
+
 	if expected_recipe:
 		print("🔁 Receita já estava setada:", expected_recipe.recipe_name)
 		_update_plate_visuals()
 	else:
 		print("🔁 Nenhuma receita atribuída ainda no DropPlateArea.")
+
+	# 🔧 Detecta início do arrasto manualmente
+	gui_input.connect(_on_gui_input)
+
+# ---------------------- 🔧 Detecta movimento do mouse ----------------------
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		# Verifica se há prato pronto pra arrastar
+		if not used_ingredients.is_empty() or _is_recipe_fulfilled():
+			print("🖱 Clique detectado — iniciando estado de drag manual.")
+			if typeof(DragManager) != TYPE_NIL:
+				DragManager.current_drag_type = DragManager.DragType.PLATE
+			print("Tipo de clique", DragManager.current_drag_type)
+
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		if typeof(DragManager) != TYPE_NIL:
+			print("🖱 Soltou mouse — encerrando drag manual.")
+			DragManager.current_drag_type = DragManager.DragType.NONE
 
 
 # ---------------------- CONFIGURAÇÃO ----------------------
@@ -93,16 +116,15 @@ func _try_recover_recipe() -> void:
 
 
 # ---------------------- BUSCA DE SPRITES ----------------------
-## agora aceita quantidade como parâmetro e tenta encontrar o sprite correto
 func _get_plate_sprite_for(id: String, state: String, quantity: int = 1) -> Texture2D:
 	var st := (state if state != null else "").to_lower()
 	var id_lower := (id if id != null else "").to_lower()
 
 	var quantity_suffixes := [
-		"%s_%d" % [st, quantity],
-		"qty%d" % quantity,
-		"count%d" % quantity,
-		st
+		"%s_%d" % [st, quantity],  # ex: cooked_2
+		"qty%d" % quantity,         # ex: qty2
+		"count%d" % quantity,       # ex: count2
+		st                          # ex: cooked
 	]
 
 	if expected_recipe and expected_recipe.plate_ingredient_visuals:
@@ -110,24 +132,43 @@ func _get_plate_sprite_for(id: String, state: String, quantity: int = 1) -> Text
 			if vis == null or vis.ingredient_id == "":
 				continue
 			if vis.ingredient_id.to_lower() == id_lower:
+				var default_tex: Texture2D = null  # guarda sprite "default" se existir
+
 				for entry in vis.state_sprites:
 					if entry == null or entry.texture == null:
 						continue
 					var state_name := entry.state.to_lower()
+
+					# guarda o default (sem estado definido)
+					if state_name == "" or state_name == "default":
+						default_tex = entry.texture
+
+					# tenta correspondência com quantidades ou estado
 					for variant in quantity_suffixes:
 						if state_name == variant:
-							print("🎨 Sprite encontrado para", id, "state:", state_name)
 							return entry.texture
 
-	# fallback: IngredientDatabase (caso exista)
+				# se não encontrou correspondência exata, retorna o default
+				if default_tex != null:
+					print("🎨 Usando sprite default para", id_lower)
+					return default_tex
+
+	# fallback: IngredientDatabase
 	if Managers and Managers.ingredient_database:
 		for variant in quantity_suffixes:
 			var tex := Managers.ingredient_database.get_sprite(id, variant)
 			if tex:
 				return tex
 
+		# tenta pegar sprite genérico do ingrediente cru
+		var base_tex := Managers.ingredient_database.get_sprite(id, "raw")
+		if base_tex:
+			return base_tex
+
 	print("❌ Nenhum sprite encontrado para:", id, "state:", st, "qtd:", quantity)
 	return null
+
+
 
 
 # ---------------------- VISUAIS ----------------------
@@ -247,11 +288,12 @@ func _get_drag_data(_pos: Vector2) -> Variant:
 		return null
 
 	print("🍽 Iniciando drag de prato...")
-
-	DragManager.current_drag_type = DragManager.DragType.PLATE
+	if typeof(DragManager) != TYPE_NIL:
+		DragManager.current_drag_type = DragManager.DragType.PLATE
 
 	var wrapper := Control.new()
 	wrapper.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 
 	# prato de fundo
 	var plate_tex := texture
@@ -262,7 +304,7 @@ func _get_drag_data(_pos: Vector2) -> Variant:
 		plate_sprite.size = PLATE_SPRITE_SIZE
 		wrapper.add_child(plate_sprite)
 
-	# ingredientes visuais (já respeitando quantidades)
+	# ingredientes visuais
 	for node in _visual_nodes:
 		if node and node.texture:
 			var clone := TextureRect.new()
@@ -276,15 +318,11 @@ func _get_drag_data(_pos: Vector2) -> Variant:
 	wrapper.position = PLATE_DRAG_OFFSET
 	set_drag_preview(wrapper)
 
-	print("📦 DragData criada para prato:", used_ingredients)
-
 	return {
 		"type": "plate",
 		"ingredients": used_ingredients.duplicate(true),
 		"source": self
 	}
-
-
 
 
 
@@ -315,9 +353,13 @@ func _drop_data(_position: Vector2, data: Variant) -> void:
 	add_ingredients(ingredients_to_add)
 
 
+# ---------------------- 🔧 DRAG STATE HANDLING ----------------------
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
-		DragManager.current_drag_type = DragManager.DragType.NONE
+		if typeof(DragManager) != TYPE_NIL:
+			print("🛑 Drag encerrado no DropPlateArea.")
+			DragManager.current_drag_type = DragManager.DragType.NONE
+
 
 
 # ---------------------- VISUAL DE ERRO ----------------------

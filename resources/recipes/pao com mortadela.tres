@@ -45,7 +45,7 @@ metadata/_custom_type_script = "uid://mwsanke8s50t"
 
 [sub_resource type="Resource" id="Resource_bmldn"]
 script = ExtResource("5_r4qv6")
-texture = ExtResource("7_ot5o0")
+texture = ExtResource("8_r4qv6")
 metadata/_custom_type_script = "uid://hs2a32jl4pas"
 
 [sub_resource type="Resource" id="Resource_ot5o0"]

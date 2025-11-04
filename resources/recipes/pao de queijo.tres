@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=9 format=3 uid="uid://d2tyt7o6iotlo"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=13 format=3 uid="uid://d2tyt7o6iotlo"]
 
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_jcfx5"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_bqi7u"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_h5gvi"]
 [ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="3_p6f63"]
 [ext_resource type="Texture2D" uid="uid://bwayqyilc6r0u" path="res://assets/Cópia de prato pao de queijo 1.1.png" id="4_fpevk"]
+[ext_resource type="Texture2D" uid="uid://d06gpmsoxoh1q" path="res://assets/Cópia de prato pao de queijo 2.1.png" id="5_dcxbh"]
+[ext_resource type="Texture2D" uid="uid://c5s38vjjgkm4h" path="res://assets/Cópia de prato pao de queijo 3.1.png" id="6_cpdue"]
 
 [sub_resource type="Resource" id="Resource_jcfx5"]
 script = ExtResource("1_jcfx5")
@@ -16,15 +18,29 @@ variation_quantity_weights = Array[float]([0.3, 0.4, 0.3])
 variation_line_quantity = Array[String](["Ah, um pão de queijo só é muito pouco!"])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
-[sub_resource type="Resource" id="Resource_dcxbh"]
+[sub_resource type="Resource" id="Resource_jdo52"]
 script = ExtResource("3_p6f63")
+state = "cooked_1"
 texture = ExtResource("4_fpevk")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_046o3"]
+script = ExtResource("3_p6f63")
+state = "cooked_2"
+texture = ExtResource("5_dcxbh")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_nq1fa"]
+script = ExtResource("3_p6f63")
+state = "cooked_3"
+texture = ExtResource("6_cpdue")
 metadata/_custom_type_script = "uid://hs2a32jl4pas"
 
 [sub_resource type="Resource" id="Resource_cpdue"]
 script = ExtResource("2_h5gvi")
 ingredient_id = "pao de queijo"
-state_sprites = Array[ExtResource("3_p6f63")]([SubResource("Resource_dcxbh")])
+state_sprites = Array[ExtResource("3_p6f63")]([SubResource("Resource_jdo52"), SubResource("Resource_046o3"), SubResource("Resource_nq1fa")])
+offset = Vector2(0, 5)
 metadata/_custom_type_script = "uid://mwsanke8s50t"
 
 [resource]

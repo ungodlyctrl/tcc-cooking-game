@@ -50,7 +50,7 @@ func _get_drag_data(event_position: Vector2) -> Dictionary:
 	set_drag_preview(wrapper)
 
 	DragManager.current_drag_type = DragManager.DragType.TOOL
-
+	
 	return {
 		"id": tool_id,
 		"state": STATE_TOOL,

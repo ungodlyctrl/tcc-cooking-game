@@ -8,7 +8,7 @@ enum GameMode { ATTENDANCE, PREPARATION, END_OF_DAY }
 var current_mode: GameMode = GameMode.ATTENDANCE
 var current_time_minutes: int = 8 * 60
 var absolute_minutes: int = 8 * 60
-var day: int = 1
+var day: int = 5
 var money: int = 100
 
 const END_OF_DAY_MINUTES: int = 19 * 60

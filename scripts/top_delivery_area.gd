@@ -1,94 +1,80 @@
 extends TextureRect
 class_name TopDeliveryArea
 
-## Exibe um contorno piscante (anel oco) em volta da área de entrega
-## quando o jogador está arrastando um prato.
+## Área de entrega de pratos
+## - Mostra contorno piscante quando o jogador arrasta um prato
+## - Entrega o prato ao soltar e muda o modo de jogo
 
 @export var outline_color: Color = Color(1.0, 0.9, 0.3, 1.0)
-@export var outline_thickness: float = 4.0        # pixels
-@export var outline_margin: float = 8.0           # pixels de afastamento
-@export var blink_speed: float = 2.0              # velocidade da piscada
+@export var outline_thickness: float = 4.0
+@export var outline_margin: float = 8.0
+@export var blink_speed: float = 2.0
+@export var always_visible_for_debug: bool = false
 
-var _is_highlight_active: bool = false
 var _blink_time: float = 0.0
+var _is_highlight_active: bool = false
 
 
+# ---------------------- READY ----------------------
 func _ready() -> void:
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	z_index = max(z_index, 10)
-	print("🟢 TopDeliveryArea pronto.")
-	_enable_highlight(true)
+	mouse_filter = Control.MOUSE_FILTER_STOP  # permite drop de prato
+	z_index = 0  # mantém o contorno no nível certo
+	set_process(true)
 
 
+# ---------------------- PROCESS ----------------------
 func _process(delta: float) -> void:
 	_blink_time += delta
-
 	var dragging_plate := _is_dragging_plate()
 
-	if dragging_plate and not _is_highlight_active:
-		_enable_highlight(true)
-	elif not dragging_plate and _is_highlight_active:
-		_enable_highlight(false)
+	if always_visible_for_debug:
+		dragging_plate = true
 
-	if _is_highlight_active:
+	if dragging_plate != _is_highlight_active:
+		_is_highlight_active = dragging_plate
+		queue_redraw()
+	elif _is_highlight_active:
 		queue_redraw()
 
 
-func _is_dragging_plate() -> bool:
-	# Tenta acessar via Managers primeiro
-	if Managers != null and Managers.drag_manager != null:
-		return Managers.drag_manager.current_drag_type == Managers.drag_manager.DragType.PLATE
-
-	# fallback — tenta autoload direto
-	if typeof(DragManager) != TYPE_NIL:
-		return DragManager.current_drag_type == DragManager.DragType.PLATE
-
-	# fallback extremo — busca nó na árvore
-	var dm: Node = get_node_or_null("/root/DragManager")
-	if dm != null and dm.has_method("get"):
-		var cur: Variant = dm.get("current_drag_type")
-		if cur != null:
-			return int(cur) == 3
-
-	return false
-
-
-func _enable_highlight(enable: bool) -> void:
-	_is_highlight_active = enable
-	if enable:
-		print("🌟 Outline ON")
-	else:
-		print("💤 Outline OFF")
-
-
+# ---------------------- DRAW ----------------------
 func _draw() -> void:
 	if not _is_highlight_active:
 		return
 
 	var blink := (sin(_blink_time * blink_speed * TAU) * 0.5 + 0.5)
-	var alpha :Variant = clamp(0.2 + blink * 0.8, 0.0, 1.0)
-	var col: Color = Color(outline_color.r, outline_color.g, outline_color.b, alpha)
+	var alpha : Variant = clamp(0.1 + blink * 0.8, 0.0, 1.0)
+	var col := Color(outline_color.r, outline_color.g, outline_color.b, alpha)
 
-	var rect := Rect2(
-		-Vector2.ONE * outline_margin,
-		size + Vector2.ONE * outline_margin * 2.0
-	)
-
+	var rect := Rect2(Vector2.ZERO - Vector2.ONE * outline_margin, size + Vector2.ONE * outline_margin * 2.0)
 	draw_rect(rect, col, false, outline_thickness)
 
 
-# ---------------------- DROP ----------------------
+# ---------------------- DRAG DETECTION ----------------------
+func _is_dragging_plate() -> bool:
+	if typeof(DragManager) != TYPE_NIL:
+		if DragManager.current_drag_type == DragManager.DragType.PLATE:
+			return true
+
+	var dm_node := get_node_or_null("/root/DragManager")
+	if dm_node != null and dm_node.has_method("get"):
+		var cur = dm_node.get("current_drag_type")
+		if cur != null:
+			return int(cur) == 3  # DragType.PLATE
+	return false
+
+
+# ---------------------- DROP LOGIC ----------------------
 func _can_drop_data(_pos: Vector2, data: Variant) -> bool:
-	return typeof(data) == TYPE_DICTIONARY \
-		and data.has("type") \
-		and data["type"] == "plate"
+	return typeof(data) == TYPE_DICTIONARY and data.has("type") and data["type"] == "plate"
 
 
 func _drop_data(_pos: Vector2, data: Variant) -> void:
 	if not _can_drop_data(_pos, data):
 		return
 
-	_enable_highlight(false)
+	_is_highlight_active = false
+	queue_redraw()
 
 	var delivered_plate := preload("res://scenes/ui/delivered_plate.tscn").instantiate()
 	delivered_plate.ingredients = data["ingredients"]

@@ -124,6 +124,10 @@ offset_left = 16.0
 offset_top = -20.0
 offset_right = 336.0
 offset_bottom = 30.0
+outline_color = Color(0.9963259, 0.8863418, 0.8941092, 1)
+outline_margin = 4.0
+blink_speed = 1.5
+always_visible_for_debug = false
 
 [node name="HUDPrep" type="Control" parent="."]
 layout_mode = 1

@@ -1,8 +1,13 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=7 format=3 uid="uid://c14i6ptmv7fp5"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=23 format=3 uid="uid://c14i6ptmv7fp5"]
 
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_cuovy"]
+[ext_resource type="Texture2D" uid="uid://b1em8tk5pg50s" path="res://assets/misto4.1.png" id="1_e8lh5"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_cstgo"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_gh3js"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="3_wwjp0"]
+[ext_resource type="Texture2D" uid="uid://cwqgs3so8r0g5" path="res://assets/misto1.1.png" id="4_e7510"]
+[ext_resource type="Texture2D" uid="uid://dd3djlehy2yc1" path="res://assets/queijo (1).png" id="5_e8lh5"]
+[ext_resource type="Texture2D" uid="uid://bgsyus78clnd4" path="res://assets/presunto (1).png" id="6_e7510"]
 
 [sub_resource type="Resource" id="Resource_cuovy"]
 script = ExtResource("1_cuovy")
@@ -34,6 +39,70 @@ variation_line_absent = Array[String](["Mas sem presunto, por favor.", "Sem pres
 variation_line_quantity = Array[String](["Capricha no presunto, coloca duas fatias!", "Quero ele mais reforçado de presunto."])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
+[sub_resource type="Resource" id="Resource_wgafg"]
+script = ExtResource("3_wwjp0")
+state = "raw_1"
+texture = ExtResource("4_e7510")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_fwkjb"]
+script = ExtResource("3_wwjp0")
+state = "fried_1"
+texture = ExtResource("4_e7510")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_1ufl3"]
+script = ExtResource("2_cstgo")
+ingredient_id = "pao"
+state_sprites = Array[ExtResource("3_wwjp0")]([SubResource("Resource_wgafg"), SubResource("Resource_fwkjb")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_nr12b"]
+script = ExtResource("3_wwjp0")
+state = "raw_1"
+texture = ExtResource("5_e8lh5")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_wwjp0"]
+script = ExtResource("3_wwjp0")
+state = "fried_1"
+texture = ExtResource("5_e8lh5")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_ke0ia"]
+script = ExtResource("3_wwjp0")
+texture = ExtResource("5_e8lh5")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_6w3gn"]
+script = ExtResource("2_cstgo")
+ingredient_id = "queijo"
+state_sprites = Array[ExtResource("3_wwjp0")]([SubResource("Resource_nr12b"), SubResource("Resource_wwjp0"), SubResource("Resource_ke0ia")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_e8lh5"]
+script = ExtResource("3_wwjp0")
+state = "raw_1"
+texture = ExtResource("6_e7510")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_io8x4"]
+script = ExtResource("3_wwjp0")
+state = "fried_1"
+texture = ExtResource("6_e7510")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_e7510"]
+script = ExtResource("3_wwjp0")
+texture = ExtResource("6_e7510")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_0sl7o"]
+script = ExtResource("2_cstgo")
+ingredient_id = "presunto"
+state_sprites = Array[ExtResource("3_wwjp0")]([SubResource("Resource_e8lh5"), SubResource("Resource_io8x4"), SubResource("Resource_e7510")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
 [resource]
 script = ExtResource("2_gh3js")
 recipe_name = "Misto Quente"
@@ -43,4 +112,6 @@ min_day = 3
 time_of_day = Array[String](["breakfast"])
 ingredient_requirements = Array[ExtResource("1_cuovy")]([SubResource("Resource_cuovy"), SubResource("Resource_gh3js"), SubResource("Resource_cstgo")])
 client_lines = Array[String](["Bom dia. Gostaria de um misto quente, por favor! ", "Eu amo muito misto quente!", "Quero um misto bem gostoso!", "Faz aquele clássico pão com queijo e presunto."])
+plate_ingredient_visuals = Array[ExtResource("2_cstgo")]([SubResource("Resource_1ufl3"), SubResource("Resource_6w3gn"), SubResource("Resource_0sl7o")])
+final_plate_sprite = ExtResource("1_e8lh5")
 metadata/_custom_type_script = "uid://c6xvod46icb2"
