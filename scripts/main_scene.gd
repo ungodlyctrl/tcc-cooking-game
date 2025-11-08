@@ -121,8 +121,6 @@ func _update_ui() -> void:
 
 	if absolute_minutes >= END_OF_DAY_MINUTES and not (current_mode == GameMode.END_OF_DAY):
 		clock_label.add_theme_color_override("font_color", Color.RED)
-	else:
-		clock_label.remove_theme_color_override("font_color")
 
 
 # ---------------- Day Cycle ----------------

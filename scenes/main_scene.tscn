@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://sqqiy62qf6np"]
+[gd_scene load_steps=35 format=3 uid="uid://sqqiy62qf6np"]
 
 [ext_resource type="Script" uid="uid://cg0pigwrqqh4d" path="res://scripts/main_scene.gd" id="1_7ykc4"]
 [ext_resource type="PackedScene" uid="uid://dehkeao1vbiy0" path="res://scenes/gamemodes/mode_attendance.tscn" id="2_pu3yx"]
@@ -6,6 +6,160 @@
 [ext_resource type="PackedScene" uid="uid://f4o0q8rd5fsb" path="res://scenes/gamemodes/mode_end_of_day.tscn" id="4_pu3yx"]
 [ext_resource type="Script" uid="uid://d26mxlbe632t8" path="res://scripts/in_game_options.gd" id="5_gubc5"]
 [ext_resource type="PackedScene" uid="uid://c04d3smbkrjhr" path="res://scenes/ui/tooltip.tscn" id="5_rt2n2"]
+[ext_resource type="Texture2D" uid="uid://dky8bny2ouexr" path="res://resources/recipes/moeda sheet.png" id="6_c16ls"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c16ls"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(0, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18nlu"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(146, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1pb6"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(292, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wevv"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(438, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1cbu"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(584, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mngbo"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(730, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4w45t"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(876, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6p65"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(1022, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_si52b"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(1168, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01n6w"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(1314, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6u1mn"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(1460, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcnxi"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(1606, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nt27"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(1752, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6f3i"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(1898, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdqt8"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(2044, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adb74"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(2190, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58gk3"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(2336, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_to7gp"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(2482, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0fll"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(2628, 0, 146, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p3nn"]
+atlas = ExtResource("6_c16ls")
+region = Rect2(2774, 0, 146, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k67gn"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c16ls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18nlu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1pb6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wevv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1cbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mngbo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4w45t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6p65")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_si52b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01n6w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6u1mn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcnxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nt27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6f3i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdqt8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adb74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58gk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_to7gp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0fll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6p3nn")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 10.0
+}]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pu3yx"]
 bg_color = Color(0.796078, 0.858824, 0.988235, 1)
@@ -72,9 +226,9 @@ anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 320.0
-offset_top = 176.0
+offset_top = 180.0
 offset_right = 320.0
-offset_bottom = 176.0
+offset_bottom = 180.0
 grow_horizontal = 1
 grow_vertical = 1
 
@@ -82,34 +236,87 @@ grow_vertical = 1
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="HUD"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_top = 332.0
 offset_right = 640.0
 offset_bottom = 364.0
 color = Color(0.180392, 0.133333, 0.184314, 1)
 
+[node name="Tooltip" parent="HUD" instance=ExtResource("5_rt2n2")]
+layout_mode = 0
+
+[node name="MarginContainer" type="HBoxContainer" parent="HUD"]
+layout_mode = 0
+offset_top = 315.0
+offset_right = 640.0
+offset_bottom = 364.0
+mouse_filter = 2
+alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HUD/MarginContainer"]
+position = Vector2(120, 24)
+sprite_frames = SubResource("SpriteFrames_k67gn")
+animation = &"new_animation"
+autoplay = "new_animation"
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="HUD/MarginContainer"]
+position = Vector2(320, 24)
+sprite_frames = SubResource("SpriteFrames_k67gn")
+animation = &"new_animation"
+autoplay = "new_animation"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="HUD/MarginContainer"]
+position = Vector2(512, 24)
+sprite_frames = SubResource("SpriteFrames_k67gn")
+animation = &"new_animation"
+autoplay = "new_animation"
+
+[node name="DayLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 90.0
+offset_top = 329.0
+offset_right = 130.0
+offset_bottom = 352.0
+theme_override_colors/font_color = Color(0.14117648, 0.14901961, 0.28627452, 1)
+text = "Dia 1"
+
 [node name="ClockLabel" type="Label" parent="HUD"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 16.0
-offset_top = 335.0
-offset_right = 57.0
-offset_bottom = 358.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+offset_left = 133.0
+offset_top = 329.0
+offset_right = 174.0
+offset_bottom = 352.0
+theme_override_colors/font_color = Color(0.14117648, 0.14901961, 0.28627452, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "08:00"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 291.0
+offset_top = 318.0
+offset_right = 333.0
+offset_bottom = 358.0
+
+[node name="ScoreLabel" type="Label" parent="HUD/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.14117648, 0.14901961, 0.28627452, 1)
+text = "100%"
 
 [node name="MoneyLabel" type="Label" parent="HUD"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 568.0
-offset_top = 335.0
-offset_right = 624.0
-offset_bottom = 358.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+offset_left = 480.0
+offset_top = 329.0
+offset_right = 536.0
+offset_bottom = 352.0
+theme_override_colors/font_color = Color(0.13971019, 0.14983389, 0.28618458, 1)
 text = "M$: 100"
 
 [node name="MoneyGainLabel" type="Label" parent="HUD/MoneyLabel"]
@@ -119,32 +326,9 @@ offset_left = 24.0
 offset_right = 83.0
 offset_bottom = 23.0
 
-[node name="DayLabel" type="Label" parent="HUD"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 304.0
-offset_top = 335.0
-offset_right = 344.0
-offset_bottom = 358.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Dia 1"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
-layout_mode = 0
-offset_left = 493.0
-offset_top = 324.0
-offset_right = 535.0
-offset_bottom = 364.0
-
-[node name="ScoreLabel" type="Label" parent="HUD/HBoxContainer"]
-layout_mode = 2
-text = "100%"
-
-[node name="Tooltip" parent="HUD" instance=ExtResource("5_rt2n2")]
-layout_mode = 0
-
 [node name="InGameOptions" type="Control" parent="."]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5

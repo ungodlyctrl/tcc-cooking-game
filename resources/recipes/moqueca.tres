@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=7 format=3 uid="uid://co0pamtmfao81"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=8 format=3 uid="uid://co0pamtmfao81"]
 
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_v5mlg"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_au55i"]
@@ -20,7 +20,13 @@ metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [sub_resource type="Resource" id="Resource_iq1wm"]
 script = ExtResource("1_v5mlg")
-ingredient_id = "arroz"
+ingredient_id = "ovo"
+state = "cooked"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_0fr6g"]
+script = ExtResource("1_v5mlg")
+ingredient_id = "agua"
 state = "cooked"
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
@@ -31,6 +37,6 @@ region = "sudeste"
 base_price = 34
 min_day = 5
 time_of_day = Array[String](["dinner"])
-ingredient_requirements = Array[ExtResource("1_v5mlg")]([SubResource("Resource_v5mlg"), SubResource("Resource_au55i"), SubResource("Resource_iq1wm")])
+ingredient_requirements = Array[ExtResource("1_v5mlg")]([SubResource("Resource_v5mlg"), SubResource("Resource_au55i"), SubResource("Resource_iq1wm"), SubResource("Resource_0fr6g")])
 client_lines = Array[String](["Essa noite pede por uma moqueca. Me veja uma por favor!", "Oi moço, gostaria de uma moqueca de peixe. Obrigado.", "Olá, ouvi dizer que a moqueca é deliciosa. Uma por favor!", "E aí, desenrola uma moqueca pra mim. Valeu."])
 metadata/_custom_type_script = "uid://c6xvod46icb2"

@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://cjbnqj36w6y5i" path="res://assets/bg3.png" id="2_b5j4s"]
 
 [node name="Tooltip" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2

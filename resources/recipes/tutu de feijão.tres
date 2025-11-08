@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=6 format=3 uid="uid://dvuwoccnego32"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=7 format=3 uid="uid://dvuwoccnego32"]
 
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_n58do"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_m738w"]
@@ -18,6 +18,12 @@ state = "cooked"
 stages = Array[int]([2])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
+[sub_resource type="Resource" id="Resource_m738w"]
+script = ExtResource("1_n58do")
+ingredient_id = "ovo"
+state = "cooked"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
 [resource]
 script = ExtResource("2_p4bu2")
 recipe_name = "Tutu de Feijão"
@@ -25,6 +31,6 @@ region = "sudeste"
 base_price = 28
 min_day = 5
 time_of_day = Array[String](["dinner"])
-ingredient_requirements = Array[ExtResource("1_n58do")]([SubResource("Resource_n58do"), SubResource("Resource_p4bu2")])
+ingredient_requirements = Array[ExtResource("1_n58do")]([SubResource("Resource_n58do"), SubResource("Resource_p4bu2"), SubResource("Resource_m738w")])
 client_lines = Array[String](["Boa noite, queria um tutu de feijão!", "Tutu de feijão, apenas. Obrigado.", "Como vai? Um tutu de feijão por favor.", "Como é o nome daquele de feijão e farinha de milho?"])
 metadata/_custom_type_script = "uid://c6xvod46icb2"

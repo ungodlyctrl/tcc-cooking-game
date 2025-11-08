@@ -1,0 +1,200 @@
+[gd_scene load_steps=18 format=3 uid="uid://d4fehmyo6hugb"]
+
+[ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
+[ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
+[ext_resource type="Script" uid="uid://ds0cqhfcadbgw" path="res://scripts/prep/prep_area.gd" id="3_s610r"]
+[ext_resource type="Script" uid="uid://dckho2cxrnnua" path="res://scripts/prep/prep_layout_resource.gd" id="4_7bx2v"]
+[ext_resource type="Resource" uid="uid://dlp7ol456f7vb" path="res://resources/prep_layouts/day1.tres" id="5_kgpen"]
+[ext_resource type="Texture2D" uid="uid://dtos62q0gwx8h" path="res://fundoteste1.png" id="5_ktx3g"]
+[ext_resource type="PackedScene" uid="uid://dk286hwgpiw5g" path="res://scenes/ui/cutting_board_area.tscn" id="5_s7btf"]
+[ext_resource type="Resource" uid="uid://h6bv745dka7u" path="res://resources/prep_layouts/day3.tres" id="6_0fv8j"]
+[ext_resource type="Resource" uid="uid://cl2w1py5ndu5a" path="res://resources/prep_layouts/day5.tres" id="7_n1wni"]
+[ext_resource type="PackedScene" uid="uid://bey8ivj14oqip" path="res://scenes/ui/drop_plate_area.tscn" id="7_vitag"]
+[ext_resource type="PackedScene" uid="uid://bimgikpa8sqfn" path="res://scenes/ui/tool.tscn" id="11_b513c"]
+[ext_resource type="PackedScene" uid="uid://dwip8uhvt1cpv" path="res://scenes/ui/stove_area.tscn" id="11_tsv3s"]
+[ext_resource type="PackedScene" uid="uid://coeukigyvkutw" path="res://scenes/ui/recipe_note_panel.tscn" id="11_ytfgg"]
+[ext_resource type="Texture2D" uid="uid://bv1bdm0dwyuy0" path="res://assets/faca.png" id="12_b513c"]
+[ext_resource type="PackedScene" uid="uid://dpukuemgj7l15" path="res://scenes/ui/trash_bin.tscn" id="13_s610r"]
+[ext_resource type="Texture2D" uid="uid://da0bcgvpli0am" path="res://assets/Misto render.png" id="15_5avst"]
+[ext_resource type="PackedScene" uid="uid://coucan28i2vhl" path="res://scenes/ui/top_delivery_area.tscn" id="15_ktx3g"]
+
+[node name="ModePreparation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dnbch")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+scroll_horizontal_custom_step = 0.0
+scroll_vertical_custom_step = 0.0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+script = ExtResource("2_vitag")
+
+[node name="PrepArea" type="Control" parent="ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("3_s610r")
+prep_layouts = Array[ExtResource("4_7bx2v")]([ExtResource("5_kgpen"), ExtResource("6_0fv8j"), ExtResource("7_n1wni")])
+
+[node name="Fundo" type="NinePatchRect" parent="ScrollContainer/PrepArea"]
+layout_mode = 1
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 1
+texture = ExtResource("5_ktx3g")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="SlotsParent" type="Control" parent="ScrollContainer/PrepArea"]
+layout_mode = 1
+anchors_preset = 0
+
+[node name="UtensilsParent" type="Control" parent="ScrollContainer/PrepArea"]
+anchors_preset = 0
+
+[node name="CuttingBoardArea" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("5_s7btf")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 97.0
+offset_top = 192.0
+offset_right = 247.0
+offset_bottom = 292.0
+
+[node name="BancadaKnife" type="Sprite2D" parent="ScrollContainer/PrepArea/UtensilsParent/CuttingBoardArea"]
+position = Vector2(166, 51)
+texture = ExtResource("12_b513c")
+
+[node name="StoveArea" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("11_tsv3s")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 432.0
+offset_top = 128.0
+offset_right = 537.0
+offset_bottom = 303.0
+
+[node name="DropPlateArea" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("7_vitag")]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 192.0
+offset_right = 400.0
+offset_bottom = 288.0
+
+[node name="TrashBin" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("13_s610r")]
+layout_mode = 0
+offset_left = 573.0
+offset_top = 128.0
+offset_right = 573.0
+offset_bottom = 128.0
+
+[node name="panela" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("11_b513c")]
+layout_mode = 1
+offset_left = 399.0
+offset_top = 32.0
+offset_right = 399.0
+offset_bottom = 32.0
+tool_id = "panela"
+
+[node name="frigideira" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("11_b513c")]
+layout_mode = 1
+offset_left = 494.0
+offset_top = 30.0
+offset_right = 494.0
+offset_bottom = 30.0
+
+[node name="TopDeliveryArea" parent="ScrollContainer/PrepArea" instance=ExtResource("15_ktx3g")]
+layout_mode = 0
+offset_left = 16.0
+offset_top = -20.0
+offset_right = 336.0
+offset_bottom = 30.0
+outline_color = Color(0.9963259, 0.8863418, 0.8941092, 1)
+outline_margin = 4.0
+blink_speed = 1.5
+always_visible_for_debug = false
+
+[node name="HUDPrep" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="RecipeNotePanel" parent="HUDPrep" instance=ExtResource("11_ytfgg")]
+layout_mode = 1
+offset_left = -190.0
+offset_right = -190.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+top_level = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="MistoRender" type="Sprite2D" parent="."]
+visible = false
+top_level = true
+position = Vector2(301, 180)
+texture = ExtResource("15_5avst")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+top_level = true
+layout_mode = 0
+offset_left = 408.0
+offset_top = 96.0
+offset_right = 624.0
+offset_bottom = 256.0
+theme_override_colors/default_color = Color(0.953083, 0.79291, 0.502579, 1)
+theme_override_font_sizes/normal_font_size = 40
+text = "MISTO QUENTE"
+
+[node name="Label" type="Label" parent="RichTextLabel"]
+layout_mode = 0
+offset_top = 56.0
+offset_right = 40.0
+offset_bottom = 73.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.7)
+theme_override_font_sizes/font_size = 18
+text = "Um clássico matinal excelente!"
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+top_level = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -62.0
+offset_right = 110.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.4)
+text = "CLIQUE EM QUALQUER LUGAR PARA FECHAR"
