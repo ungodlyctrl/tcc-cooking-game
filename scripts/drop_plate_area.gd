@@ -293,8 +293,26 @@ func _hide_plateroot_for_drag() -> void:
 	# guardamos a textura base (caso precise restaurar de outra forma)
 	if base_plate and base_plate.texture:
 		_saved_base_texture = base_plate.texture
-	# esconder visualmente a área do prato
+		
+		
+	print("DEBUG: plate_root.visible before =", plate_root.visible)
+	print("DEBUG: base_plate.visible before =", base_plate.visible)
+	print("DEBUG: DropPlateArea.visible before =", self.visible)
+	print("DEBUG: parent.visible before =", get_parent().visible)
+
+	print("Children of DropPlateArea:")
+	for c in get_children():
+		print(" - ", c.name, " visible=", c.visible)
+
+	print("Children of PlateRoot:")
+	for c in plate_root.get_children():
+		print(" - ", c.name, " visible=", c.visible)
+
+
 	_set_plate_root_visible(false)
+	await get_tree().process_frame
+	print("DEBUG: AFTER HIDE — plate_root:", plate_root.visible, " base_plate:", base_plate.visible)
+
 	emit_signal("drag_state_changed", true)
 
 func _can_drop_data(_position: Vector2, data: Variant) -> bool:

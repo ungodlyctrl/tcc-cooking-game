@@ -99,6 +99,7 @@ offset_right = 537.0
 offset_bottom = 303.0
 
 [node name="DropPlateArea" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("7_vitag")]
+visible = false
 layout_mode = 0
 offset_left = 304.0
 offset_top = 192.0

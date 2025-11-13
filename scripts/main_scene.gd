@@ -87,7 +87,6 @@ func _connect_plate_drag_signal() -> void:
 	else:
 		print("⚠️ DropPlateArea não encontrado para conectar drag_state_changed.")
 
-
 func _on_plate_drag_state_changed(is_dragging: bool) -> void:
 	_is_dragging_plate = is_dragging
 	print("📦 MainScene: drag de prato =", is_dragging)
