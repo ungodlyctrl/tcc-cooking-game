@@ -32,6 +32,9 @@ var day_should_end: bool = false
 var initial_day_at_start: int = 1
 var has_shown_note_first_day: bool = false
 
+# Controle interno de drag de prato
+var _is_dragging_plate: bool = false
+
 # ---------------- Onready ----------------
 @onready var mode_attendance: ModeAttendance = $Mode_Attendance
 @onready var mode_preparation: ModePreparation = $Mode_Preparation
@@ -43,6 +46,7 @@ var has_shown_note_first_day: bool = false
 @onready var clock_label: Label = $HUD/ClockLabel
 @onready var money_label: Label = $HUD/MoneyLabel
 @onready var day_label: Label = $HUD/DayLabel
+
 
 # ---------------- Ready ----------------
 func _ready() -> void:
@@ -57,7 +61,6 @@ func _ready() -> void:
 	switch_mode(GameMode.ATTENDANCE)
 	_update_ui()
 
-	# Espera managers carregarem
 	await get_tree().process_frame
 	load_new_recipe()
 
@@ -67,9 +70,39 @@ func _ready() -> void:
 	# Garante bancada inicial
 	prep_area.update_ingredients_for_day(day)
 
+	# 🔹 Conecta drag do prato
+	_connect_plate_drag_signal()
+
+
+# ---------------- Drag Signal Connection ----------------
+func _connect_plate_drag_signal() -> void:
+	if not prep_area:
+		return
+	var plate_node: DropPlateArea = prep_area.get_node_or_null("UtensilsParent/DropPlateArea")
+	if plate_node and plate_node.has_signal("drag_state_changed"):
+		if plate_node.is_connected("drag_state_changed", Callable(self, "_on_plate_drag_state_changed")):
+			plate_node.disconnect("drag_state_changed", Callable(self, "_on_plate_drag_state_changed"))
+		plate_node.connect("drag_state_changed", Callable(self, "_on_plate_drag_state_changed"))
+		print("🔗 MainScene conectado ao sinal de drag do prato.")
+	else:
+		print("⚠️ DropPlateArea não encontrado para conectar drag_state_changed.")
+
+
+func _on_plate_drag_state_changed(is_dragging: bool) -> void:
+	_is_dragging_plate = is_dragging
+	print("📦 MainScene: drag de prato =", is_dragging)
+	if is_dragging:
+		set_process_input(false)
+	else:
+		set_process_input(true)
+
 
 # ---------------- Mode Switch ----------------
 func switch_mode(new_mode: GameMode) -> void:
+	if _is_dragging_plate:
+		print("⚠️ Ignorando switch_mode durante drag do prato.")
+		return
+
 	current_mode = new_mode
 
 	mode_attendance.visible = (new_mode == GameMode.ATTENDANCE)
@@ -77,8 +110,6 @@ func switch_mode(new_mode: GameMode) -> void:
 	mode_end_of_day.visible = (new_mode == GameMode.END_OF_DAY)
 	$HUD.visible = (new_mode != GameMode.END_OF_DAY)
 
-	# ⚠️ NÃO esconder nota aqui (o painel é responsável pelo seu estado),
-	# apenas escondemos no END_OF_DAY
 	if new_mode == GameMode.END_OF_DAY:
 		$Mode_Preparation/HUDPrep/RecipeNotePanel.hide()
 	else:
@@ -87,10 +118,14 @@ func switch_mode(new_mode: GameMode) -> void:
 	if new_mode == GameMode.PREPARATION:
 		scroll_container.scroll_horizontal = 0
 		prep_area.ensure_plate_for_day(day)
+		_connect_plate_drag_signal()
 
 
 # ---------------- Tick / Time ----------------
 func _on_time_tick() -> void:
+	if _is_dragging_plate:
+		return  # pausa contagem durante drag (opcional)
+
 	absolute_minutes += 15
 
 	if current_time_minutes < HARD_LIMIT_MINUTES:
@@ -116,7 +151,7 @@ func _update_ui() -> void:
 	var minutes: int = current_time_minutes % 60
 
 	clock_label.text = "%02d:%02d" % [hours, minutes]
-	money_label.text = "M$: " + str(money)
+	money_label.text = "M$ " + str(money)
 	day_label.text = "Dia " + str(day)
 
 	if absolute_minutes >= END_OF_DAY_MINUTES and not (current_mode == GameMode.END_OF_DAY):
@@ -125,6 +160,10 @@ func _update_ui() -> void:
 
 # ---------------- Day Cycle ----------------
 func _end_day() -> void:
+	if _is_dragging_plate:
+		print("⚠️ Ignorando _end_day — prato está sendo arrastado.")
+		return
+
 	clock_timer.stop()
 	print("🔹 Fim do dia — Gerando relatório…")
 
@@ -137,6 +176,10 @@ func _end_day() -> void:
 
 
 func start_new_day() -> void:
+	if _is_dragging_plate:
+		print("⚠️ Ignorando start_new_day — prato ainda em drag.")
+		return
+
 	print("🔹 Iniciando novo dia…")
 	day += 1
 	current_time_minutes = 8 * 60
@@ -163,6 +206,7 @@ func start_new_day() -> void:
 
 	prep_area.update_ingredients_for_day(day)
 	prep_area.ensure_plate_for_day(day)
+	_connect_plate_drag_signal()
 
 
 # ---------------- Gameplay ----------------
@@ -207,6 +251,10 @@ func update_score_display(optional_score: int = -1) -> void:
 
 # ---------------- Recipe Loading ----------------
 func load_new_recipe() -> void:
+	if _is_dragging_plate:
+		print("⚠️ Ignorando load_new_recipe durante drag.")
+		return
+
 	if Managers.recipe_manager == null:
 		push_warning("⚠️ RecipeManager ainda não carregado, aguardando...")
 		await get_tree().process_frame
@@ -233,7 +281,6 @@ func load_new_recipe() -> void:
 	print("🧾 Enviando receita para RecipeNotePanel:", current_recipe.recipe_name)
 	mode_preparation.set_recipe(current_recipe, current_recipe_variants)
 
-	# ⚙️ Aguardar DropPlateArea pronto antes de setar receita
 	await get_tree().process_frame
 	if prep_area:
 		var dpa: DropPlateArea = prep_area.get_node_or_null("UtensilsParent/DropPlateArea")
@@ -241,6 +288,7 @@ func load_new_recipe() -> void:
 			await get_tree().process_frame
 			print("✅ DropPlateArea encontrado e configurado")
 			dpa.set_current_recipe(current_recipe)
+			_connect_plate_drag_signal()
 		else:
 			print("❌ DropPlateArea não encontrado em PrepArea!")
 
@@ -255,7 +303,6 @@ func load_new_recipe() -> void:
 			has_shown_note_first_day = true
 
 	show_random_client()
-
 
 
 # ---------------- Attendance ----------------
@@ -274,7 +321,10 @@ func _spawn_delivered_plate(delivered_plate: Node) -> void:
 
 
 func finalize_attendance(final_score: int, final_payment: int, comment: String, grade: String = "") -> void:
-	# 🔹 salva imediatamente os dados atuais da receita
+	if _is_dragging_plate:
+		print("⚠️ Ignorando finalize_attendance — prato está em drag.")
+		return
+
 	var recipe_snapshot := current_recipe if current_recipe else null
 	var recipe_name := recipe_snapshot.recipe_name if recipe_snapshot else "—"
 
@@ -287,7 +337,6 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String, 
 
 	print("Pedido registrado:", daily_report[-1])
 
-	# Agora mostra feedback e faz o resto normalmente
 	mode_attendance.show_feedback(comment, grade, current_client)
 	add_money(final_payment)
 	show_money_gain(final_payment)
@@ -296,7 +345,6 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String, 
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
 	score_label.text = "%d%%" % final_score
 
-	# Tempo de exibição da fala
 	var base_time := 0.8
 	var extra_time := float(comment.length()) / 40.0
 	var wait_time : float = clamp(base_time + extra_time, 0.8, 4.0)
@@ -304,7 +352,6 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String, 
 	await get_tree().create_timer(wait_time).timeout
 	await mode_attendance.hide_client()
 
-	# 🔹 Limpeza e preparação para o próximo pedido
 	prep_area.clear_day_leftovers()
 	prep_area.update_ingredients_for_day(day)
 	prep_area.ensure_plate_for_day(day)
