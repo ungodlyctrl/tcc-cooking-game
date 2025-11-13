@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://d4fehmyo6hugb"]
+[gd_scene load_steps=25 format=3 uid="uid://d4fehmyo6hugb"]
 
 [ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
 [ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dk286hwgpiw5g" path="res://scenes/ui/cutting_board_area.tscn" id="5_s7btf"]
 [ext_resource type="Resource" uid="uid://h6bv745dka7u" path="res://resources/prep_layouts/day3.tres" id="6_0fv8j"]
 [ext_resource type="Resource" uid="uid://cl2w1py5ndu5a" path="res://resources/prep_layouts/day5.tres" id="7_n1wni"]
-[ext_resource type="PackedScene" uid="uid://bey8ivj14oqip" path="res://scenes/ui/drop_plate_area.tscn" id="7_vitag"]
 [ext_resource type="Texture2D" uid="uid://b17kxfptkmg2r" path="res://assets/bancada marrom 7.3.png" id="8_kgpen"]
 [ext_resource type="PackedScene" uid="uid://bimgikpa8sqfn" path="res://scenes/ui/tool.tscn" id="11_b513c"]
 [ext_resource type="PackedScene" uid="uid://dwip8uhvt1cpv" path="res://scenes/ui/stove_area.tscn" id="11_tsv3s"]
@@ -97,14 +96,6 @@ offset_left = 432.0
 offset_top = 128.0
 offset_right = 537.0
 offset_bottom = 303.0
-
-[node name="DropPlateArea" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("7_vitag")]
-visible = false
-layout_mode = 0
-offset_left = 304.0
-offset_top = 192.0
-offset_right = 400.0
-offset_bottom = 288.0
 
 [node name="TrashBin" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("13_s610r")]
 layout_mode = 0

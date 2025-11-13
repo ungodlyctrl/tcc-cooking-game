@@ -1,6 +1,7 @@
 extends Control
 class_name PrepArea
 
+
 # ---------------- Config ----------------
 @export var slot_scene: PackedScene = preload("res://scenes/ui/container_slot.tscn")
 @export var prep_layouts: Array[PrepLayoutResource] = []
@@ -12,14 +13,17 @@ class_name PrepArea
 @export var plate_late_pos: Vector2 = Vector2(384, 192)
 @export var plate_threshold_day: int = 5
 
+
 # ---------------- Refs ----------------
 @onready var fundo: NinePatchRect = $Fundo
 @onready var slots_parent: Control = $SlotsParent
 @onready var utensils_parent: Control = $UtensilsParent
 
+
 # ---------------- Vars ----------------
 var current_plate: DropPlateArea = null
 var _is_dragging_plate: bool = false
+
 
 # ---------------- Public ----------------
 func update_ingredients_for_day(current_day: int) -> void:
@@ -32,7 +36,6 @@ func update_ingredients_for_day(current_day: int) -> void:
 		await _apply_preset(chosen_preset, current_day)
 	call_deferred("_reflow")
 	ensure_plate_for_day(current_day)
-
 func clear_day_leftovers() -> void:
 	if _is_dragging_plate:
 		print("⚠️ Ignorando clear_day_leftovers enquanto o prato está sendo arrastado.")
@@ -43,6 +46,7 @@ func clear_day_leftovers() -> void:
 	for s in slots_parent.get_children():
 		if s is Control:
 			s.queue_free()
+
 
 # ---------------- Internals ----------------
 func ensure_plate_for_day(current_day: int) -> void:
@@ -60,6 +64,8 @@ func ensure_plate_for_day(current_day: int) -> void:
 	if plate_node == null:
 		push_warning("PrepArea: falha ao instanciar plate_scene.")
 		return
+	# garantir nome fixo para facilitar buscar com get_node_or_null
+	plate_node.name = "DropPlateArea"
 	plate_node.position = target_world_pos - utensils_parent.position
 	utensils_parent.add_child(plate_node)
 	current_plate = plate_node
@@ -69,6 +75,7 @@ func ensure_plate_for_day(current_day: int) -> void:
 			current_plate.disconnect("drag_state_changed", Callable(self, "_on_plate_drag_state_changed"))
 		current_plate.connect("drag_state_changed", Callable(self, "_on_plate_drag_state_changed"))
 	print("🍽 Prato criado e posicionado. Drag conectado:", current_plate != null)
+
 
 func _on_plate_drag_state_changed(is_dragging: bool) -> void:
 	_is_dragging_plate = is_dragging
@@ -81,6 +88,7 @@ func _on_plate_drag_state_changed(is_dragging: bool) -> void:
 	else:
 		set_process(true)
 
+
 # rest of file (unchanged helper functions)
 func _find_best_preset_for_day(current_day: int) -> PrepLayoutResource:
 	var best: PrepLayoutResource = null
@@ -89,6 +97,7 @@ func _find_best_preset_for_day(current_day: int) -> PrepLayoutResource:
 			if best == null or pr.min_day > best.min_day:
 				best = pr
 	return best
+
 
 func _apply_preset(preset: PrepLayoutResource, current_day: int) -> void:
 	if Managers.ingredient_database == null:
@@ -119,6 +128,7 @@ func _apply_preset(preset: PrepLayoutResource, current_day: int) -> void:
 		target.visible = ue.visible
 		target.set_meta("is_fixed", true)
 
+
 func _instantiate_slot(ingredient_id: String, pos: Vector2, size: Vector2) -> void:
 	if slot_scene == null: return
 	var slot_node := slot_scene.instantiate()
@@ -132,6 +142,7 @@ func _instantiate_slot(ingredient_id: String, pos: Vector2, size: Vector2) -> vo
 	slot_node.position = pos - slots_parent.position
 	slot_node.custom_minimum_size = size if size != Vector2.ZERO else Vector2(64, 64)
 	slots_parent.add_child(slot_node)
+
 
 func _reflow() -> void:
 	await get_tree().process_frame
