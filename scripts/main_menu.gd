@@ -1,44 +1,84 @@
 extends Control
 
-@onready var options_panel = $OptionsPanel
-@onready var credits_panel = $CreditsPanel
-@onready var volume_slider = $OptionsPanel/VolumeSlider
-@onready var overlay = $OverlayDarkener
+## ------------------------- NODES -------------------------
+@onready var options_panel: Control = $OptionsPanel
+@onready var credits_panel: Control = $CreditsPanel
+@onready var volume_slider: HSlider = $OptionsPanel/VolumeSlider
+@onready var overlay: Control = $OverlayDarkener
+@onready var logo: TextureRect = $Logo
 
-func _on_volume_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(value))
-	
-	
-func _ready():
+
+## ------------------------- STATE -------------------------
+var _time: float = 0.0
+var _base_pos: Vector2
+
+
+## ------------------------- READY -------------------------
+func _ready() -> void:
 	options_panel.visible = false
 	credits_panel.visible = false
+	overlay.visible = false
 
-func _on_play_button_pressed():
+	# Salva posição inicial da logo
+	_base_pos = logo.position
+
+	# Garantir animação natural
+	logo.pivot_offset = logo.size / 2.0
+
+
+## ------------------------- PROCESS (ANIMAÇÃO LOGO) -------------------------
+func _process(delta: float) -> void:
+	_time += delta
+
+	# --- Respiração (scale suave) ---
+	var breath: float = 1.0 + sin(_time * 0.7) * 0.02  # ±2%
+	logo.scale = Vector2(breath, breath)
+
+	# --- Micro flutuação vertical/horizontal ---
+	var float_y: float = sin(_time * 0.5) * 1.0     # ±2px
+	var float_x: float = sin(_time * 0.7 ) * 1.0  # ±1px
+	logo.position = _base_pos + Vector2(float_x, float_y)
+
+	# --- Tilt super leve (orgânico) ---
+	var tilt: float = sin(_time * 1.0) * deg_to_rad(0.8)
+	logo.rotation = tilt
+
+
+## ------------------------- BUTTON ACTIONS -------------------------
+func start_game() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_scene.tscn")
 
-func _on_options_button_pressed():
+
+func toggle_options() -> void:
 	options_panel.visible = not options_panel.visible
 	credits_panel.visible = false
-	overlay.visible = true
+	overlay.visible = options_panel.visible
 
-func _on_credits_button_pressed():
+
+func toggle_credits() -> void:
 	credits_panel.visible = not credits_panel.visible
 	options_panel.visible = false
-	overlay.visible = true
+	overlay.visible = credits_panel.visible
 
-func _on_quit_button_pressed():
+
+func quit_game() -> void:
 	get_tree().quit()
 
-func _input(event):
+
+## ------------------------- UI / INPUT -------------------------
+func _on_volume_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(
+		AudioServer.get_bus_index("Master"),
+		linear_to_db(value)
+	)
+
+
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		_hide_all_panels()
 
 
-func _on_button_pressed() -> void:
-	_hide_all_panels()
-	
-	
-func _hide_all_panels():
+func _hide_all_panels() -> void:
 	options_panel.visible = false
 	credits_panel.visible = false
 	overlay.visible = false

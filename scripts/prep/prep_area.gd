@@ -28,7 +28,6 @@ var _is_dragging_plate: bool = false
 # ---------------- Public ----------------
 func update_ingredients_for_day(current_day: int) -> void:
 	if _is_dragging_plate:
-		print("⚠️ Ignorando update_ingredients_for_day porque o prato está sendo arrastado.")
 		return
 	clear_day_leftovers()
 	var chosen_preset: PrepLayoutResource = _find_best_preset_for_day(current_day)
@@ -38,7 +37,6 @@ func update_ingredients_for_day(current_day: int) -> void:
 	ensure_plate_for_day(current_day)
 func clear_day_leftovers() -> void:
 	if _is_dragging_plate:
-		print("⚠️ Ignorando clear_day_leftovers enquanto o prato está sendo arrastado.")
 		return
 	if current_plate and current_plate.is_inside_tree():
 		current_plate.queue_free()
@@ -51,7 +49,6 @@ func clear_day_leftovers() -> void:
 # ---------------- Internals ----------------
 func ensure_plate_for_day(current_day: int) -> void:
 	if _is_dragging_plate:
-		print("⚠️ ensure_plate_for_day ignorado — prato em drag.")
 		return
 	var target_world_pos: Vector2 = plate_early_pos if current_day < plate_threshold_day else plate_late_pos
 	if current_plate and current_plate.is_inside_tree():
@@ -74,12 +71,10 @@ func ensure_plate_for_day(current_day: int) -> void:
 		if current_plate.is_connected("drag_state_changed", Callable(self, "_on_plate_drag_state_changed")):
 			current_plate.disconnect("drag_state_changed", Callable(self, "_on_plate_drag_state_changed"))
 		current_plate.connect("drag_state_changed", Callable(self, "_on_plate_drag_state_changed"))
-	print("🍽 Prato criado e posicionado. Drag conectado:", current_plate != null)
 
 
 func _on_plate_drag_state_changed(is_dragging: bool) -> void:
 	_is_dragging_plate = is_dragging
-	print("📦 Drag de prato mudou estado:", is_dragging)
 	# esconder/mostrar o nó atual (redundante com DropPlateArea, mas garante)
 	if current_plate and current_plate.is_inside_tree():
 		current_plate.visible = not is_dragging

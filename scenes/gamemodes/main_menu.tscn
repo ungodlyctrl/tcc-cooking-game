@@ -1,27 +1,27 @@
-[gd_scene load_steps=11 format=3 uid="uid://xr31gi5ou22p"]
+[gd_scene load_steps=19 format=3 uid="uid://xr31gi5ou22p"]
 
 [ext_resource type="Script" uid="uid://cidbmcw2jvpgw" path="res://scripts/main_menu.gd" id="1_1lf7f"]
-[ext_resource type="Texture2D" uid="uid://nelvbo5bhms0" path="res://assets/backgrounds/CDS_2.png" id="2_guywi"]
+[ext_resource type="Texture2D" uid="uid://7l1hjfhu6epf" path="res://assets/Ilustração30.png" id="2_1lf7f"]
+[ext_resource type="Texture2D" uid="uid://cpxpquuy8ljfh" path="res://assets/logo outline.png" id="3_guywi"]
+[ext_resource type="Script" uid="uid://cchfn3r4pvsuv" path="res://scripts/texture_button.gd" id="4_meetk"]
+[ext_resource type="Texture2D" uid="uid://dyfp22gmop2i5" path="res://assets/Jogar.png" id="4_w1q6q"]
+[ext_resource type="Texture2D" uid="uid://cbkoc1j4qovls" path="res://assets/opcoes.png" id="5_meetk"]
+[ext_resource type="Texture2D" uid="uid://ck615kf77obvs" path="res://assets/sair.png" id="6_orc0m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_guywi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_37v3f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ewhso"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w1q6q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37v3f"]
-bg_color = Color(0.913725, 0.941176, 1, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-expand_margin_left = 3.0
-expand_margin_top = 3.0
-expand_margin_right = 3.0
-expand_margin_bottom = 3.0
-shadow_color = Color(0, 0, 0, 0.072)
-shadow_size = 4
-shadow_offset = Vector2(0, 4.09)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_guywi"]
-bg_color = Color(0.913725, 0.941176, 1, 1)
+bg_color = Color(0.9138015, 0.94100165, 1, 0)
+draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lf7f"]
-bg_color = Color(0.921569, 0.945098, 1, 1)
+bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -86,55 +86,108 @@ script = ExtResource("1_1lf7f")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("2_guywi")
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("2_1lf7f")
+expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(0, 30)
+[node name="Jogar" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 289.0
-offset_top = 258.0
-offset_right = 613.0
-offset_bottom = 288.0
-theme_override_constants/separation = 12
+offset_left = 15.0
+offset_top = 5.0
+offset_right = 137.0
+offset_bottom = 75.0
+mouse_filter = 0
+texture = ExtResource("4_w1q6q")
+expand_mode = 1
+script = ExtResource("4_meetk")
+action = "play"
 
-[node name="PlayButton" type="Button" parent="HBoxContainer"]
+[node name="Opções" type="TextureRect" parent="."]
+modulate = Color(0.99607843, 0.47843137, 0.77254903, 1)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 87.0
+offset_right = 150.66699
+offset_bottom = 162.0
+mouse_filter = 0
+texture = ExtResource("5_meetk")
+expand_mode = 1
+script = ExtResource("4_meetk")
+action = "options"
+
+[node name="Sair" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 182.0
+offset_right = 127.83301
+offset_bottom = 244.66699
+mouse_filter = 0
+texture = ExtResource("6_orc0m")
+expand_mode = 1
+script = ExtResource("4_meetk")
+action = "quit"
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 69.285706
+offset_top = -183.0
+offset_right = 319.14282
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_guywi")
+expand_mode = 1
+
+[node name="PlayButton" type="Button" parent="."]
+visible = false
 custom_minimum_size = Vector2(75, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_font_sizes/font_size = 15
-theme_override_styles/normal = SubResource("StyleBoxFlat_37v3f")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_guywi")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
+layout_mode = 0
+offset_left = 30.0
+offset_top = 24.0
+offset_right = 118.0
+offset_bottom = 70.0
+rotation = -0.20231125
+theme_override_colors/font_color = Color(0.94210726, 0.92928046, 0.89800495, 1)
+theme_override_colors/font_pressed_color = Color(0.9488706, 0.61695445, 0.16924071, 1)
+theme_override_colors/font_hover_color = Color(0.9490196, 0.6156863, 0.16862746, 1)
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_guywi")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_37v3f")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ewhso")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w1q6q")
 text = "JOGAR"
 
-[node name="OptionsButton" type="Button" parent="HBoxContainer"]
+[node name="OptionsButton" type="Button" parent="."]
+visible = false
 custom_minimum_size = Vector2(75, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/font_outline_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_normal_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_colors/icon_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_font_sizes/font_size = 15
+layout_mode = 0
+offset_left = 26.999996
+offset_top = 115.0
+offset_right = 132.0
+offset_bottom = 161.0
+rotation = -0.25409663
+theme_override_colors/font_color = Color(0.94210726, 0.92928046, 0.89800495, 1)
+theme_override_colors/font_pressed_color = Color(0.9490196, 0.6156863, 0.16862746, 1)
+theme_override_colors/font_hover_color = Color(0.9490196, 0.6156863, 0.16862746, 1)
+theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_37v3f")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
 text = "OPÇÕES"
 
-[node name="CreditsButton" type="Button" parent="HBoxContainer"]
+[node name="CreditsButton" type="Button" parent="."]
+visible = false
 custom_minimum_size = Vector2(75, 0)
-layout_mode = 2
+layout_mode = 0
+offset_left = 288.0
+offset_top = 258.0
+offset_right = 363.0
+offset_bottom = 288.0
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
@@ -153,9 +206,14 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_37v3f")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
 text = "CRÉDITOS"
 
-[node name="QuitButton" type="Button" parent="HBoxContainer"]
+[node name="QuitButton" type="Button" parent="."]
+visible = false
 custom_minimum_size = Vector2(75, 0)
-layout_mode = 2
+layout_mode = 0
+offset_left = 375.0
+offset_top = 258.0
+offset_right = 450.0
+offset_bottom = 288.0
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_focus_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/font_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
@@ -366,9 +424,15 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_w1q6q")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
 text = "FECHAR"
 
-[connection signal="pressed" from="HBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="mouse_entered" from="Jogar" to="Jogar" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Jogar" to="Jogar" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Opções" to="Opções" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Opções" to="Opções" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Sair" to="Sair" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Sair" to="Sair" method="_on_mouse_exited"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="OptionsPanel/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CreditsPanel/Button" to="." method="_on_button_pressed"]

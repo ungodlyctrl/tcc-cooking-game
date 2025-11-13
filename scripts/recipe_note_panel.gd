@@ -66,8 +66,6 @@ func _ready() -> void:
 	note_bg.mouse_filter = Control.MOUSE_FILTER_STOP
 	note_bg.gui_input.connect(_on_note_gui_input)
 
-	print("🟢 RecipeNotePanel pronto — posição:", position)
-
 
 func set_recipe(recipe: RecipeResource, variants: Array = []) -> void:
 	current_recipe = recipe

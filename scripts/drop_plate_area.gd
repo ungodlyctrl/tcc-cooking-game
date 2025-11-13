@@ -1,14 +1,13 @@
 extends Control
 class_name DropPlateArea
 
-
 signal drag_state_changed(is_dragging: bool)
 
 # --- Consts
-const PLATE_SPRITE_SIZE := Vector2(96, 96)
-const PLATE_DRAG_OFFSET := Vector2(-40, -30)
+const PLATE_SPRITE_SIZE: Vector2 = Vector2(96, 96)
+const PLATE_DRAG_OFFSET: Vector2 = Vector2(-40, -30)
 
-# --- Nodes (assumem a hierarquia acima)
+# --- Nodes
 @onready var plate_root: Control = $PlateRoot
 @onready var base_plate: TextureRect = $PlateRoot/BasePlate
 @onready var visual_container: Control = $PlateRoot/VisualContainer
@@ -26,14 +25,16 @@ var _saved_base_texture: Texture2D = null
 func _ready() -> void:
 	await get_tree().process_frame
 	_ready_finished = true
-	print("🟢 DropPlateArea pronto.")
-	# segurança: reset estado global de drag (se existir)
+
 	if typeof(DragManager) != TYPE_NIL:
 		DragManager.current_drag_type = DragManager.DragType.NONE
 
 	if expected_recipe:
 		_update_plate_visuals()
+
 	gui_input.connect(_on_gui_input)
+
+
 
 # ---------------- GUI INPUT ----------------
 func _on_gui_input(event: InputEvent) -> void:
@@ -46,112 +47,149 @@ func _on_gui_input(event: InputEvent) -> void:
 			if typeof(DragManager) != TYPE_NIL:
 				DragManager.current_drag_type = DragManager.DragType.NONE
 
-# ---------------- VISIBILIDADE PLATE ROOT ----------------
+
+
+# ---------------- VISIBILIDADE ----------------
 func _set_plate_root_visible(visible: bool) -> void:
-	# esconder/mostrar toda a área do prato (não queue_free nem altera dados)
 	if plate_root and plate_root.is_inside_tree():
 		plate_root.visible = visible
-	# lista textual coerente
 	used_list.visible = not (visual_container.get_child_count() > 0)
+
+
 
 # ---------------- CONFIGURAÇÃO ----------------
 func set_current_recipe(recipe: RecipeResource) -> void:
+	if not is_instance_valid(self):
+		return
+
 	expected_recipe = recipe
 	clear_ingredients()
+
 	if expected_recipe:
 		print("✅ DropPlateArea recebeu receita:", expected_recipe.recipe_name)
 	else:
 		print("⚠️ DropPlateArea recebeu receita nula.")
+
 	_ready_finished = true
 	_update_plate_visuals()
 
+
+
 func clear_ingredients() -> void:
 	used_ingredients.clear()
+
 	for n in _visual_nodes:
 		if n and n.is_inside_tree():
 			n.queue_free()
+
 	_visual_nodes.clear()
+
 	for c in used_list.get_children():
 		c.queue_free()
 
-# ---------------- ADIÇÃO DE INGREDIENTES ----------------
+
+
+# ---------------- ADD INGREDIENTS ----------------
 func add_ingredients(ingredients: Array[Dictionary]) -> void:
 	if expected_recipe == null:
 		_try_recover_recipe()
 		if expected_recipe == null:
 			push_warning("❌ Nenhuma receita disponível — ignorando ingredientes.")
 			return
+
 	for ing in ingredients:
 		used_ingredients.append(ing)
+
 	_update_ingredient_list_ui()
 	_update_plate_visuals()
 
+
+
 func _try_recover_recipe() -> void:
 	var ms := get_tree().current_scene
-	if ms != null:
-		if ms.has_method("get"):
-			var maybe = ms.get("current_recipe")
-			if maybe:
-				expected_recipe = maybe
-				print("♻️ Receita recuperada automaticamente do MainScene:", expected_recipe.recipe_name)
-				return
+
+	if ms != null and ms.has_method("get"):
+		var maybe = ms.get("current_recipe")
+		if maybe:
+			expected_recipe = maybe
+			print("♻️ Receita recuperada automaticamente do MainScene:", expected_recipe.recipe_name)
+			return
+
 	if Managers != null and Managers.has_method("get_current_recipe"):
 		var mr = Managers.get_current_recipe()
 		if mr:
 			expected_recipe = mr
 			print("♻️ Receita recuperada automaticamente do Managers.")
 			return
+
 	print("⚠️ _try_recover_recipe(): não foi possível recuperar recipe automaticamente.")
+
+
 
 # ---------------- BUSCA DE SPRITES ----------------
 func _get_plate_sprite_for(id: String, state: String, quantity: int = 1) -> Texture2D:
-	var st := (state if state != null else "").to_lower()
-	var id_lower := (id if id != null else "").to_lower()
-	var quantity_suffixes := [
+	var st: String = (state if state != null else "").to_lower()
+	var id_lower: String = (id if id != null else "").to_lower()
+
+	var quantity_suffixes: Array[String] = [
 		"%s_%d" % [st, quantity],
 		"qty%d" % quantity,
 		"count%d" % quantity,
 		st
 	]
+
 	if expected_recipe and expected_recipe.plate_ingredient_visuals:
 		for vis in expected_recipe.plate_ingredient_visuals:
 			if vis == null or vis.ingredient_id == "":
 				continue
+
 			if vis.ingredient_id.to_lower() == id_lower:
+
 				var default_tex: Texture2D = null
+
 				for entry in vis.state_sprites:
 					if entry == null or entry.texture == null:
 						continue
-					var state_name := entry.state.to_lower()
+
+					var state_name: String = entry.state.to_lower()
+
 					if state_name == "" or state_name == "default":
 						default_tex = entry.texture
+
 					for variant in quantity_suffixes:
 						if state_name == variant:
 							return entry.texture
+
 				if default_tex != null:
 					return default_tex
-	# fallback: IngredientDatabase
+
 	if Managers and Managers.ingredient_database:
 		for variant in quantity_suffixes:
 			var tex := Managers.ingredient_database.get_sprite(id, variant)
 			if tex:
 				return tex
+
 		var base_tex := Managers.ingredient_database.get_sprite(id, "raw")
 		if base_tex:
 			return base_tex
+
 	return null
+
+
 
 # ---------------- VISUAIS ----------------
 func _update_plate_visuals() -> void:
 	if expected_recipe == null:
 		return
-	# removemos visuais antigos
+
 	for n in _visual_nodes:
 		if n and n.is_inside_tree():
 			n.queue_free()
+
 	_visual_nodes.clear()
-	var has_sprites := false
-	# se prato final
+
+	var has_sprites: bool = false
+
 	if _is_recipe_fulfilled() and expected_recipe.final_plate_sprite:
 		var spr := TextureRect.new()
 		spr.texture = expected_recipe.final_plate_sprite
@@ -160,22 +198,28 @@ func _update_plate_visuals() -> void:
 		spr.custom_minimum_size = PLATE_SPRITE_SIZE
 		spr.size = PLATE_SPRITE_SIZE
 		spr.position = await _center_visual_position_for(spr)
+
 		visual_container.add_child(spr)
 		_visual_nodes.append(spr)
 		has_sprites = true
+
 	else:
-		var qty_map := {}
+		var qty_map: Dictionary = {}
+
 		for ing in used_ingredients:
 			var key := "%s|%s" % [ing["id"], ing["state"]]
 			qty_map[key] = qty_map.get(key, 0) + 1
+
 		for key in qty_map.keys():
-			var parts : PackedStringArray = key.split("|")
-			var id : String = parts[0]
-			var st : String = parts[1]
-			var count : int = qty_map[key]
+			var parts: PackedStringArray = key.split("|")
+			var id: String = parts[0]
+			var st: String = parts[1]
+			var count: int = qty_map[key]
+
 			var tex := _get_plate_sprite_for(id, st, count)
 			if tex == null:
 				continue
+
 			var node := TextureRect.new()
 			node.texture = tex
 			node.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -184,23 +228,32 @@ func _update_plate_visuals() -> void:
 			node.size = PLATE_SPRITE_SIZE
 			node.position = await _center_visual_position_for(node) + _get_offset_for(id)
 			node.z_index = _get_z_for(id, 0)
+
 			visual_container.add_child(node)
 			_visual_nodes.append(node)
 			has_sprites = true
+
 	used_list.visible = not has_sprites
+
+
 
 # ---------------- CENTRALIZAÇÃO ----------------
 func _center_visual_position_for(node: Control) -> Vector2:
 	await get_tree().process_frame
-	var vc_size := visual_container.size
+
+	var vc_size: Vector2 = visual_container.size
 	if vc_size == Vector2.ZERO:
 		vc_size = visual_container.get_combined_minimum_size()
 		if vc_size == Vector2.ZERO:
 			vc_size = plate_root.size
-	var node_size := node.custom_minimum_size
+
+	var node_size: Vector2 = node.custom_minimum_size
 	if node_size == Vector2.ZERO:
 		node_size = PLATE_SPRITE_SIZE
+
 	return (vc_size - node_size) / 2.0
+
+
 
 # ---------------- OFFSET / Z ----------------
 func _get_offset_for(id: String) -> Vector2:
@@ -210,6 +263,7 @@ func _get_offset_for(id: String) -> Vector2:
 				return vis.offset
 	return Vector2.ZERO
 
+
 func _get_z_for(id: String, idx: int) -> int:
 	if expected_recipe and expected_recipe.plate_ingredient_visuals:
 		for vis in expected_recipe.plate_ingredient_visuals:
@@ -217,39 +271,44 @@ func _get_z_for(id: String, idx: int) -> int:
 				return vis.z_index + idx
 	return idx
 
-# ---------------- CHECAGEM DE COMPLETUDE ----------------
+
+
+# ---------------- CHECAGEM RECEITA COMPLETA ----------------
 func _is_recipe_fulfilled() -> bool:
 	if expected_recipe == null:
 		return false
-	var need := {}
+
+	var need: Dictionary = {}
 	for req in expected_recipe.ingredient_requirements:
 		if req == null:
 			continue
 		var key := "%s|%s" % [req.ingredient_id, req.state]
 		need[key] = need.get(key, 0) + int(req.quantity)
-	var have := {}
+
+	var have: Dictionary = {}
 	for ing in used_ingredients:
 		var key := "%s|%s" % [ing.get("id", ""), ing.get("state", "")]
 		have[key] = have.get(key, 0) + 1
+
 	for key in need.keys():
 		if have.get(key, 0) < need[key]:
 			return false
+
 	return true
 
-# ---------------- DRAG & DROP / PREVIEW ----------------
+
+
+# ---------------- DRAG & DROP ----------------
 func _get_drag_data(_pos: Vector2) -> Variant:
-	# evita drag se vazio
 	if used_ingredients.is_empty() and not _is_recipe_fulfilled():
 		return null
 
-	# monta preview
 	var preview := Control.new()
 	preview.name = "drag_preview_plate"
 	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	preview.custom_minimum_size = PLATE_SPRITE_SIZE
 	preview.size = PLATE_SPRITE_SIZE
 
-	# base do prato (usando textura do BasePlate)
 	if base_plate and base_plate.texture:
 		var plate_sprite := TextureRect.new()
 		plate_sprite.texture = base_plate.texture
@@ -259,8 +318,8 @@ func _get_drag_data(_pos: Vector2) -> Variant:
 		plate_sprite.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		preview.add_child(plate_sprite)
 
-	# clona visuais
-	var container_center := (visual_container.size - PLATE_SPRITE_SIZE) / 2.0
+	var container_center: Vector2 = (visual_container.size - PLATE_SPRITE_SIZE) / 2.0
+
 	for node in _visual_nodes:
 		if node and node.texture:
 			var clone := TextureRect.new()
@@ -275,7 +334,6 @@ func _get_drag_data(_pos: Vector2) -> Variant:
 	preview.position = PLATE_DRAG_OFFSET
 	set_drag_preview(preview)
 
-	# esconder o PlateRoot no próximo frame para evitar conflitos com engine
 	call_deferred("_hide_plateroot_for_drag")
 
 	if typeof(DragManager) != TYPE_NIL:
@@ -287,47 +345,38 @@ func _get_drag_data(_pos: Vector2) -> Variant:
 		"source": self
 	}
 
+
+
 func _hide_plateroot_for_drag() -> void:
-	# método chamado deferred
 	_is_dragging_local = true
-	# guardamos a textura base (caso precise restaurar de outra forma)
+
 	if base_plate and base_plate.texture:
 		_saved_base_texture = base_plate.texture
-		
-		
-	print("DEBUG: plate_root.visible before =", plate_root.visible)
-	print("DEBUG: base_plate.visible before =", base_plate.visible)
-	print("DEBUG: DropPlateArea.visible before =", self.visible)
-	print("DEBUG: parent.visible before =", get_parent().visible)
-
-	print("Children of DropPlateArea:")
-	for c in get_children():
-		print(" - ", c.name, " visible=", c.visible)
-
-	print("Children of PlateRoot:")
-	for c in plate_root.get_children():
-		print(" - ", c.name, " visible=", c.visible)
-
 
 	_set_plate_root_visible(false)
 	await get_tree().process_frame
-	print("DEBUG: AFTER HIDE — plate_root:", plate_root.visible, " base_plate:", base_plate.visible)
-
 	emit_signal("drag_state_changed", true)
 
+
+
+# ---------------- DROP ----------------
 func _can_drop_data(_position: Vector2, data: Variant) -> bool:
 	return typeof(data) == TYPE_DICTIONARY and (
 		(data.has("type") and data["type"] == "cooked_tool") or
 		(data.has("id") and data.has("state"))
 	)
 
+
 func _drop_data(_position: Vector2, data: Variant) -> void:
 	if not _can_drop_data(_position, data):
 		return
+
 	var ingredients_to_add: Array[Dictionary] = []
+
 	if data.has("type") and data["type"] == "cooked_tool":
 		if data.has("ingredients"):
 			ingredients_to_add = data["ingredients"]
+
 		var src: Control = data.get("source", null)
 		if src and src.is_inside_tree():
 			src.queue_free()
@@ -336,25 +385,33 @@ func _drop_data(_position: Vector2, data: Variant) -> void:
 			"id": data.get("id", ""),
 			"state": data.get("state", "")
 		})
+
 	add_ingredients(ingredients_to_add)
 
-# ---------------- RESTAURAÇÃO (quando drag nativo termina) ----------------
+
+
+# ---------------- RESTAURAÇÃO ----------------
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
 		if _is_dragging_local:
 			_is_dragging_local = false
 			_set_plate_root_visible(true)
 			emit_signal("drag_state_changed", false)
+
 		if typeof(DragManager) != TYPE_NIL:
 			DragManager.current_drag_type = DragManager.DragType.NONE
+
+
 
 # ---------------- VISUAL DE ERRO ----------------
 func _flash_wrong_ing_visual(ing: Dictionary) -> void:
 	var id: String = ing.get("id", "")
 	var st: String = ing.get("state", "")
 	var tex := _get_plate_sprite_for(id, st)
+
 	if tex == null:
 		return
+
 	var node := TextureRect.new()
 	node.texture = tex
 	node.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -364,34 +421,48 @@ func _flash_wrong_ing_visual(ing: Dictionary) -> void:
 	node.custom_minimum_size = PLATE_SPRITE_SIZE
 	node.size = PLATE_SPRITE_SIZE
 	node.position = await _center_visual_position_for(node)
+
 	visual_container.add_child(node)
+
 	await get_tree().create_timer(0.25).timeout
+
 	if node.is_inside_tree():
 		node.queue_free()
+
+
 
 # ---------------- LISTAGEM TEXTUAL ----------------
 func _update_ingredient_list_ui() -> void:
 	for c in used_list.get_children():
 		c.queue_free()
-	var count_map := {}
+
+	var count_map: Dictionary = {}
+
 	for ing in used_ingredients:
 		var key := "%s|%s" % [ing["id"], ing["state"]]
 		count_map[key] = count_map.get(key, 0) + 1
+
 	for key in count_map.keys():
 		var parts: PackedStringArray = key.split("|")
 		var id: String = parts[0]
 		var state: String = parts[1]
 		var amount: int = count_map[key]
+
 		var label := Label.new()
 		label.text = "- %s (%s) x%d" % [id.capitalize(), state, amount]
 		used_list.add_child(label)
+
 	used_list.visible = _visual_nodes.is_empty()
+
+
 
 # ---------------- UTIL ----------------
 func _ingredient_is_expected(ing: Dictionary) -> bool:
 	if expected_recipe == null:
 		return true
+
 	for req in expected_recipe.ingredient_requirements:
 		if req and req.ingredient_id == ing.get("id", ""):
 			return true
+
 	return false

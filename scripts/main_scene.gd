@@ -33,7 +33,7 @@ var _is_dragging_plate: bool = false
 # ---------------- Onready ----------------
 @onready var mode_attendance: ModeAttendance = $Mode_Attendance
 @onready var mode_preparation: ModePreparation = $Mode_Preparation
-@onready var mode_end_of_day: ModeEndOfDay = $Mode_EndOfDay
+@onready var mode_end_of_day: ModeEndOfDay = $ModeEndOfDay
 @onready var scroll_container: ScrollContainer = $Mode_Preparation/ScrollContainer
 @onready var prep_area: PrepArea = $Mode_Preparation/ScrollContainer/PrepArea
 # HUD
@@ -44,8 +44,6 @@ var _is_dragging_plate: bool = false
 
 # ---------------- Ready ----------------
 func _ready() -> void:
-	print("Managers:", Managers)
-	print("RecipeManager:", Managers.recipe_manager)
 	clock_timer.wait_time = 2.7
 	clock_timer.timeout.connect(_on_time_tick)
 	add_child(clock_timer)
@@ -73,14 +71,10 @@ func _connect_plate_drag_signal() -> void:
 		if plate_node.is_connected("drag_state_changed", Callable(self, "_on_plate_drag_state_changed")):
 			plate_node.disconnect("drag_state_changed", Callable(self, "_on_plate_drag_state_changed"))
 		plate_node.connect("drag_state_changed", Callable(self, "_on_plate_drag_state_changed"))
-		print("🔗 MainScene conectado ao sinal de drag do prato.")
-	else:
-		print("⚠️ DropPlateArea não encontrado para conectar drag_state_changed.")
 
 
 func _on_plate_drag_state_changed(is_dragging: bool) -> void:
 	_is_dragging_plate = is_dragging
-	print("📦 MainScene: drag de prato =", is_dragging)
 	if is_dragging:
 		set_process_input(false)
 	else:
@@ -90,7 +84,6 @@ func _on_plate_drag_state_changed(is_dragging: bool) -> void:
 # ---------------- Mode Switch ----------------
 func switch_mode(new_mode: GameMode) -> void:
 	if _is_dragging_plate:
-		print("⚠️ Ignorando switch_mode durante drag do prato.")
 		return
 	current_mode = new_mode
 	mode_attendance.visible = (new_mode == GameMode.ATTENDANCE)
@@ -139,7 +132,6 @@ func _update_ui() -> void:
 # ---------------- Day Cycle ----------------
 func _end_day() -> void:
 	if _is_dragging_plate:
-		print("⚠️ Ignorando _end_day — prato está sendo arrastado.")
 		return
 	clock_timer.stop()
 	print("🔹 Fim do dia — Gerando relatório…")
@@ -152,7 +144,6 @@ func _end_day() -> void:
 
 func start_new_day() -> void:
 	if _is_dragging_plate:
-		print("⚠️ Ignorando start_new_day — prato ainda em drag.")
 		return
 	print("🔹 Iniciando novo dia…")
 	day += 1
