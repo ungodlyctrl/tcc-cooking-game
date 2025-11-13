@@ -1,12 +1,18 @@
-[gd_scene load_steps=12 format=3 uid="uid://dehkeao1vbiy0"]
+[gd_scene load_steps=18 format=3 uid="uid://dehkeao1vbiy0"]
 
 [ext_resource type="Script" uid="uid://6dn564kkwxms" path="res://scripts/mode_attendance.gd" id="1_jdssm"]
 [ext_resource type="Script" uid="uid://f8ltra48a5fx" path="res://scripts/client_drop_area.gd" id="3_k6rd5"]
 [ext_resource type="Texture2D" uid="uid://b086dnrubqghm" path="res://assets/fundos/parede completa skin.png" id="3_mess2"]
 [ext_resource type="PackedScene" uid="uid://idosu0ea81b0" path="res://scenes/ui/dialogue_box.tscn" id="3_tdh31"]
+[ext_resource type="Texture2D" uid="uid://8ik3qet5q0ca" path="res://assets/fundos/parede limpa skin.png" id="4_nnl24"]
 [ext_resource type="Texture2D" uid="uid://bimj0humej7l2" path="res://assets/fundos/relogio.png" id="5_6enio"]
+[ext_resource type="Texture2D" uid="uid://cbgu007mt15q2" path="res://assets/fundos/borda skin.png" id="5_ma782"]
 [ext_resource type="Texture2D" uid="uid://ca0kg54ynlnfb" path="res://assets/fundos/calendario.png" id="6_k6rd5"]
+[ext_resource type="Texture2D" uid="uid://dyxqfk7hc1iou" path="res://assets/fundos/frigobar.png" id="6_yf3ax"]
+[ext_resource type="Texture2D" uid="uid://dyul35xv4f1oo" path="res://assets/fundos/mapa skin.png" id="7_ghgpe"]
 [ext_resource type="Texture2D" uid="uid://bajd32jdwarvc" path="res://moio (1).png" id="7_k6rd5"]
+[ext_resource type="Texture2D" uid="uid://crmhpana72md8" path="res://assets/fundos/bancada skin.png" id="8_jo5r6"]
+[ext_resource type="Texture2D" uid="uid://dcv1t5jdpjj80" path="res://assets/fundos/relogio skin.png" id="13_1jjao"]
 
 [sub_resource type="Animation" id="Animation_kpxur"]
 length = 0.001
@@ -122,8 +128,29 @@ scale = Vector2(1, 3.44)
 script = ExtResource("3_k6rd5")
 
 [node name="BackgroundTruck" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("3_mess2")
 centered = false
+
+[node name="ParedeLimpaSkin" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+texture = ExtResource("4_nnl24")
+
+[node name="BordaSkin" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+texture = ExtResource("5_ma782")
+
+[node name="Frigobar" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+texture = ExtResource("6_yf3ax")
+
+[node name="MapaSkin" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+texture = ExtResource("7_ghgpe")
+
+[node name="BancadaSkin" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+texture = ExtResource("8_jo5r6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -156,3 +183,7 @@ offset_right = 402.0
 offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="RelogioSkin" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+texture = ExtResource("13_1jjao")
