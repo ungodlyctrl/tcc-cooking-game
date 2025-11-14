@@ -3,7 +3,7 @@ class_name CuttingBoardQTE
 
 signal finished_cut(ingredient_id: String, hits: int)
 
-const POINTER_SPEED: float = 80.0
+const POINTER_SPEED: float = 40.0
 const KNIFE_SECTIONS: Array[float] = [0.2, 0.4, 0.65]
 const KNIFE_OFFSET_Y: float = -15.0
 

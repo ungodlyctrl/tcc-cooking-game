@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=4 format=3 uid="uid://blcomhui2tvwu"]
+
+[ext_resource type="Texture2D" uid="uid://x6viwlor4mo2" path="res://assets/ingredientes/tomate/container.png" id="1_kcooi"]
+[ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_lfep1"]
+[ext_resource type="Texture2D" uid="uid://cgjlm8edyxoyg" path="res://assets/ingredientes/tomate/tomate unico.png" id="3_7enfk"]
+
+[resource]
+script = ExtResource("1_lfep1")
+id = "tomate"
+display_name = "Tomate"
+container_texture = ExtResource("1_kcooi")
+states = Dictionary[String, Texture2D]({
+"raw": ExtResource("3_7enfk")
+})
+gender = "m"
+metadata/_custom_type_script = "uid://ccubj8or3d2vb"

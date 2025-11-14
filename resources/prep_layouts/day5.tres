@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PrepLayoutResource" load_steps=27 format=3 uid="uid://cl2w1py5ndu5a"]
+[gd_resource type="Resource" script_class="PrepLayoutResource" load_steps=28 format=3 uid="uid://cl2w1py5ndu5a"]
 
 [ext_resource type="Script" uid="uid://dckho2cxrnnua" path="res://scripts/prep/prep_layout_resource.gd" id="1_nvpwj"]
 [ext_resource type="Script" uid="uid://cechr0x3jl21b" path="res://scripts/prep/slot_entry.gd" id="2_jd6mm"]
@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_cfgkr"]
 script = ExtResource("2_jd6mm")
 ingredient_id = "pimentao"
-pos = Vector2(16, 40)
+pos = Vector2(85, 40)
 metadata/_custom_type_script = "uid://cechr0x3jl21b"
 
 [sub_resource type="Resource" id="Resource_3jokg"]
@@ -30,8 +30,15 @@ metadata/_custom_type_script = "uid://cechr0x3jl21b"
 
 [sub_resource type="Resource" id="Resource_63nkx"]
 script = ExtResource("2_jd6mm")
-ingredient_id = "salsicha"
-pos = Vector2(85, 40)
+ingredient_id = "tomate"
+pos = Vector2(16, 40)
+size = Vector2(64, 32)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_h2dvi"]
+script = ExtResource("2_jd6mm")
+ingredient_id = "alface"
+pos = Vector2(16, 72)
 metadata/_custom_type_script = "uid://cechr0x3jl21b"
 
 [sub_resource type="Resource" id="Resource_380kp"]
@@ -150,7 +157,7 @@ metadata/_custom_type_script = "uid://bojulivybbvsu"
 [resource]
 script = ExtResource("1_nvpwj")
 min_day = 5
-slots = Array[ExtResource("2_jd6mm")]([SubResource("Resource_cfgkr"), SubResource("Resource_3jokg"), SubResource("Resource_72gvw"), SubResource("Resource_y4n83"), SubResource("Resource_63nkx"), SubResource("Resource_380kp"), SubResource("Resource_nvpwj"), SubResource("Resource_jd6mm"), SubResource("Resource_56ib2"), SubResource("Resource_kpfmh"), SubResource("Resource_6ius7"), SubResource("Resource_7tb10"), SubResource("Resource_p06hb"), SubResource("Resource_ieooj"), SubResource("Resource_xq1ea"), SubResource("Resource_8ycal"), SubResource("Resource_xv4v3")])
+slots = Array[ExtResource("2_jd6mm")]([SubResource("Resource_cfgkr"), SubResource("Resource_3jokg"), SubResource("Resource_72gvw"), SubResource("Resource_y4n83"), SubResource("Resource_63nkx"), SubResource("Resource_h2dvi"), SubResource("Resource_380kp"), SubResource("Resource_nvpwj"), SubResource("Resource_jd6mm"), SubResource("Resource_56ib2"), SubResource("Resource_kpfmh"), SubResource("Resource_6ius7"), SubResource("Resource_7tb10"), SubResource("Resource_p06hb"), SubResource("Resource_ieooj"), SubResource("Resource_xq1ea"), SubResource("Resource_8ycal"), SubResource("Resource_xv4v3")])
 utensils = Array[ExtResource("3_jd6mm")]([SubResource("Resource_oqa8x"), SubResource("Resource_dpma0"), SubResource("Resource_x4vt3"), SubResource("Resource_dr17f"), SubResource("Resource_l88oh"), SubResource("Resource_dm67n")])
 background_min_height = 360
 metadata/_custom_type_script = "uid://dckho2cxrnnua"

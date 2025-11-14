@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://busp1jxgd1yo"]
+[gd_scene load_steps=52 format=3 uid="uid://busp1jxgd1yo"]
 
 [ext_resource type="Script" uid="uid://b1cw8wj6np025" path="res://scripts/managers.gd" id="1_eubx1"]
 [ext_resource type="Script" uid="uid://b8x6uvbe45tpd" path="res://scripts/client_manager.gd" id="1_osspy"]
@@ -37,7 +37,9 @@
 [ext_resource type="Resource" uid="uid://csppvrhxqj4ng" path="res://resources/ingredients/carne.tres" id="32_75lyh"]
 [ext_resource type="Resource" uid="uid://bmybqunnhl12v" path="res://resources/ingredients/cuscuz.tres" id="33_a8prd"]
 [ext_resource type="Resource" uid="uid://cl5fvpk0ugy0n" path="res://resources/ingredients/farofa.tres" id="34_lmnp6"]
+[ext_resource type="Resource" uid="uid://blcomhui2tvwu" path="res://resources/ingredients/tomate.tres" id="35_b8u1i"]
 [ext_resource type="Resource" uid="uid://dcigg377cndry" path="res://resources/ingredients/feijao.tres" id="35_fd81x"]
+[ext_resource type="Resource" uid="uid://dhlh3yw5ri7hc" path="res://resources/ingredients/alface.tres" id="36_emnlt"]
 [ext_resource type="Resource" uid="uid://c4vjan0ovxi50" path="res://resources/ingredients/manteiga.tres" id="36_tbw62"]
 [ext_resource type="Resource" uid="uid://dypvp3p014tpl" path="res://resources/ingredients/mortadela.tres" id="37_v5pq0"]
 [ext_resource type="Resource" uid="uid://sebcmd5raimh" path="res://resources/ingredients/ovo.tres" id="38_p3c4h"]
@@ -60,7 +62,7 @@ clients = Array[ExtResource("4_xl2cx")]([ExtResource("5_rmo1q"), ExtResource("6_
 
 [node name="IngredientDatabase" type="Node" parent="."]
 script = ExtResource("27_jxyry")
-ingredient_list = Array[ExtResource("28_6jetn")]([ExtResource("29_2l7ur"), ExtResource("30_gjllj"), ExtResource("31_vqhob"), ExtResource("32_75lyh"), ExtResource("33_a8prd"), ExtResource("34_lmnp6"), ExtResource("35_fd81x"), ExtResource("36_tbw62"), ExtResource("37_v5pq0"), ExtResource("38_p3c4h"), ExtResource("39_xq3wl"), ExtResource("40_ckbyc"), ExtResource("41_ss10b"), ExtResource("42_et0nk"), ExtResource("43_q2mbl"), ExtResource("44_8a70s"), ExtResource("45_5q5o7")])
+ingredient_list = Array[ExtResource("28_6jetn")]([ExtResource("29_2l7ur"), ExtResource("30_gjllj"), ExtResource("31_vqhob"), ExtResource("32_75lyh"), ExtResource("33_a8prd"), ExtResource("34_lmnp6"), ExtResource("35_fd81x"), ExtResource("36_tbw62"), ExtResource("37_v5pq0"), ExtResource("38_p3c4h"), ExtResource("39_xq3wl"), ExtResource("40_ckbyc"), ExtResource("41_ss10b"), ExtResource("42_et0nk"), ExtResource("43_q2mbl"), ExtResource("44_8a70s"), ExtResource("45_5q5o7"), ExtResource("35_b8u1i"), ExtResource("36_emnlt")])
 
 [node name="RecipeManager" type="Node" parent="."]
 script = ExtResource("13_tjrm2")

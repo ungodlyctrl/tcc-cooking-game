@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://6dn564kkwxms" path="res://scripts/mode_attendance.gd" id="1_jdssm"]
 [ext_resource type="Script" uid="uid://f8ltra48a5fx" path="res://scripts/client_drop_area.gd" id="3_k6rd5"]
-[ext_resource type="Texture2D" uid="uid://b086dnrubqghm" path="res://assets/fundos/parede completa skin.png" id="3_mess2"]
+[ext_resource type="Texture2D" uid="uid://0qin4q4lmblx" path="res://assets/fundos/Foodtruck.png" id="3_nnl24"]
 [ext_resource type="PackedScene" uid="uid://idosu0ea81b0" path="res://scenes/ui/dialogue_box.tscn" id="3_tdh31"]
 [ext_resource type="Texture2D" uid="uid://8ik3qet5q0ca" path="res://assets/fundos/parede limpa skin.png" id="4_nnl24"]
 [ext_resource type="Texture2D" uid="uid://bimj0humej7l2" path="res://assets/fundos/relogio.png" id="5_6enio"]
@@ -128,27 +128,31 @@ scale = Vector2(1, 3.44)
 script = ExtResource("3_k6rd5")
 
 [node name="BackgroundTruck" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("3_mess2")
+texture = ExtResource("3_nnl24")
 centered = false
 
 [node name="ParedeLimpaSkin" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(320, 180)
 texture = ExtResource("4_nnl24")
 
 [node name="BordaSkin" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(320, 180)
 texture = ExtResource("5_ma782")
 
 [node name="Frigobar" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(320, 180)
 texture = ExtResource("6_yf3ax")
 
 [node name="MapaSkin" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(320, 180)
 texture = ExtResource("7_ghgpe")
 
 [node name="BancadaSkin" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(320, 180)
 texture = ExtResource("8_jo5r6")
 
@@ -159,12 +163,10 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(320, 180)
 texture = ExtResource("5_6enio")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(320, 180)
 texture = ExtResource("6_k6rd5")
 
@@ -185,5 +187,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="RelogioSkin" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(320, 180)
 texture = ExtResource("13_1jjao")
