@@ -58,9 +58,8 @@ func _process(delta: float) -> void:
 
 
 func _get_drag_data(_pos: Vector2) -> Dictionary:
-	## Inicia o processo de drag & drop.
-	## Criamos um preview manual no overlay para garantir que fique acima de tudo.
-
+	visible = false
+	
 	var tex: Texture2D = null
 	if Managers.ingredient_database:
 		tex = Managers.ingredient_database.get_sprite(ingredient_id, state)
@@ -73,30 +72,31 @@ func _get_drag_data(_pos: Vector2) -> Dictionary:
 	preview.stretch_mode = TextureRect.STRETCH_SCALE
 	preview.name = "drag_preview_%s" % ingredient_id
 	set_drag_preview(preview)
-	# adiciona no overlay do viewport (topo) — cast explícito para Control
-
-
+	
 	DragManager.current_drag_type = DragManager.DragType.INGREDIENT
 
 	return {
 		"id": ingredient_id,
 		"state": state,
+		"type": "ingredient",
 		"source": self
 	}
 
 
+
 func _notification(what: int) -> void:
-	## Reseta estado de drag ao fim do movimento.
 	if what == NOTIFICATION_DRAG_END:
 		DragManager.current_drag_type = DragManager.DragType.NONE
 
-		## remove preview overlay se existir
 		if _overlay_preview and _overlay_preview.is_inside_tree():
 			_overlay_preview.queue_free()
 		_overlay_preview = null
 		set_process(false)
 
-		## Caso seja um ingrediente de corte, se sair da tela volta para a posição original
+		# Só volta se ainda estiver na árvore (não dropado com sucesso)
+		if is_inside_tree():
+			visible = true
+
 		if is_cutting_result:
 			await get_tree().process_frame
 			if not get_global_rect().intersects(get_viewport_rect()):

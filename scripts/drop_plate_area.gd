@@ -373,20 +373,33 @@ func _drop_data(_position: Vector2, data: Variant) -> void:
 
 	var ingredients_to_add: Array[Dictionary] = []
 
+	# ------------------------------
+	# COOKED TOOL → adiciona ingredientes
+	# ------------------------------
 	if data.has("type") and data["type"] == "cooked_tool":
 		if data.has("ingredients"):
 			ingredients_to_add = data["ingredients"]
 
-		var src: Control = data.get("source", null)
+		var src = data.get("source", null)
 		if src and src.is_inside_tree():
 			src.queue_free()
-	else:
+
+	# ------------------------------
+	# INGREDIENTE (cru OU cortado)
+	# ------------------------------
+	elif data.has("id") and data.has("state"):
 		ingredients_to_add.append({
-			"id": data.get("id", ""),
-			"state": data.get("state", "")
+			"id": data["id"],
+			"state": data["state"]
 		})
 
+		var src = data.get("source", null)
+		if src and src.is_inside_tree():
+			src.queue_free()
+
 	add_ingredients(ingredients_to_add)
+
+
 
 
 

@@ -29,6 +29,12 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 		var source: Control = data.get("source", null)
 		if source and source is DropPlateArea:
 			source.clear_ingredients()
+	
+	elif data_type == "ingredient":
+		var source: Control = data.get("source", null)
+		if source and source.is_inside_tree():
+			source.queue_free()
+
 
 func _on_mouse_entered() -> void:
 	texture = open_texture
