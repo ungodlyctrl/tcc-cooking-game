@@ -411,8 +411,12 @@ func _notification(what: int) -> void:
 			_set_plate_root_visible(true)
 			emit_signal("drag_state_changed", false)
 
+# Garantir fim do drag, independente de qualquer coisa
 		if typeof(DragManager) != TYPE_NIL:
 			DragManager.current_drag_type = DragManager.DragType.NONE
+
+			emit_signal("drag_state_changed", false)
+
 
 
 

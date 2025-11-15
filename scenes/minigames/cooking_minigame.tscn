@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://det48e24b3j7b"]
+[gd_scene load_steps=2 format=3 uid="uid://det48e24b3j7b"]
 
 [ext_resource type="Script" uid="uid://nopev2xb8r8r" path="res://scripts/cooking_minigame.gd" id="1_nsvnn"]
-[ext_resource type="Texture2D" uid="uid://d26rq8sn4y5jo" path="res://assets/fogão.png" id="2_nsvnn"]
 
 [node name="CookingMinigame" type="Control"]
 custom_minimum_size = Vector2(175, 175)
@@ -20,7 +19,6 @@ offset_left = -8.0
 offset_top = -77.0
 offset_right = 207.0
 offset_bottom = 98.0
-texture = ExtResource("2_nsvnn")
 
 [node name="ToolSprite" type="TextureRect" parent="."]
 layout_mode = 0

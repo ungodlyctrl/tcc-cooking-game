@@ -107,6 +107,7 @@ base_price = 40
 time_of_day = Array[String](["dinner"])
 ingredient_requirements = Array[ExtResource("1_gcvmf")]([SubResource("Resource_gcvmf"), SubResource("Resource_vblu1"), SubResource("Resource_k2pes"), SubResource("Resource_frm77")])
 client_lines = Array[String](["Olá, boa noite. Um filé Oswaldo Aranha.", "Oswaldo Aranha, apenas o filé, sem aranhas desta vez.", "Opa, me vê um filé Oswaldo Aranha!"])
+display_steps = Array[String](["Adicionar arroz", "Fritar carne", "Cortar batata", "Fritar batata", "Adicionar farofa"])
 plate_ingredient_visuals = Array[ExtResource("2_k2pes")]([SubResource("Resource_rnit5"), SubResource("Resource_1r7qi"), SubResource("Resource_scgq2"), SubResource("Resource_hj3wa")])
 final_plate_sprite = ExtResource("1_k01y2")
 delivered_plate_sprite = ExtResource("1_105i3")

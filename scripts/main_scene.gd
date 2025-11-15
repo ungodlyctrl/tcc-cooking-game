@@ -84,7 +84,9 @@ func _on_plate_drag_state_changed(is_dragging: bool) -> void:
 # ---------------- Mode Switch ----------------
 func switch_mode(new_mode: GameMode) -> void:
 	if _is_dragging_plate:
-		return
+		await get_tree().process_frame
+		if _is_dragging_plate:
+			return
 	current_mode = new_mode
 	mode_attendance.visible = (new_mode == GameMode.ATTENDANCE)
 	mode_preparation.visible = (new_mode == GameMode.PREPARATION)
@@ -126,7 +128,7 @@ func _update_ui() -> void:
 	money_label.text = "M$ " + str(money)
 	day_label.text = "Dia " + str(day)
 	if absolute_minutes >= END_OF_DAY_MINUTES and not (current_mode == GameMode.END_OF_DAY):
-		clock_label.add_theme_color_override("font_color", Color.RED)
+		clock_label.add_theme_color_override("font_color", Color(0.85, 0.162, 0.184, 1.0))
 
 
 # ---------------- Day Cycle ----------------

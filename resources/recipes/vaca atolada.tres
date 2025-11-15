@@ -33,4 +33,5 @@ base_price = 38
 time_of_day = Array[String](["lunch"])
 ingredient_requirements = Array[ExtResource("1_0gaev")]([SubResource("Resource_0gaev"), SubResource("Resource_p7gce"), SubResource("Resource_7s0de")])
 client_lines = Array[String](["Boa tarde, me vê uma vaca atolada por favor.", "Uma vaca atolada, espero que essa carne esteja bem suculenta.", "E aí, uma vaca atolada por favor!"])
+display_steps = Array[String](["Adicionar arroz", "Cozinhar carne e batata"])
 metadata/_custom_type_script = "uid://c6xvod46icb2"

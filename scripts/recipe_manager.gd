@@ -83,6 +83,13 @@ func apply_variations(recipe: RecipeResource) -> Dictionary:
 	clone.time_of_day = recipe.time_of_day.duplicate()
 	clone.client_lines = recipe.client_lines.duplicate()
 	clone.display_steps = recipe.display_steps.duplicate()
+	clone.display_steps_variants = []
+	for v in recipe.display_steps_variants:
+		if v != null:
+			var new_v := DisplayStepsVariant.new()
+			new_v.missing = v.missing.duplicate(true)
+			new_v.steps = v.steps.duplicate(true)
+			clone.display_steps_variants.append(new_v)
 	clone.final_plate_sprite = recipe.final_plate_sprite
 	clone.delivered_plate_sprite = recipe.delivered_plate_sprite
 

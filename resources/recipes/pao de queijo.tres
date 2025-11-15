@@ -51,5 +51,6 @@ base_price = 9
 time_of_day = Array[String](["breakfast"])
 ingredient_requirements = Array[ExtResource("1_jcfx5")]([SubResource("Resource_jcfx5")])
 client_lines = Array[String](["Opa, bom? Me vê um pão de queijo quentinho por favor.", "Pão de queijo por favor, é macio e fofinho!", "Pão e queijo, pão de queijo!"])
+display_steps = Array[String](["Adicionar pão de queijo"])
 plate_ingredient_visuals = Array[ExtResource("2_h5gvi")]([SubResource("Resource_cpdue")])
 metadata/_custom_type_script = "uid://c6xvod46icb2"

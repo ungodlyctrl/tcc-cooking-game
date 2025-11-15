@@ -87,6 +87,7 @@ base_price = 18
 time_of_day = Array[String](["breakfast"])
 ingredient_requirements = Array[ExtResource("1_sbib0")]([SubResource("Resource_sbib0"), SubResource("Resource_h5mvj")])
 client_lines = Array[String](["E aí, poderia me ver um pão com mortadela, por favor?", "Bom dia, me vê um pão com mortadela? Ouvi dizer que é tão bom que é patrimônio nacional, sabia?", "Bom dia, me vê um pão com mortadela?", "Um pão com mortadela. Simples e divino."])
+display_steps = Array[String](["Levar pão ao prato", "Tostar mortadela na frigideira"])
 plate_ingredient_visuals = Array[ExtResource("2_gacoo")]([SubResource("Resource_3ewag"), SubResource("Resource_mcsga")])
 final_plate_sprite = ExtResource("2_r4qv6")
 delivered_plate_sprite = ExtResource("1_gd1ir")

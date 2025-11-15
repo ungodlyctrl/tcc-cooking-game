@@ -75,6 +75,7 @@ base_price = 26
 time_of_day = Array[String](["lunch"])
 ingredient_requirements = Array[ExtResource("1_tjqf5")]([SubResource("Resource_tjqf5"), SubResource("Resource_7c4my"), SubResource("Resource_gm1fx")])
 client_lines = Array[String](["Arroz e feijão bem temperado, é isso que quero. uma feijoada por favor! Não esquece a farofa chefe.", "Opa, me vê uma feijoada no capricho.", "Olá, gostaria de uma feijoada!"])
+display_steps = Array[String](["Adicionar arroz", "Adicionar feijão", "Adicionar farofa"])
 plate_ingredient_visuals = Array[ExtResource("2_gm1fx")]([SubResource("Resource_5nye8"), SubResource("Resource_eqvum"), SubResource("Resource_quwp1")])
 final_plate_sprite = ExtResource("1_vf75x")
 metadata/_custom_type_script = "uid://c6xvod46icb2"

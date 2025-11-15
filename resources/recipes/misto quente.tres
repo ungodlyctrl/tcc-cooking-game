@@ -1,13 +1,26 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=23 format=3 uid="uid://c14i6ptmv7fp5"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=26 format=3 uid="uid://c14i6ptmv7fp5"]
 
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_cuovy"]
 [ext_resource type="Texture2D" uid="uid://b1em8tk5pg50s" path="res://assets/misto4.1.png" id="1_e8lh5"]
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_wgafg"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_cstgo"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_gh3js"]
 [ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="3_wwjp0"]
 [ext_resource type="Texture2D" uid="uid://cwqgs3so8r0g5" path="res://assets/misto1.1.png" id="4_e7510"]
 [ext_resource type="Texture2D" uid="uid://dd3djlehy2yc1" path="res://assets/queijo (1).png" id="5_e8lh5"]
 [ext_resource type="Texture2D" uid="uid://bgsyus78clnd4" path="res://assets/presunto (1).png" id="6_e7510"]
+
+[sub_resource type="Resource" id="Resource_0t1uu"]
+script = ExtResource("1_wgafg")
+missing = Array[String](["queijo"])
+steps = Array[String](["Tostar pão e presunto na frigideira"])
+metadata/_custom_type_script = "uid://dhmrlg7flv700"
+
+[sub_resource type="Resource" id="Resource_2jhii"]
+script = ExtResource("1_wgafg")
+missing = Array[String](["presunto"])
+steps = Array[String](["Tostar pão e queijo na frigideira"])
+metadata/_custom_type_script = "uid://dhmrlg7flv700"
 
 [sub_resource type="Resource" id="Resource_cuovy"]
 script = ExtResource("1_cuovy")
@@ -112,6 +125,8 @@ min_day = 3
 time_of_day = Array[String](["breakfast"])
 ingredient_requirements = Array[ExtResource("1_cuovy")]([SubResource("Resource_cuovy"), SubResource("Resource_gh3js"), SubResource("Resource_cstgo")])
 client_lines = Array[String](["Bom dia. Gostaria de um misto quente, por favor! ", "Eu amo muito misto quente!", "Quero um misto bem gostoso!", "Faz aquele clássico pão com queijo e presunto."])
+display_steps = Array[String](["Tostar pão, queijo e presunto na frigideira"])
+display_steps_variants = Array[ExtResource("1_wgafg")]([SubResource("Resource_0t1uu"), SubResource("Resource_2jhii")])
 plate_ingredient_visuals = Array[ExtResource("2_cstgo")]([SubResource("Resource_1ufl3"), SubResource("Resource_6w3gn"), SubResource("Resource_0sl7o")])
 final_plate_sprite = ExtResource("1_e8lh5")
 metadata/_custom_type_script = "uid://c6xvod46icb2"
