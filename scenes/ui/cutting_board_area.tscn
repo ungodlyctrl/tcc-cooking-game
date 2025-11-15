@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dk286hwgpiw5g"]
+[gd_scene load_steps=7 format=3 uid="uid://dk286hwgpiw5g"]
 
 [ext_resource type="Texture2D" uid="uid://jm7mrqlk1yu3" path="res://assets/tauba arrumada 1.png" id="1_nmhlm"]
 [ext_resource type="Script" uid="uid://dmsc0jo7ibmnl" path="res://scripts/cutting_board_area.gd" id="2_nmhlm"]
+[ext_resource type="Texture2D" uid="uid://bv1bdm0dwyuy0" path="res://assets/faca.png" id="3_4kqre"]
+[ext_resource type="Script" uid="uid://baqat5tghxdy3" path="res://scripts/cutting_difficulty_resource.gd" id="3_slu3u"]
+[ext_resource type="Resource" uid="uid://f07symht4l5b" path="res://resources/cuttinglayouts/cut_easy1.tres" id="4_w2sjh"]
+[ext_resource type="Resource" uid="uid://di4jf2hftkul" path="res://resources/cuttinglayouts/cut_hard1.tres" id="5_w2sjh"]
 
 [node name="CuttingBoardArea" type="TextureRect"]
 custom_minimum_size = Vector2(150, 100)
@@ -9,3 +13,11 @@ offset_right = 150.0
 offset_bottom = 100.0
 texture = ExtResource("1_nmhlm")
 script = ExtResource("2_nmhlm")
+cutting_difficulties = Array[ExtResource("3_slu3u")]([ExtResource("4_w2sjh"), ExtResource("5_w2sjh")])
+
+[node name="BancadaKnife" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 166.0
+offset_right = 190.0
+offset_bottom = 100.0
+texture = ExtResource("3_4kqre")

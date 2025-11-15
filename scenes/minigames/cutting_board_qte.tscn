@@ -53,29 +53,13 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("3_kbunt")
 
-[node name="Hitzone1" type="ColorRect" parent="QTEBar"]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 0
-offset_left = 24.0
-offset_right = 39.0
-offset_bottom = 15.0
-color = Color(0.8050247, 0.81985444, 0.8346881, 1)
-
-[node name="Hitzone2" type="ColorRect" parent="QTEBar"]
-custom_minimum_size = Vector2(20, 15)
-layout_mode = 0
-offset_left = 64.0
-offset_right = 84.0
-offset_bottom = 15.0
-color = Color(0.8039216, 0.81960785, 0.8352941, 1)
-
-[node name="Hitzone3" type="ColorRect" parent="QTEBar"]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 0
-offset_left = 120.0
-offset_right = 135.0
-offset_bottom = 15.0
-color = Color(0.8039216, 0.81960785, 0.8352941, 1)
+[node name="Hitzones" type="Control" parent="QTEBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Pointer" type="TextureRect" parent="QTEBar"]
 modulate = Color(1.0187511, 1.0187511, 1.0187511, 1)

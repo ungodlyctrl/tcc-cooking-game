@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CuttingDifficultyResource" load_steps=2 format=3 uid="uid://di4jf2hftkul"]
+
+[ext_resource type="Script" uid="uid://baqat5tghxdy3" path="res://scripts/cutting_difficulty_resource.gd" id="1_fy5co"]
+
+[resource]
+script = ExtResource("1_fy5co")
+min_day = 5
+pointer_speed = 70.0
+attempts = 4
+hitzone_count = 4
+hitzone_positions = Array[float]([0.2, 0.45, 0.65, 0.9])
+hitzone_sizes = Array[float]([0.1, 0.12, 0.12, 0.08])
+hitzone_hit_modulate = Color(0.49019608, 0.8784314, 0.5058824, 0.8509804)
+metadata/_custom_type_script = "uid://baqat5tghxdy3"
