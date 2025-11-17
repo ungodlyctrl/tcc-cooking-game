@@ -1,9 +1,15 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=8 format=3 uid="uid://3g63wrh5tmqq"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=20 format=3 uid="uid://3g63wrh5tmqq"]
 
+[ext_resource type="Texture2D" uid="uid://dqg02q6g42283" path="res://assets/cuscuz pronto.png" id="1_c5gnj"]
 [ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_ncd7f"]
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_xt4fu"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_k5hbk"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_ncd7f"]
+[ext_resource type="Texture2D" uid="uid://cvnkgf58t5axe" path="res://assets/prato cm cuscuz cm ovo cm pimentão1 .png" id="3_m1v6a"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="4_5i84f"]
+[ext_resource type="Texture2D" uid="uid://dbo6wpvrrrv8e" path="res://assets/prato cm cuscuz1.png" id="5_vc8nw"]
+[ext_resource type="Texture2D" uid="uid://cj1rq3fgql6fc" path="res://assets/pimentao 2.png" id="8_4os1p"]
+[ext_resource type="Texture2D" uid="uid://ui4ksgb3syu2" path="res://assets/ovo2 (2).png" id="9_nnp6k"]
 
 [sub_resource type="Resource" id="Resource_xt4fu"]
 script = ExtResource("1_xt4fu")
@@ -27,6 +33,43 @@ inclusion_chance = 0.8
 variation_line_absent = Array[String](["Mas sem aquilo vermelho, digo, o pimentão."])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
+[sub_resource type="Resource" id="Resource_4os1p"]
+script = ExtResource("4_5i84f")
+state = "cooked"
+texture = ExtResource("5_vc8nw")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_j7p4k"]
+script = ExtResource("2_ncd7f")
+ingredient_id = "cuscuz"
+state_sprites = Array[ExtResource("4_5i84f")]([SubResource("Resource_4os1p")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_5i84f"]
+script = ExtResource("4_5i84f")
+texture = ExtResource("8_4os1p")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_vc8nw"]
+script = ExtResource("2_ncd7f")
+ingredient_id = "pimentao"
+state_sprites = Array[ExtResource("4_5i84f")]([SubResource("Resource_5i84f")])
+z_index = 1
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_c5gnj"]
+script = ExtResource("4_5i84f")
+state = "cooked"
+texture = ExtResource("9_nnp6k")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_m1v6a"]
+script = ExtResource("2_ncd7f")
+ingredient_id = "ovo"
+state_sprites = Array[ExtResource("4_5i84f")]([SubResource("Resource_c5gnj")])
+z_index = 1
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
 [resource]
 script = ExtResource("2_k5hbk")
 recipe_name = "Cuscuz Paulista"
@@ -36,4 +79,7 @@ min_day = 5
 time_of_day = Array[String](["lunch"])
 ingredient_requirements = Array[ExtResource("1_xt4fu")]([SubResource("Resource_xt4fu"), SubResource("Resource_k5hbk"), SubResource("Resource_ncd7f")])
 client_lines = Array[String](["Olá, gostaria de um cuscuz paulista por favor. ", "Boa tarde, um cuscuz paulista. Apenas isso.", "Ovo, pimentão e flocão, eu quero um cuscuz paulista!"])
+plate_ingredient_visuals = Array[ExtResource("2_ncd7f")]([SubResource("Resource_j7p4k"), SubResource("Resource_vc8nw"), SubResource("Resource_m1v6a")])
+final_plate_sprite = ExtResource("3_m1v6a")
+delivered_plate_sprite = ExtResource("1_c5gnj")
 metadata/_custom_type_script = "uid://c6xvod46icb2"

@@ -6,7 +6,7 @@ const INGREDIENT_COSTS := {
 	"mortadela": 4,
 	"presunto": 5,
 	"pao": 2,
-	"pao de queijo": 3,
+	"pao de queijo": 2,
 	"manteiga": 2,
 	"ovo": 2,
 	"arroz": 3,

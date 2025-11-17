@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d4fehmyo6hugb"]
+[gd_scene load_steps=25 format=3 uid="uid://d4fehmyo6hugb"]
 
 [ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
 [ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
@@ -8,11 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://dk286hwgpiw5g" path="res://scenes/ui/cutting_board_area.tscn" id="5_s7btf"]
 [ext_resource type="Resource" uid="uid://h6bv745dka7u" path="res://resources/prep_layouts/day3.tres" id="6_0fv8j"]
 [ext_resource type="Resource" uid="uid://cl2w1py5ndu5a" path="res://resources/prep_layouts/day5.tres" id="7_n1wni"]
-[ext_resource type="Texture2D" uid="uid://b17kxfptkmg2r" path="res://assets/bancada marrom 7.3.png" id="8_kgpen"]
+[ext_resource type="Texture2D" uid="uid://hdc0dc3cmlwc" path="res://assets/bancada marrom 7.2 (1).png" id="9_436n2"]
 [ext_resource type="PackedScene" uid="uid://bimgikpa8sqfn" path="res://scenes/ui/tool.tscn" id="11_b513c"]
 [ext_resource type="PackedScene" uid="uid://dwip8uhvt1cpv" path="res://scenes/ui/stove_area.tscn" id="11_tsv3s"]
 [ext_resource type="PackedScene" uid="uid://coeukigyvkutw" path="res://scenes/ui/recipe_note_panel.tscn" id="11_ytfgg"]
 [ext_resource type="PackedScene" uid="uid://dpukuemgj7l15" path="res://scenes/ui/trash_bin.tscn" id="13_s610r"]
+[ext_resource type="Texture2D" uid="uid://h3i6kpp70rq0" path="res://assets/armario 760x40.png" id="14_i1lce"]
 [ext_resource type="Texture2D" uid="uid://da0bcgvpli0am" path="res://assets/Misto render.png" id="15_5avst"]
 [ext_resource type="PackedScene" uid="uid://coucan28i2vhl" path="res://scenes/ui/top_delivery_area.tscn" id="15_ktx3g"]
 [ext_resource type="Texture2D" uid="uid://b6vkk2ebf3h3m" path="res://assets/mini/carne 1.png" id="16_udkeo"]
@@ -55,12 +56,19 @@ mouse_filter = 2
 script = ExtResource("3_s610r")
 prep_layouts = Array[ExtResource("4_7bx2v")]([ExtResource("5_kgpen"), ExtResource("6_0fv8j"), ExtResource("7_n1wni")])
 
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PrepArea"]
+layout_mode = 0
+offset_top = 320.0
+offset_right = 760.0
+offset_bottom = 360.0
+texture = ExtResource("14_i1lce")
+
 [node name="Fundo" type="NinePatchRect" parent="ScrollContainer/PrepArea"]
 layout_mode = 1
 offset_right = 64.0
 offset_bottom = 64.0
 mouse_filter = 1
-texture = ExtResource("8_kgpen")
+texture = ExtResource("9_436n2")
 region_rect = Rect2(0, 0, 128, 128)
 patch_margin_left = 16
 patch_margin_top = 16
@@ -125,45 +133,29 @@ outline_margin = 4.0
 blink_speed = 1.5
 always_visible_for_debug = false
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PrepArea"]
-layout_mode = 0
-offset_top = 320.0
-offset_right = 40.0
-offset_bottom = 360.0
-
 [node name="Carne1" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-visible = false
-modulate = Color(1, 0.5, 0.5, 1)
 position = Vector2(406, 175)
 texture = ExtResource("16_udkeo")
 
 [node name="Carne2" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-visible = false
-modulate = Color(1, 0, 0, 1)
+modulate = Color(1, 0.35000002, 0.35000002, 1)
 position = Vector2(425, 175)
 texture = ExtResource("17_i1lce")
 
 [node name="Mortadela(1)" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-visible = false
-modulate = Color(1, 0, 0, 1)
 position = Vector2(444, 175)
 texture = ExtResource("18_64ko7")
 
 [node name="PaoDeQueijo" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-visible = false
-modulate = Color(1, 0.39999998, 0.39999998, 1)
 position = Vector2(462, 175)
 texture = ExtResource("19_4q0da")
 
 [node name="Peixe" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-visible = false
 modulate = Color(1, 0, 0, 1)
 position = Vector2(480, 175)
 texture = ExtResource("20_ntn0l")
 
 [node name="Pimentao" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-visible = false
-modulate = Color(1, 0.5, 0.5, 1)
 position = Vector2(388, 175)
 texture = ExtResource("21_updoi")
 
@@ -173,13 +165,10 @@ position = Vector2(388, 158)
 texture = ExtResource("21_updoi")
 
 [node name="Presunto(2)" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-visible = false
-modulate = Color(1, 0.5, 0.5, 1)
 position = Vector2(370, 175)
 texture = ExtResource("22_itwtr")
 
 [node name="Queijo(2)" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-visible = false
 modulate = Color(1, 0, 0, 1)
 position = Vector2(498, 175)
 texture = ExtResource("23_m18tk")

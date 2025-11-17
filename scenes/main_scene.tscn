@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bb8qn4uw8t02" path="res://assets/relogio-Sheet2.png" id="6_6wevv"]
 [ext_resource type="Texture2D" uid="uid://bt1v4c0kkjd85" path="res://assets/moeda sheet 2.png" id="7_e1cbu"]
 [ext_resource type="Texture2D" uid="uid://3fie0u0ymmqe" path="res://assets/estrela sheet.png" id="8_mngbo"]
+[ext_resource type="Texture2D" uid="uid://dpfmfyejcommj" path="res://assets/dialogoo.png" id="10_6wevv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4w45t"]
 atlas = ExtResource("6_6wevv")
@@ -392,13 +393,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pu3yx"]
-bg_color = Color(0.796078, 0.858824, 0.988235, 1)
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gubc5"]
 bg_color = Color(0.913725, 0.941176, 1, 1)
 border_width_left = 4
@@ -419,7 +413,12 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1pb6"]
-bg_color = Color(0.913725, 0.941176, 1, 1)
+bg_color = Color(0.9764706, 0.94509804, 0.89411765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3372549, 0.2627451, 0.21176471, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -563,7 +562,6 @@ offset_bottom = 23.0
 
 [node name="InGameOptions" type="Control" parent="."]
 process_mode = 3
-visible = false
 z_index = 999
 layout_mode = 3
 anchors_preset = 8
@@ -581,17 +579,21 @@ custom_minimum_size = Vector2(640, 360)
 layout_mode = 1
 offset_right = 640.0
 offset_bottom = 360.0
-color = Color(0, 0, 0, 0.4)
+color = Color(0, 0, 0, 0.5)
 
-[node name="OptionsPanel" type="Panel" parent="InGameOptions"]
+[node name="OptionsPanel" type="NinePatchRect" parent="InGameOptions"]
 process_mode = 3
-custom_minimum_size = Vector2(230, 200)
+custom_minimum_size = Vector2(230, 210)
 layout_mode = 1
 offset_left = 205.0
 offset_top = 58.0
 offset_right = 435.0
 offset_bottom = 258.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_pu3yx")
+texture = ExtResource("10_6wevv")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
 [node name="OptionsTitle" type="Label" parent="InGameOptions/OptionsPanel"]
 layout_mode = 1
@@ -640,10 +642,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -37.5
-offset_top = -88.0
-offset_right = 37.5
-offset_bottom = -58.0
+offset_left = -53.0
+offset_top = -92.0
+offset_right = 53.0
+offset_bottom = -62.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
@@ -663,10 +665,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -37.5
-offset_top = -44.0
-offset_right = 37.5
-offset_bottom = -14.0
+offset_left = -53.0
+offset_top = -48.0
+offset_right = 53.0
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
