@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=6 format=3 uid="uid://cn5tl61fvyxog"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=7 format=3 uid="uid://cn5tl61fvyxog"]
 
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_7lkcx"]
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_or3uk"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_7lkcx"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_786k6"]
@@ -26,5 +27,4 @@ min_day = 5
 time_of_day = Array[String](["dinner"])
 ingredient_requirements = Array[ExtResource("1_or3uk")]([SubResource("Resource_or3uk"), SubResource("Resource_786k6")])
 client_lines = Array[String](["Boa noite. Algo frito e saboroso. Certo, um bolinho de bacalhau. ", "Gostaria de um bolinho de bacalhau. Valeu!", "Olá, um bolinho de bacalhau no capricho por favor."])
-display_steps_variants = Array[Dictionary]([{}])
 metadata/_custom_type_script = "uid://c6xvod46icb2"

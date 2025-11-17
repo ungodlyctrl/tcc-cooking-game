@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=18 format=3 uid="uid://op4gaj7yrofn"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=19 format=3 uid="uid://op4gaj7yrofn"]
 
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_6r2q5"]
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_tjqf5"]
 [ext_resource type="Texture2D" uid="uid://deccuj6ovh5p5" path="res://assets/feiju 1.1.png" id="1_vf75x"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_7c4my"]

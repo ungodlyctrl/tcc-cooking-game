@@ -1,8 +1,14 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=7 format=3 uid="uid://dvuwoccnego32"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=20 format=3 uid="uid://dvuwoccnego32"]
 
+[ext_resource type="Texture2D" uid="uid://0xmsdoudmmaq" path="res://assets/tutu servdio.png" id="1_e4int"]
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_m738w"]
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_n58do"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_m738w"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_p4bu2"]
+[ext_resource type="Texture2D" uid="uid://chm3bsp805f6h" path="res://assets/tutu1.1 .png" id="3_051uu"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="6_ge3eo"]
+[ext_resource type="Texture2D" uid="uid://c5s8qhbf21gku" path="res://assets/tutu2,1.png" id="7_td065"]
+[ext_resource type="Texture2D" uid="uid://cqkr7oh05kox7" path="res://assets/Cópia de ovo.png" id="8_xhrw1"]
 
 [sub_resource type="Resource" id="Resource_n58do"]
 script = ExtResource("1_n58do")
@@ -24,6 +30,48 @@ ingredient_id = "ovo"
 state = "cooked"
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
+[sub_resource type="Resource" id="Resource_p605a"]
+script = ExtResource("6_ge3eo")
+state = "cooked"
+texture = ExtResource("7_td065")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_xj6no"]
+script = ExtResource("6_ge3eo")
+texture = ExtResource("7_td065")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_ptyp5"]
+script = ExtResource("2_m738w")
+ingredient_id = "feijao"
+state_sprites = Array[ExtResource("6_ge3eo")]([SubResource("Resource_p605a"), SubResource("Resource_xj6no")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_8p8se"]
+script = ExtResource("6_ge3eo")
+state = "cooked"
+texture = ExtResource("7_td065")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_gicxl"]
+script = ExtResource("2_m738w")
+ingredient_id = "cuscuz"
+state_sprites = Array[ExtResource("6_ge3eo")]([SubResource("Resource_8p8se")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_1wl4x"]
+script = ExtResource("6_ge3eo")
+state = "cooked"
+texture = ExtResource("8_xhrw1")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_bu20u"]
+script = ExtResource("2_m738w")
+ingredient_id = "ovo"
+state_sprites = Array[ExtResource("6_ge3eo")]([SubResource("Resource_1wl4x")])
+z_index = 1
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
 [resource]
 script = ExtResource("2_p4bu2")
 recipe_name = "Tutu de Feijão"
@@ -33,4 +81,7 @@ min_day = 5
 time_of_day = Array[String](["dinner"])
 ingredient_requirements = Array[ExtResource("1_n58do")]([SubResource("Resource_n58do"), SubResource("Resource_p4bu2"), SubResource("Resource_m738w")])
 client_lines = Array[String](["Boa noite, queria um tutu de feijão!", "Tutu de feijão, apenas. Obrigado.", "Como vai? Um tutu de feijão por favor.", "Como é o nome daquele de feijão e farinha de milho?"])
+plate_ingredient_visuals = Array[ExtResource("2_m738w")]([SubResource("Resource_ptyp5"), SubResource("Resource_gicxl"), SubResource("Resource_bu20u")])
+final_plate_sprite = ExtResource("3_051uu")
+delivered_plate_sprite = ExtResource("1_e4int")
 metadata/_custom_type_script = "uid://c6xvod46icb2"

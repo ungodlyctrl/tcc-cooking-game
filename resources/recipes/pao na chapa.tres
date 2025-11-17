@@ -1,8 +1,15 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=6 format=3 uid="uid://c58yfwumkfobg"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=19 format=3 uid="uid://c58yfwumkfobg"]
 
+[ext_resource type="Texture2D" uid="uid://xiobnh6qeymo" path="res://assets/entrega4 (1).png" id="1_10d0m"]
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_halyj"]
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_q14fl"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_db24g"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_halyj"]
+[ext_resource type="Texture2D" uid="uid://cva6yi5wc5wha" path="res://assets/pao4.1 (1).png" id="3_02cf4"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="6_lw4td"]
+[ext_resource type="Texture2D" uid="uid://dm2fn6mf7v6cc" path="res://assets/pao1.1 (1).png" id="7_g15ld"]
+[ext_resource type="Texture2D" uid="uid://bkbesx1lql8sc" path="res://assets/pao2.1 (1).png" id="8_jfxf1"]
+[ext_resource type="Texture2D" uid="uid://b2u1hjdy8dgvt" path="res://assets/pao3.1 (1).png" id="9_kypcd"]
 
 [sub_resource type="Resource" id="Resource_gacoo"]
 script = ExtResource("1_q14fl")
@@ -18,6 +25,42 @@ state = "fried"
 stages = Array[int]([3])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
+[sub_resource type="Resource" id="Resource_42mgb"]
+script = ExtResource("6_lw4td")
+state = "raw"
+texture = ExtResource("7_g15ld")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_6acjd"]
+script = ExtResource("6_lw4td")
+state = "fried"
+texture = ExtResource("8_jfxf1")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_87de3"]
+script = ExtResource("2_halyj")
+ingredient_id = "pao"
+state_sprites = Array[ExtResource("6_lw4td")]([SubResource("Resource_42mgb"), SubResource("Resource_6acjd")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_gl53p"]
+script = ExtResource("6_lw4td")
+state = "raw"
+texture = ExtResource("9_kypcd")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_k23oc"]
+script = ExtResource("6_lw4td")
+state = "fried"
+texture = ExtResource("3_02cf4")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_lry7d"]
+script = ExtResource("2_halyj")
+ingredient_id = "manteiga"
+state_sprites = Array[ExtResource("6_lw4td")]([SubResource("Resource_gl53p"), SubResource("Resource_k23oc")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
 [resource]
 script = ExtResource("2_db24g")
 recipe_name = "Pão na chapa"
@@ -27,3 +70,6 @@ min_day = 5
 time_of_day = Array[String](["breakfast"])
 ingredient_requirements = Array[ExtResource("1_q14fl")]([SubResource("Resource_gacoo"), SubResource("Resource_6clnh")])
 client_lines = Array[String](["Quero um pão na chapa.", "Bom dia. Me vê um pão na chapa, por favor!", "E aí mano, um pão na chapa.", "Quero um pão na chapa bem tostadinho, tio!"])
+plate_ingredient_visuals = Array[ExtResource("2_halyj")]([SubResource("Resource_87de3"), SubResource("Resource_lry7d")])
+final_plate_sprite = ExtResource("3_02cf4")
+delivered_plate_sprite = ExtResource("1_10d0m")

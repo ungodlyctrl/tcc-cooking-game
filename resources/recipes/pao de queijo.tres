@@ -1,6 +1,8 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=13 format=3 uid="uid://d2tyt7o6iotlo"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=15 format=3 uid="uid://d2tyt7o6iotlo"]
 
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_cpdue"]
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_jcfx5"]
+[ext_resource type="Texture2D" uid="uid://b7iue0hfc8tda" path="res://assets/1 (1).png" id="1_jdo52"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_bqi7u"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_h5gvi"]
 [ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="3_p6f63"]
@@ -53,4 +55,5 @@ ingredient_requirements = Array[ExtResource("1_jcfx5")]([SubResource("Resource_j
 client_lines = Array[String](["Opa, bom? Me vê um pão de queijo quentinho por favor.", "Pão de queijo por favor, é macio e fofinho!", "Pão e queijo, pão de queijo!"])
 display_steps = Array[String](["Adicionar pão de queijo"])
 plate_ingredient_visuals = Array[ExtResource("2_h5gvi")]([SubResource("Resource_cpdue")])
+delivered_plate_sprite = ExtResource("1_jdo52")
 metadata/_custom_type_script = "uid://c6xvod46icb2"

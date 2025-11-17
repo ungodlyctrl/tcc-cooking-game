@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=21 format=3 uid="uid://76qn8eienky0"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=22 format=3 uid="uid://76qn8eienky0"]
 
-[ext_resource type="Texture2D" uid="uid://dxxgc5edc0lka" path="res://assets/prato pao cm mortadela.png" id="1_gd1ir"]
+[ext_resource type="Texture2D" uid="uid://xl1ofsrp545p" path="res://assets/prato pao cm mortadela 2.png" id="1_3ewag"]
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_sbib0"]
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="2_3ewag"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_gacoo"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_h5mvj"]
 [ext_resource type="Texture2D" uid="uid://ct06miopqr6ql" path="res://assets/p morta4.1.png" id="2_r4qv6"]
@@ -90,4 +91,4 @@ client_lines = Array[String](["E aí, poderia me ver um pão com mortadela, por 
 display_steps = Array[String](["Levar pão ao prato", "Tostar mortadela na frigideira"])
 plate_ingredient_visuals = Array[ExtResource("2_gacoo")]([SubResource("Resource_3ewag"), SubResource("Resource_mcsga")])
 final_plate_sprite = ExtResource("2_r4qv6")
-delivered_plate_sprite = ExtResource("1_gd1ir")
+delivered_plate_sprite = ExtResource("1_3ewag")

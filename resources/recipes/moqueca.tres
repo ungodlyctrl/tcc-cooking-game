@@ -1,8 +1,14 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=8 format=3 uid="uid://co0pamtmfao81"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=22 format=3 uid="uid://co0pamtmfao81"]
 
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_iq1wm"]
+[ext_resource type="Texture2D" uid="uid://cbofsrpmleqnf" path="res://assets/moqueca entrega.png" id="1_l6h7b"]
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_v5mlg"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_au55i"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_iq1wm"]
+[ext_resource type="Texture2D" uid="uid://d2jw3die2qsxl" path="res://assets/moqueca 1.1.png" id="3_4uu2j"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="6_2yk7y"]
+[ext_resource type="Texture2D" uid="uid://cbkjiajr6cjqj" path="res://assets/moqueca2.1.png" id="7_ialhq"]
+[ext_resource type="Texture2D" uid="uid://tlybl30vflww" path="res://assets/ovo (2).png" id="8_a5ctp"]
 
 [sub_resource type="Resource" id="Resource_v5mlg"]
 script = ExtResource("1_v5mlg")
@@ -13,7 +19,7 @@ metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [sub_resource type="Resource" id="Resource_au55i"]
 script = ExtResource("1_v5mlg")
-ingredient_id = "pimentão"
+ingredient_id = "pimentao"
 state = "cooked"
 stages = Array[int]([1, 2])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
@@ -30,6 +36,52 @@ ingredient_id = "agua"
 state = "cooked"
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
+[sub_resource type="Resource" id="Resource_aehs2"]
+script = ExtResource("6_2yk7y")
+state = "cooked_1"
+texture = ExtResource("7_ialhq")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_hv34t"]
+script = ExtResource("2_iq1wm")
+ingredient_id = "peixe"
+state_sprites = Array[ExtResource("6_2yk7y")]([SubResource("Resource_aehs2")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_f6qf0"]
+script = ExtResource("6_2yk7y")
+texture = ExtResource("7_ialhq")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_ji1v1"]
+script = ExtResource("2_iq1wm")
+ingredient_id = "pimentao"
+state_sprites = Array[ExtResource("6_2yk7y")]([SubResource("Resource_f6qf0")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_562id"]
+script = ExtResource("6_2yk7y")
+texture = ExtResource("7_ialhq")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_7mrcf"]
+script = ExtResource("2_iq1wm")
+ingredient_id = "agua"
+state_sprites = Array[ExtResource("6_2yk7y")]([SubResource("Resource_562id")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_nytjh"]
+script = ExtResource("6_2yk7y")
+state = "cooked_1"
+texture = ExtResource("8_a5ctp")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_chv5o"]
+script = ExtResource("2_iq1wm")
+ingredient_id = "ovo"
+state_sprites = Array[ExtResource("6_2yk7y")]([SubResource("Resource_nytjh")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
 [resource]
 script = ExtResource("2_au55i")
 recipe_name = "Moqueca"
@@ -39,4 +91,7 @@ min_day = 5
 time_of_day = Array[String](["dinner"])
 ingredient_requirements = Array[ExtResource("1_v5mlg")]([SubResource("Resource_v5mlg"), SubResource("Resource_au55i"), SubResource("Resource_iq1wm"), SubResource("Resource_0fr6g")])
 client_lines = Array[String](["Essa noite pede por uma moqueca. Me veja uma por favor!", "Oi moço, gostaria de uma moqueca de peixe. Obrigado.", "Olá, ouvi dizer que a moqueca é deliciosa. Uma por favor!", "E aí, desenrola uma moqueca pra mim. Valeu."])
+plate_ingredient_visuals = Array[ExtResource("2_iq1wm")]([SubResource("Resource_hv34t"), SubResource("Resource_ji1v1"), SubResource("Resource_7mrcf"), SubResource("Resource_chv5o")])
+final_plate_sprite = ExtResource("3_4uu2j")
+delivered_plate_sprite = ExtResource("1_l6h7b")
 metadata/_custom_type_script = "uid://c6xvod46icb2"

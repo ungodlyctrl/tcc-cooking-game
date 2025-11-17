@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=25 format=3 uid="uid://c5osvsrm6mm6d"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=26 format=3 uid="uid://c5osvsrm6mm6d"]
 
 [ext_resource type="Texture2D" uid="uid://b7t642ci257kl" path="res://assets/prato2 (2).png" id="1_105i3"]
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_gcvmf"]
-[ext_resource type="Texture2D" uid="uid://bvi7pa2fw0pqa" path="res://assets/owa 3.1.png" id="1_k01y2"]
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="2_b7iyh"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_k2pes"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_vblu1"]
+[ext_resource type="Texture2D" uid="uid://drotukdal2hn7" path="res://assets/owa 4.1.png" id="3_b7iyh"]
 [ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="3_nrj08"]
 [ext_resource type="Texture2D" uid="uid://c5mrhtlcyrj2b" path="res://assets/arroz.png" id="4_k01y2"]
 [ext_resource type="Texture2D" uid="uid://djt3ahpt8etfq" path="res://assets/carne (1).png" id="5_105i3"]
@@ -109,6 +110,6 @@ ingredient_requirements = Array[ExtResource("1_gcvmf")]([SubResource("Resource_g
 client_lines = Array[String](["Olá, boa noite. Um filé Oswaldo Aranha.", "Oswaldo Aranha, apenas o filé, sem aranhas desta vez.", "Opa, me vê um filé Oswaldo Aranha!"])
 display_steps = Array[String](["Adicionar arroz", "Fritar carne", "Cortar batata", "Fritar batata", "Adicionar farofa"])
 plate_ingredient_visuals = Array[ExtResource("2_k2pes")]([SubResource("Resource_rnit5"), SubResource("Resource_1r7qi"), SubResource("Resource_scgq2"), SubResource("Resource_hj3wa")])
-final_plate_sprite = ExtResource("1_k01y2")
+final_plate_sprite = ExtResource("3_b7iyh")
 delivered_plate_sprite = ExtResource("1_105i3")
 metadata/_custom_type_script = "uid://c6xvod46icb2"
