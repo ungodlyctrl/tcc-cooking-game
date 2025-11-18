@@ -128,7 +128,7 @@ func _update_ui() -> void:
 	money_label.text = "M$ " + str(money)
 	day_label.text = "Dia " + str(day)
 	if absolute_minutes >= END_OF_DAY_MINUTES and not (current_mode == GameMode.END_OF_DAY):
-		clock_label.add_theme_color_override("font_color", Color(0.85, 0.162, 0.184, 1.0))
+		clock_label.add_theme_color_override("font_color", Color("d9292fff"))
 
 
 # ---------------- Day Cycle ----------------

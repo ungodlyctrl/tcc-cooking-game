@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://det48e24b3j7b"]
+[gd_scene load_steps=7 format=3 uid="uid://det48e24b3j7b"]
 
 [ext_resource type="Script" uid="uid://nopev2xb8r8r" path="res://scripts/cooking_minigame.gd" id="1_nsvnn"]
+[ext_resource type="Texture2D" uid="uid://da6jpr7yphasl" path="res://assets/barra cookingminigame.png" id="2_dnglp"]
+[ext_resource type="Texture2D" uid="uid://l0r6y2v0hsfa" path="res://assets/barra cru.png" id="3_a4ail"]
+[ext_resource type="Texture2D" uid="uid://b1eiomn3f21q5" path="res://assets/barra bom.png" id="4_vdwtf"]
+[ext_resource type="Texture2D" uid="uid://cw607toriad13" path="res://assets/barra queimada.png" id="5_qviqj"]
+[ext_resource type="Texture2D" uid="uid://b27342ickku8t" path="res://assets/ponteiro cookingminigame.png" id="6_a4ail"]
 
 [node name="CookingMinigame" type="Control"]
 custom_minimum_size = Vector2(175, 175)
@@ -11,6 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nsvnn")
+cook_speed = 15.0
 
 [node name="Background" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(215, 175)
@@ -31,39 +37,41 @@ offset_top = 11.0
 offset_right = 58.0
 offset_bottom = 51.0
 
-[node name="HeatBar" type="ColorRect" parent="."]
+[node name="HeatBar" type="TextureRect" parent="."]
 z_index = 4
+custom_minimum_size = Vector2(0, 12)
 layout_mode = 0
 offset_left = 8.0
-offset_top = 83.0
+offset_top = 81.0
 offset_right = 95.0
-offset_bottom = 95.0
-color = Color(0.340339, 0.340339, 0.340339, 0.647)
+offset_bottom = 93.0
+texture = ExtResource("2_dnglp")
 
-[node name="ZoneCool" type="ColorRect" parent="HeatBar"]
+[node name="ZoneCool" type="TextureRect" parent="HeatBar"]
 layout_mode = 0
 offset_right = 25.0
 offset_bottom = 12.0
-color = Color(0.269, 0.584, 0.824, 0.75)
+texture = ExtResource("3_a4ail")
 
-[node name="ZoneIdeal" type="ColorRect" parent="HeatBar"]
+[node name="ZoneIdeal" type="TextureRect" parent="HeatBar"]
 layout_mode = 0
 offset_left = 25.0
 offset_right = 57.0
 offset_bottom = 12.0
-color = Color(0, 0.8, 0.2, 0.75)
+texture = ExtResource("4_vdwtf")
 
-[node name="ZoneBurn" type="ColorRect" parent="HeatBar"]
+[node name="ZoneBurn" type="TextureRect" parent="HeatBar"]
 layout_mode = 0
 offset_left = 57.0
 offset_right = 87.0
 offset_bottom = 12.0
-color = Color(0.785664, 0.231419, 0.15503, 0.75)
+texture = ExtResource("5_qviqj")
 
-[node name="HeatMarker" type="ColorRect" parent="HeatBar"]
+[node name="HeatMarker" type="TextureRect" parent="HeatBar"]
 layout_mode = 0
-offset_right = 6.0
+offset_right = 7.0
 offset_bottom = 12.0
+texture = ExtResource("6_a4ail")
 
 [node name="FeedbackLabel" type="Label" parent="."]
 layout_mode = 0
