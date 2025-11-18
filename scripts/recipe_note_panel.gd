@@ -35,8 +35,9 @@ const HEADER_EXTRA: int = 20
 func _ready() -> void:
 	await get_tree().process_frame
 
+	# por padrão não mostrar barra vertical (vamos só ativar quando necessário)
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_NEVER
 
 	for lbl in [title_label, ingredient_label, steps_label]:
 		lbl.bbcode_enabled = true
@@ -52,6 +53,7 @@ func _ready() -> void:
 	margin.add_theme_constant_override("margin_bottom", 10)
 
 	note_bg.custom_minimum_size = CLOSED_SIZE
+	# tamanho inicial do scroll (ajustado quando abrir)
 	scroll.custom_minimum_size = Vector2(OPEN_WIDTH - INNER_HORIZONTAL_PADDING, CLOSED_SIZE.y)
 	content_box.visible = false
 
@@ -72,6 +74,7 @@ func set_recipe(recipe: RecipeResource, variants: Array = []) -> void:
 
 
 func _update_content() -> void:
+	# espera frame pra garantir que nodes/labels tenham tamanho correto
 	await get_tree().process_frame
 
 	if current_recipe == null:
@@ -88,12 +91,28 @@ func _update_content() -> void:
 	for req in current_recipe.ingredient_requirements:
 		if req == null:
 			continue
-		var name := _get_display_name(req.ingredient_id)
-		var qty := req.quantity
-		var qty_txt := "" if qty <= 1 else " x%d" % qty
-		ing_lines.append("[color=%s]- %s%s[/color]" % [TEXT_COLOR, name, qty_txt])
 
-	ingredient_label.bbcode_text = "[color=%s]Ingredientes:[/color]\n%s" % [SECTION_COLOR, "\n".join(ing_lines)]
+		var name := _get_display_name(req.ingredient_id)
+		var qty := int(req.quantity)
+		# sempre exibir quantidade (x1, x2...)
+		var qty_txt := "x%d" % qty
+
+		# ícone (bbcode img) — fica antes da quantidade
+		var icon_bb := _get_ingredient_icon_bbcode(req.ingredient_id, req.state)
+		var icon_prefix := "" if icon_bb == "" else "%s " % icon_bb
+
+		# novo formato: icone + quantidade + nome  (ex: [img] x2 Presunto)
+		ing_lines.append("[color=%s]- %s%s %s[/color]" % [
+			TEXT_COLOR,
+			icon_prefix,
+			qty_txt,
+			name
+		])
+
+	ingredient_label.bbcode_text = "[color=%s]Ingredientes:[/color]\n%s" % [
+		SECTION_COLOR,
+		"\n".join(ing_lines)
+	]
 
 	# -------------------- MODO DE PREPARO --------------------
 
@@ -101,6 +120,7 @@ func _update_content() -> void:
 	var variant_steps := _get_variant_display_steps(current_recipe, current_variants)
 	if not variant_steps.is_empty():
 		steps_label.bbcode_text = _format_steps_block(variant_steps)
+		_post_update_layout_and_scroll()
 		return
 
 	# 2) Usa display_steps normal (com filtragem)
@@ -114,13 +134,34 @@ func _update_content() -> void:
 
 		if filtered.is_empty():
 			steps_label.bbcode_text = _generate_steps_bbcode_filtered(current_recipe, current_variants)
+			_post_update_layout_and_scroll()
 			return
 
 		steps_label.bbcode_text = _format_steps_block(filtered)
+		_post_update_layout_and_scroll()
 		return
 
 	# 3) Fallback automático
 	steps_label.bbcode_text = _generate_steps_bbcode_filtered(current_recipe, current_variants)
+	_post_update_layout_and_scroll()
+
+
+# chama após atualizar bbcode para medir e ajustar scroll (reaproveitado)
+func _post_update_layout_and_scroll() -> void:
+	# espera um frame ou dois para o RichTextLabel recalcular tamanho corretamente
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	var content_h := content_box.get_combined_minimum_size().y + HEADER_EXTRA
+	# decide se mostra a barra vertical
+	if content_h > MAX_HEIGHT:
+		scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_ALWAYS
+	else:
+		scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_NEVER
+
+	# ajusta o custom_minimum_size do scroll pra ficar alinhado com a animação
+	var target_h := int(clamp(content_h, MIN_HEIGHT, MAX_HEIGHT))
+	scroll.custom_minimum_size = Vector2(OPEN_WIDTH - INNER_HORIZONTAL_PADDING, target_h - HEADER_EXTRA)
 
 
 # ============================================================
@@ -145,10 +186,7 @@ func _get_variant_display_steps(recipe: RecipeResource, variants: Array) -> Arra
 			print(" ✔ VARIANTE ENCONTRADA!")
 			return var_res.steps.duplicate(true) as Array[String]
 
-
-
 	return [] as Array[String]
-
 
 
 # ============================================================
@@ -273,6 +311,18 @@ func _get_display_name(id: String) -> String:
 	return id.capitalize()
 
 
+func _get_ingredient_icon_bbcode(id: String, state: String) -> String:
+	# tenta pegar mini icon considerando estado; managers retorna Texture2D ou null
+	var tex := Managers.ingredient_database.get_mini_icon(id, state)
+	if tex == null:
+		return ""
+	var path := tex.resource_path
+	if path == "":
+		return ""
+	# 14px costuma encaixar com texto
+	return "[img=14]" + path + "[/img]"
+
+
 # ============================================================
 # INTERAÇÃO / ANIMAÇÕES
 # ============================================================
@@ -296,11 +346,16 @@ func _animate_open() -> void:
 	content_box.visible = true
 	scroll.modulate.a = 1.0
 
+	# atualiza conteúdo e espera o layout estabilizar antes de medir
 	_update_content()
+	await get_tree().process_frame
 	await get_tree().process_frame
 
 	var content_h := content_box.get_combined_minimum_size().y + HEADER_EXTRA
 	var target_h := int(clamp(content_h, MIN_HEIGHT, MAX_HEIGHT))
+
+	# garante que o scroll tenha o tamanho correto ANTES da animação (evita "texto descendo antes do fundo")
+	scroll.custom_minimum_size = Vector2(OPEN_WIDTH - INNER_HORIZONTAL_PADDING, max(1, target_h - HEADER_EXTRA))
 
 	var tw := create_tween()
 	tw.parallel().tween_property(note_bg, "custom_minimum_size", Vector2(OPEN_WIDTH, target_h), 0.35).set_trans(Tween.TRANS_BACK)

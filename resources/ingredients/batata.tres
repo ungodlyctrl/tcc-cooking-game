@@ -1,13 +1,21 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://f4je2rnfbe5r"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=8 format=3 uid="uid://f4je2rnfbe5r"]
 
 [ext_resource type="Texture2D" uid="uid://cq01vct86kjci" path="res://assets/ingredientes/batata/container.png" id="1_4r4mv"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_ei2p1"]
+[ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_1gg26"]
+[ext_resource type="Texture2D" uid="uid://dginjl55pgey2" path="res://assets/mini/batata.png" id="3_bnwyl"]
 [ext_resource type="Texture2D" uid="uid://dwipom76agdwa" path="res://assets/ingredientes/batata/raw.png" id="3_hm0iv"]
 [ext_resource type="Texture2D" uid="uid://c2fg3q8fc3jhb" path="res://assets/ingredientes/batata/cut.png" id="4_ssoop"]
+
+[sub_resource type="Resource" id="Resource_cxqrj"]
+script = ExtResource("2_1gg26")
+texture = ExtResource("3_bnwyl")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
 
 [resource]
 script = ExtResource("1_ei2p1")
 id = "batata"
+mini_icons = Array[ExtResource("2_1gg26")]([SubResource("Resource_cxqrj")])
 display_name = "Batata"
 container_texture = ExtResource("1_4r4mv")
 states = Dictionary[String, Texture2D]({

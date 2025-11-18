@@ -39,6 +39,7 @@ metadata/_custom_type_script = "uid://cechr0x3jl21b"
 script = ExtResource("2_jd6mm")
 ingredient_id = "alface"
 pos = Vector2(16, 72)
+size = Vector2(64, 32)
 metadata/_custom_type_script = "uid://cechr0x3jl21b"
 
 [sub_resource type="Resource" id="Resource_380kp"]

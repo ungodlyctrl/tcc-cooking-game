@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jsixmrpuuj4a"
-path="res://.godot/imported/queijo (2).png-2a32884a120dec5a83f077964ea42696.ctex"
+uid="uid://h6i1m1kjqsrl"
+path="res://.godot/imported/feijão.png-630fbcae43ab1d045691e5bb6a3ddb8d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/mini/queijo (2).png"
-dest_files=["res://.godot/imported/queijo (2).png-2a32884a120dec5a83f077964ea42696.ctex"]
+source_file="res://assets/mini/feijão.png"
+dest_files=["res://.godot/imported/feijão.png-630fbcae43ab1d045691e5bb6a3ddb8d.ctex"]
 
 [params]
 

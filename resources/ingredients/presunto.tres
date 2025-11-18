@@ -1,12 +1,20 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=4 format=3 uid="uid://dnmt1j0074gxj"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://dnmt1j0074gxj"]
 
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_270b4"]
 [ext_resource type="Texture2D" uid="uid://gbelajjo7qrt" path="res://assets/ingredientes/presunto/container.png" id="1_a2aep"]
+[ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_5kgm7"]
+[ext_resource type="Texture2D" uid="uid://sosmqb6ojmtt" path="res://assets/mini/presunto.png" id="3_de705"]
 [ext_resource type="Texture2D" uid="uid://lk8i1ttuwnqy" path="res://assets/ingredientes/presunto/raw.png" id="3_mrwjm"]
+
+[sub_resource type="Resource" id="Resource_w48tq"]
+script = ExtResource("2_5kgm7")
+texture = ExtResource("3_de705")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
 
 [resource]
 script = ExtResource("1_270b4")
 id = "presunto"
+mini_icons = Array[ExtResource("2_5kgm7")]([SubResource("Resource_w48tq")])
 display_name = "Presunto"
 min_day = 3
 container_texture = ExtResource("1_a2aep")

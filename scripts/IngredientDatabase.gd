@@ -5,6 +5,7 @@ extends Node
 
 var ingredients: Dictionary[String, IngredientData] = {}
 
+
 func _ready() -> void:
 	ingredients.clear()
 	if not ingredient_list.is_empty():
@@ -17,8 +18,27 @@ func _ready() -> void:
 func get_ingredient(id: String) -> IngredientData:
 	return ingredients.get(id, null)
 
+
 func get_sprite(id: String, state: String) -> Texture2D:
 	var data := get_ingredient(id)
 	if data:
 		return data.states.get(state, null)
+	return null
+
+
+func get_mini_icon(id: String, state: String) -> Texture2D:
+	var data := get_ingredient(id)
+	if not data:
+		return null
+
+	# tenta achar match exato
+	for m in data.mini_icons:
+		if m.state == state:
+			return m.texture
+
+	# fallback: raw
+	for m in data.mini_icons:
+		if m.state == "raw":
+			return m.texture
+
 	return null

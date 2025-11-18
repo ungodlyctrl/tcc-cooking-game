@@ -1,13 +1,34 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://si0gtg2ngnt"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=11 format=3 uid="uid://si0gtg2ngnt"]
 
 [ext_resource type="Texture2D" uid="uid://dl7iusc78woxb" path="res://assets/ingredientes/peixe/peixe 2 .png" id="1_ih8bh"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_p1sa1"]
+[ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_hcein"]
+[ext_resource type="Texture2D" uid="uid://bcnai4b7pmnxi" path="res://assets/mini/peixe.png" id="3_1denm"]
 [ext_resource type="Texture2D" uid="uid://qfpwfahr715m" path="res://assets/ingredientes/peixe/cut.png" id="4_3nnve"]
+[ext_resource type="Texture2D" uid="uid://bswupv3127ugp" path="res://assets/mini/peixe2.png" id="4_68ffv"]
 [ext_resource type="Texture2D" uid="uid://c7oqc5ekbcreo" path="res://assets/ingredientes/peixe/peixe unico 2.png" id="4_onhh4"]
+
+[sub_resource type="Resource" id="Resource_gwxhb"]
+script = ExtResource("2_hcein")
+texture = ExtResource("3_1denm")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
+
+[sub_resource type="Resource" id="Resource_v7q3j"]
+script = ExtResource("2_hcein")
+state = "cooked"
+texture = ExtResource("4_68ffv")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
+
+[sub_resource type="Resource" id="Resource_h35mq"]
+script = ExtResource("2_hcein")
+state = "fried"
+texture = ExtResource("4_68ffv")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
 
 [resource]
 script = ExtResource("1_p1sa1")
 id = "peixe"
+mini_icons = Array[ExtResource("2_hcein")]([SubResource("Resource_gwxhb"), SubResource("Resource_v7q3j"), SubResource("Resource_h35mq")])
 display_name = "Peixe"
 min_day = 5
 container_texture = ExtResource("1_ih8bh")

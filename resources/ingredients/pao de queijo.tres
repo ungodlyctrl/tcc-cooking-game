@@ -1,12 +1,20 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=4 format=3 uid="uid://bumww64d3ymy0"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://bumww64d3ymy0"]
 
 [ext_resource type="Texture2D" uid="uid://bkln2mad42j22" path="res://assets/ingredientes/pao de queijo/container.png" id="1_fgnwl"]
+[ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_3iema"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="2_66lru"]
+[ext_resource type="Texture2D" uid="uid://s5qrx11ll87i" path="res://assets/mini/pao de queijo.png" id="3_1rltc"]
 [ext_resource type="Texture2D" uid="uid://ejumco2qb38y" path="res://assets/ingredientes/pao de queijo/pao de queijo uncio3.png" id="3_66lru"]
+
+[sub_resource type="Resource" id="Resource_plv0g"]
+script = ExtResource("2_3iema")
+texture = ExtResource("3_1rltc")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
 
 [resource]
 script = ExtResource("2_66lru")
 id = "pao de queijo"
+mini_icons = Array[ExtResource("2_3iema")]([SubResource("Resource_plv0g")])
 display_name = "Pão de queijo"
 container_texture = ExtResource("1_fgnwl")
 initial_state = "cooked"

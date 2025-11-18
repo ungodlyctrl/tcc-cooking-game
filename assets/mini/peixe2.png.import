@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlbtmtwg33d08"
-path="res://.godot/imported/presunto (2).png-c2bea748469f49d8c6649039a113de86.ctex"
+uid="uid://bswupv3127ugp"
+path="res://.godot/imported/peixe2.png-4b5dcf8eca3a7fb1460492880065b40a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/mini/presunto (2).png"
-dest_files=["res://.godot/imported/presunto (2).png-c2bea748469f49d8c6649039a113de86.ctex"]
+source_file="res://assets/mini/peixe2.png"
+dest_files=["res://.godot/imported/peixe2.png-4b5dcf8eca3a7fb1460492880065b40a.ctex"]
 
 [params]
 

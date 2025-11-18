@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbv7kx372mnvi"
-path="res://.godot/imported/mortadela (1).png-01a7c69769a25924bc50c1c2c8b2318c.ctex"
+uid="uid://dginjl55pgey2"
+path="res://.godot/imported/batata.png-756e59cec4fe4fae40b795c4955814c3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/mini/mortadela (1).png"
-dest_files=["res://.godot/imported/mortadela (1).png-01a7c69769a25924bc50c1c2c8b2318c.ctex"]
+source_file="res://assets/mini/batata.png"
+dest_files=["res://.godot/imported/batata.png-756e59cec4fe4fae40b795c4955814c3.ctex"]
 
 [params]
 

@@ -12,6 +12,7 @@ const PLATE_DRAG_OFFSET: Vector2 = Vector2(-40, -30)
 @onready var base_plate: TextureRect = $PlateRoot/BasePlate
 @onready var visual_container: Control = $PlateRoot/VisualContainer
 @onready var used_list: VBoxContainer = $VBoxContainer/UsedList
+@onready var mini_icons: HBoxContainer = $MiniIconsContainer
 
 # --- Estado
 var used_ingredients: Array[Dictionary] = []
@@ -64,6 +65,7 @@ func set_current_recipe(recipe: RecipeResource) -> void:
 
 	expected_recipe = recipe
 	clear_ingredients()
+	_update_mini_icons()
 
 	if expected_recipe:
 		print("✅ DropPlateArea recebeu receita:", expected_recipe.recipe_name)
@@ -81,12 +83,13 @@ func clear_ingredients() -> void:
 	for n in _visual_nodes:
 		if n and n.is_inside_tree():
 			n.queue_free()
-
 	_visual_nodes.clear()
 
 	for c in used_list.get_children():
 		c.queue_free()
 
+	for c in mini_icons.get_children():
+		c.queue_free()
 
 
 # ---------------- ADD INGREDIENTS ----------------
@@ -102,7 +105,7 @@ func add_ingredients(ingredients: Array[Dictionary]) -> void:
 
 	_update_ingredient_list_ui()
 	_update_plate_visuals()
-
+	_update_mini_icons()
 
 
 func _try_recover_recipe() -> void:
@@ -175,6 +178,31 @@ func _get_plate_sprite_for(id: String, state: String, quantity: int = 1) -> Text
 
 	return null
 
+
+#----------------- ICONES -----------
+func _update_mini_icons() -> void:
+	# limpa
+	for c in mini_icons.get_children():
+		c.queue_free()
+
+	# recria
+	for ing in used_ingredients:
+		var id : String = ing.get("id", "")
+		var st : String = ing.get("state", "")
+
+		var tex := Managers.ingredient_database.get_mini_icon(id, st)
+		if tex == null:
+			continue
+
+		var icon := TextureRect.new()
+		icon.texture = tex
+		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+		# erro? pinta vermelho
+		if not _ingredient_is_expected(ing):
+			icon.modulate = Color("ff8080ff")
+
+		mini_icons.add_child(icon)
 
 
 # ---------------- VISUAIS ----------------

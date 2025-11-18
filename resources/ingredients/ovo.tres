@@ -1,12 +1,20 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=4 format=3 uid="uid://sebcmd5raimh"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://sebcmd5raimh"]
 
 [ext_resource type="Texture2D" uid="uid://dwwfckkgjx4c2" path="res://assets/ingredientes/ovo/container.png" id="1_hivub"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_mcomf"]
+[ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_btcvk"]
+[ext_resource type="Texture2D" uid="uid://d7qi2tly0g06" path="res://assets/mini/ovo.png" id="3_m72xa"]
 [ext_resource type="Texture2D" uid="uid://c3tqhlns1fd5r" path="res://assets/ingredientes/ovo/raw.png" id="3_tnaqi"]
+
+[sub_resource type="Resource" id="Resource_3i1wl"]
+script = ExtResource("2_btcvk")
+texture = ExtResource("3_m72xa")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
 
 [resource]
 script = ExtResource("1_mcomf")
 id = "ovo"
+mini_icons = Array[ExtResource("2_btcvk")]([SubResource("Resource_3i1wl")])
 display_name = "Ovo"
 min_day = 5
 container_texture = ExtResource("1_hivub")

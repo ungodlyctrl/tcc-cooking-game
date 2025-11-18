@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d4fehmyo6hugb"]
+[gd_scene load_steps=17 format=3 uid="uid://d4fehmyo6hugb"]
 
 [ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
 [ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
@@ -16,14 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://h3i6kpp70rq0" path="res://assets/armario 760x40.png" id="14_i1lce"]
 [ext_resource type="Texture2D" uid="uid://da0bcgvpli0am" path="res://assets/Misto render.png" id="15_5avst"]
 [ext_resource type="PackedScene" uid="uid://coucan28i2vhl" path="res://scenes/ui/top_delivery_area.tscn" id="15_ktx3g"]
-[ext_resource type="Texture2D" uid="uid://b6vkk2ebf3h3m" path="res://assets/mini/carne 1.png" id="16_udkeo"]
-[ext_resource type="Texture2D" uid="uid://cjmhmd4el8o6t" path="res://assets/mini/carne 2.png" id="17_i1lce"]
-[ext_resource type="Texture2D" uid="uid://bbv7kx372mnvi" path="res://assets/mini/mortadela (1).png" id="18_64ko7"]
-[ext_resource type="Texture2D" uid="uid://s5qrx11ll87i" path="res://assets/mini/pao de queijo.png" id="19_4q0da"]
-[ext_resource type="Texture2D" uid="uid://bcnai4b7pmnxi" path="res://assets/mini/peixe.png" id="20_ntn0l"]
-[ext_resource type="Texture2D" uid="uid://dxxl15u51x3kt" path="res://assets/mini/pimentao.png" id="21_updoi"]
-[ext_resource type="Texture2D" uid="uid://dlbtmtwg33d08" path="res://assets/mini/presunto (2).png" id="22_itwtr"]
-[ext_resource type="Texture2D" uid="uid://jsixmrpuuj4a" path="res://assets/mini/queijo (2).png" id="23_m18tk"]
 
 [node name="ModePreparation" type="Control"]
 layout_mode = 3
@@ -132,51 +124,6 @@ outline_color = Color(0.9963259, 0.8863418, 0.8941092, 1)
 outline_margin = 4.0
 blink_speed = 1.5
 always_visible_for_debug = false
-
-[node name="Carne1" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-position = Vector2(406, 175)
-texture = ExtResource("16_udkeo")
-
-[node name="Carne2" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-modulate = Color(1, 0.35000002, 0.35000002, 1)
-position = Vector2(425, 175)
-texture = ExtResource("17_i1lce")
-
-[node name="Mortadela(1)" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-position = Vector2(444, 175)
-texture = ExtResource("18_64ko7")
-
-[node name="PaoDeQueijo" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-position = Vector2(462, 175)
-texture = ExtResource("19_4q0da")
-
-[node name="Peixe" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-modulate = Color(1, 0, 0, 1)
-position = Vector2(480, 175)
-texture = ExtResource("20_ntn0l")
-
-[node name="Pimentao" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-position = Vector2(388, 175)
-texture = ExtResource("21_updoi")
-
-[node name="Pimentao2" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-visible = false
-position = Vector2(388, 158)
-texture = ExtResource("21_updoi")
-
-[node name="Presunto(2)" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-position = Vector2(370, 175)
-texture = ExtResource("22_itwtr")
-
-[node name="Queijo(2)" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-modulate = Color(1, 0, 0, 1)
-position = Vector2(498, 175)
-texture = ExtResource("23_m18tk")
-
-[node name="Queijo(2)2" type="Sprite2D" parent="ScrollContainer/PrepArea"]
-visible = false
-position = Vector2(498, 160)
-texture = ExtResource("23_m18tk")
 
 [node name="HUDPrep" type="Control" parent="."]
 layout_mode = 1
