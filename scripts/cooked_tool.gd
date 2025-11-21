@@ -25,8 +25,15 @@ func _ready() -> void:
 func _load_tool_sprite() -> void:
 	if tool_type == "":
 		return
-	var path := "res://assets/utensilios/%s.png" % tool_type
-	tool_sprite.texture = load(path)
+
+	var full_path := "res://assets/utensilios/%s_full.png" % tool_type
+	if ResourceLoader.exists(full_path):
+		tool_sprite.texture = load(full_path)
+	else:
+		var base_path := "res://assets/utensilios/%s.png" % tool_type
+		tool_sprite.texture = load(base_path)
+
+
 
 
 
