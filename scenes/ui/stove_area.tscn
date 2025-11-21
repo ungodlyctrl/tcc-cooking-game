@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwip8uhvt1cpv"]
 
-[ext_resource type="Texture2D" uid="uid://bgg72l032bv5o" path="res://assets/utensilios/cu que entope 6.png" id="1_w3vhk"]
+[ext_resource type="Texture2D" uid="uid://ciaxcja3qdgbf" path="res://assets/cooktop.png" id="1_w3vhk"]
 [ext_resource type="Script" uid="uid://e0qlc3bjakqj" path="res://scenes/ui/burner_slot.gd" id="3_650sq"]
 
 [node name="StoveArea" type="TextureRect"]
 custom_minimum_size = Vector2(0, 175)
+anchors_preset = -1
 offset_right = 105.0
 offset_bottom = 175.0
 texture = ExtResource("1_w3vhk")
@@ -12,9 +13,9 @@ texture = ExtResource("1_w3vhk")
 [node name="BurnerSlot1" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 2.0
-offset_top = 66.0
+offset_top = 76.0
 offset_right = 58.0
-offset_bottom = 122.0
+offset_bottom = 132.0
 script = ExtResource("3_650sq")
 
 [node name="ToolAnchor" type="TextureRect" parent="BurnerSlot1"]
@@ -25,17 +26,17 @@ layout_mode = 0
 modulate = Color(1, 1, 1, 0.42)
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 0
-offset_left = 12.0
-offset_top = 84.0
-offset_right = 28.0
-offset_bottom = 100.0
+offset_left = 13.0
+offset_top = 82.0
+offset_right = 29.0
+offset_bottom = 98.0
 
 [node name="BurnerSlot2" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 2.0
-offset_top = -1.0
+offset_top = -2.0
 offset_right = 58.0
-offset_bottom = 60.0
+offset_bottom = 59.0
 script = ExtResource("3_650sq")
 
 [node name="ToolAnchor" type="TextureRect" parent="BurnerSlot2"]
@@ -45,10 +46,10 @@ layout_mode = 0
 modulate = Color(1, 1, 1, 0.42)
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 0
-offset_left = 65.0
-offset_top = 153.0
-offset_right = 81.0
-offset_bottom = 169.0
+offset_left = 66.0
+offset_top = 160.0
+offset_right = 82.0
+offset_bottom = 176.0
 
 [node name="FeedbackLabel" type="Label" parent="."]
 z_index = 2

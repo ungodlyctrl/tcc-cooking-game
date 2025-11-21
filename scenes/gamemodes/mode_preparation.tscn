@@ -87,10 +87,11 @@ offset_bottom = 292.0
 [node name="StoveArea" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("11_tsv3s")]
 unique_name_in_owner = true
 layout_mode = 0
+anchors_preset = 0
 offset_left = 432.0
-offset_top = 128.0
+offset_top = 126.0
 offset_right = 537.0
-offset_bottom = 303.0
+offset_bottom = 301.0
 
 [node name="TrashBin" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("13_s610r")]
 layout_mode = 0

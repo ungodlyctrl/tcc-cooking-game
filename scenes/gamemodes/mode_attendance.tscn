@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dehkeao1vbiy0"]
+[gd_scene load_steps=20 format=3 uid="uid://dehkeao1vbiy0"]
 
 [ext_resource type="Script" uid="uid://6dn564kkwxms" path="res://scripts/mode_attendance.gd" id="1_jdssm"]
 [ext_resource type="Script" uid="uid://f8ltra48a5fx" path="res://scripts/client_drop_area.gd" id="3_k6rd5"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://bajd32jdwarvc" path="res://moio (1).png" id="7_k6rd5"]
 [ext_resource type="Texture2D" uid="uid://crmhpana72md8" path="res://assets/fundos/bancada skin.png" id="8_jo5r6"]
 [ext_resource type="Texture2D" uid="uid://dcv1t5jdpjj80" path="res://assets/fundos/relogio skin.png" id="13_1jjao"]
+[ext_resource type="Texture2D" uid="uid://c4xpbtnsc3o21" path="res://assets/figobar 2.png" id="14_yf3ax"]
+[ext_resource type="Texture2D" uid="uid://23ayu4m0lrl1" path="res://assets/pinguim.png" id="15_ghgpe"]
 
 [sub_resource type="Animation" id="Animation_kpxur"]
 length = 0.001
@@ -190,3 +192,11 @@ grow_vertical = 2
 visible = false
 position = Vector2(320, 180)
 texture = ExtResource("13_1jjao")
+
+[node name="Figobar2" type="Sprite2D" parent="."]
+position = Vector2(55, 205)
+texture = ExtResource("14_yf3ax")
+
+[node name="Pinguim" type="Sprite2D" parent="."]
+position = Vector2(28, 112)
+texture = ExtResource("15_ghgpe")

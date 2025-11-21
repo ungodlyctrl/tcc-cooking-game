@@ -17,7 +17,7 @@ cutting_difficulties = Array[ExtResource("3_slu3u")]([ExtResource("4_w2sjh"), Ex
 
 [node name="BancadaKnife" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 166.0
-offset_right = 190.0
+offset_left = 156.0
+offset_right = 180.0
 offset_bottom = 100.0
 texture = ExtResource("3_4kqre")

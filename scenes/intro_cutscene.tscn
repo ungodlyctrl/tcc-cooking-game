@@ -1,0 +1,125 @@
+[gd_scene load_steps=10 format=3 uid="uid://j6ypms5kguqm"]
+
+[ext_resource type="Script" uid="uid://bqq66flqhcai2" path="res://scripts/intro_cutscene.gd" id="1_dcu1r"]
+[ext_resource type="Texture2D" uid="uid://o2agneexbexj" path="res://assets/quadrinho cds.png" id="2_on3y1"]
+[ext_resource type="Texture2D" uid="uid://dck2qku0l8aoh" path="res://assets/quadrinho cds 2.png" id="3_wo2cs"]
+[ext_resource type="Texture2D" uid="uid://bo5apec2micip" path="res://assets/quadrinho cds 3.png" id="4_bprnf"]
+[ext_resource type="Texture2D" uid="uid://dpbrs36h0u7ea" path="res://assets/quadrinho cds 4.png" id="5_pbanw"]
+[ext_resource type="Texture2D" uid="uid://bb8m8jhu6ffnw" path="res://assets/quadrinho cds 5.png" id="6_fxsd4"]
+[ext_resource type="Texture2D" uid="uid://co5g8cia7toxh" path="res://assets/quadrinho cds 6.png" id="7_rqbdd"]
+[ext_resource type="Texture2D" uid="uid://dqqu1xieywlsh" path="res://assets/quadrinho cds 7.png" id="8_rh6bc"]
+[ext_resource type="Texture2D" uid="uid://dlu8j2cxt6oy7" path="res://assets/quadrinho cds todo.png" id="9_on3y1"]
+
+[node name="IntroCutscene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dcu1r")
+fade_time = 0.5
+delay_between_panels = 1.9
+group_hold_time = 2.5
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.22805128, 0.22063005, 0.32039592, 1)
+
+[node name="PanelsGroupA" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel1" type="TextureRect" parent="PanelsGroupA"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("2_on3y1")
+expand_mode = 1
+
+[node name="Panel2" type="TextureRect" parent="PanelsGroupA"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -2.0
+offset_right = 638.0
+offset_bottom = 360.0
+texture = ExtResource("3_wo2cs")
+expand_mode = 1
+
+[node name="Panel3" type="TextureRect" parent="PanelsGroupA"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -4.0
+offset_right = 636.0
+offset_bottom = 360.0
+texture = ExtResource("4_bprnf")
+expand_mode = 1
+
+[node name="Panel4" type="TextureRect" parent="PanelsGroupA"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -1.0
+offset_right = 639.0
+offset_bottom = 360.0
+texture = ExtResource("5_pbanw")
+expand_mode = 1
+
+[node name="Panel5" type="TextureRect" parent="PanelsGroupA"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -1.0
+offset_right = 639.0
+offset_bottom = 360.0
+texture = ExtResource("6_fxsd4")
+expand_mode = 1
+
+[node name="PanelsGroupB" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -40.0
+offset_right = -16.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel1" type="TextureRect" parent="PanelsGroupB"]
+layout_mode = 0
+offset_right = 730.0
+offset_bottom = 450.0
+texture = ExtResource("7_rqbdd")
+expand_mode = 1
+
+[node name="Panel2" type="TextureRect" parent="PanelsGroupB"]
+layout_mode = 0
+offset_right = 730.0
+offset_bottom = 450.0
+texture = ExtResource("8_rh6bc")
+expand_mode = 1
+
+[node name="SkipLabel" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.7372549)
+layout_mode = 0
+offset_left = 484.0
+offset_top = 345.0
+offset_right = 682.0
+offset_bottom = 362.0
+theme_override_font_sizes/font_size = 12
+text = "APERTE ESPAÇO / CLIQUE PARA PULAR"
+
+[node name="QuadrinhoCdsTodo" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(968, 272)
+texture = ExtResource("9_on3y1")

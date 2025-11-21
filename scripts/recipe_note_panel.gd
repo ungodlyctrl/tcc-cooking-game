@@ -18,10 +18,10 @@ const OPEN_WIDTH := 180
 const MIN_HEIGHT := 120
 const MAX_HEIGHT := 240
 
-const TITLE_BBCODE := "[font_size=16][color=#1a0d00]%s[/color][/font_size]\n"
-const SECTION_COLOR := "#1a0d00"
-const TEXT_COLOR := "#2b1a10"
-const LIGHT_TEXT_COLOR := "#3b2415"
+const TITLE_BBCODE := "[font_size=18][color=#0f1735]%s[/color][/font_size]\n"
+const SECTION_COLOR := "0f1735"
+const TEXT_COLOR := "0f1735"
+const LIGHT_TEXT_COLOR := "#0f1735"
 
 var is_open := false
 
@@ -137,7 +137,6 @@ func _animate_open() -> void:
 		return
 	is_open = true
 
-	# prepara conteúdo mas DEIXA invisível
 	_update_content(true)
 	content_box.visible = true
 	_set_content_alpha(0.0)
@@ -147,11 +146,11 @@ func _animate_open() -> void:
 	var content_h := content_box.get_combined_minimum_size().y + HEADER_EXTRA
 	var target_h := int(clamp(content_h, MIN_HEIGHT, MAX_HEIGHT))
 
-	scroll.vertical_scroll_mode = (
-		content_h > MAX_HEIGHT
-		if ScrollContainer.SCROLL_MODE_SHOW_ALWAYS
-		else ScrollContainer.SCROLL_MODE_DISABLED
-	)
+	# CORRIGIDO – sem ternário inválido
+	if content_h > MAX_HEIGHT:
+		scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_ALWAYS
+	else:
+		scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 
 	scroll.custom_minimum_size = Vector2(
 		OPEN_WIDTH - INNER_HORIZONTAL_PADDING,
@@ -174,13 +173,15 @@ func _animate_open() -> void:
 
 	await tw.finished
 
-	# agora que a nota já desceu → FADE-IN DO TEXTO
+	# FADE-IN
 	var tw2 := create_tween()
-	tw2.tween_property(self, "_dummy", 0.0, 0.06) # delay curto
+	tw2.tween_property(self, "modulate:a", 1.0, 0.00001)
 	await tw2.finished
 
 	_set_content_alpha(1.0)
 	scroll.scroll_vertical = 0
+
+
 
 
 func _animate_close() -> void:

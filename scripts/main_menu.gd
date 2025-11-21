@@ -46,6 +46,17 @@ func _process(delta: float) -> void:
 
 ## ------------------------- BUTTON ACTIONS -------------------------
 func start_game() -> void:
+	var scene := load("res://scenes/intro_cutscene.tscn")
+	var cutscene = scene.instantiate()
+	get_tree().root.add_child(cutscene)
+
+	# esconde o menu enquanto a cutscene roda
+	self.visible = false
+
+	cutscene.connect("cutscene_finished", Callable(self, "_on_cutscene_end"))
+
+
+func _on_cutscene_end() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_scene.tscn")
 
 

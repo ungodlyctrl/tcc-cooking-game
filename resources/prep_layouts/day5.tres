@@ -127,7 +127,7 @@ metadata/_custom_type_script = "uid://bojulivybbvsu"
 script = ExtResource("3_jd6mm")
 node_name = "StoveArea"
 pos = Vector2(512, 128)
-size = Vector2(105, 175)
+size = Vector2(105, 180)
 metadata/_custom_type_script = "uid://bojulivybbvsu"
 
 [sub_resource type="Resource" id="Resource_x4vt3"]
