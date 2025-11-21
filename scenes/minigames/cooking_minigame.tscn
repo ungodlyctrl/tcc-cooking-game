@@ -94,11 +94,9 @@ animations = [{
 [node name="CookingMinigame" type="Control"]
 custom_minimum_size = Vector2(175, 175)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 175.0
+offset_bottom = 175.0
 script = ExtResource("1_nsvnn")
 cook_speed = 15.0
 
@@ -123,12 +121,15 @@ mouse_filter = 0
 [node name="MiniIcons" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 8.0
-offset_top = -10.0
-offset_right = 8.0
-offset_bottom = -10.0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.5
+offset_top = -15.0
+offset_right = -37.5
+offset_bottom = -15.0
 grow_horizontal = 2
 mouse_filter = 2
+theme_override_constants/separation = 2
 alignment = 1
 
 [node name="IngredientSprite" type="TextureRect" parent="."]
