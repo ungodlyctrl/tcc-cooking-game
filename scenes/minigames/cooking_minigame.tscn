@@ -83,7 +83,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"boil",
-"speed": 7.0
+"speed": 6.0
 }, {
 "frames": [],
 "loop": true,
@@ -109,9 +109,9 @@ offset_right = 207.0
 offset_bottom = 98.0
 
 [node name="PanAnimation" type="AnimatedSprite2D" parent="."]
-visible = false
 sprite_frames = SubResource("SpriteFrames_tsqvi")
 animation = &"boil"
+frame_progress = 0.15295438
 centered = false
 
 [node name="ToolSprite" type="TextureRect" parent="."]
