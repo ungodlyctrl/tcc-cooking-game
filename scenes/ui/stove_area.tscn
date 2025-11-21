@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwip8uhvt1cpv"]
+[gd_scene load_steps=5 format=3 uid="uid://dwip8uhvt1cpv"]
 
 [ext_resource type="Texture2D" uid="uid://ciaxcja3qdgbf" path="res://assets/cooktop.png" id="1_w3vhk"]
 [ext_resource type="Script" uid="uid://e0qlc3bjakqj" path="res://scenes/ui/burner_slot.gd" id="3_650sq"]
+[ext_resource type="Texture2D" uid="uid://lcxtpe5mkb8" path="res://assets/botão cooktop.png" id="3_xk2vl"]
+[ext_resource type="Texture2D" uid="uid://b1nsfl77q1esd" path="res://assets/outlinebotão cooktop.png" id="4_ytpre"]
 
 [node name="StoveArea" type="TextureRect"]
 custom_minimum_size = Vector2(0, 175)
@@ -9,27 +11,6 @@ anchors_preset = -1
 offset_right = 105.0
 offset_bottom = 175.0
 texture = ExtResource("1_w3vhk")
-
-[node name="BurnerSlot1" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 2.0
-offset_top = 76.0
-offset_right = 58.0
-offset_bottom = 132.0
-script = ExtResource("3_650sq")
-
-[node name="ToolAnchor" type="TextureRect" parent="BurnerSlot1"]
-unique_name_in_owner = true
-layout_mode = 0
-
-[node name="StartButton" type="Button" parent="BurnerSlot1"]
-modulate = Color(1, 1, 1, 0.42)
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 0
-offset_left = 13.0
-offset_top = 82.0
-offset_right = 29.0
-offset_bottom = 98.0
 
 [node name="BurnerSlot2" type="Control" parent="."]
 anchors_preset = 0
@@ -40,20 +21,86 @@ offset_bottom = 59.0
 script = ExtResource("3_650sq")
 
 [node name="ToolAnchor" type="TextureRect" parent="BurnerSlot2"]
+visible = false
 layout_mode = 0
 
-[node name="StartButton" type="Button" parent="BurnerSlot2"]
-modulate = Color(1, 1, 1, 0.42)
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 0
-offset_left = 66.0
-offset_top = 160.0
-offset_right = 82.0
-offset_bottom = 176.0
+[node name="MiniIcons" type="HBoxContainer" parent="BurnerSlot2"]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 22.0
+offset_top = -15.0
+offset_right = 22.0
+offset_bottom = -15.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+alignment = 1
 
-[node name="FeedbackLabel" type="Label" parent="."]
-z_index = 2
+[node name="StartButtonSprite" type="TextureRect" parent="BurnerSlot2"]
 layout_mode = 0
-offset_left = 216.0
-offset_right = 256.0
-offset_bottom = 23.0
+offset_left = 65.0
+offset_top = 159.0
+offset_right = 83.0
+offset_bottom = 177.0
+mouse_filter = 0
+texture = ExtResource("3_xk2vl")
+
+[node name="StartButtonOutline" type="TextureRect" parent="BurnerSlot2"]
+visible = false
+modulate = Color(1.3945211, 1.3945211, 1.3945211, 1)
+layout_mode = 0
+offset_left = 63.0
+offset_top = 157.0
+offset_right = 85.0
+offset_bottom = 179.0
+mouse_filter = 2
+texture = ExtResource("4_ytpre")
+
+[node name="BurnerSlot1" type="Control" parent="BurnerSlot2"]
+anchors_preset = 0
+offset_top = 78.0
+offset_right = 56.0
+offset_bottom = 134.0
+script = ExtResource("3_650sq")
+
+[node name="ToolAnchor" type="TextureRect" parent="BurnerSlot2/BurnerSlot1"]
+unique_name_in_owner = true
+layout_mode = 0
+
+[node name="MiniIcons" type="HBoxContainer" parent="BurnerSlot2/BurnerSlot1"]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 22.0
+offset_top = -15.0
+offset_right = 22.0
+offset_bottom = -15.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="StartButtonSprite" type="TextureRect" parent="BurnerSlot2/BurnerSlot1"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 81.0
+offset_right = 30.0
+offset_bottom = 99.0
+mouse_filter = 0
+texture = ExtResource("3_xk2vl")
+
+[node name="StartButtonOutline" type="TextureRect" parent="BurnerSlot2/BurnerSlot1"]
+visible = false
+modulate = Color(1.3945211, 1.3945211, 1.3945211, 1)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 79.0
+offset_right = 32.0
+offset_bottom = 101.0
+mouse_filter = 2
+texture = ExtResource("4_ytpre")

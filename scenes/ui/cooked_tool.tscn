@@ -6,12 +6,21 @@
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_kf0ps")
+tool_type = null
+cooked_ingredients = null
 
 [node name="ToolSprite" type="TextureRect" parent="."]
 layout_mode = 1
 
-[node name="IngredientsLabel" type="Label" parent="."]
-layout_mode = 0
-offset_top = -32.0
-offset_right = 40.0
-offset_bottom = -9.0
+[node name="MiniIcons" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = -10.0
+offset_right = -20.0
+offset_bottom = -10.0
+grow_horizontal = 2
+mouse_filter = 2
+alignment = 1

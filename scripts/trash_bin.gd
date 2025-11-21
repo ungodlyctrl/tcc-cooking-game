@@ -12,14 +12,17 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_PASS
 
 func _can_drop_data(_pos: Vector2, data: Variant) -> bool:
-	return typeof(data) == TYPE_DICTIONARY and data.has("type")
+	return typeof(data) == TYPE_DICTIONARY and data.has("type") or (data.has("state") and data["state"] == "tool")
+
 
 func _drop_data(_pos: Vector2, data: Variant) -> void:
 	if not _can_drop_data(_pos, data):
 		return
 
-	var data_type: String = data["type"]
+	var data_type: String = data.get("type", "")
+	var state_type: String = data.get("state", "")
 
+	# --- EXISTENTES ---
 	if data_type == TYPE_COOKED_TOOL:
 		var source: Control = data.get("source", null)
 		if source and source.is_inside_tree():
@@ -29,11 +32,18 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 		var source: Control = data.get("source", null)
 		if source and source is DropPlateArea:
 			source.clear_ingredients()
-	
+
 	elif data_type == "ingredient":
 		var source: Control = data.get("source", null)
 		if source and source.is_inside_tree():
 			source.queue_free()
+
+	# --- NOVO: permitir jogar fora panela normal do fogão ---
+	elif data_type == "tool":
+		var source = data.get("source", null)
+		if source and source is BurnerSlot:
+			source.remove_tool_from_burner()
+
 
 
 func _on_mouse_entered() -> void:

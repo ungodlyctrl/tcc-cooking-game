@@ -1,3 +1,4 @@
+
 extends Control
 class_name Tool
 
@@ -6,8 +7,6 @@ class_name Tool
 
 # ---------------- Constants ----------------
 const STATE_TOOL := "tool"
-
-# 🔹 Offsets visuais personalizados para o preview de drag
 const TOOL_DRAG_OFFSETS := {
 	"panela": Vector2(-25, -15),
 	"frigideira": Vector2(-24, -14)
@@ -51,6 +50,7 @@ func _get_drag_data(event_position: Vector2) -> Dictionary:
 
 	DragManager.current_drag_type = DragManager.DragType.TOOL
 	
+
 	return {
 		"id": tool_id,
 		"state": STATE_TOOL,

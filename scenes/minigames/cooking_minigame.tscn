@@ -1,11 +1,95 @@
-[gd_scene load_steps=7 format=3 uid="uid://det48e24b3j7b"]
+[gd_scene load_steps=19 format=3 uid="uid://det48e24b3j7b"]
 
 [ext_resource type="Script" uid="uid://nopev2xb8r8r" path="res://scripts/cooking_minigame.gd" id="1_nsvnn"]
 [ext_resource type="Texture2D" uid="uid://da6jpr7yphasl" path="res://assets/barra cookingminigame.png" id="2_dnglp"]
+[ext_resource type="Texture2D" uid="uid://dm6wp1cxkalod" path="res://assets/panela-animação.png" id="2_vdwtf"]
 [ext_resource type="Texture2D" uid="uid://l0r6y2v0hsfa" path="res://assets/barra cru.png" id="3_a4ail"]
 [ext_resource type="Texture2D" uid="uid://b1eiomn3f21q5" path="res://assets/barra bom.png" id="4_vdwtf"]
 [ext_resource type="Texture2D" uid="uid://cw607toriad13" path="res://assets/barra queimada.png" id="5_qviqj"]
 [ext_resource type="Texture2D" uid="uid://b27342ickku8t" path="res://assets/ponteiro cookingminigame.png" id="6_a4ail"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qviqj"]
+atlas = ExtResource("2_vdwtf")
+region = Rect2(0, 0, 101, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cqvk"]
+atlas = ExtResource("2_vdwtf")
+region = Rect2(101, 0, 101, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbmxj"]
+atlas = ExtResource("2_vdwtf")
+region = Rect2(202, 0, 101, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_do87h"]
+atlas = ExtResource("2_vdwtf")
+region = Rect2(303, 0, 101, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmnmk"]
+atlas = ExtResource("2_vdwtf")
+region = Rect2(404, 0, 101, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvel7"]
+atlas = ExtResource("2_vdwtf")
+region = Rect2(505, 0, 101, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0f3ys"]
+atlas = ExtResource("2_vdwtf")
+region = Rect2(606, 0, 101, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4am1q"]
+atlas = ExtResource("2_vdwtf")
+region = Rect2(707, 0, 101, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ep4wk"]
+atlas = ExtResource("2_vdwtf")
+region = Rect2(808, 0, 101, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lp2b7"]
+atlas = ExtResource("2_vdwtf")
+region = Rect2(909, 0, 101, 77)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tsqvi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qviqj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4cqvk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tbmxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_do87h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmnmk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvel7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0f3ys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4am1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ep4wk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lp2b7")
+}],
+"loop": true,
+"name": &"boil",
+"speed": 7.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="CookingMinigame" type="Control"]
 custom_minimum_size = Vector2(175, 175)
@@ -26,9 +110,26 @@ offset_top = -77.0
 offset_right = 207.0
 offset_bottom = 98.0
 
+[node name="PanAnimation" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_tsqvi")
+animation = &"boil"
+centered = false
+
 [node name="ToolSprite" type="TextureRect" parent="."]
 layout_mode = 0
 mouse_filter = 0
+
+[node name="MiniIcons" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 8.0
+offset_top = -10.0
+offset_right = 8.0
+offset_bottom = -10.0
+grow_horizontal = 2
+mouse_filter = 2
+alignment = 1
 
 [node name="IngredientSprite" type="TextureRect" parent="."]
 layout_mode = 0
@@ -38,62 +139,26 @@ offset_right = 58.0
 offset_bottom = 51.0
 
 [node name="HeatBar" type="TextureRect" parent="."]
-z_index = 4
-custom_minimum_size = Vector2(0, 12)
-layout_mode = 0
-offset_left = 8.0
-offset_top = 81.0
-offset_right = 95.0
-offset_bottom = 93.0
-texture = ExtResource("2_dnglp")
-
-[node name="ZoneCool" type="TextureRect" parent="HeatBar"]
-layout_mode = 0
-offset_right = 25.0
-offset_bottom = 12.0
-texture = ExtResource("3_a4ail")
-
-[node name="ZoneIdeal" type="TextureRect" parent="HeatBar"]
-layout_mode = 0
-offset_left = 25.0
-offset_right = 57.0
-offset_bottom = 12.0
-texture = ExtResource("4_vdwtf")
-
-[node name="ZoneBurn" type="TextureRect" parent="HeatBar"]
-layout_mode = 0
-offset_left = 57.0
-offset_right = 87.0
-offset_bottom = 12.0
-texture = ExtResource("5_qviqj")
-
-[node name="HeatMarker" type="TextureRect" parent="HeatBar"]
-layout_mode = 0
-offset_right = 7.0
-offset_bottom = 12.0
-texture = ExtResource("6_a4ail")
-
-[node name="HeatBar2" type="TextureRect" parent="."]
-visible = false
 modulate = Color(1.0184411, 1.0184411, 1.0184411, 1)
 z_index = 4
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 0
-offset_left = -8.0
-offset_right = 67.0
-offset_bottom = 12.0
-rotation = 1.5707964
+offset_left = -17.0
+offset_top = 75.0
+offset_right = 58.0
+offset_bottom = 87.0
+rotation = -1.5707964
 texture = ExtResource("2_dnglp")
 expand_mode = 1
 
-[node name="ZoneCool" type="TextureRect" parent="HeatBar2"]
+[node name="ZoneCool" type="TextureRect" parent="HeatBar"]
 layout_mode = 0
 offset_right = 23.0
 offset_bottom = 12.0
 texture = ExtResource("3_a4ail")
 expand_mode = 1
 
-[node name="ZoneIdeal" type="TextureRect" parent="HeatBar2"]
+[node name="ZoneIdeal" type="TextureRect" parent="HeatBar"]
 layout_mode = 0
 offset_left = 23.0
 offset_right = 49.0
@@ -101,7 +166,7 @@ offset_bottom = 12.0
 texture = ExtResource("4_vdwtf")
 expand_mode = 1
 
-[node name="ZoneBurn" type="TextureRect" parent="HeatBar2"]
+[node name="ZoneBurn" type="TextureRect" parent="HeatBar"]
 layout_mode = 0
 offset_left = 49.0
 offset_right = 75.0
@@ -109,7 +174,7 @@ offset_bottom = 11.999996
 texture = ExtResource("5_qviqj")
 expand_mode = 1
 
-[node name="HeatMarker" type="TextureRect" parent="HeatBar2"]
+[node name="HeatMarker" type="TextureRect" parent="HeatBar"]
 layout_mode = 0
 offset_right = 7.0
 offset_bottom = 12.0
@@ -118,11 +183,6 @@ texture = ExtResource("6_a4ail")
 [node name="FeedbackLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 19.0
-offset_top = 100.0
+offset_top = 91.0
 offset_right = 59.0
-offset_bottom = 123.0
-
-[node name="IngredientListLabel" type="Label" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 17.0
+offset_bottom = 114.0
