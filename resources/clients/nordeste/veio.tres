@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ClientData" load_steps=5 format=3 uid="uid://bpbxaniibmggx"]
+
+[ext_resource type="Texture2D" uid="uid://sqnpobm5ygsy" path="res://assets/clients/Veio ruim.png" id="1_1qef0"]
+[ext_resource type="Script" uid="uid://c1roybtu8ul0l" path="res://scripts/client_data.gd" id="1_tx4ic"]
+[ext_resource type="Texture2D" uid="uid://d08yxbdkns6ir" path="res://assets/clients/Veio bom.png" id="2_3puj1"]
+[ext_resource type="Texture2D" uid="uid://cbqp71o3tt63v" path="res://assets/clients/Veio .png" id="3_kkduv"]
+
+[resource]
+script = ExtResource("1_tx4ic")
+region = "nordeste"
+neutral = ExtResource("3_kkduv")
+happy = ExtResource("2_3puj1")
+angry = ExtResource("1_1qef0")
+metadata/_custom_type_script = "uid://c1roybtu8ul0l"

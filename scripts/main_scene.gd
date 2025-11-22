@@ -1,6 +1,7 @@
 extends Node2D
 class_name MainScene
 ## Gerencia modos do jogo e ciclo de dias / receitas.
+
 enum GameMode { ATTENDANCE, PREPARATION, END_OF_DAY }
 
 # ---------------- Variáveis principais ----------------
@@ -9,24 +10,27 @@ var current_time_minutes: int = 8 * 60
 var absolute_minutes: int = 8 * 60
 var day: int = 5
 var money: int = 100
+
 const END_OF_DAY_MINUTES: int = 19 * 60
 const HARD_LIMIT_MINUTES: int = 20 * 60
+
 var last_time_of_day: String = ""
-var region: String = "sudeste"
 var current_recipe: RecipeResource = null
 var current_client_lines: Array[String] = []
 var current_recipe_variants: Array = []
+
 var prep_start_minutes: int = -1
 var pending_delivery: Array[Dictionary] = []
 var daily_report: Array = []
 var total_ingredient_expense: int = 0
+
 var current_client: ClientData = null
 var clock_timer: Timer = Timer.new()
 var day_should_end: bool = false
-# AUTO-NOTE: abrir só na primeira receita do day inicial
+
 var initial_day_at_start: int = 1
 var has_shown_note_first_day: bool = false
-# Controle interno de drag de prato
+
 var _is_dragging_plate: bool = false
 
 
@@ -36,6 +40,7 @@ var _is_dragging_plate: bool = false
 @onready var mode_end_of_day: ModeEndOfDay = $ModeEndOfDay
 @onready var scroll_container: ScrollContainer = $Mode_Preparation/ScrollContainer
 @onready var prep_area: PrepArea = $Mode_Preparation/ScrollContainer/PrepArea
+
 # HUD
 @onready var clock_label: Label = $HUD/ClockLabel
 @onready var money_label: Label = $HUD/MoneyLabel
@@ -48,37 +53,49 @@ func _ready() -> void:
 	clock_timer.timeout.connect(_on_time_tick)
 	add_child(clock_timer)
 	clock_timer.start()
+
 	switch_mode(GameMode.ATTENDANCE)
 	_update_ui()
+
 	await get_tree().process_frame
+	_apply_region_to_preparea()
+
 	load_new_recipe()
+
 	last_time_of_day = get_visual_time_of_day()
 	mode_attendance.update_city_background(last_time_of_day)
-	# Garante bancada inicial
+
+	# bancada inicial
 	prep_area.update_ingredients_for_day(day)
-	# 🔹 Conecta drag do prato
 	_connect_plate_drag_signal()
 
 
-# ---------------- Drag Signal Connection ----------------
+# ---------------- REGION HOOK ----------------
+func _apply_region_to_preparea() -> void:
+	var region_resource := Managers.region_manager.get_current_region()
+	if region_resource == null:
+		push_warning("⚠ Nenhuma região atual encontrada!")
+		return
+
+	prep_area.set_region(region_resource)
+
+
+# ---------------- Drag Signal ----------------
 func _connect_plate_drag_signal() -> void:
 	if not prep_area:
 		return
+
 	var plate_node := prep_area.get_node_or_null("UtensilsParent/DropPlateArea")
-	# checa is_instance_valid para não usar uma referência já freed
-	if plate_node and is_instance_valid(plate_node) and plate_node.has_signal("drag_state_changed"):
-		# desconecta com segurança (se existir)
+	if plate_node and is_instance_valid(plate_node):
 		if plate_node.is_connected("drag_state_changed", Callable(self, "_on_plate_drag_state_changed")):
 			plate_node.disconnect("drag_state_changed", Callable(self, "_on_plate_drag_state_changed"))
+
 		plate_node.connect("drag_state_changed", Callable(self, "_on_plate_drag_state_changed"))
 
 
 func _on_plate_drag_state_changed(is_dragging: bool) -> void:
 	_is_dragging_plate = is_dragging
-	if is_dragging:
-		set_process_input(false)
-	else:
-		set_process_input(true)
+	set_process_input(not is_dragging)
 
 
 # ---------------- Mode Switch ----------------
@@ -87,34 +104,46 @@ func switch_mode(new_mode: GameMode) -> void:
 		await get_tree().process_frame
 		if _is_dragging_plate:
 			return
+
 	current_mode = new_mode
+
 	mode_attendance.visible = (new_mode == GameMode.ATTENDANCE)
 	mode_preparation.visible = (new_mode == GameMode.PREPARATION)
 	mode_end_of_day.visible = (new_mode == GameMode.END_OF_DAY)
+
 	$HUD.visible = (new_mode != GameMode.END_OF_DAY)
+
 	if new_mode == GameMode.END_OF_DAY:
 		$Mode_Preparation/HUDPrep/RecipeNotePanel.hide()
 	else:
 		$Mode_Preparation/HUDPrep/RecipeNotePanel.show()
+
 	if new_mode == GameMode.PREPARATION:
 		scroll_container.scroll_horizontal = 0
 		prep_area.ensure_plate_for_day(day)
 		_connect_plate_drag_signal()
 
 
-# ---------------- Tick / Time ----------------
+# ---------------- Time Tick ----------------
 func _on_time_tick() -> void:
 	if _is_dragging_plate:
-		return  # pausa contagem durante drag (opcional)
+		return
+
 	absolute_minutes += 15
+
 	if current_time_minutes < HARD_LIMIT_MINUTES:
 		current_time_minutes += 15
+
 	current_time_minutes = min(current_time_minutes, HARD_LIMIT_MINUTES)
+
 	if absolute_minutes >= END_OF_DAY_MINUTES:
 		day_should_end = true
+
 	_update_ui()
+
 	if current_mode == GameMode.PREPARATION:
 		update_score_display()
+
 	var visual_time: String = get_visual_time_of_day()
 	if visual_time != last_time_of_day:
 		last_time_of_day = visual_time
@@ -122,12 +151,13 @@ func _on_time_tick() -> void:
 
 
 func _update_ui() -> void:
-	var hours: int = current_time_minutes / 60
-	var minutes: int = current_time_minutes % 60
+	var hours := current_time_minutes / 60
+	var minutes := current_time_minutes % 60
 	clock_label.text = "%02d:%02d" % [hours, minutes]
 	money_label.text = "M$ " + str(money)
 	day_label.text = "Dia " + str(day)
-	if absolute_minutes >= END_OF_DAY_MINUTES and not (current_mode == GameMode.END_OF_DAY):
+
+	if absolute_minutes >= END_OF_DAY_MINUTES and current_mode != GameMode.END_OF_DAY:
 		clock_label.add_theme_color_override("font_color", Color("d9292fff"))
 
 
@@ -135,37 +165,49 @@ func _update_ui() -> void:
 func _end_day() -> void:
 	if _is_dragging_plate:
 		return
+
 	clock_timer.stop()
-	print("🔹 Fim do dia — Gerando relatório…")
+
 	if mode_end_of_day and mode_end_of_day.has_method("populate"):
 		mode_end_of_day.populate(daily_report, total_ingredient_expense, day)
-	else:
-		push_warning("⚠️ mode_end_of_day.populate() não encontrado!")
+
 	switch_mode(GameMode.END_OF_DAY)
 
 
 func start_new_day() -> void:
 	if _is_dragging_plate:
 		return
-	print("🔹 Iniciando novo dia…")
+
 	day += 1
 	current_time_minutes = 8 * 60
 	absolute_minutes = 8 * 60
 	day_should_end = false
 	prep_start_minutes = -1
+
 	daily_report.clear()
 	total_ingredient_expense = 0
 	pending_delivery.clear()
+
+	# aplica troca de região
+	Managers.region_manager.apply_pending_change()
+	_apply_region_to_preparea()
+
 	last_time_of_day = get_visual_time_of_day()
 	mode_attendance.update_city_background(last_time_of_day)
+
 	prep_area.clear_day_leftovers()
+
 	clock_timer.start()
 	switch_mode(GameMode.ATTENDANCE)
+
 	await get_tree().process_frame
+
 	load_new_recipe()
 	_update_ui()
+
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
 	score_label.text = "100%"
+
 	prep_area.update_ingredients_for_day(day)
 	prep_area.ensure_plate_for_day(day)
 	_connect_plate_drag_signal()
@@ -180,121 +222,138 @@ func add_money(amount: int) -> void:
 func get_time_of_day() -> String:
 	if current_time_minutes < 12 * 60:
 		return "breakfast"
-	elif current_time_minutes < 17 * 60:
+
+	if current_time_minutes < 17 * 60:
 		return "lunch"
-	else:
-		return "dinner"
+
+	return "dinner"
 
 
 func get_visual_time_of_day() -> String:
 	if current_time_minutes < 16 * 60:
 		return "morning"
-	elif current_time_minutes < 18 * 60:
+
+	if current_time_minutes < 18 * 60:
 		return "afternoon"
-	else:
-		return "night"
+
+	return "night"
 
 
 func update_score_display(optional_score: int = -1) -> void:
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
+
 	if optional_score >= 0:
 		score_label.text = "%d%%" % optional_score
 		return
+
 	if current_recipe == null or prep_start_minutes < 0:
 		return
-	var elapsed_minutes: int = absolute_minutes - prep_start_minutes
-	var time_penalty: int = int(elapsed_minutes / 15)
-	var score: int = clamp(100 - time_penalty, 0, 100)
+
+	var elapsed_minutes := absolute_minutes - prep_start_minutes
+	var time_penalty := int(elapsed_minutes / 15)
+	var score = clamp(100 - time_penalty, 0, 100)
+
 	score_label.text = "%d%%" % score
 
 
-# ---------------- Recipe Loading ----------------
+# ---------------- Load Recipe ----------------
 func load_new_recipe() -> void:
 	if _is_dragging_plate:
-		print("⚠️ Ignorando load_new_recipe durante drag.")
 		return
-	if Managers.recipe_manager == null:
-		push_warning("⚠️ RecipeManager ainda não carregado, aguardando...")
-		await get_tree().process_frame
-		if Managers.recipe_manager == null:
-			push_error("❌ RecipeManager não inicializado!")
-			return
+
+	var region_id := Managers.region_manager.current_region_id
 	var time_of_day := get_time_of_day()
-	var result : Dictionary = Managers.recipe_manager.get_random_recipe(day, region, time_of_day)
+
+	var result := Managers.recipe_manager.get_random_recipe(day, region_id, time_of_day)
 	if result.is_empty():
-		push_warning("⚠️ Nenhuma receita encontrada para %s (%s, Dia %d)" % [region, time_of_day, day])
+		push_warning("⚠ Nenhuma receita válida encontrada para região '%s'" % region_id)
 		return
-	current_recipe = result.get("recipe", null)
-	current_recipe_variants = result.get("variants", [])
-	current_client_lines = result.get("client_lines", [])
+
+	current_recipe = result.get("recipe")
+	current_recipe_variants = result.get("variants")
+	current_client_lines = result.get("client_lines")
+
 	prep_start_minutes = absolute_minutes
+
 	mode_attendance.set_recipe(current_recipe, current_client_lines)
+
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
 	score_label.text = "100%"
-	print("🧾 Enviando receita para RecipeNotePanel:", current_recipe.recipe_name)
+
 	mode_preparation.set_recipe(current_recipe, current_recipe_variants)
-	# aguardamos um frame pra a UI estabilizar (mas NÃO entre pegar node e usar)
+
 	await get_tree().process_frame
+
 	if prep_area:
-		# pega e usa o node IMEDIATAMENTE sem await adicional
 		var dpa: DropPlateArea = prep_area.get_node_or_null("UtensilsParent/DropPlateArea")
-		if dpa and is_instance_valid(dpa):
-			print("✅ DropPlateArea encontrado e configurado")
+		if dpa:
 			dpa.set_current_recipe(current_recipe)
 			_connect_plate_drag_signal()
-		else:
-			print("❌ DropPlateArea não encontrado em PrepArea!")
+
 	update_score_display()
 	prep_area.update_ingredients_for_day(day)
 	prep_area.ensure_plate_for_day(day)
+
 	if not has_shown_note_first_day and day == initial_day_at_start:
 		await get_tree().process_frame
-		if mode_preparation and mode_preparation.recipe_note_panel:
-			mode_preparation.recipe_note_panel._animate_open()
-			has_shown_note_first_day = true
+		mode_preparation.recipe_note_panel._animate_open()
+		has_shown_note_first_day = true
+
 	show_random_client()
 
 
 # ---------------- Attendance ----------------
 func show_random_client() -> void:
-	current_client = Managers.client_manager.pick_random_client()
+	var region_id := Managers.region_manager.current_region_id
+	current_client = Managers.client_manager.pick_random_client(region_id)
+
 	if current_client == null:
-		push_warning("Nenhum cliente disponível!")
+		push_warning("Nenhum cliente disponível para região '%s'" % region_id)
 		return
+
 	mode_attendance.show_client(current_client)
-	
+
+
 func _spawn_delivered_plate(delivered_plate: Node) -> void:
-	var attendance: Node = $Mode_Attendance
+	var attendance := $Mode_Attendance
 	attendance.add_child(delivered_plate)
 	delivered_plate.global_position = Vector2(285, 231)
-	
+
+
 func finalize_attendance(final_score: int, final_payment: int, comment: String, grade: String = "") -> void:
 	if _is_dragging_plate:
-		print("⚠️ Ignorando finalize_attendance — prato está em drag.")
 		return
-	var recipe_snapshot := current_recipe if current_recipe else null
-	var recipe_name := recipe_snapshot.recipe_name if recipe_snapshot else "—"
+
+	var recipe_name := "—"
+	if current_recipe:
+		recipe_name = current_recipe.recipe_name
+
 	daily_report.append({
-		"recipe_name": str(recipe_name),
-		"score": int(final_score),
-		"payment": int(final_payment),
-		"grade": str(grade)
+		"recipe_name": recipe_name,
+		"score": final_score,
+		"payment": final_payment,
+		"grade": grade
 	}.duplicate(true))
-	print("Pedido registrado:", daily_report[-1])
+
 	mode_attendance.show_feedback(comment, grade, current_client)
+
 	add_money(final_payment)
 	show_money_gain(final_payment)
+
 	update_score_display(final_score)
+
 	var score_label: Label = $HUD/HBoxContainer/ScoreLabel
 	score_label.text = "%d%%" % final_score
-	var base_time := 0.8
-	var extra_time := float(comment.length()) / 40.0
-	var wait_time : float = clamp(base_time + extra_time, 0.8, 4.0)
+
+	var wait_time = clamp(0.8 + float(comment.length()) / 40.0, 0.8, 4.0)
 	await get_tree().create_timer(wait_time).timeout
+
 	await mode_attendance.hide_client()
+
 	prep_area.clear_day_leftovers()
 	prep_area.update_ingredients_for_day(day)
 	prep_area.ensure_plate_for_day(day)
+
 	if day_should_end:
 		_end_day()
 	else:
@@ -303,16 +362,18 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String, 
 		load_new_recipe()
 
 
-# ---------------- UI ----------------
+# ---------------- UI Money Gain ----------------
 func show_money_gain(amount: int) -> void:
 	var gain_label: Label = $HUD/MoneyLabel/MoneyGainLabel
 	gain_label.text = "+%d" % amount
 	gain_label.visible = true
 	gain_label.modulate.a = 1.0
 	gain_label.position = Vector2(25, -20)
+
 	var tween := create_tween()
-	tween.tween_property(gain_label, "position:y", -30, 0.6).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(gain_label, "modulate:a", 0.0, 0.4).set_trans(Tween.TRANS_SINE).set_delay(0.3)
+	tween.tween_property(gain_label, "position:y", -30, 0.6)
+	tween.tween_property(gain_label, "modulate:a", 0.0, 0.4).set_delay(0.3)
+
 	await tween.finished
 	gain_label.visible = false
 

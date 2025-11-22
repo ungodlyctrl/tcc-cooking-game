@@ -1,13 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://d4fehmyo6hugb"]
+[gd_scene load_steps=13 format=3 uid="uid://d4fehmyo6hugb"]
 
 [ext_resource type="Script" uid="uid://itambtlmpjx8" path="res://scripts/mode_preparation.gd" id="1_dnbch"]
 [ext_resource type="Script" uid="uid://cgee1b54cgbw1" path="res://scripts/drag_catch_zone.gd" id="2_vitag"]
 [ext_resource type="Script" uid="uid://ds0cqhfcadbgw" path="res://scripts/prep/prep_area.gd" id="3_s610r"]
-[ext_resource type="Script" uid="uid://dckho2cxrnnua" path="res://scripts/prep/prep_layout_resource.gd" id="4_7bx2v"]
-[ext_resource type="Resource" uid="uid://dlp7ol456f7vb" path="res://resources/prep_layouts/day1.tres" id="5_kgpen"]
 [ext_resource type="PackedScene" uid="uid://dk286hwgpiw5g" path="res://scenes/ui/cutting_board_area.tscn" id="5_s7btf"]
-[ext_resource type="Resource" uid="uid://h6bv745dka7u" path="res://resources/prep_layouts/day3.tres" id="6_0fv8j"]
-[ext_resource type="Resource" uid="uid://cl2w1py5ndu5a" path="res://resources/prep_layouts/day5.tres" id="7_n1wni"]
 [ext_resource type="Texture2D" uid="uid://hdc0dc3cmlwc" path="res://assets/bancada marrom 7.2 (1).png" id="9_436n2"]
 [ext_resource type="PackedScene" uid="uid://bimgikpa8sqfn" path="res://scenes/ui/tool.tscn" id="11_b513c"]
 [ext_resource type="PackedScene" uid="uid://dwip8uhvt1cpv" path="res://scenes/ui/stove_area.tscn" id="11_tsv3s"]
@@ -46,7 +42,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("3_s610r")
-prep_layouts = Array[ExtResource("4_7bx2v")]([ExtResource("5_kgpen"), ExtResource("6_0fv8j"), ExtResource("7_n1wni")])
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/PrepArea"]
 layout_mode = 0
@@ -87,7 +82,6 @@ offset_bottom = 292.0
 [node name="StoveArea" parent="ScrollContainer/PrepArea/UtensilsParent" instance=ExtResource("11_tsv3s")]
 unique_name_in_owner = true
 layout_mode = 0
-anchors_preset = 0
 offset_left = 432.0
 offset_top = 126.0
 offset_right = 537.0

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RegionResource" load_steps=12 format=3 uid="uid://d30s2d68k64ui"]
+
+[ext_resource type="Script" uid="uid://d0tobb7uauvh8" path="res://scripts/region_resource.gd" id="1_2y8pt"]
+[ext_resource type="Script" uid="uid://c1roybtu8ul0l" path="res://scripts/client_data.gd" id="1_loos5"]
+[ext_resource type="Resource" uid="uid://dlhrfv3t6eoi" path="res://resources/clients/nordeste/davi.tres" id="2_k6p4o"]
+[ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="2_ynj5s"]
+[ext_resource type="Script" uid="uid://dckho2cxrnnua" path="res://scripts/prep/prep_layout_resource.gd" id="3_amakw"]
+[ext_resource type="Resource" uid="uid://cf0o3824s8ut" path="res://resources/clients/nordeste/menina nordeste.tres" id="3_x6h4m"]
+[ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="4_8sr70"]
+[ext_resource type="Resource" uid="uid://cv11a0jr4sd0l" path="res://resources/clients/nordeste/queen bombada.tres" id="4_a7o3w"]
+[ext_resource type="Resource" uid="uid://bf5kb081ddfqq" path="res://resources/clients/nordeste/ruivo.tres" id="5_s6mmq"]
+[ext_resource type="Resource" uid="uid://bpbxaniibmggx" path="res://resources/clients/nordeste/veio.tres" id="6_hihb8"]
+[ext_resource type="Resource" uid="uid://bgelph6f8vq78" path="res://resources/recipes/nordeste/cuscuz nordestino.tres" id="10_2mklg"]
+
+[resource]
+script = ExtResource("1_2y8pt")
+id = "nordeste"
+display_name = "Nordeste"
+recipes = Array[ExtResource("4_8sr70")]([ExtResource("10_2mklg")])
+clients = Array[ExtResource("1_loos5")]([ExtResource("2_k6p4o"), ExtResource("3_x6h4m"), ExtResource("4_a7o3w"), ExtResource("5_s6mmq"), ExtResource("6_hihb8")])
+metadata/_custom_type_script = "uid://d0tobb7uauvh8"

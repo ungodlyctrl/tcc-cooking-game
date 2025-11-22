@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwip8uhvt1cpv"]
 
 [ext_resource type="Texture2D" uid="uid://ciaxcja3qdgbf" path="res://assets/cooktop.png" id="1_w3vhk"]
-[ext_resource type="Script" uid="uid://e0qlc3bjakqj" path="res://scenes/ui/burner_slot.gd" id="3_650sq"]
+[ext_resource type="Script" uid="uid://e0qlc3bjakqj" path="res://scripts/burner_slot.gd" id="3_650sq"]
 [ext_resource type="Texture2D" uid="uid://lcxtpe5mkb8" path="res://assets/botão cooktop.png" id="3_xk2vl"]
 [ext_resource type="Texture2D" uid="uid://b1nsfl77q1esd" path="res://assets/outlinebotão cooktop.png" id="4_ytpre"]
 

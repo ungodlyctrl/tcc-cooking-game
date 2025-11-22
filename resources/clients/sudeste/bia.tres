@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ClientData" load_steps=5 format=3 uid="uid://vik0d5npu7sq"]
+
+[ext_resource type="Texture2D" uid="uid://cxrr4yvqcnwr6" path="res://assets/clients/bia ruim.png" id="1_6r706"]
+[ext_resource type="Script" uid="uid://c1roybtu8ul0l" path="res://scripts/client_data.gd" id="1_vkub0"]
+[ext_resource type="Texture2D" uid="uid://1q6qsttlwr4d" path="res://assets/clients/bia bom.png" id="2_parcv"]
+[ext_resource type="Texture2D" uid="uid://c6jwndukuqsm1" path="res://assets/clients/bia.png" id="3_082nd"]
+
+[resource]
+script = ExtResource("1_vkub0")
+region = "sudeste"
+neutral = ExtResource("3_082nd")
+happy = ExtResource("2_parcv")
+angry = ExtResource("1_6r706")
+metadata/_custom_type_script = "uid://c1roybtu8ul0l"

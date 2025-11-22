@@ -389,10 +389,25 @@ func _hide_plateroot_for_drag() -> void:
 
 # ---------------- DROP ----------------
 func _can_drop_data(_position: Vector2, data: Variant) -> bool:
-	return typeof(data) == TYPE_DICTIONARY and (
-		(data.has("type") and data["type"] == "cooked_tool") or
-		(data.has("id") and data.has("state"))
-	)
+	if typeof(data) != TYPE_DICTIONARY:
+		return false
+
+	# BLOQUEIA ferramentas (panela/frigideira) e cooked_tool
+	if data.get("state", "") == "tool":
+		return false
+
+	# Só aceita:
+	# 1) cooked_tool
+	# 2) ingredientes individuais
+	if data.has("type") and data["type"] == "cooked_tool":
+		return true
+
+	if data.has("id") and data.has("state"):
+		return true
+
+	return false
+
+
 
 
 func _drop_data(_position: Vector2, data: Variant) -> void:

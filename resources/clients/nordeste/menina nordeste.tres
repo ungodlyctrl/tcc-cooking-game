@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ClientData" load_steps=5 format=3 uid="uid://cf0o3824s8ut"]
+
+[ext_resource type="Script" uid="uid://c1roybtu8ul0l" path="res://scripts/client_data.gd" id="1_1p41k"]
+[ext_resource type="Texture2D" uid="uid://ckgupqawlkn10" path="res://assets/clients/Menina nordestina ruim.png" id="1_owc62"]
+[ext_resource type="Texture2D" uid="uid://c5spwsv1uyqme" path="res://assets/clients/Menina nordestina bom.png" id="2_x6d05"]
+[ext_resource type="Texture2D" uid="uid://dvh2xr4psndyt" path="res://assets/clients/Menina nordestina.png" id="3_ypgwi"]
+
+[resource]
+script = ExtResource("1_1p41k")
+region = "nordeste"
+neutral = ExtResource("3_ypgwi")
+happy = ExtResource("2_x6d05")
+angry = ExtResource("1_owc62")
+metadata/_custom_type_script = "uid://c1roybtu8ul0l"

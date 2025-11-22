@@ -60,7 +60,6 @@ scroll_active = false
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-alignment = 2
 
 [node name="NextButton" type="NinePatchRect" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(20, 27)

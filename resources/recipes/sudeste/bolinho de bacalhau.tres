@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=7 format=3 uid="uid://cn5tl61fvyxog"]
+
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_te0n1"]
+[ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="2_j7ofx"]
+[ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="3_0b0pi"]
+[ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="4_xujxn"]
+
+[sub_resource type="Resource" id="Resource_or3uk"]
+script = ExtResource("2_j7ofx")
+ingredient_id = "batata"
+state = "cooked"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_786k6"]
+script = ExtResource("2_j7ofx")
+ingredient_id = "peixe"
+state = "cooked"
+stages = Array[int]([1, 2])
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[resource]
+script = ExtResource("4_xujxn")
+recipe_name = "Bolinho de Bacalhau"
+region = "sudeste"
+base_price = 30
+min_day = 5
+time_of_day = Array[String](["dinner"])
+ingredient_requirements = Array[ExtResource("2_j7ofx")]([SubResource("Resource_or3uk"), SubResource("Resource_786k6")])
+client_lines = Array[String](["Boa noite. Algo frito e saboroso. Certo, um bolinho de bacalhau. ", "Gostaria de um bolinho de bacalhau. Valeu!", "Olá, um bolinho de bacalhau no capricho por favor."])
+metadata/_custom_type_script = "uid://c6xvod46icb2"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ClientData" load_steps=5 format=3 uid="uid://hu05oudhmj8o"]
+
+[ext_resource type="Texture2D" uid="uid://dvmglm4w4tx3i" path="res://assets/clients/vein ruim.png" id="1_tn7m0"]
+[ext_resource type="Script" uid="uid://c1roybtu8ul0l" path="res://scripts/client_data.gd" id="1_xm8l3"]
+[ext_resource type="Texture2D" uid="uid://b71ywfxb7nmjo" path="res://assets/clients/vein bom.png" id="2_o5256"]
+[ext_resource type="Texture2D" uid="uid://bq15bq600moii" path="res://assets/clients/vein.png" id="3_ycq7b"]
+
+[resource]
+script = ExtResource("1_xm8l3")
+region = "sudeste"
+neutral = ExtResource("3_ycq7b")
+happy = ExtResource("2_o5256")
+angry = ExtResource("1_tn7m0")
+metadata/_custom_type_script = "uid://c1roybtu8ul0l"

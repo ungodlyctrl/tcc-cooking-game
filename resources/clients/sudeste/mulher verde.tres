@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ClientData" load_steps=5 format=3 uid="uid://bq4weex875umr"]
+
+[ext_resource type="Script" uid="uid://c1roybtu8ul0l" path="res://scripts/client_data.gd" id="1_jip5a"]
+[ext_resource type="Texture2D" uid="uid://kvvfrkfvi7hx" path="res://assets/clients/mulher verde ruim.png" id="1_qkudl"]
+[ext_resource type="Texture2D" uid="uid://clcwcooqvly0a" path="res://assets/clients/mulher verde bom.png" id="2_7yio1"]
+[ext_resource type="Texture2D" uid="uid://ttb1lgq7twyj" path="res://assets/clients/mulher verde.png" id="3_2g8pg"]
+
+[resource]
+script = ExtResource("1_jip5a")
+region = "sudeste"
+neutral = ExtResource("3_2g8pg")
+happy = ExtResource("2_7yio1")
+angry = ExtResource("1_qkudl")
+metadata/_custom_type_script = "uid://c1roybtu8ul0l"

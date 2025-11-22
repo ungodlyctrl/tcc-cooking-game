@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://sqqiy62qf6np"]
+[gd_scene load_steps=74 format=3 uid="uid://sqqiy62qf6np"]
 
 [ext_resource type="Script" uid="uid://cg0pigwrqqh4d" path="res://scripts/main_scene.gd" id="1_7ykc4"]
 [ext_resource type="PackedScene" uid="uid://dehkeao1vbiy0" path="res://scenes/gamemodes/mode_attendance.tscn" id="2_pu3yx"]
@@ -10,6 +10,12 @@
 [ext_resource type="Texture2D" uid="uid://bt1v4c0kkjd85" path="res://assets/moeda sheet 2.png" id="7_e1cbu"]
 [ext_resource type="Texture2D" uid="uid://3fie0u0ymmqe" path="res://assets/estrela sheet.png" id="8_mngbo"]
 [ext_resource type="Texture2D" uid="uid://dpfmfyejcommj" path="res://assets/dialogoo.png" id="10_6wevv"]
+[ext_resource type="Texture2D" uid="uid://byr01k8gr6llr" path="res://assets/loja/paginas.png" id="11_e1cbu"]
+[ext_resource type="Texture2D" uid="uid://jgttopa0k5sk" path="res://assets/loja/botao 2.png" id="11_si52b"]
+[ext_resource type="Texture2D" uid="uid://cqqqxj3oi4i5i" path="res://assets/loja/botao 3.png" id="12_01n6w"]
+[ext_resource type="Texture2D" uid="uid://ctiuslbcxbrk1" path="res://assets/loja/botão 1.png" id="14_6u1mn"]
+[ext_resource type="Texture2D" uid="uid://b70vmw712np1t" path="res://assets/loja/quadrados.png" id="15_bcnxi"]
+[ext_resource type="Texture2D" uid="uid://ffejys4nqcax" path="res://assets/loja/update viagem.png" id="16_01n6w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4w45t"]
 atlas = ExtResource("6_6wevv")
@@ -562,6 +568,7 @@ offset_bottom = 23.0
 
 [node name="InGameOptions" type="Control" parent="."]
 process_mode = 3
+visible = false
 z_index = 999
 layout_mode = 3
 anchors_preset = 8
@@ -679,6 +686,54 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_c1pb6")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_18nlu")
 theme_override_styles/hover = SubResource("StyleBoxFlat_c16ls")
 text = "MENU INICIAL"
+
+[node name="Control" type="Control" parent="."]
+visible = false
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DarkOverlay" type="ColorRect" parent="Control"]
+process_mode = 3
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 0.5)
+
+[node name="Botao3" type="Sprite2D" parent="Control"]
+texture = ExtResource("12_01n6w")
+centered = false
+
+[node name="Botao2" type="Sprite2D" parent="Control"]
+texture = ExtResource("11_si52b")
+centered = false
+
+[node name="Paginas" type="Sprite2D" parent="Control"]
+texture = ExtResource("11_e1cbu")
+centered = false
+
+[node name="Quadrados" type="Sprite2D" parent="Control"]
+visible = false
+position = Vector2(0, -1)
+texture = ExtResource("15_bcnxi")
+centered = false
+
+[node name="Botão1" type="Sprite2D" parent="Control"]
+texture = ExtResource("14_6u1mn")
+centered = false
+
+[node name="UpdateViagem" type="Sprite2D" parent="Control"]
+position = Vector2(-92, 0)
+texture = ExtResource("16_01n6w")
+centered = false
+
+[node name="UpdateViagem2" type="Sprite2D" parent="Control"]
+position = Vector2(93, 0)
+texture = ExtResource("16_01n6w")
+centered = false
 
 [connection signal="pressed" from="InGameOptions/OptionsPanel/ContinueButton" to="InGameOptions" method="_on_continue_button_pressed"]
 [connection signal="pressed" from="InGameOptions/OptionsPanel/BackToMenuButton" to="InGameOptions" method="_on_back_to_menu_button_pressed"]

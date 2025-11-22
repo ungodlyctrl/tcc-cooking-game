@@ -1,40 +1,47 @@
 extends Node
 
-## Lista de clientes (arraste ClientData.tres aqui no Inspector)
 @export var clients: Array[ClientData] = []
 
-## Guarda os últimos clientes mostrados (para evitar repetições)
 var recent_clients: Array[int] = []
-const RECENT_LIMIT: int = 3  # quantidade de clientes que devem ser diferentes antes de repetir
+const RECENT_LIMIT: int = 3
 
 func _ready() -> void:
 	if clients.is_empty():
-		push_warning("⚠️ ClientManager: nenhum ClientData configurado.")
+		push_warning("⚠️ ClientManager: nenhum cliente configurado.")
 	else:
 		print("ClientManager carregou %d clientes" % clients.size())
 
-func pick_random_client() -> ClientData:
+func pick_random_client(region_id: String = "") -> ClientData:
 	if clients.is_empty():
 		return null
-	if clients.size() == 1:
-		return clients[0]
 
-	var available_indices: Array[int] = []
-	for i in range(clients.size()):
-		if not recent_clients.has(i):
-			available_indices.append(i)
+	# Filtragem por região
+	var pool: Array[ClientData] = []
+	for c in clients:
+		if region_id == "" or c.region == region_id:
+			pool.append(c)
 
-	# Se todos já apareceram recentemente, limpa a lista e recomeça
-	if available_indices.is_empty():
+	if pool.is_empty():
+		# fallback total
+		return clients.pick_random()
+
+	if pool.size() == 1:
+		return pool[0]
+
+	# Agora evitamos repetições COM BASE NO POOL
+	var available: Array[ClientData] = []
+	for c in pool:
+		if not recent_clients.has(c.get_instance_id()):
+			available.append(c)
+
+	if available.is_empty():
 		recent_clients.clear()
-		for i in range(clients.size()):
-			available_indices.append(i)
+		available = pool.duplicate()
 
-	var index : int = available_indices.pick_random()
-	recent_clients.append(index)
+	var chosen = available.pick_random()
+	recent_clients.append(chosen.get_instance_id())
 
-	# Mantém o histórico no tamanho máximo
 	if recent_clients.size() > RECENT_LIMIT:
 		recent_clients.pop_front()
 
-	return clients[index]
+	return chosen

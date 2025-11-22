@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=16 format=3 uid="uid://bgelph6f8vq78"]
+
+[ext_resource type="Texture2D" uid="uid://bhqw15yqxl5an" path="res://assets/entrega.png" id="1_agnig"]
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_c36e5"]
+[ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="2_uhfhv"]
+[ext_resource type="Texture2D" uid="uid://erni4gix75te" path="res://assets/czcds2.1.png" id="3_aj8ah"]
+[ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="3_otlad"]
+[ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="4_bucg2"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="6_qkq5v"]
+[ext_resource type="Texture2D" uid="uid://cqxg37disatix" path="res://assets/czcds3.1.png" id="7_mghpk"]
+[ext_resource type="Texture2D" uid="uid://c1kwhwtwb35p" path="res://assets/czcds1.1.png" id="8_3l8dc"]
+
+[sub_resource type="Resource" id="Resource_c36e5"]
+script = ExtResource("2_uhfhv")
+ingredient_id = "cuscuz"
+state = "cooked"
+quantity = 2
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_uhfhv"]
+script = ExtResource("2_uhfhv")
+ingredient_id = "carne de sol"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_7rqxs"]
+script = ExtResource("6_qkq5v")
+state = "cooked"
+texture = ExtResource("7_mghpk")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_rx4eq"]
+script = ExtResource("3_otlad")
+ingredient_id = "cuscuz"
+state_sprites = Array[ExtResource("6_qkq5v")]([SubResource("Resource_7rqxs")])
+z_index = 1
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_6xslg"]
+script = ExtResource("6_qkq5v")
+state = "cooked"
+texture = ExtResource("8_3l8dc")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_5d2k8"]
+script = ExtResource("3_otlad")
+ingredient_id = "carne de sol"
+state_sprites = Array[ExtResource("6_qkq5v")]([SubResource("Resource_6xslg")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[resource]
+script = ExtResource("4_bucg2")
+recipe_name = "Cuscuz Nordestino"
+region = "nordeste"
+ingredient_requirements = Array[ExtResource("2_uhfhv")]([SubResource("Resource_c36e5"), SubResource("Resource_uhfhv")])
+plate_ingredient_visuals = Array[ExtResource("3_otlad")]([SubResource("Resource_rx4eq"), SubResource("Resource_5d2k8")])
+final_plate_sprite = ExtResource("3_aj8ah")
+delivered_plate_sprite = ExtResource("1_agnig")
+metadata/_custom_type_script = "uid://c6xvod46icb2"

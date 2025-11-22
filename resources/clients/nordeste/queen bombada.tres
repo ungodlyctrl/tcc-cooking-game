@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ClientData" load_steps=5 format=3 uid="uid://cv11a0jr4sd0l"]
+
+[ext_resource type="Texture2D" uid="uid://bo5jm5sdep4eh" path="res://assets/clients/mulher academia ruim.png" id="1_8oaen"]
+[ext_resource type="Script" uid="uid://c1roybtu8ul0l" path="res://scripts/client_data.gd" id="1_u1jmh"]
+[ext_resource type="Texture2D" uid="uid://cx1ees5ax0of6" path="res://assets/clients/mulher academia bom.png" id="2_2y5wa"]
+[ext_resource type="Texture2D" uid="uid://cm08wybdqr62b" path="res://assets/clients/mulher academia.png" id="3_72gdd"]
+
+[resource]
+script = ExtResource("1_u1jmh")
+region = "nordeste"
+neutral = ExtResource("3_72gdd")
+happy = ExtResource("2_2y5wa")
+angry = ExtResource("1_8oaen")
+metadata/_custom_type_script = "uid://c1roybtu8ul0l"
