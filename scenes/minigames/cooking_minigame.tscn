@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://det48e24b3j7b"]
+[gd_scene load_steps=24 format=3 uid="uid://det48e24b3j7b"]
 
 [ext_resource type="Script" uid="uid://nopev2xb8r8r" path="res://scripts/cooking_minigame.gd" id="1_nsvnn"]
 [ext_resource type="Texture2D" uid="uid://da6jpr7yphasl" path="res://assets/barra cookingminigame.png" id="2_dnglp"]
@@ -106,6 +106,12 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qviqj"]
+size = Vector2(115.5, 77)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4cqvk"]
+size = Vector2(120, 64)
+
 [node name="CookingMinigame" type="Control"]
 layout_mode = 3
 anchors_preset = 0
@@ -113,17 +119,29 @@ script = ExtResource("1_nsvnn")
 cook_speed = 15.0
 
 [node name="PanAnimation" type="AnimatedSprite2D" parent="."]
-visible = false
 sprite_frames = SubResource("SpriteFrames_tsqvi")
 animation = &"boil"
 centered = false
+
+[node name="PanArea" type="Area2D" parent="."]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PanArea"]
+position = Vector2(41.75, 44.5)
+shape = SubResource("RectangleShape2D_qviqj")
 
 [node name="FryAnimation" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_tsqvi")
 animation = &"fry"
-frame_progress = 0.18411015
 centered = false
+
+[node name="FryArea" type="Area2D" parent="."]
+position = Vector2(9, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FryArea"]
+position = Vector2(35, 32)
+shape = SubResource("RectangleShape2D_4cqvk")
 
 [node name="ToolSprite" type="TextureRect" parent="."]
 layout_mode = 0
@@ -140,7 +158,7 @@ offset_right = 50.0
 offset_bottom = -15.0
 grow_horizontal = 2
 mouse_filter = 2
-theme_override_constants/separation = 2
+theme_override_constants/separation = 5
 alignment = 1
 
 [node name="IngredientSprite" type="TextureRect" parent="."]
@@ -198,3 +216,6 @@ offset_left = 19.0
 offset_top = 91.0
 offset_right = 59.0
 offset_bottom = 114.0
+
+[connection signal="input_event" from="PanArea" to="." method="_on_utensil_area_input"]
+[connection signal="input_event" from="FryArea" to="." method="_on_utensil_area_input"]

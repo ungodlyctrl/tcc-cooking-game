@@ -6,13 +6,12 @@
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_kf0ps")
-tool_type = null
-cooked_ingredients = null
 
 [node name="ToolSprite" type="TextureRect" parent="."]
 layout_mode = 1
 
 [node name="MiniIcons" type="HBoxContainer" parent="."]
+z_index = 5
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5

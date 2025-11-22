@@ -7,7 +7,6 @@
 
 [node name="StoveArea" type="TextureRect"]
 custom_minimum_size = Vector2(0, 175)
-anchors_preset = -1
 offset_right = 105.0
 offset_bottom = 175.0
 texture = ExtResource("1_w3vhk")
@@ -50,7 +49,7 @@ texture = ExtResource("3_xk2vl")
 
 [node name="StartButtonOutline" type="TextureRect" parent="BurnerSlot2"]
 visible = false
-modulate = Color(1.3945211, 1.3945211, 1.3945211, 1)
+modulate = Color(1.353256, 1.353256, 1.353256, 1)
 layout_mode = 0
 offset_left = 63.0
 offset_top = 157.0
@@ -96,7 +95,7 @@ texture = ExtResource("3_xk2vl")
 
 [node name="StartButtonOutline" type="TextureRect" parent="BurnerSlot2/BurnerSlot1"]
 visible = false
-modulate = Color(1.3945211, 1.3945211, 1.3945211, 1)
+modulate = Color(1.5261705, 1.3700519, 1.1514856, 1)
 layout_mode = 0
 offset_left = 10.0
 offset_top = 79.0

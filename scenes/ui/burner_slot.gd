@@ -261,7 +261,7 @@ func _start_outline_blink(enable: bool) -> void:
 		_outline_tween = create_tween()
 		_outline_tween.set_loops()
 		# stronger/faster blink
-		_outline_tween.tween_property(start_btn_outline, "modulate:a", 0.15, 0.22)
+		_outline_tween.tween_property(start_btn_outline, "modulate:a", 0.2, 0.22)
 		_outline_tween.tween_property(start_btn_outline, "modulate:a", 1.0, 0.22)
 	else:
 		if _outline_tween and _outline_tween.is_valid():
