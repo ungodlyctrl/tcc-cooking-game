@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=5 format=3 uid="uid://ch4qllawvr7n"]
+
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_a3nqb"]
+[ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="2_k43w4"]
+[ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="3_5p5vk"]
+[ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="4_7cn3a"]
+
+[resource]
+script = ExtResource("4_7cn3a")
+recipe_name = "Moqueca"
+region = "nordeste"
+metadata/_custom_type_script = "uid://c6xvod46icb2"

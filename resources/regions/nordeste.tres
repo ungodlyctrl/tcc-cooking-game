@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RegionResource" load_steps=12 format=3 uid="uid://d30s2d68k64ui"]
+[gd_resource type="Resource" script_class="RegionResource" load_steps=16 format=3 uid="uid://d30s2d68k64ui"]
 
 [ext_resource type="Script" uid="uid://d0tobb7uauvh8" path="res://scripts/region_resource.gd" id="1_2y8pt"]
 [ext_resource type="Script" uid="uid://c1roybtu8ul0l" path="res://scripts/client_data.gd" id="1_loos5"]
@@ -10,12 +10,28 @@
 [ext_resource type="Resource" uid="uid://cv11a0jr4sd0l" path="res://resources/clients/nordeste/queen bombada.tres" id="4_a7o3w"]
 [ext_resource type="Resource" uid="uid://bf5kb081ddfqq" path="res://resources/clients/nordeste/ruivo.tres" id="5_s6mmq"]
 [ext_resource type="Resource" uid="uid://bpbxaniibmggx" path="res://resources/clients/nordeste/veio.tres" id="6_hihb8"]
+[ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="8_a7o3w"]
+[ext_resource type="Resource" uid="uid://cw2om563ngwr0" path="res://resources/prep_layouts/nordeste.tres" id="9_x6h4m"]
 [ext_resource type="Resource" uid="uid://bgelph6f8vq78" path="res://resources/recipes/nordeste/cuscuz nordestino.tres" id="10_2mklg"]
+
+[sub_resource type="Resource" id="Resource_s6mmq"]
+script = ExtResource("2_ynj5s")
+id = "cuscuz"
+display_name = "Cuscuz"
+metadata/_custom_type_script = "uid://ccubj8or3d2vb"
+
+[sub_resource type="Resource" id="Resource_hihb8"]
+script = ExtResource("2_ynj5s")
+id = "carne de sol"
+display_name = "Carne de Sol"
+metadata/_custom_type_script = "uid://ccubj8or3d2vb"
 
 [resource]
 script = ExtResource("1_2y8pt")
 id = "nordeste"
 display_name = "Nordeste"
+ingredients = Array[ExtResource("2_ynj5s")]([SubResource("Resource_s6mmq"), SubResource("Resource_hihb8")])
 recipes = Array[ExtResource("4_8sr70")]([ExtResource("10_2mklg")])
 clients = Array[ExtResource("1_loos5")]([ExtResource("2_k6p4o"), ExtResource("3_x6h4m"), ExtResource("4_a7o3w"), ExtResource("5_s6mmq"), ExtResource("6_hihb8")])
+prep_layouts = Array[ExtResource("3_amakw")]([ExtResource("9_x6h4m")])
 metadata/_custom_type_script = "uid://d0tobb7uauvh8"

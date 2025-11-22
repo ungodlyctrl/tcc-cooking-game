@@ -84,7 +84,7 @@ metadata/_custom_type_script = "uid://mwsanke8s50t"
 
 [resource]
 script = ExtResource("2_au55i")
-recipe_name = "Moqueca"
+recipe_name = "Moqueca Capixaba"
 region = "sudeste"
 base_price = 34
 min_day = 5

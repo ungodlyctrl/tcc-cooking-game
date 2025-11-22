@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dehkeao1vbiy0"]
+[gd_scene load_steps=31 format=3 uid="uid://dehkeao1vbiy0"]
 
 [ext_resource type="Script" uid="uid://6dn564kkwxms" path="res://scripts/mode_attendance.gd" id="1_jdssm"]
 [ext_resource type="Script" uid="uid://f8ltra48a5fx" path="res://scripts/client_drop_area.gd" id="3_k6rd5"]
@@ -16,6 +16,16 @@
 [ext_resource type="Texture2D" uid="uid://c4xpbtnsc3o21" path="res://assets/figobar 2.png" id="14_yf3ax"]
 [ext_resource type="Texture2D" uid="uid://23ayu4m0lrl1" path="res://assets/pinguim.png" id="15_ghgpe"]
 [ext_resource type="Texture2D" uid="uid://byr01k8gr6llr" path="res://assets/loja/paginas.png" id="16_ghgpe"]
+[ext_resource type="Texture2D" uid="uid://d2pfilmixd3e6" path="res://assets/mapa/mapa papel .png" id="17_ncvdp"]
+[ext_resource type="Texture2D" uid="uid://fn3gujlnlt0l" path="res://assets/mapa/norte .png" id="18_0xbv7"]
+[ext_resource type="Texture2D" uid="uid://3rcbxqpuj5gk" path="res://assets/mapa/nordestee .png" id="19_vvbqu"]
+[ext_resource type="Texture2D" uid="uid://vrt0hvr3wh5q" path="res://assets/mapa/centro oeste .png" id="20_ilfml"]
+[ext_resource type="Texture2D" uid="uid://bln7a3yfsfmkj" path="res://assets/mapa/Sdestel .png" id="21_2akgv"]
+[ext_resource type="Texture2D" uid="uid://qwx2qobwp2l8" path="res://assets/mapa/Sul .png" id="22_s3axi"]
+[ext_resource type="Texture2D" uid="uid://b8nlm7t67ymnf" path="res://assets/mapa/nordestee -export.png" id="23_0xbv7"]
+[ext_resource type="Texture2D" uid="uid://67wnjcx7sjhl" path="res://assets/mapa/sudeste.png" id="23_2akgv"]
+[ext_resource type="Texture2D" uid="uid://cixxl4ny0fdr8" path="res://assets/mapa/sudeste e nordeste.png" id="24_s3axi"]
+[ext_resource type="Texture2D" uid="uid://b0hanfjmer8tv" path="res://assets/mapa/feli frente-export.png" id="26_30cfc"]
 
 [sub_resource type="Animation" id="Animation_kpxur"]
 length = 0.001
@@ -219,3 +229,61 @@ color = Color(0, 0, 0, 0.5)
 [node name="Paginas" type="Sprite2D" parent="Control"]
 texture = ExtResource("16_ghgpe")
 centered = false
+
+[node name="Control2" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DarkOverlay" type="ColorRect" parent="Control2"]
+process_mode = 3
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 0.5)
+
+[node name="MapaPapel" type="Sprite2D" parent="Control2"]
+position = Vector2(320, 180)
+texture = ExtResource("17_ncvdp")
+region_rect = Rect2(55, 0, 533, 360)
+
+[node name="Norte" type="Sprite2D" parent="Control2"]
+texture = ExtResource("18_0xbv7")
+centered = false
+
+[node name="Nordestee" type="Sprite2D" parent="Control2"]
+texture = ExtResource("19_vvbqu")
+centered = false
+
+[node name="CentroOeste" type="Sprite2D" parent="Control2"]
+texture = ExtResource("20_ilfml")
+centered = false
+
+[node name="Sdestel" type="Sprite2D" parent="Control2"]
+texture = ExtResource("21_2akgv")
+centered = false
+
+[node name="Sul" type="Sprite2D" parent="Control2"]
+texture = ExtResource("22_s3axi")
+centered = false
+
+[node name="Sudeste" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("23_2akgv")
+centered = false
+
+[node name="SudesteENordeste" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("24_s3axi")
+centered = false
+
+[node name="NordesteeExport" type="Sprite2D" parent="SudesteENordeste"]
+texture = ExtResource("23_0xbv7")
+centered = false
+
+[node name="FeliFrente" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(384, 224)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("26_30cfc")

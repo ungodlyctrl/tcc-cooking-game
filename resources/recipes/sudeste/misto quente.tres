@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="RecipeResource" load_steps=27 format=3 uid="uid://c14i6ptmv7fp5"]
 
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_cuovy"]
-[ext_resource type="Texture2D" uid="uid://b1em8tk5pg50s" path="res://assets/misto4.1.png" id="1_e8lh5"]
+[ext_resource type="Texture2D" uid="uid://daxhqcali1qjp" path="res://assets/misto4.1.png" id="1_e8lh5"]
 [ext_resource type="Texture2D" uid="uid://duj4q4otclh6u" path="res://assets/prato com misto.png" id="1_fwkjb"]
 [ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_wgafg"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_cstgo"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_gh3js"]
 [ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="3_wwjp0"]
-[ext_resource type="Texture2D" uid="uid://cwqgs3so8r0g5" path="res://assets/misto1.1.png" id="4_e7510"]
+[ext_resource type="Texture2D" uid="uid://cg3oivdr44tgs" path="res://assets/misto1.1.png" id="4_e7510"]
 [ext_resource type="Texture2D" uid="uid://dd3djlehy2yc1" path="res://assets/queijo (1).png" id="5_e8lh5"]
 [ext_resource type="Texture2D" uid="uid://bgsyus78clnd4" path="res://assets/presunto (1).png" id="6_e7510"]
 
