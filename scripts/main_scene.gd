@@ -34,6 +34,7 @@ var has_shown_note_first_day: bool = false
 var _is_dragging_plate: bool = false
 
 
+
 # ---------------- Onready ----------------
 @onready var mode_attendance: ModeAttendance = $Mode_Attendance
 @onready var mode_preparation: ModePreparation = $Mode_Preparation
@@ -128,6 +129,7 @@ func switch_mode(new_mode: GameMode) -> void:
 
 # ---------------- Time Tick ----------------
 func _on_time_tick() -> void:
+
 	if _is_dragging_plate:
 		return
 

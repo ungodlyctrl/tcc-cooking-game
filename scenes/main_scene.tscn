@@ -472,6 +472,11 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="RegionMap" parent="." instance=ExtResource("5_6u1mn")]
+anchors_preset = -1
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="HUD" type="Control" parent="."]
 unique_name_in_owner = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bbc1w8rq0ddlg"]
+[gd_scene load_steps=15 format=3 uid="uid://bbc1w8rq0ddlg"]
 
 [ext_resource type="Texture2D" uid="uid://d2pfilmixd3e6" path="res://assets/mapa/mapa papel .png" id="1_7aop5"]
 [ext_resource type="Script" uid="uid://bfperd6sngqoh" path="res://scripts/region_map.gd" id="1_eekl5"]
@@ -13,31 +13,35 @@
 [ext_resource type="Texture2D" uid="uid://b0hanfjmer8tv" path="res://assets/mapa/feli frente-export.png" id="9_ekfwi"]
 [ext_resource type="Texture2D" uid="uid://tvvsfq6x54c1" path="res://assets/mapa/cadeado.png" id="11_uic1k"]
 [ext_resource type="Texture2D" uid="uid://dpfmfyejcommj" path="res://assets/dialogoo.png" id="13_5hnb5"]
+[ext_resource type="Texture2D" uid="uid://cnj30tqm3p713" path="res://assets/quadrado.png" id="14_6jxqs"]
 
-[node name="RegionMap" type="Node2D"]
+[node name="RegionMap" type="Control"]
 process_mode = 3
 z_index = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_eekl5")
 player_icon_texture = ExtResource("9_ekfwi")
 background_texture = ExtResource("1_7aop5")
 outline_scale = Vector2(1, 1)
 
 [node name="DarkOverlay" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.70000005)
+layout_mode = 1
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.5529412)
 
 [node name="ClickBlocker" type="Control" parent="."]
-layout_mode = 3
 anchors_preset = 0
 offset_right = 95.0
 offset_bottom = 360.0
 
 [node name="ClickBlocker2" type="Control" parent="."]
-layout_mode = 3
 anchors_preset = 0
 offset_left = 545.0
 offset_right = 640.0
@@ -146,9 +150,10 @@ texture = ExtResource("11_uic1k")
 
 [node name="PopupLockedRegion" type="NinePatchRect" parent="."]
 z_index = 2
+layout_mode = 0
 offset_left = 353.0
 offset_top = 163.0
-offset_right = 473.0
+offset_right = 480.0
 offset_bottom = 218.0
 texture = ExtResource("13_5hnb5")
 region_rect = Rect2(0, 0, 64, 64)
@@ -167,6 +172,7 @@ offset_top = 4.0
 offset_right = 20.0
 offset_bottom = 21.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(0.05882353, 0.09019608, 0.20784314, 1)
 theme_override_font_sizes/font_size = 18
 horizontal_alignment = 1
 
@@ -180,23 +186,71 @@ offset_top = 23.0
 offset_right = 20.0
 offset_bottom = 41.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(0.05882353, 0.09019608, 0.20784314, 1)
 theme_override_font_sizes/font_size = 18
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PopupLockedRegion"]
 layout_mode = 0
-offset_left = -1.0
+offset_left = 1.0
 offset_top = 56.0
-offset_right = 121.0
+offset_right = 127.0
 offset_bottom = 81.0
 
-[node name="ButtonUnlock" type="Button" parent="PopupLockedRegion/HBoxContainer"]
+[node name="ButtonUnlock" type="NinePatchRect" parent="PopupLockedRegion/HBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
-text = "Desbloquear"
+texture = ExtResource("14_6jxqs")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 
-[node name="ButtonClose" type="Button" parent="PopupLockedRegion/HBoxContainer"]
+[node name="Label" type="Label" parent="PopupLockedRegion/HBoxContainer/ButtonUnlock"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -10.5
+offset_right = 32.5
+offset_bottom = 6.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.05882353, 0.09019608, 0.20784314, 1)
+text = "Desbloquear"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonClose" type="NinePatchRect" parent="PopupLockedRegion/HBoxContainer"]
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
+texture = ExtResource("14_6jxqs")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Label" type="Label" parent="PopupLockedRegion/HBoxContainer/ButtonClose"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -10.5
+offset_right = 20.0
+offset_bottom = 6.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.05882353, 0.09019608, 0.20784314, 1)
 text = "Fechar"
+horizontal_alignment = 1
 
 [connection signal="gui_input" from="ClickBlocker" to="." method="_on_blocker_input"]
 [connection signal="gui_input" from="ClickBlocker2" to="." method="_on_blocker_input"]
@@ -206,3 +260,5 @@ text = "Fechar"
 [connection signal="input_event" from="MapNode/Region_sudeste" to="MapNode/Region_sudeste" method="_input_event"]
 [connection signal="mouse_entered" from="MapNode/Region_sudeste" to="MapNode/Region_sudeste" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="MapNode/Region_sudeste" to="MapNode/Region_sudeste" method="_on_mouse_exited"]
+[connection signal="gui_input" from="PopupLockedRegion/HBoxContainer/ButtonUnlock" to="." method="_on_unlock_button_gui_input"]
+[connection signal="gui_input" from="PopupLockedRegion/HBoxContainer/ButtonClose" to="." method="_on_close_button_gui_input"]
