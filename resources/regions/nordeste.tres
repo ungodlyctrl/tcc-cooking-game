@@ -30,6 +30,7 @@ metadata/_custom_type_script = "uid://ccubj8or3d2vb"
 script = ExtResource("1_2y8pt")
 id = "nordeste"
 display_name = "Nordeste"
+unlock_price = 20
 ingredients = Array[ExtResource("2_ynj5s")]([SubResource("Resource_s6mmq"), SubResource("Resource_hihb8")])
 recipes = Array[ExtResource("4_8sr70")]([ExtResource("10_2mklg")])
 clients = Array[ExtResource("1_loos5")]([ExtResource("2_k6p4o"), ExtResource("3_x6h4m"), ExtResource("4_a7o3w"), ExtResource("5_s6mmq"), ExtResource("6_hihb8")])

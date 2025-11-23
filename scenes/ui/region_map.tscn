@@ -1,0 +1,208 @@
+[gd_scene load_steps=14 format=3 uid="uid://bbc1w8rq0ddlg"]
+
+[ext_resource type="Texture2D" uid="uid://d2pfilmixd3e6" path="res://assets/mapa/mapa papel .png" id="1_7aop5"]
+[ext_resource type="Script" uid="uid://bfperd6sngqoh" path="res://scripts/region_map.gd" id="1_eekl5"]
+[ext_resource type="Texture2D" uid="uid://vrt0hvr3wh5q" path="res://assets/mapa/centro oeste .png" id="2_ioxfe"]
+[ext_resource type="Texture2D" uid="uid://fn3gujlnlt0l" path="res://assets/mapa/norte .png" id="3_eekl5"]
+[ext_resource type="Texture2D" uid="uid://qwx2qobwp2l8" path="res://assets/mapa/Sul .png" id="4_6jxqs"]
+[ext_resource type="Texture2D" uid="uid://3rcbxqpuj5gk" path="res://assets/mapa/nordestee .png" id="5_5hnb5"]
+[ext_resource type="Script" uid="uid://cldmcil1vluyw" path="res://scripts/region_area.gd" id="6_6jxqs"]
+[ext_resource type="Texture2D" uid="uid://b8nlm7t67ymnf" path="res://assets/mapa/nordestee -export.png" id="6_l2s3y"]
+[ext_resource type="Texture2D" uid="uid://bln7a3yfsfmkj" path="res://assets/mapa/Sdestel .png" id="7_d4164"]
+[ext_resource type="Texture2D" uid="uid://dpcvp43qyvkwg" path="res://assets/mapa/Sdestel -export.png" id="8_8agqn"]
+[ext_resource type="Texture2D" uid="uid://b0hanfjmer8tv" path="res://assets/mapa/feli frente-export.png" id="9_ekfwi"]
+[ext_resource type="Texture2D" uid="uid://tvvsfq6x54c1" path="res://assets/mapa/cadeado.png" id="11_uic1k"]
+[ext_resource type="Texture2D" uid="uid://dpfmfyejcommj" path="res://assets/dialogoo.png" id="13_5hnb5"]
+
+[node name="RegionMap" type="Node2D"]
+process_mode = 3
+z_index = 3
+script = ExtResource("1_eekl5")
+player_icon_texture = ExtResource("9_ekfwi")
+background_texture = ExtResource("1_7aop5")
+outline_scale = Vector2(1, 1)
+
+[node name="DarkOverlay" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.70000005)
+
+[node name="ClickBlocker" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 95.0
+offset_bottom = 360.0
+
+[node name="ClickBlocker2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 545.0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="MapNode" type="Node2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="MapNode"]
+position = Vector2(320, 180)
+texture = ExtResource("1_7aop5")
+region_enabled = true
+region_rect = Rect2(55, 0, 533, 360)
+
+[node name="CentroOeste" type="Sprite2D" parent="MapNode"]
+position = Vector2(314, 189)
+texture = ExtResource("2_ioxfe")
+region_enabled = true
+region_rect = Rect2(251, 112, 126, 154)
+
+[node name="Norte" type="Sprite2D" parent="MapNode"]
+position = Vector2(267, 89)
+texture = ExtResource("3_eekl5")
+region_enabled = true
+region_rect = Rect2(156, 4, 222, 170)
+
+[node name="Sul" type="Sprite2D" parent="MapNode"]
+position = Vector2(284, 248)
+texture = ExtResource("4_6jxqs")
+centered = false
+region_enabled = true
+region_rect = Rect2(284, 248, 76, 103)
+
+[node name="Region_nordeste" type="Area2D" parent="MapNode"]
+script = ExtResource("6_6jxqs")
+region_id = "nordeste"
+
+[node name="Sprite" type="Sprite2D" parent="MapNode/Region_nordeste"]
+position = Vector2(355, 59)
+texture = ExtResource("5_5hnb5")
+centered = false
+region_enabled = true
+region_rect = Rect2(355, 59, 110, 156)
+
+[node name="Outline" type="Sprite2D" parent="MapNode/Region_nordeste"]
+visible = false
+z_index = 1
+position = Vector2(354, 59)
+texture = ExtResource("6_l2s3y")
+centered = false
+region_enabled = true
+region_rect = Rect2(354, 59, 113, 157)
+
+[node name="Collision" type="CollisionPolygon2D" parent="MapNode/Region_nordeste"]
+polygon = PackedVector2Array(376, 64, 385, 68, 384, 83, 396, 74, 402, 74, 410, 78, 425, 77, 444, 97, 459, 97, 461, 126, 444, 150, 436, 165, 430, 163, 430, 190, 427, 208, 419, 208, 419, 200, 424, 195, 419, 189, 403, 182, 392, 178, 382, 178, 377, 185, 374, 172, 374, 150, 378, 142, 370, 137, 369, 127, 373, 128, 373, 122, 367, 121, 364, 112, 367, 110, 365, 100, 359, 97, 365, 91, 369, 79)
+
+[node name="PlayerAnchor" type="Node2D" parent="MapNode/Region_nordeste"]
+position = Vector2(382, 227)
+
+[node name="Region_sudeste" type="Area2D" parent="MapNode"]
+script = ExtResource("6_6jxqs")
+region_id = "sudeste"
+
+[node name="Sprite" type="Sprite2D" parent="MapNode/Region_sudeste"]
+position = Vector2(319, 174)
+texture = ExtResource("7_d4164")
+centered = false
+region_enabled = true
+region_rect = Rect2(319, 174, 109, 103)
+
+[node name="Outline" type="Sprite2D" parent="MapNode/Region_sudeste"]
+visible = false
+z_index = 1
+position = Vector2(320, 180)
+texture = ExtResource("8_8agqn")
+
+[node name="Collision" type="CollisionPolygon2D" parent="MapNode/Region_sudeste"]
+polygon = PackedVector2Array(371, 184, 380, 182, 384, 178, 394, 176, 394, 180, 402, 180, 405, 183, 410, 183, 414, 190, 424, 193, 420, 204, 425, 211, 424, 224, 412, 245, 404, 251, 394, 251, 356, 275, 344, 255, 322, 250, 337, 228, 337, 222, 346, 216, 361, 213)
+
+[node name="PlayerAnchor" type="Node2D" parent="MapNode/Region_sudeste"]
+position = Vector2(408, 131)
+
+[node name="PlayerIcon" type="Sprite2D" parent="MapNode"]
+z_index = 1
+position = Vector2(383, 225)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_ekfwi")
+
+[node name="LocksContainer" type="Node2D" parent="."]
+z_index = 2
+
+[node name="Lock_nordeste" type="Sprite2D" parent="LocksContainer"]
+position = Vector2(408, 128)
+texture = ExtResource("11_uic1k")
+
+[node name="Cadeado" type="Sprite2D" parent="LocksContainer"]
+position = Vector2(272, 86)
+texture = ExtResource("11_uic1k")
+
+[node name="Cadeado2" type="Sprite2D" parent="LocksContainer"]
+position = Vector2(316, 184)
+texture = ExtResource("11_uic1k")
+
+[node name="Cadeado3" type="Sprite2D" parent="LocksContainer"]
+position = Vector2(331, 292)
+texture = ExtResource("11_uic1k")
+
+[node name="PopupLockedRegion" type="NinePatchRect" parent="."]
+z_index = 2
+offset_left = 353.0
+offset_top = 163.0
+offset_right = 473.0
+offset_bottom = 218.0
+texture = ExtResource("13_5hnb5")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 16
+
+[node name="Title" type="Label" parent="PopupLockedRegion"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 4.0
+offset_right = 20.0
+offset_bottom = 21.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="PopupLockedRegion"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 23.0
+offset_right = 20.0
+offset_bottom = 41.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupLockedRegion"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 56.0
+offset_right = 121.0
+offset_bottom = 81.0
+
+[node name="ButtonUnlock" type="Button" parent="PopupLockedRegion/HBoxContainer"]
+layout_mode = 2
+text = "Desbloquear"
+
+[node name="ButtonClose" type="Button" parent="PopupLockedRegion/HBoxContainer"]
+layout_mode = 2
+text = "Fechar"
+
+[connection signal="gui_input" from="ClickBlocker" to="." method="_on_blocker_input"]
+[connection signal="gui_input" from="ClickBlocker2" to="." method="_on_blocker_input"]
+[connection signal="input_event" from="MapNode/Region_nordeste" to="MapNode/Region_nordeste" method="_input_event"]
+[connection signal="mouse_entered" from="MapNode/Region_nordeste" to="MapNode/Region_nordeste" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MapNode/Region_nordeste" to="MapNode/Region_nordeste" method="_on_mouse_exited"]
+[connection signal="input_event" from="MapNode/Region_sudeste" to="MapNode/Region_sudeste" method="_input_event"]
+[connection signal="mouse_entered" from="MapNode/Region_sudeste" to="MapNode/Region_sudeste" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MapNode/Region_sudeste" to="MapNode/Region_sudeste" method="_on_mouse_exited"]

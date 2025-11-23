@@ -40,6 +40,8 @@ var _is_dragging_plate: bool = false
 @onready var mode_end_of_day: ModeEndOfDay = $ModeEndOfDay
 @onready var scroll_container: ScrollContainer = $Mode_Preparation/ScrollContainer
 @onready var prep_area: PrepArea = $Mode_Preparation/ScrollContainer/PrepArea
+@onready var region_map: RegionMap = $RegionMap
+
 
 # HUD
 @onready var clock_label: Label = $HUD/ClockLabel
@@ -384,3 +386,10 @@ func _input(event) -> void:
 		var options_panel: Control = $InGameOptions
 		options_panel.visible = not options_panel.visible
 		get_tree().paused = options_panel.visible
+
+
+
+
+func open_region_map() -> void:
+	if region_map:
+		region_map.open()

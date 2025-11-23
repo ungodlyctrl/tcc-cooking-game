@@ -71,3 +71,10 @@ func update_city_background(visual_time_of_day: String) -> void:
 		push_warning("❌ Fundo não encontrado para: " + visual_time_of_day)
 	else:
 		$CityBackground.texture = texture
+
+
+func _on_mapinha_roxo_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		var main := get_tree().current_scene as MainScene
+		if main:
+			main.open_region_map()
