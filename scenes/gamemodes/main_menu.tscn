@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://xr31gi5ou22p"]
+[gd_scene load_steps=20 format=3 uid="uid://xr31gi5ou22p"]
 
 [ext_resource type="Script" uid="uid://cidbmcw2jvpgw" path="res://scripts/main_menu.gd" id="1_1lf7f"]
 [ext_resource type="Texture2D" uid="uid://7l1hjfhu6epf" path="res://assets/Ilustração30.png" id="2_1lf7f"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dyfp22gmop2i5" path="res://assets/Jogar.png" id="4_w1q6q"]
 [ext_resource type="Texture2D" uid="uid://cbkoc1j4qovls" path="res://assets/opcoes.png" id="5_meetk"]
 [ext_resource type="Texture2D" uid="uid://ck615kf77obvs" path="res://assets/sair.png" id="6_orc0m"]
+[ext_resource type="Texture2D" uid="uid://bcdfjmuybtvho" path="res://assets/abluble_2.png" id="8_orc0m"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_guywi"]
 
@@ -423,6 +424,14 @@ theme_override_colors/icon_disabled_color = Color(0.0980392, 0.105882, 0.160784,
 theme_override_styles/normal = SubResource("StyleBoxFlat_w1q6q")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
 text = "FECHAR"
+
+[node name="Abluble2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(616, 336)
+scale = Vector2(0.018595038, 0.018595038)
+texture = ExtResource("8_orc0m")
+region_enabled = true
+region_rect = Rect2(774, 149, 1944, 1815)
 
 [connection signal="mouse_entered" from="Jogar" to="Jogar" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Jogar" to="Jogar" method="_on_mouse_exited"]

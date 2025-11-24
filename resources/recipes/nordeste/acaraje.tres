@@ -1,0 +1,91 @@
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=23 format=3 uid="uid://wffewf8g3dr5"]
+
+[ext_resource type="Texture2D" uid="uid://bxjf22dwt8xys" path="res://assets/nordeste/entrega1.png" id="1_rwrdu"]
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="2_42v35"]
+[ext_resource type="Texture2D" uid="uid://qow4vug1btm1" path="res://assets/nordeste/acaraje3.1.png" id="3_06ply"]
+[ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="4_sur8j"]
+[ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="5_h1hct"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="6_7asb6"]
+[ext_resource type="Texture2D" uid="uid://cy7ctkotyq4rb" path="res://assets/nordeste/acaraje1.1.png" id="7_muk34"]
+[ext_resource type="Texture2D" uid="uid://fojrfp8webb7" path="res://assets/nordeste/acaraje2.1.png" id="8_15auw"]
+[ext_resource type="Texture2D" uid="uid://0mkbxwpu35cn" path="res://assets/nordeste/acaraje4.1.png" id="9_fqqa2"]
+[ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="10_e5u1d"]
+
+[sub_resource type="Resource" id="Resource_wqon3"]
+script = ExtResource("4_sur8j")
+ingredient_id = "massa do acaraje"
+state = "fried"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_1wbos"]
+script = ExtResource("4_sur8j")
+ingredient_id = "vatapa"
+state = "cooked"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_vv084"]
+script = ExtResource("4_sur8j")
+ingredient_id = "camarao"
+state = "fried"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_dd00f"]
+script = ExtResource("4_sur8j")
+ingredient_id = "vinagrete"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_qeihq"]
+script = ExtResource("6_7asb6")
+texture = ExtResource("7_muk34")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_ova74"]
+script = ExtResource("5_h1hct")
+ingredient_id = "massa do acaraje"
+state_sprites = Array[ExtResource("6_7asb6")]([SubResource("Resource_qeihq")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_aaxdh"]
+script = ExtResource("6_7asb6")
+texture = ExtResource("8_15auw")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_x6dtf"]
+script = ExtResource("5_h1hct")
+ingredient_id = "vatapa"
+state_sprites = Array[ExtResource("6_7asb6")]([SubResource("Resource_aaxdh")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_gnswp"]
+script = ExtResource("6_7asb6")
+texture = ExtResource("8_15auw")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_fckcs"]
+script = ExtResource("5_h1hct")
+ingredient_id = "camarao"
+state_sprites = Array[ExtResource("6_7asb6")]([SubResource("Resource_gnswp")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_xgh23"]
+script = ExtResource("6_7asb6")
+texture = ExtResource("9_fqqa2")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_uq3tl"]
+script = ExtResource("5_h1hct")
+ingredient_id = "vinagrete"
+state_sprites = Array[ExtResource("6_7asb6")]([SubResource("Resource_xgh23")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[resource]
+script = ExtResource("10_e5u1d")
+recipe_name = "Acarajé"
+region = "nordeste"
+time_of_day = Array[String](["dinner"])
+ingredient_requirements = Array[ExtResource("4_sur8j")]([SubResource("Resource_wqon3"), SubResource("Resource_1wbos"), SubResource("Resource_vv084"), SubResource("Resource_dd00f")])
+client_lines = Array[String](["Boa noite, um acarajé. Obrigado. ", "Meu mano, hoje eu quero é cair de boca em um acarajé. Manda!", "Um acarajé bem recheado, mas por favor, sem verduras! "])
+plate_ingredient_visuals = Array[ExtResource("5_h1hct")]([SubResource("Resource_ova74"), SubResource("Resource_x6dtf"), SubResource("Resource_fckcs"), SubResource("Resource_uq3tl")])
+final_plate_sprite = ExtResource("3_06ply")
+delivered_plate_sprite = ExtResource("1_rwrdu")
+metadata/_custom_type_script = "uid://c6xvod46icb2"

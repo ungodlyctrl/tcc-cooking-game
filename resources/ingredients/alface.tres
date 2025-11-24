@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_r4lrf"]
 [ext_resource type="Texture2D" uid="uid://fqrgq2c3ok33" path="res://assets/ingredientes/alface/alface.png" id="1_x40hn"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_qe7or"]
-[ext_resource type="Texture2D" uid="uid://ceatuofkov558" path="res://assets/ingredientes/alface/alface unico.png" id="3_goqt2"]
 [ext_resource type="Texture2D" uid="uid://dui0mnq0l5r2j" path="res://assets/mini/alface.png" id="3_pteyy"]
+[ext_resource type="Texture2D" uid="uid://dk84imi0id60q" path="res://assets/nordeste2/alface unico2 (1).png" id="5_qe7or"]
 
 [sub_resource type="Resource" id="Resource_w4mka"]
 script = ExtResource("2_qe7or")
@@ -19,6 +19,6 @@ display_name = "Alface"
 min_day = 5
 container_texture = ExtResource("1_x40hn")
 states = Dictionary[String, Texture2D]({
-"raw": ExtResource("3_goqt2")
+"raw": ExtResource("5_qe7or")
 })
 metadata/_custom_type_script = "uid://ccubj8or3d2vb"

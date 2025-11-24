@@ -1,0 +1,91 @@
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=22 format=3 uid="uid://dc0w5parwh3pp"]
+
+[ext_resource type="Texture2D" uid="uid://dlql8tb0ftsjk" path="res://assets/nordeste/entrega (3).png" id="1_x8a58"]
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="2_8m72r"]
+[ext_resource type="Texture2D" uid="uid://qb0dvgsbvrbq" path="res://assets/nordeste/monheca2.1 (1).png" id="3_swxhp"]
+[ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="4_ynqb1"]
+[ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="5_8b442"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="6_nx6y2"]
+[ext_resource type="Texture2D" uid="uid://c3hpalii6d24l" path="res://assets/nordeste/monheca1.1 (2).png" id="7_5g4ao"]
+[ext_resource type="Texture2D" uid="uid://cfaot7xl12f2h" path="res://assets/nordeste/monheca3.1 (1).png" id="8_ipfja"]
+[ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="9_dt4d4"]
+
+[sub_resource type="Resource" id="Resource_rlitk"]
+script = ExtResource("4_ynqb1")
+ingredient_id = "camarao"
+state = "cooked"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_cjnmd"]
+script = ExtResource("4_ynqb1")
+ingredient_id = "pimentao"
+state = "cooked"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_vk6ow"]
+script = ExtResource("4_ynqb1")
+ingredient_id = "ovo"
+state = "cooked"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_k258h"]
+script = ExtResource("4_ynqb1")
+ingredient_id = "agua"
+state = "cooked"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_4euxl"]
+script = ExtResource("6_nx6y2")
+texture = ExtResource("7_5g4ao")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_o4nae"]
+script = ExtResource("5_8b442")
+ingredient_id = "camarao"
+state_sprites = Array[ExtResource("6_nx6y2")]([SubResource("Resource_4euxl")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_it02j"]
+script = ExtResource("6_nx6y2")
+texture = ExtResource("7_5g4ao")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_je0sx"]
+script = ExtResource("5_8b442")
+ingredient_id = "pimentao"
+state_sprites = Array[ExtResource("6_nx6y2")]([SubResource("Resource_it02j")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_lb5pc"]
+script = ExtResource("6_nx6y2")
+texture = ExtResource("7_5g4ao")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_jb0m3"]
+script = ExtResource("5_8b442")
+ingredient_id = "agua"
+state_sprites = Array[ExtResource("6_nx6y2")]([SubResource("Resource_lb5pc")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_hspfi"]
+script = ExtResource("6_nx6y2")
+texture = ExtResource("8_ipfja")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_ft7nb"]
+script = ExtResource("5_8b442")
+ingredient_id = "ovo"
+state_sprites = Array[ExtResource("6_nx6y2")]([SubResource("Resource_hspfi")])
+z_index = 1
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[resource]
+script = ExtResource("9_dt4d4")
+recipe_name = "Moqueca maranhense"
+region = "nordeste"
+time_of_day = Array[String](["lunch"])
+ingredient_requirements = Array[ExtResource("4_ynqb1")]([SubResource("Resource_rlitk"), SubResource("Resource_cjnmd"), SubResource("Resource_vk6ow"), SubResource("Resource_k258h")])
+plate_ingredient_visuals = Array[ExtResource("5_8b442")]([SubResource("Resource_o4nae"), SubResource("Resource_je0sx"), SubResource("Resource_jb0m3"), SubResource("Resource_ft7nb")])
+final_plate_sprite = ExtResource("3_swxhp")
+delivered_plate_sprite = ExtResource("1_x8a58")
+metadata/_custom_type_script = "uid://c6xvod46icb2"

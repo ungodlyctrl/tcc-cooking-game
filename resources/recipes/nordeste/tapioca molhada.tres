@@ -1,0 +1,90 @@
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=20 format=3 uid="uid://c76dkhxvi24df"]
+
+[ext_resource type="Texture2D" uid="uid://btxbs7c2vrxs0" path="res://assets/nordeste/entrega1 (1).png" id="1_4ojix"]
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="2_37uwf"]
+[ext_resource type="Texture2D" uid="uid://bj0febi3jq7pi" path="res://assets/nordeste/tapioca2.png" id="3_4ewoj"]
+[ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="4_khlga"]
+[ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="5_q2fif"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="6_kvhcc"]
+[ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="7_dnjaw"]
+
+[sub_resource type="Resource" id="Resource_7auok"]
+script = ExtResource("4_khlga")
+ingredient_id = "tapioca"
+state = "fried"
+quantity = 2
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_6ayix"]
+script = ExtResource("4_khlga")
+ingredient_id = "leite de coco"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_58wo2"]
+script = ExtResource("4_khlga")
+ingredient_id = "leite condensado"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_lmmvi"]
+script = ExtResource("4_khlga")
+ingredient_id = "coco"
+optional = true
+inclusion_chance = 0.7
+variation_line_absent = Array[String](["Mas sem coco, apenas leite. Obrigado."])
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_ryxg5"]
+script = ExtResource("6_kvhcc")
+texture = ExtResource("3_4ewoj")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_b3846"]
+script = ExtResource("5_q2fif")
+ingredient_id = "tapioca"
+state_sprites = Array[ExtResource("6_kvhcc")]([SubResource("Resource_ryxg5")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_j8t17"]
+script = ExtResource("6_kvhcc")
+texture = ExtResource("3_4ewoj")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_lybqm"]
+script = ExtResource("5_q2fif")
+ingredient_id = "leite de coco"
+state_sprites = Array[ExtResource("6_kvhcc")]([SubResource("Resource_j8t17")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_74pn0"]
+script = ExtResource("6_kvhcc")
+texture = ExtResource("3_4ewoj")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_foge3"]
+script = ExtResource("5_q2fif")
+ingredient_id = "leite condensado"
+state_sprites = Array[ExtResource("6_kvhcc")]([SubResource("Resource_74pn0")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_uq6ma"]
+script = ExtResource("6_kvhcc")
+texture = ExtResource("3_4ewoj")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_e6gmu"]
+script = ExtResource("5_q2fif")
+ingredient_id = "coco"
+state_sprites = Array[ExtResource("6_kvhcc")]([SubResource("Resource_uq6ma")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[resource]
+script = ExtResource("7_dnjaw")
+recipe_name = "Tapioca Molhada"
+region = "nordeste"
+time_of_day = Array[String](["breakfast"])
+ingredient_requirements = Array[ExtResource("4_khlga")]([SubResource("Resource_7auok"), SubResource("Resource_6ayix"), SubResource("Resource_58wo2"), SubResource("Resource_lmmvi")])
+client_lines = Array[String](["Que dia bonito né não? Uma tapioca alagada por favor. ", "Digo, uma tapioca molhada de coco por favor.", "Imagina uma tapioquinha agora? Me vê uma chefe!", "Uma tapioca molhada."])
+plate_ingredient_visuals = Array[ExtResource("5_q2fif")]([SubResource("Resource_b3846"), SubResource("Resource_lybqm"), SubResource("Resource_foge3"), SubResource("Resource_e6gmu")])
+final_plate_sprite = ExtResource("3_4ewoj")
+delivered_plate_sprite = ExtResource("1_4ojix")
+metadata/_custom_type_script = "uid://c6xvod46icb2"

@@ -1,0 +1,112 @@
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=23 format=3 uid="uid://cnwwbwdpkccbw"]
+
+[ext_resource type="Texture2D" uid="uid://d62k3uc7hjnr" path="res://assets/nordeste/entrega (2).png" id="1_1iiob"]
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="2_vitcl"]
+[ext_resource type="Texture2D" uid="uid://dseffhn1m1alj" path="res://assets/nordeste/farofa2.png" id="3_7ridy"]
+[ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="4_3u5yd"]
+[ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="5_mpjst"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="6_pksx1"]
+[ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="7_6kesx"]
+
+[sub_resource type="Resource" id="Resource_vkttu"]
+script = ExtResource("4_3u5yd")
+ingredient_id = "cuscuz"
+state = "cooked"
+quantity = 2
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_gpvel"]
+script = ExtResource("4_3u5yd")
+ingredient_id = "ovo"
+state = "cooked"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_r8teo"]
+script = ExtResource("4_3u5yd")
+ingredient_id = "pimentao"
+state = "cooked"
+optional = true
+inclusion_chance = 0.7
+variation_line_absent = Array[String](["Ah, e sem pimentão."])
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_33fmq"]
+script = ExtResource("4_3u5yd")
+ingredient_id = "feijao fradinho"
+state = "cooked"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_r5ust"]
+script = ExtResource("4_3u5yd")
+ingredient_id = "queijo coalho"
+state = "cooked"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_ufbs4"]
+script = ExtResource("6_pksx1")
+texture = ExtResource("3_7ridy")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_wsvji"]
+script = ExtResource("5_mpjst")
+ingredient_id = "cuscuz"
+state_sprites = Array[ExtResource("6_pksx1")]([SubResource("Resource_ufbs4")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_q8pyy"]
+script = ExtResource("6_pksx1")
+texture = ExtResource("3_7ridy")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_8rccu"]
+script = ExtResource("5_mpjst")
+ingredient_id = "feijao fradinho"
+state_sprites = Array[ExtResource("6_pksx1")]([SubResource("Resource_q8pyy")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_5e3ej"]
+script = ExtResource("6_pksx1")
+texture = ExtResource("3_7ridy")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_mx5mc"]
+script = ExtResource("5_mpjst")
+ingredient_id = "queijo coalho"
+state_sprites = Array[ExtResource("6_pksx1")]([SubResource("Resource_5e3ej")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_pxviv"]
+script = ExtResource("6_pksx1")
+texture = ExtResource("3_7ridy")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_vmexs"]
+script = ExtResource("5_mpjst")
+ingredient_id = "pimentao"
+state_sprites = Array[ExtResource("6_pksx1")]([SubResource("Resource_pxviv")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_ymc4g"]
+script = ExtResource("6_pksx1")
+texture = ExtResource("3_7ridy")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_3h18i"]
+script = ExtResource("5_mpjst")
+ingredient_id = "ovo"
+state_sprites = Array[ExtResource("6_pksx1")]([SubResource("Resource_ymc4g")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[resource]
+script = ExtResource("7_6kesx")
+recipe_name = "Farofa de Cuscuz"
+region = "nordeste"
+base_price = 32
+min_day = 2
+time_of_day = Array[String](["breakfast"])
+ingredient_requirements = Array[ExtResource("4_3u5yd")]([SubResource("Resource_vkttu"), SubResource("Resource_gpvel"), SubResource("Resource_r8teo"), SubResource("Resource_33fmq"), SubResource("Resource_r5ust")])
+client_lines = Array[String](["Fala pai, me vê uma farofa de cuscuz, no ponto hein?!", "Bom dia, uma farofa de cuscuz por favor.", "Opa, uma farofa de cuscuz."])
+plate_ingredient_visuals = Array[ExtResource("5_mpjst")]([SubResource("Resource_wsvji"), SubResource("Resource_8rccu"), SubResource("Resource_mx5mc"), SubResource("Resource_vmexs"), SubResource("Resource_3h18i")])
+final_plate_sprite = ExtResource("3_7ridy")
+delivered_plate_sprite = ExtResource("1_1iiob")
+metadata/_custom_type_script = "uid://c6xvod46icb2"

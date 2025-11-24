@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://bfieei5e6g61o"]
+
+[ext_resource type="Texture2D" uid="uid://c1yqif8b20ox5" path="res://assets/nordeste2/feijão fradinho (1).png" id="1_npyxm"]
+[ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_5iv3i"]
+[ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="3_kl0tt"]
+[ext_resource type="Texture2D" uid="uid://dfexeiediomes" path="res://assets/nordeste2/concha feijão fradiho.png" id="4_5iv3i"]
+
+[resource]
+script = ExtResource("3_kl0tt")
+id = "feijao fradinho"
+display_name = "Feijão Fradinho"
+container_texture = ExtResource("1_npyxm")
+initial_state = "cooked"
+states = Dictionary[String, Texture2D]({
+"cooked": ExtResource("4_5iv3i")
+})
+gender = "m"
+drag_offset = Vector2(-3, -37)
+metadata/_custom_type_script = "uid://ccubj8or3d2vb"

@@ -79,6 +79,7 @@ min_day = 5
 time_of_day = Array[String](["lunch"])
 ingredient_requirements = Array[ExtResource("1_xt4fu")]([SubResource("Resource_xt4fu"), SubResource("Resource_k5hbk"), SubResource("Resource_ncd7f")])
 client_lines = Array[String](["Olá, gostaria de um cuscuz paulista por favor. ", "Boa tarde, um cuscuz paulista. Apenas isso.", "Ovo, pimentão e flocão, eu quero um cuscuz paulista!"])
+display_steps = Array[String](["Cozinhar cuscuz", "Adicionar ovo", "Adicionar pimentão"])
 plate_ingredient_visuals = Array[ExtResource("2_ncd7f")]([SubResource("Resource_j7p4k"), SubResource("Resource_vc8nw"), SubResource("Resource_m1v6a")])
 final_plate_sprite = ExtResource("3_m1v6a")
 delivered_plate_sprite = ExtResource("1_c5gnj")

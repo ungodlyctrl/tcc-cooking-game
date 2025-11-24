@@ -3,15 +3,12 @@ class_name RegionMap
 
 signal closed()
 
-## Exports (arraste texturas no Inspector)
 @export var player_icon_texture: Texture2D
 @export var background_texture: Texture2D
 
-# visual tweaks
 @export var outline_scale: Vector2 = Vector2(1.06, 1.06)
 @export var overlay_alpha: float = 0.7
 
-# Internals
 var _region_areas: Dictionary[String, Area2D] = {}
 var _locks: Dictionary[String, Sprite2D] = {}
 var _selected_region: String = ""
@@ -25,18 +22,20 @@ var _popup_region: String = ""
 @onready var popup_locked: Control = $PopupLockedRegion
 
 
-# ============================================================
+# ====================================================================
 # READY
-# ============================================================
+# ====================================================================
 func _ready() -> void:
-	# overlay setup
+	# ❗ Permite o mapa funcionar durante o pause do jogo
+	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+
+	# overlay
 	dark_overlay.color = Color(0, 0, 0, overlay_alpha)
 
 	# background opcional
 	if background_texture and map_node.has_node("Background"):
-		var bg_node := map_node.get_node("Background")
-		if bg_node is Sprite2D:
-			bg_node.texture = background_texture
+		var bg := map_node.get_node("Background") as Sprite2D
+		bg.texture = background_texture
 
 	_discover_regions()
 	_update_visuals()
@@ -44,9 +43,7 @@ func _ready() -> void:
 	popup_locked.visible = false
 	self.visible = false
 
-	# ---------------------------------------------------------
-	# NOVO: suporte aos novos botões em NinePatchRect
-	# ---------------------------------------------------------
+	# botões do popup (NinePatchRects com Label)
 	var close_btn := popup_locked.get_node_or_null("CloseButton")
 	if close_btn:
 		close_btn.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -58,14 +55,13 @@ func _ready() -> void:
 		unlock_btn.gui_input.connect(_on_unlock_button_gui_input)
 
 
-# ============================================================
+# ====================================================================
 # DESCOBRIR REGIÕES
-# ============================================================
+# ====================================================================
 func _discover_regions() -> void:
 	_region_areas.clear()
 	_locks.clear()
 
-	# identifica regions no MapNode
 	for child in map_node.get_children():
 		if child is Area2D:
 			if child is RegionArea:
@@ -73,18 +69,15 @@ func _discover_regions() -> void:
 				if rid != "":
 					_region_areas[rid] = child
 			elif child.has_meta("region_id"):
-				var rid_meta := str(child.get_meta("region_id"))
-				if rid_meta != "":
-					_region_areas[rid_meta] = child
+				var rid2 := str(child.get_meta("region_id"))
+				if rid2 != "":
+					_region_areas[rid2] = child
 
-	# locks em LocksContainer
 	for lk in locks_container.get_children():
-		if lk is Sprite2D:
-			if lk.name.begins_with("Lock_"):
-				var rid := lk.name.replace("Lock_", "")
-				_locks[rid] = lk
+		if lk is Sprite2D and lk.name.begins_with("Lock_"):
+			var rid := lk.name.replace("Lock_", "")
+			_locks[rid] = lk
 
-	# conectar sinais
 	for rid in _region_areas.keys():
 		var area: Area2D = _region_areas[rid]
 
@@ -96,78 +89,62 @@ func _discover_regions() -> void:
 				area.connect("input_event", Callable(self, "_on_area_input_event"))
 
 		if area.has_signal("region_hovered"):
-			if not area.is_connected("region_hovered", Callable(self, "_on_region_hover")):
-				area.connect("region_hovered", Callable(self, "_on_region_hover"))
+			area.connect("region_hovered", Callable(self, "_on_region_hover"))
 
 		if area.has_signal("region_exited"):
-			if not area.is_connected("region_exited", Callable(self, "_on_region_exit")):
-				area.connect("region_exited", Callable(self, "_on_region_exit"))
+			area.connect("region_exited", Callable(self, "_on_region_exit"))
 
 
-# ============================================================
-# ABRIR / FECHAR MAPA
-# ============================================================
+# ====================================================================
+# OPEN / CLOSE MAP
+# ====================================================================
 func open() -> void:
 	self.visible = true
-	get_tree().paused = true
+	get_tree().paused = true    # pausa o jogo
 	_update_visuals()
-
-	# impede DialogueBox de capturar clique
-	var main := get_tree().current_scene as MainScene
-	if main and main.mode_attendance:
-		if main.mode_attendance.dialogue_box:
-			main.mode_attendance.dialogue_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 
 func close() -> void:
 	self.visible = false
-	get_tree().paused = false
-
+	get_tree().paused = false   # destrava o jogo
 	_selected_region = ""
 	_hover_region = ""
+	popup_locked.visible = false
 	emit_signal("closed")
 
-	# restaura DialogueBox
-	var main := get_tree().current_scene as MainScene
-	if main and main.mode_attendance:
-		if main.mode_attendance.dialogue_box:
-			main.mode_attendance.dialogue_box.mouse_filter = Control.MOUSE_FILTER_STOP
 
-
-# ============================================================
-# INPUT REGION FALLBACK
-# ============================================================
-func _on_area_input_event(viewport: Viewport, event: InputEvent, shape_idx: int, area: Object) -> void:
+# ====================================================================
+# REGION CLICK FALLBACK
+# ====================================================================
+func _on_area_input_event(viewport, event, shape_idx, area) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		var rid := ""
 		if area is RegionArea:
 			rid = area.region_id
-		elif (area as Node).has_meta("region_id"):
-			rid = str((area as Node).get_meta("region_id"))
+		elif area.has_meta("region_id"):
+			rid = str(area.get_meta("region_id"))
 
 		if rid != "":
 			_on_region_clicked(rid)
 
 
-# ============================================================
+# ====================================================================
 # REGION HANDLERS
-# ============================================================
+# ====================================================================
 func _on_region_clicked(region_id: String) -> void:
 	var rm := Managers.region_manager
 
-	# já está nessa região → ignorar
 	if region_id == rm.current_region_id:
 		return
 
-	# região bloqueada → abre popup
 	if not rm.is_unlocked(region_id):
 		_show_locked(region_id)
 		return
 
 	_selected_region = region_id
 	rm.request_region_change_next_day(region_id)
-
 	_update_visuals()
+  # fecha o mapa ao selecionar região desbloqueada
 
 
 func _on_region_hover(region_id: String) -> void:
@@ -181,36 +158,33 @@ func _on_region_exit(region_id: String) -> void:
 	_update_visuals()
 
 
-# ============================================================
+# ====================================================================
 # VISUALS
-# ============================================================
+# ====================================================================
 func _update_visuals() -> void:
 	var rm := Managers.region_manager
 	var current_region := rm.current_region_id
 
-	# locks visíveis p/ regiões fechadas
 	for rid in _locks.keys():
 		_locks[rid].visible = not rm.is_unlocked(rid)
 
-	# visuais das regiões
 	for rid in _region_areas.keys():
 		var area := _region_areas[rid]
-		var sprite := area.get_node_or_null("Sprite") as Sprite2D
-		var outline := area.get_node_or_null("Outline") as Sprite2D
+		var s := area.get_node_or_null("Sprite") as Sprite2D
+		var o := area.get_node_or_null("Outline") as Sprite2D
 
-		if outline:
-			outline.visible = (rid == _hover_region or rid == _selected_region)
-			outline.scale = outline_scale
+		if o:
+			o.visible = (rid == _hover_region or rid == _selected_region)
+			o.scale = outline_scale
 
-		if sprite:
+		if s:
 			if rid == _selected_region:
-				sprite.modulate = Color(1, 1, 1, 1)
+				s.modulate = Color(1,1,1,1)
 			elif rid == current_region:
-				sprite.modulate = Color(1, 1, 1, 0.95)
+				s.modulate = Color(1,1,1,0.95)
 			else:
-				sprite.modulate = Color(1, 1, 1, 0.85)
+				s.modulate = Color(1,1,1,0.85)
 
-	# player icon
 	if player_icon_texture:
 		player_icon.texture = player_icon_texture
 
@@ -221,18 +195,18 @@ func _update_visuals() -> void:
 		if anchor:
 			player_icon.global_position = anchor.global_position
 		else:
-			var s := area.get_node_or_null("Sprite") as Sprite2D
-			if s and s.texture:
-				player_icon.global_position = s.global_position
+			var s2 := area.get_node_or_null("Sprite") as Sprite2D
+			if s2:
+				player_icon.global_position = s2.global_position
 
 		player_icon.visible = true
 	else:
 		player_icon.visible = false
 
 
-# ============================================================
-# POPUP LOCKED
-# ============================================================
+# ====================================================================
+# POPUP
+# ====================================================================
 func _show_locked(region_id: String) -> void:
 	_popup_set_region(region_id)
 	popup_locked.visible = true
@@ -269,6 +243,7 @@ func _on_popup_unlock_pressed() -> void:
 			var main := get_tree().current_scene as MainScene
 			if main:
 				main.add_money(-rm.get_region(_popup_region).unlock_price)
+
 			popup_locked.visible = false
 			_update_visuals()
 	else:
@@ -287,19 +262,24 @@ func money_can_unlock(region_id: String) -> bool:
 	return main.money >= int(r.unlock_price)
 
 
-# ============================================================
-# INPUT – fechar ao clicar fora
-# ============================================================
+# ====================================================================
+# INPUT – FECHAR AO CLICAR FORA
+# ====================================================================
 func _input(event: InputEvent) -> void:
 	if not self.visible:
 		return
 
+	# ESC fecha
 	if event.is_action_pressed("ui_cancel"):
 		close()
 		return
 
+	# popup aberto → ignorar clique fora
+	if popup_locked.visible:
+		return
+
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		var click_pos: Vector2 = event.position
+		var click_pos = event.position
 		var bg := map_node.get_node_or_null("Background") as Sprite2D
 
 		if bg and bg.texture:
@@ -309,14 +289,24 @@ func _input(event: InputEvent) -> void:
 				close()
 
 
-# ============================================================
-# NinePatchRect button handlers
-# ============================================================
+# ====================================================================
+# BUTTON HANDLERS
+# ====================================================================
 func _on_close_button_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		_on_popup_close()
 
 
 func _on_unlock_button_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		_on_popup_unlock_pressed()
+
+
+
+
+func _on_blocker_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		# ignora se popup aberto
+		if popup_locked.visible:
+			return
+		close()

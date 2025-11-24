@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=4 format=3 uid="uid://b7qhlsndurxc0"]
+
+[ext_resource type="Texture2D" uid="uid://cjbpg1hxgbdg5" path="res://assets/nordeste2/coco (1).png" id="1_46xy7"]
+[ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_wbmmk"]
+[ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="3_8tf2w"]
+
+[resource]
+script = ExtResource("3_8tf2w")
+id = "coco"
+display_name = "Coco"
+container_texture = ExtResource("1_46xy7")
+gender = "m"
+metadata/_custom_type_script = "uid://ccubj8or3d2vb"

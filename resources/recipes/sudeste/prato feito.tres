@@ -1,9 +1,16 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=9 format=3 uid="uid://cxce7ity5redu"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=24 format=3 uid="uid://cxce7ity5redu"]
 
+[ext_resource type="Texture2D" uid="uid://bg6jt3eudxgub" path="res://assets/prato cm pf.png" id="1_band0"]
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_hesue"]
 [ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_hkkxw"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_55mys"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_hkkxw"]
+[ext_resource type="Texture2D" uid="uid://wgqwvuvrxnbk" path="res://assets/pf3.1.png" id="3_t8wh5"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="6_2gcls"]
+[ext_resource type="Texture2D" uid="uid://c5mrhtlcyrj2b" path="res://assets/arroz.png" id="7_4ejbm"]
+[ext_resource type="Texture2D" uid="uid://d4k28myghd7hh" path="res://assets/feijao (1).png" id="8_d0pvx"]
+[ext_resource type="Texture2D" uid="uid://ddut1ol1wu7tk" path="res://assets/carne (4).png" id="9_p2w6n"]
+[ext_resource type="Texture2D" uid="uid://d4ixftur18yv7" path="res://assets/batata (2).png" id="10_p4ddc"]
 
 [sub_resource type="Resource" id="Resource_hesue"]
 script = ExtResource("1_hesue")
@@ -41,6 +48,56 @@ variation_line_absent = Array[String](["Hoje sem batata, por favor!"])
 variation_line_quantity = Array[String](["Fritas extra por favor!"])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
+[sub_resource type="Resource" id="Resource_j3p5j"]
+script = ExtResource("6_2gcls")
+state = "cooked"
+texture = ExtResource("7_4ejbm")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_q436g"]
+script = ExtResource("2_hkkxw")
+ingredient_id = "arroz"
+state_sprites = Array[ExtResource("6_2gcls")]([SubResource("Resource_j3p5j")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_cyy0q"]
+script = ExtResource("6_2gcls")
+state = "cooked"
+texture = ExtResource("8_d0pvx")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_mefcv"]
+script = ExtResource("2_hkkxw")
+ingredient_id = "feijao"
+state_sprites = Array[ExtResource("6_2gcls")]([SubResource("Resource_cyy0q")])
+z_index = 1
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_xhr1m"]
+script = ExtResource("6_2gcls")
+state = "fried"
+texture = ExtResource("9_p2w6n")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_1gibt"]
+script = ExtResource("2_hkkxw")
+ingredient_id = "carne"
+state_sprites = Array[ExtResource("6_2gcls")]([SubResource("Resource_xhr1m")])
+z_index = 2
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_xjtjb"]
+script = ExtResource("6_2gcls")
+state = "fried"
+texture = ExtResource("10_p4ddc")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_q27p2"]
+script = ExtResource("2_hkkxw")
+ingredient_id = "batata"
+state_sprites = Array[ExtResource("6_2gcls")]([SubResource("Resource_xjtjb")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
 [resource]
 script = ExtResource("2_55mys")
 recipe_name = "Prato Feito"
@@ -49,4 +106,8 @@ base_price = 36
 time_of_day = Array[String](["lunch"])
 ingredient_requirements = Array[ExtResource("1_hesue")]([SubResource("Resource_hesue"), SubResource("Resource_55mys"), SubResource("Resource_hkkxw"), SubResource("Resource_qba60")])
 client_lines = Array[String](["Que fome! Me vê um prato feito por favor!", "Oi, por hoje eu quero um PF. ", "Boa tarde, um prato feito. Espero que as fritas sejam boas.", "Capricha no PF aí, tô morrendo de fome."])
+display_steps = Array[String](["Adicionar arroz", "Adicionar feijão", "Fritar carne", "Cortar batata", "Fritar batata"])
+plate_ingredient_visuals = Array[ExtResource("2_hkkxw")]([SubResource("Resource_q436g"), SubResource("Resource_mefcv"), SubResource("Resource_1gibt"), SubResource("Resource_q27p2")])
+final_plate_sprite = ExtResource("3_t8wh5")
+delivered_plate_sprite = ExtResource("1_band0")
 metadata/_custom_type_script = "uid://c6xvod46icb2"

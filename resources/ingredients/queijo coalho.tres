@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://g5nn1waylyg1"]
+
+[ext_resource type="Texture2D" uid="uid://rhvihdq6suxs" path="res://assets/nordeste2/queijo coalha (1).png" id="1_s1cki"]
+[ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_urdrm"]
+[ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="3_uic8m"]
+[ext_resource type="Texture2D" uid="uid://d3m81dj4utd01" path="res://assets/nordeste2/queijo coalho unico2 (1).png" id="4_ww4i2"]
+
+[resource]
+script = ExtResource("3_uic8m")
+id = "queijo coalho"
+display_name = "Queijo coalho"
+container_texture = ExtResource("1_s1cki")
+states = Dictionary[String, Texture2D]({
+"raw": ExtResource("4_ww4i2")
+})
+gender = "m"
+metadata/_custom_type_script = "uid://ccubj8or3d2vb"

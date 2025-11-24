@@ -98,7 +98,7 @@ region_rect = Rect2(354, 59, 113, 157)
 polygon = PackedVector2Array(376, 64, 385, 68, 384, 83, 396, 74, 402, 74, 410, 78, 425, 77, 444, 97, 459, 97, 461, 126, 444, 150, 436, 165, 430, 163, 430, 190, 427, 208, 419, 208, 419, 200, 424, 195, 419, 189, 403, 182, 392, 178, 382, 178, 377, 185, 374, 172, 374, 150, 378, 142, 370, 137, 369, 127, 373, 128, 373, 122, 367, 121, 364, 112, 367, 110, 365, 100, 359, 97, 365, 91, 369, 79)
 
 [node name="PlayerAnchor" type="Node2D" parent="MapNode/Region_nordeste"]
-position = Vector2(382, 227)
+position = Vector2(408, 132)
 
 [node name="Region_sudeste" type="Area2D" parent="MapNode"]
 script = ExtResource("6_6jxqs")
@@ -112,16 +112,18 @@ region_enabled = true
 region_rect = Rect2(319, 174, 109, 103)
 
 [node name="Outline" type="Sprite2D" parent="MapNode/Region_sudeste"]
-visible = false
 z_index = 1
-position = Vector2(320, 180)
+position = Vector2(374, 226)
 texture = ExtResource("8_8agqn")
+region_enabled = true
+region_rect = Rect2(318, 172, 111, 108)
 
 [node name="Collision" type="CollisionPolygon2D" parent="MapNode/Region_sudeste"]
+visible = false
 polygon = PackedVector2Array(371, 184, 380, 182, 384, 178, 394, 176, 394, 180, 402, 180, 405, 183, 410, 183, 414, 190, 424, 193, 420, 204, 425, 211, 424, 224, 412, 245, 404, 251, 394, 251, 356, 275, 344, 255, 322, 250, 337, 228, 337, 222, 346, 216, 361, 213)
 
 [node name="PlayerAnchor" type="Node2D" parent="MapNode/Region_sudeste"]
-position = Vector2(408, 131)
+position = Vector2(383, 230)
 
 [node name="PlayerIcon" type="Sprite2D" parent="MapNode"]
 z_index = 1
@@ -149,6 +151,7 @@ position = Vector2(331, 292)
 texture = ExtResource("11_uic1k")
 
 [node name="PopupLockedRegion" type="NinePatchRect" parent="."]
+visible = false
 z_index = 2
 layout_mode = 0
 offset_left = 353.0
@@ -200,6 +203,7 @@ offset_bottom = 81.0
 [node name="ButtonUnlock" type="NinePatchRect" parent="PopupLockedRegion/HBoxContainer"]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
+mouse_filter = 0
 texture = ExtResource("14_6jxqs")
 region_rect = Rect2(0, 0, 48, 48)
 patch_margin_left = 8
@@ -228,6 +232,7 @@ vertical_alignment = 1
 [node name="ButtonClose" type="NinePatchRect" parent="PopupLockedRegion/HBoxContainer"]
 custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
+mouse_filter = 0
 texture = ExtResource("14_6jxqs")
 region_rect = Rect2(0, 0, 48, 48)
 patch_margin_left = 8
@@ -252,8 +257,8 @@ theme_override_colors/font_color = Color(0.05882353, 0.09019608, 0.20784314, 1)
 text = "Fechar"
 horizontal_alignment = 1
 
-[connection signal="gui_input" from="ClickBlocker" to="." method="_on_blocker_input"]
-[connection signal="gui_input" from="ClickBlocker2" to="." method="_on_blocker_input"]
+[connection signal="gui_input" from="ClickBlocker" to="." method="_on_blocker_gui_input"]
+[connection signal="gui_input" from="ClickBlocker2" to="." method="_on_blocker_gui_input"]
 [connection signal="input_event" from="MapNode/Region_nordeste" to="MapNode/Region_nordeste" method="_input_event"]
 [connection signal="mouse_entered" from="MapNode/Region_nordeste" to="MapNode/Region_nordeste" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="MapNode/Region_nordeste" to="MapNode/Region_nordeste" method="_on_mouse_exited"]

@@ -1,14 +1,18 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=7 format=3 uid="uid://cn5tl61fvyxog"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=14 format=3 uid="uid://cn5tl61fvyxog"]
 
 [ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_te0n1"]
+[ext_resource type="Texture2D" uid="uid://by1ccovck17co" path="res://assets/prato2.2.png" id="1_xujxn"]
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="2_j7ofx"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="3_0b0pi"]
+[ext_resource type="Texture2D" uid="uid://c1vn2wxqvulrq" path="res://assets/bolinho.png" id="3_nsqpr"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="4_xujxn"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="6_h8d7t"]
 
 [sub_resource type="Resource" id="Resource_or3uk"]
 script = ExtResource("2_j7ofx")
 ingredient_id = "batata"
 state = "cooked"
+stages = Array[int]([1, 2])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [sub_resource type="Resource" id="Resource_786k6"]
@@ -17,6 +21,30 @@ ingredient_id = "peixe"
 state = "cooked"
 stages = Array[int]([1, 2])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_84w6w"]
+script = ExtResource("6_h8d7t")
+state = "cooked"
+texture = ExtResource("3_nsqpr")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_otad0"]
+script = ExtResource("3_0b0pi")
+ingredient_id = "batata"
+state_sprites = Array[ExtResource("6_h8d7t")]([SubResource("Resource_84w6w")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_d6dds"]
+script = ExtResource("6_h8d7t")
+state = "cooked"
+texture = ExtResource("3_nsqpr")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_awm5p"]
+script = ExtResource("3_0b0pi")
+ingredient_id = "peixe"
+state_sprites = Array[ExtResource("6_h8d7t")]([SubResource("Resource_d6dds")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
 
 [resource]
 script = ExtResource("4_xujxn")
@@ -27,4 +55,8 @@ min_day = 5
 time_of_day = Array[String](["dinner"])
 ingredient_requirements = Array[ExtResource("2_j7ofx")]([SubResource("Resource_or3uk"), SubResource("Resource_786k6")])
 client_lines = Array[String](["Boa noite. Algo frito e saboroso. Certo, um bolinho de bacalhau. ", "Gostaria de um bolinho de bacalhau. Valeu!", "Olá, um bolinho de bacalhau no capricho por favor."])
+display_steps = Array[String](["Cortar batata", "Cortar peixe", "Cozinhar batata e peixe"])
+plate_ingredient_visuals = Array[ExtResource("3_0b0pi")]([SubResource("Resource_otad0"), SubResource("Resource_awm5p")])
+final_plate_sprite = ExtResource("3_nsqpr")
+delivered_plate_sprite = ExtResource("1_xujxn")
 metadata/_custom_type_script = "uid://c6xvod46icb2"

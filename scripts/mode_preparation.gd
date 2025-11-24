@@ -5,7 +5,7 @@ class_name ModePreparation
 @onready var prep_area: PrepArea = $ScrollContainer/PrepArea
 @onready var recipe_note_panel: RecipeNotePanel = $HUDPrep/RecipeNotePanel
 
-const SCROLL_MARGIN := 50
+const SCROLL_MARGIN := 25
 const SCROLL_SPEED := 400.0
 
 var max_scroll := 0

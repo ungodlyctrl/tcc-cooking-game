@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=19 format=3 uid="uid://op4gaj7yrofn"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=20 format=3 uid="uid://op4gaj7yrofn"]
 
+[ext_resource type="Texture2D" uid="uid://bigk1ht0gcjmb" path="res://assets/prato cm feijaoda.png" id="1_0qaf3"]
 [ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_6r2q5"]
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_tjqf5"]
 [ext_resource type="Texture2D" uid="uid://deccuj6ovh5p5" path="res://assets/feiju 1.1.png" id="1_vf75x"]
@@ -70,7 +71,7 @@ metadata/_custom_type_script = "uid://mwsanke8s50t"
 
 [resource]
 script = ExtResource("2_7c4my")
-recipe_name = "Feijoada Carioca"
+recipe_name = "Feijoada"
 region = "sudeste"
 base_price = 26
 time_of_day = Array[String](["lunch"])
@@ -79,4 +80,5 @@ client_lines = Array[String](["Arroz e feijão bem temperado, é isso que quero.
 display_steps = Array[String](["Adicionar arroz", "Adicionar feijão", "Adicionar farofa"])
 plate_ingredient_visuals = Array[ExtResource("2_gm1fx")]([SubResource("Resource_5nye8"), SubResource("Resource_eqvum"), SubResource("Resource_quwp1")])
 final_plate_sprite = ExtResource("1_vf75x")
+delivered_plate_sprite = ExtResource("1_0qaf3")
 metadata/_custom_type_script = "uid://c6xvod46icb2"

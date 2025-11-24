@@ -1,9 +1,14 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=8 format=3 uid="uid://c4kho504hhpk6"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=19 format=3 uid="uid://c4kho504hhpk6"]
 
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="1_0gaev"]
 [ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_7s0de"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="2_7s0de"]
+[ext_resource type="Texture2D" uid="uid://7y4ifi8tcsyt" path="res://assets/vaca atolada 2.2.png" id="2_87kpr"]
 [ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="2_p7gce"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="5_hongb"]
+[ext_resource type="Texture2D" uid="uid://c5mrhtlcyrj2b" path="res://assets/arroz.png" id="6_sex58"]
+[ext_resource type="Texture2D" uid="uid://cg22tv5ul3xm1" path="res://assets/carne 3 (1).png" id="7_ui3j7"]
+[ext_resource type="Texture2D" uid="uid://bibuyrobqj3y6" path="res://assets/carne 2 (2).png" id="8_lmlg1"]
 
 [sub_resource type="Resource" id="Resource_0gaev"]
 script = ExtResource("1_0gaev")
@@ -26,6 +31,43 @@ state = "cooked"
 stages = Array[int]([1, 2])
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
+[sub_resource type="Resource" id="Resource_5snq0"]
+script = ExtResource("5_hongb")
+state = "cooked"
+texture = ExtResource("6_sex58")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_xn4xv"]
+script = ExtResource("2_7s0de")
+ingredient_id = "arroz"
+state_sprites = Array[ExtResource("5_hongb")]([SubResource("Resource_5snq0")])
+z_index = 1
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_57dnc"]
+script = ExtResource("5_hongb")
+state = "cooked"
+texture = ExtResource("7_ui3j7")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_xwxhx"]
+script = ExtResource("2_7s0de")
+ingredient_id = "carne"
+state_sprites = Array[ExtResource("5_hongb")]([SubResource("Resource_57dnc")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_rnygb"]
+script = ExtResource("5_hongb")
+state = "cooked"
+texture = ExtResource("8_lmlg1")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_20dkt"]
+script = ExtResource("2_7s0de")
+ingredient_id = "batata"
+state_sprites = Array[ExtResource("5_hongb")]([SubResource("Resource_rnygb")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
 [resource]
 script = ExtResource("2_p7gce")
 recipe_name = "Vaca Atolada"
@@ -35,4 +77,6 @@ time_of_day = Array[String](["lunch"])
 ingredient_requirements = Array[ExtResource("1_0gaev")]([SubResource("Resource_0gaev"), SubResource("Resource_p7gce"), SubResource("Resource_7s0de")])
 client_lines = Array[String](["Boa tarde, me vê uma vaca atolada por favor.", "Uma vaca atolada, espero que essa carne esteja bem suculenta.", "E aí, uma vaca atolada por favor!"])
 display_steps = Array[String](["Adicionar arroz", "Cozinhar carne e batata"])
+plate_ingredient_visuals = Array[ExtResource("2_7s0de")]([SubResource("Resource_xn4xv"), SubResource("Resource_xwxhx"), SubResource("Resource_20dkt")])
+final_plate_sprite = ExtResource("2_87kpr")
 metadata/_custom_type_script = "uid://c6xvod46icb2"

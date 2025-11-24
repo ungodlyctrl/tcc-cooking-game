@@ -91,6 +91,7 @@ min_day = 5
 time_of_day = Array[String](["dinner"])
 ingredient_requirements = Array[ExtResource("1_v5mlg")]([SubResource("Resource_v5mlg"), SubResource("Resource_au55i"), SubResource("Resource_iq1wm"), SubResource("Resource_0fr6g")])
 client_lines = Array[String](["Essa noite pede por uma moqueca. Me veja uma por favor!", "Oi moço, gostaria de uma moqueca de peixe. Obrigado.", "Olá, ouvi dizer que a moqueca é deliciosa. Uma por favor!", "E aí, desenrola uma moqueca pra mim. Valeu."])
+display_steps = Array[String](["Adicionar peixe, pimentão e água na panela e cozinhar", "Adicionar ovo"])
 plate_ingredient_visuals = Array[ExtResource("2_iq1wm")]([SubResource("Resource_hv34t"), SubResource("Resource_ji1v1"), SubResource("Resource_7mrcf"), SubResource("Resource_chv5o")])
 final_plate_sprite = ExtResource("3_4uu2j")
 delivered_plate_sprite = ExtResource("1_l6h7b")

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RecipeResource" load_steps=16 format=3 uid="uid://bgelph6f8vq78"]
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=19 format=3 uid="uid://bgelph6f8vq78"]
 
 [ext_resource type="Texture2D" uid="uid://bhqw15yqxl5an" path="res://assets/entrega.png" id="1_agnig"]
 [ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="1_c36e5"]
@@ -20,6 +20,15 @@ metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 [sub_resource type="Resource" id="Resource_uhfhv"]
 script = ExtResource("2_uhfhv")
 ingredient_id = "carne de sol"
+state = "cooked"
+optional = true
+inclusion_chance = 0.8
+variation_line_absent = Array[String](["Mas sem carne por favor."])
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_qkq5v"]
+script = ExtResource("2_uhfhv")
+ingredient_id = "manteiga"
 metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
 
 [sub_resource type="Resource" id="Resource_7rqxs"]
@@ -47,15 +56,25 @@ ingredient_id = "carne de sol"
 state_sprites = Array[ExtResource("6_qkq5v")]([SubResource("Resource_6xslg")])
 metadata/_custom_type_script = "uid://mwsanke8s50t"
 
+[sub_resource type="Resource" id="Resource_agnig"]
+script = ExtResource("6_qkq5v")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_aj8ah"]
+script = ExtResource("3_otlad")
+ingredient_id = "manteiga"
+state_sprites = Array[ExtResource("6_qkq5v")]([SubResource("Resource_agnig")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
 [resource]
 script = ExtResource("4_bucg2")
 recipe_name = "Cuscuz Nordestino"
 region = "nordeste"
+base_price = 28
 min_day = 2
-time_of_day = Array[String](["breakfast"])
-ingredient_requirements = Array[ExtResource("2_uhfhv")]([SubResource("Resource_c36e5"), SubResource("Resource_uhfhv")])
-client_lines = Array[String](["Oi, cuscuz!"])
-plate_ingredient_visuals = Array[ExtResource("3_otlad")]([SubResource("Resource_rx4eq"), SubResource("Resource_5d2k8")])
+ingredient_requirements = Array[ExtResource("2_uhfhv")]([SubResource("Resource_c36e5"), SubResource("Resource_uhfhv"), SubResource("Resource_qkq5v")])
+client_lines = Array[String](["Bom dia meu lindo, me vê um cuscuz com aquela manteiguinha e carne de sol? ", "E aí mano, um cuscuz bem quentinho daquele por favor.", "Oi, um cuscuz!"])
+plate_ingredient_visuals = Array[ExtResource("3_otlad")]([SubResource("Resource_rx4eq"), SubResource("Resource_5d2k8"), SubResource("Resource_aj8ah")])
 final_plate_sprite = ExtResource("3_aj8ah")
 delivered_plate_sprite = ExtResource("1_agnig")
 metadata/_custom_type_script = "uid://c6xvod46icb2"
