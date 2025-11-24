@@ -8,7 +8,7 @@ signal region_selected(region_id: String)
 
 var regions: Dictionary = {}                  # id -> RegionResource
 var unlocked_regions: Dictionary = {}         # id -> bool
-var current_region_id: String = "sudeste"
+@export var current_region_id: String = "sudeste"
 var pending_region_change: String = ""
 
 func _ready() -> void:

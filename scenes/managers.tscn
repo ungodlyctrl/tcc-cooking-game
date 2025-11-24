@@ -1,4 +1,4 @@
-[gd_scene load_steps=139 format=3 uid="uid://busp1jxgd1yo"]
+[gd_scene load_steps=136 format=3 uid="uid://busp1jxgd1yo"]
 
 [ext_resource type="Script" uid="uid://b1cw8wj6np025" path="res://scripts/managers.gd" id="1_eubx1"]
 [ext_resource type="Script" uid="uid://b8x6uvbe45tpd" path="res://scripts/client_manager.gd" id="1_osspy"]
@@ -58,8 +58,8 @@
 [ext_resource type="Resource" uid="uid://dglbfet6fj6kh" path="res://resources/ingredients/queijo.tres" id="44_8a70s"]
 [ext_resource type="Resource" uid="uid://b6ui5fm7kasst" path="res://resources/ingredients/tapioca.tres" id="44_tnnmq"]
 [ext_resource type="Resource" uid="uid://r4wrgh7wj" path="res://resources/ingredients/salsicha.tres" id="45_5q5o7"]
-[ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="45_j6plk"]
-[ext_resource type="Texture2D" uid="uid://lmuo3j3gg3tw" path="res://assets/nordeste2/leite condensado (1).png" id="46_nkul1"]
+[ext_resource type="Resource" uid="uid://bny5hihfw1fg" path="res://resources/ingredients/leite de coco.tres" id="45_tnnmq"]
+[ext_resource type="Resource" uid="uid://c1c2j6ip5mwo6" path="res://resources/ingredients/leite condensado.tres" id="46_j6plk"]
 [ext_resource type="Resource" uid="uid://b7qhlsndurxc0" path="res://resources/ingredients/coco.tres" id="47_s8fts"]
 [ext_resource type="Resource" uid="uid://xoi5hcvr6tty" path="res://resources/ingredients/macaxeira.tres" id="48_scqq6"]
 [ext_resource type="Script" uid="uid://b42matis0s41g" path="res://scripts/drag_manager.gd" id="49_rrdc0"]
@@ -67,11 +67,12 @@
 [ext_resource type="Resource" uid="uid://bm2k7jgl3dsur" path="res://resources/ingredients/camarao.tres" id="50_ku2qx"]
 [ext_resource type="Resource" uid="uid://bf7wd61ghnegv" path="res://resources/ingredients/vinagrete.tres" id="51_i8mb8"]
 [ext_resource type="Resource" uid="uid://bgelph6f8vq78" path="res://resources/recipes/nordeste/cuscuz nordestino.tres" id="51_lkxab"]
-[ext_resource type="Texture2D" uid="uid://rm11n2ko4vjd" path="res://assets/nordeste2/massa de acaraje (1).png" id="52_cwwlu"]
 [ext_resource type="Script" uid="uid://ycuoort7goa5" path="res://scripts/region_manager.gd" id="52_emnlt"]
+[ext_resource type="Resource" uid="uid://beoscs2u5bsn5" path="res://resources/ingredients/massa do acaraje.tres" id="52_nkul1"]
 [ext_resource type="Script" uid="uid://d0tobb7uauvh8" path="res://scripts/region_resource.gd" id="53_11yci"]
-[ext_resource type="Texture2D" uid="uid://bnfynvad7b7oe" path="res://assets/nordeste2/Vatapá (1).png" id="53_hd0ws"]
+[ext_resource type="Resource" uid="uid://db44mnignke02" path="res://resources/ingredients/vatapa.tres" id="53_s8fts"]
 [ext_resource type="Resource" uid="uid://djysxtd8w1ccv" path="res://resources/regions/sudeste.tres" id="54_lkxab"]
+[ext_resource type="Resource" uid="uid://c413icpckpbe6" path="res://resources/ingredients/pimenta biquinho.tres" id="54_scqq6"]
 [ext_resource type="Resource" uid="uid://d30s2d68k64ui" path="res://resources/regions/nordeste.tres" id="55_tjrm2"]
 [ext_resource type="Resource" uid="uid://cnwwbwdpkccbw" path="res://resources/recipes/nordeste/farofa de cuscuz.tres" id="57_h4sy6"]
 [ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="57_vkttu"]
@@ -88,39 +89,6 @@
 [ext_resource type="Texture2D" uid="uid://b5i8pkppneb5g" path="res://assets/nordeste/vatapa5.1.png" id="81_bhwb2"]
 [ext_resource type="Texture2D" uid="uid://dpimdqmk6tkd" path="res://assets/nordeste/entrega (4).png" id="82_73fj7"]
 [ext_resource type="Texture2D" uid="uid://dljgl115kqm61" path="res://assets/nordeste/bolinha2.png" id="83_1xub3"]
-
-[sub_resource type="Resource" id="Resource_1agi5"]
-script = ExtResource("28_6jetn")
-id = "leite de coco"
-display_name = "Leite de Coco"
-metadata/_custom_type_script = "uid://ccubj8or3d2vb"
-
-[sub_resource type="Resource" id="Resource_6532l"]
-script = ExtResource("28_6jetn")
-id = "leite condensado"
-display_name = "Leite Condensado"
-container_texture = ExtResource("46_nkul1")
-states = Dictionary[String, Texture2D]({
-"raw": ExtResource("46_nkul1")
-})
-gender = "m"
-metadata/_custom_type_script = "uid://ccubj8or3d2vb"
-
-[sub_resource type="Resource" id="Resource_vpeoq"]
-script = ExtResource("28_6jetn")
-id = "massa do acaraje"
-display_name = "Massa do Acarajé"
-container_texture = ExtResource("52_cwwlu")
-metadata/_custom_type_script = "uid://ccubj8or3d2vb"
-
-[sub_resource type="Resource" id="Resource_ttcp8"]
-script = ExtResource("28_6jetn")
-id = "vatapa"
-display_name = "Vatapá"
-container_texture = ExtResource("53_hd0ws")
-initial_state = "cooked"
-gender = "m"
-metadata/_custom_type_script = "uid://ccubj8or3d2vb"
 
 [sub_resource type="Resource" id="Resource_dgfrh"]
 script = ExtResource("58_h6v6t")
@@ -436,7 +404,7 @@ clients = Array[ExtResource("4_xl2cx")]([ExtResource("5_rmo1q"), ExtResource("6_
 
 [node name="IngredientDatabase" type="Node" parent="."]
 script = ExtResource("27_jxyry")
-ingredient_list = Array[ExtResource("28_6jetn")]([ExtResource("29_2l7ur"), ExtResource("30_gjllj"), ExtResource("31_vqhob"), ExtResource("32_75lyh"), ExtResource("33_a8prd"), ExtResource("34_lmnp6"), ExtResource("35_fd81x"), ExtResource("36_tbw62"), ExtResource("37_v5pq0"), ExtResource("38_p3c4h"), ExtResource("39_xq3wl"), ExtResource("40_ckbyc"), ExtResource("41_ss10b"), ExtResource("42_et0nk"), ExtResource("43_q2mbl"), ExtResource("44_8a70s"), ExtResource("45_5q5o7"), ExtResource("35_b8u1i"), ExtResource("36_emnlt"), ExtResource("42_8a70s"), ExtResource("43_5q5o7"), ExtResource("44_tnnmq"), SubResource("Resource_1agi5"), SubResource("Resource_6532l"), ExtResource("47_s8fts"), ExtResource("48_scqq6"), ExtResource("49_yu101"), ExtResource("50_ku2qx"), ExtResource("51_i8mb8"), SubResource("Resource_vpeoq"), SubResource("Resource_ttcp8")])
+ingredient_list = Array[ExtResource("28_6jetn")]([ExtResource("29_2l7ur"), ExtResource("30_gjllj"), ExtResource("31_vqhob"), ExtResource("32_75lyh"), ExtResource("33_a8prd"), ExtResource("34_lmnp6"), ExtResource("35_fd81x"), ExtResource("36_tbw62"), ExtResource("37_v5pq0"), ExtResource("38_p3c4h"), ExtResource("39_xq3wl"), ExtResource("40_ckbyc"), ExtResource("41_ss10b"), ExtResource("42_et0nk"), ExtResource("43_q2mbl"), ExtResource("44_8a70s"), ExtResource("45_5q5o7"), ExtResource("35_b8u1i"), ExtResource("36_emnlt"), ExtResource("42_8a70s"), ExtResource("43_5q5o7"), ExtResource("44_tnnmq"), ExtResource("45_tnnmq"), ExtResource("46_j6plk"), ExtResource("47_s8fts"), ExtResource("48_scqq6"), ExtResource("49_yu101"), ExtResource("50_ku2qx"), ExtResource("51_i8mb8"), ExtResource("52_nkul1"), ExtResource("53_s8fts"), ExtResource("54_scqq6")])
 
 [node name="RecipeManager" type="Node" parent="."]
 script = ExtResource("13_tjrm2")
@@ -448,3 +416,4 @@ script = ExtResource("49_rrdc0")
 [node name="RegionManager" type="Node" parent="."]
 script = ExtResource("52_emnlt")
 region_resources = Array[ExtResource("53_11yci")]([ExtResource("54_lkxab"), ExtResource("55_tjrm2")])
+current_region_id = "nordeste"

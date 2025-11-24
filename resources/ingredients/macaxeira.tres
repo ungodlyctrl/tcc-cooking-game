@@ -1,12 +1,16 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=4 format=3 uid="uid://xoi5hcvr6tty"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://xoi5hcvr6tty"]
 
 [ext_resource type="Texture2D" uid="uid://bfhpoor301st3" path="res://assets/nordeste2/mandioca2 (1) (1).png" id="1_0s7yk"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_72kvr"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="3_vwp7o"]
+[ext_resource type="Texture2D" uid="uid://cwlpi0brorq3y" path="res://assets/nordeste2/mandioca unica (1).png" id="4_72kvr"]
 
 [resource]
 script = ExtResource("3_vwp7o")
 id = "macaxeira"
 display_name = "Macaxeira"
 container_texture = ExtResource("1_0s7yk")
+states = Dictionary[String, Texture2D]({
+"raw": ExtResource("4_72kvr")
+})
 metadata/_custom_type_script = "uid://ccubj8or3d2vb"

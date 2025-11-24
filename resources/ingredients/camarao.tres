@@ -1,13 +1,17 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=4 format=3 uid="uid://bm2k7jgl3dsur"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://bm2k7jgl3dsur"]
 
 [ext_resource type="Texture2D" uid="uid://cm6x7g8ha74yf" path="res://assets/nordeste2/camarão (1).png" id="1_ixnov"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_svr5n"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="3_dfid8"]
+[ext_resource type="Texture2D" uid="uid://c78v768kdaryy" path="res://assets/nordeste2/camarao unico (1).png" id="4_svr5n"]
 
 [resource]
 script = ExtResource("3_dfid8")
 id = "camarao"
 display_name = "Camarão"
 container_texture = ExtResource("1_ixnov")
+states = Dictionary[String, Texture2D]({
+"raw": ExtResource("4_svr5n")
+})
 gender = "m"
 metadata/_custom_type_script = "uid://ccubj8or3d2vb"

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RegionResource" load_steps=16 format=3 uid="uid://d30s2d68k64ui"]
+[gd_resource type="Resource" script_class="RegionResource" load_steps=64 format=3 uid="uid://d30s2d68k64ui"]
 
 [ext_resource type="Script" uid="uid://d0tobb7uauvh8" path="res://scripts/region_resource.gd" id="1_2y8pt"]
 [ext_resource type="Script" uid="uid://c1roybtu8ul0l" path="res://scripts/client_data.gd" id="1_loos5"]
@@ -10,29 +10,220 @@
 [ext_resource type="Resource" uid="uid://cv11a0jr4sd0l" path="res://resources/clients/nordeste/queen bombada.tres" id="4_a7o3w"]
 [ext_resource type="Resource" uid="uid://bf5kb081ddfqq" path="res://resources/clients/nordeste/ruivo.tres" id="5_s6mmq"]
 [ext_resource type="Resource" uid="uid://bpbxaniibmggx" path="res://resources/clients/nordeste/veio.tres" id="6_hihb8"]
-[ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="8_a7o3w"]
-[ext_resource type="Resource" uid="uid://cw2om563ngwr0" path="res://resources/prep_layouts/nordeste.tres" id="9_x6h4m"]
+[ext_resource type="Resource" uid="uid://0glxrx71t1ju" path="res://resources/ingredients/agua.tres" id="8_2burl"]
+[ext_resource type="Resource" uid="uid://c8w71uoxo511l" path="res://resources/ingredients/arroz.tres" id="9_yn8xk"]
 [ext_resource type="Resource" uid="uid://bgelph6f8vq78" path="res://resources/recipes/nordeste/cuscuz nordestino.tres" id="10_2mklg"]
+[ext_resource type="Resource" uid="uid://bm2k7jgl3dsur" path="res://resources/ingredients/camarao.tres" id="10_68kbo"]
+[ext_resource type="Resource" uid="uid://drmqtqs6eoh0j" path="res://resources/ingredients/caranguejo.tres" id="11_ylcoc"]
+[ext_resource type="Resource" uid="uid://csppvrhxqj4ng" path="res://resources/ingredients/carne.tres" id="12_x0efn"]
+[ext_resource type="Resource" uid="uid://b7qhlsndurxc0" path="res://resources/ingredients/coco.tres" id="13_a6d4t"]
+[ext_resource type="Resource" uid="uid://bmybqunnhl12v" path="res://resources/ingredients/cuscuz.tres" id="14_0xdt3"]
+[ext_resource type="Resource" uid="uid://cl5fvpk0ugy0n" path="res://resources/ingredients/farofa.tres" id="15_vio0a"]
+[ext_resource type="Resource" uid="uid://bfieei5e6g61o" path="res://resources/ingredients/feijao fradinho.tres" id="16_6j18c"]
+[ext_resource type="Resource" uid="uid://c1c2j6ip5mwo6" path="res://resources/ingredients/leite condensado.tres" id="17_8aww5"]
+[ext_resource type="Resource" uid="uid://xoi5hcvr6tty" path="res://resources/ingredients/macaxeira.tres" id="18_6bf8a"]
+[ext_resource type="Resource" uid="uid://c4vjan0ovxi50" path="res://resources/ingredients/manteiga.tres" id="19_4rt1h"]
+[ext_resource type="Resource" uid="uid://beoscs2u5bsn5" path="res://resources/ingredients/massa do acaraje.tres" id="20_43nh8"]
+[ext_resource type="Resource" uid="uid://sebcmd5raimh" path="res://resources/ingredients/ovo.tres" id="21_4j0po"]
+[ext_resource type="Resource" uid="uid://c413icpckpbe6" path="res://resources/ingredients/pimenta biquinho.tres" id="22_ikuld"]
+[ext_resource type="Resource" uid="uid://nvrpjwi02mln" path="res://resources/ingredients/pimentao.tres" id="23_qdka7"]
+[ext_resource type="Resource" uid="uid://g5nn1waylyg1" path="res://resources/ingredients/queijo coalho.tres" id="24_mgwwh"]
+[ext_resource type="Resource" uid="uid://b6ui5fm7kasst" path="res://resources/ingredients/tapioca.tres" id="25_2qv44"]
+[ext_resource type="Resource" uid="uid://db44mnignke02" path="res://resources/ingredients/vatapa.tres" id="26_bigum"]
+[ext_resource type="Resource" uid="uid://bf7wd61ghnegv" path="res://resources/ingredients/vinagrete.tres" id="27_8mmbm"]
+[ext_resource type="Resource" uid="uid://bny5hihfw1fg" path="res://resources/ingredients/leite de coco.tres" id="28_lb6pd"]
+[ext_resource type="Script" uid="uid://cechr0x3jl21b" path="res://scripts/prep/slot_entry.gd" id="30_kte7j"]
+[ext_resource type="Script" uid="uid://bojulivybbvsu" path="res://scripts/prep/utensil_entry.gd" id="31_iq0qt"]
 
-[sub_resource type="Resource" id="Resource_s6mmq"]
-script = ExtResource("2_ynj5s")
-id = "cuscuz"
-display_name = "Cuscuz"
-metadata/_custom_type_script = "uid://ccubj8or3d2vb"
+[sub_resource type="Resource" id="Resource_cfgkr"]
+script = ExtResource("30_kte7j")
+ingredient_id = "pimentao"
+pos = Vector2(85, 40)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
 
-[sub_resource type="Resource" id="Resource_hihb8"]
-script = ExtResource("2_ynj5s")
-id = "carne de sol"
-display_name = "Carne de Sol"
-metadata/_custom_type_script = "uid://ccubj8or3d2vb"
+[sub_resource type="Resource" id="Resource_3jokg"]
+script = ExtResource("30_kte7j")
+ingredient_id = "cuscuz"
+pos = Vector2(16, 109)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_72gvw"]
+script = ExtResource("30_kte7j")
+ingredient_id = "farofa"
+pos = Vector2(16, 178)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_y4n83"]
+script = ExtResource("30_kte7j")
+ingredient_id = "macaxeira"
+pos = Vector2(16, 247)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_63nkx"]
+script = ExtResource("30_kte7j")
+ingredient_id = "pimenta biquinho"
+pos = Vector2(16, 40)
+size = Vector2(64, 32)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_h2dvi"]
+script = ExtResource("30_kte7j")
+ingredient_id = "tapioca"
+pos = Vector2(16, 72)
+size = Vector2(64, 32)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_380kp"]
+script = ExtResource("30_kte7j")
+ingredient_id = "feijao fradinho"
+pos = Vector2(85, 109)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_nvpwj"]
+script = ExtResource("30_kte7j")
+ingredient_id = "arroz"
+pos = Vector2(85, 178)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_jd6mm"]
+script = ExtResource("30_kte7j")
+ingredient_id = "ovo"
+pos = Vector2(85, 247)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_56ib2"]
+script = ExtResource("30_kte7j")
+ingredient_id = "carne"
+pos = Vector2(154, 40)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_kpfmh"]
+script = ExtResource("30_kte7j")
+ingredient_id = "vinagrete"
+pos = Vector2(154, 109)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_6ius7"]
+script = ExtResource("30_kte7j")
+ingredient_id = "caranguejo"
+pos = Vector2(223, 40)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_7tb10"]
+script = ExtResource("30_kte7j")
+ingredient_id = "queijo coalho"
+pos = Vector2(223, 109)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_p06hb"]
+script = ExtResource("30_kte7j")
+ingredient_id = "camarao"
+pos = Vector2(292, 40)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_ieooj"]
+script = ExtResource("30_kte7j")
+ingredient_id = "massa do acaraje"
+pos = Vector2(292, 109)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_xq1ea"]
+script = ExtResource("30_kte7j")
+ingredient_id = "vatapa"
+pos = Vector2(361, 40)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_2burl"]
+script = ExtResource("30_kte7j")
+ingredient_id = "coco"
+pos = Vector2(361, 109)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_8ycal"]
+script = ExtResource("30_kte7j")
+ingredient_id = "manteiga"
+pos = Vector2(430, 35)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_yn8xk"]
+script = ExtResource("30_kte7j")
+ingredient_id = "leite condensado"
+pos = Vector2(466, 40)
+size = Vector2(28, 48)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_68kbo"]
+script = ExtResource("30_kte7j")
+ingredient_id = "leite de coco"
+pos = Vector2(430, 95)
+size = Vector2(28, 48)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_xv4v3"]
+script = ExtResource("30_kte7j")
+ingredient_id = "agua"
+pos = Vector2(430, 125)
+size = Vector2(28, 48)
+metadata/_custom_type_script = "uid://cechr0x3jl21b"
+
+[sub_resource type="Resource" id="Resource_oqa8x"]
+script = ExtResource("31_iq0qt")
+node_name = "CuttingBoardArea"
+pos = Vector2(177, 192)
+size = Vector2(150, 100)
+metadata/_custom_type_script = "uid://bojulivybbvsu"
+
+[sub_resource type="Resource" id="Resource_dpma0"]
+script = ExtResource("31_iq0qt")
+node_name = "StoveArea"
+pos = Vector2(582, 128)
+size = Vector2(105, 180)
+metadata/_custom_type_script = "uid://bojulivybbvsu"
+
+[sub_resource type="Resource" id="Resource_x4vt3"]
+script = ExtResource("31_iq0qt")
+node_name = "DropPlateArea"
+pos = Vector2(384, 192)
+size = Vector2(96, 96)
+metadata/_custom_type_script = "uid://bojulivybbvsu"
+
+[sub_resource type="Resource" id="Resource_dr17f"]
+script = ExtResource("31_iq0qt")
+node_name = "TrashBin"
+pos = Vector2(745, 128)
+metadata/_custom_type_script = "uid://bojulivybbvsu"
+
+[sub_resource type="Resource" id="Resource_l88oh"]
+script = ExtResource("31_iq0qt")
+node_name = "panela"
+pos = Vector2(549, 32)
+metadata/_custom_type_script = "uid://bojulivybbvsu"
+
+[sub_resource type="Resource" id="Resource_dm67n"]
+script = ExtResource("31_iq0qt")
+node_name = "frigideira"
+pos = Vector2(644, 30)
+metadata/_custom_type_script = "uid://bojulivybbvsu"
+
+[sub_resource type="Resource" id="Resource_nt8xc"]
+script = ExtResource("31_iq0qt")
+metadata/_custom_type_script = "uid://bojulivybbvsu"
+
+[sub_resource type="Resource" id="Resource_56667"]
+script = ExtResource("3_amakw")
+min_day = 5
+slots = Array[ExtResource("30_kte7j")]([SubResource("Resource_cfgkr"), SubResource("Resource_3jokg"), SubResource("Resource_72gvw"), SubResource("Resource_y4n83"), SubResource("Resource_63nkx"), SubResource("Resource_h2dvi"), SubResource("Resource_380kp"), SubResource("Resource_nvpwj"), SubResource("Resource_jd6mm"), SubResource("Resource_56ib2"), SubResource("Resource_kpfmh"), SubResource("Resource_6ius7"), SubResource("Resource_7tb10"), SubResource("Resource_p06hb"), SubResource("Resource_ieooj"), SubResource("Resource_xq1ea"), SubResource("Resource_2burl"), SubResource("Resource_8ycal"), SubResource("Resource_yn8xk"), SubResource("Resource_68kbo"), SubResource("Resource_xv4v3")])
+utensils = Array[ExtResource("31_iq0qt")]([SubResource("Resource_oqa8x"), SubResource("Resource_dpma0"), SubResource("Resource_x4vt3"), SubResource("Resource_dr17f"), SubResource("Resource_l88oh"), SubResource("Resource_dm67n"), SubResource("Resource_nt8xc")])
+background_min_height = 360
+metadata/_custom_type_script = "uid://dckho2cxrnnua"
 
 [resource]
 script = ExtResource("1_2y8pt")
 id = "nordeste"
 display_name = "Nordeste"
 unlock_price = 20
-ingredients = Array[ExtResource("2_ynj5s")]([SubResource("Resource_s6mmq"), SubResource("Resource_hihb8")])
+ingredients = Array[ExtResource("2_ynj5s")]([ExtResource("8_2burl"), ExtResource("9_yn8xk"), ExtResource("10_68kbo"), ExtResource("11_ylcoc"), ExtResource("12_x0efn"), ExtResource("13_a6d4t"), ExtResource("14_0xdt3"), ExtResource("15_vio0a"), ExtResource("16_6j18c"), ExtResource("17_8aww5"), ExtResource("18_6bf8a"), ExtResource("19_4rt1h"), ExtResource("20_43nh8"), ExtResource("21_4j0po"), ExtResource("22_ikuld"), ExtResource("23_qdka7"), ExtResource("24_mgwwh"), ExtResource("25_2qv44"), ExtResource("26_bigum"), ExtResource("27_8mmbm"), ExtResource("28_lb6pd")])
 recipes = Array[ExtResource("4_8sr70")]([ExtResource("10_2mklg")])
 clients = Array[ExtResource("1_loos5")]([ExtResource("2_k6p4o"), ExtResource("3_x6h4m"), ExtResource("4_a7o3w"), ExtResource("5_s6mmq"), ExtResource("6_hihb8")])
-prep_layouts = Array[ExtResource("3_amakw")]([ExtResource("9_x6h4m")])
+prep_layouts = Array[ExtResource("3_amakw")]([SubResource("Resource_56667")])
 metadata/_custom_type_script = "uid://d0tobb7uauvh8"
