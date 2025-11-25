@@ -15,6 +15,9 @@ var _base_pos: Vector2
 
 ## ------------------------- READY -------------------------
 func _ready() -> void:
+	
+	AudioManager.play_bgm(AudioManager.library.bgm_main)
+	
 	options_panel.visible = false
 	credits_panel.visible = false
 	overlay.visible = false
@@ -46,6 +49,7 @@ func _process(delta: float) -> void:
 
 ## ------------------------- BUTTON ACTIONS -------------------------
 func start_game() -> void:
+	AudioManager.play_bgm_fade(AudioManager.library.bgm_cutscene, 1.2)
 	var scene := load("res://scenes/intro_cutscene.tscn")
 	var cutscene = scene.instantiate()
 	get_tree().root.add_child(cutscene)
@@ -93,3 +97,7 @@ func _hide_all_panels() -> void:
 	options_panel.visible = false
 	credits_panel.visible = false
 	overlay.visible = false
+
+
+func _on_button_pressed() -> void:
+	_hide_all_panels()

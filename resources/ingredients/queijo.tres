@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://dglbfet6fj6kh"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=8 format=3 uid="uid://dglbfet6fj6kh"]
 
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_1mg55"]
 [ext_resource type="Texture2D" uid="uid://ifn2nu85iqoa" path="res://assets/ingredientes/queijo/container.png" id="1_86ht2"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_xr5x7"]
 [ext_resource type="Texture2D" uid="uid://nih6vwovy5rl" path="res://assets/ingredientes/queijo/raw.png" id="3_aq5j0"]
 [ext_resource type="Texture2D" uid="uid://g7iuwicsphng" path="res://assets/mini/queijo.png" id="3_yqy3p"]
+[ext_resource type="Texture2D" uid="uid://dd3djlehy2yc1" path="res://assets/queijo (1).png" id="6_yqy3p"]
 
 [sub_resource type="Resource" id="Resource_kwqfc"]
 script = ExtResource("2_xr5x7")
@@ -21,6 +22,7 @@ container_texture = ExtResource("1_86ht2")
 states = Dictionary[String, Texture2D]({
 "cooked": null,
 "fried": null,
+"plate": ExtResource("6_yqy3p"),
 "raw": ExtResource("3_aq5j0")
 })
 gender = "m"

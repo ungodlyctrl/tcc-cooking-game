@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=3 uid="uid://busp1jxgd1yo"]
+[gd_scene load_steps=135 format=3 uid="uid://busp1jxgd1yo"]
 
 [ext_resource type="Script" uid="uid://b1cw8wj6np025" path="res://scripts/managers.gd" id="1_eubx1"]
 [ext_resource type="Script" uid="uid://b8x6uvbe45tpd" path="res://scripts/client_manager.gd" id="1_osspy"]
@@ -79,6 +79,7 @@
 [ext_resource type="Resource" uid="uid://c76dkhxvi24df" path="res://resources/recipes/nordeste/tapioca molhada.tres" id="58_8q7ow"]
 [ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="58_h6v6t"]
 [ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="59_h4sy6"]
+[ext_resource type="Resource" uid="uid://408bkinv6exm" path="res://resources/recipes/nordeste/cocada.tres" id="72_j6plk"]
 [ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="74_mflbc"]
 [ext_resource type="Texture2D" uid="uid://t3gaykhmul4y" path="res://assets/nordeste/paçoca1.1 (1).png" id="75_qnafn"]
 [ext_resource type="Texture2D" uid="uid://8iw5uehc1e4e" path="res://assets/nordeste/paçoca3.1 (1).png" id="76_lm2tj"]
@@ -89,27 +90,7 @@
 [ext_resource type="Texture2D" uid="uid://b5i8pkppneb5g" path="res://assets/nordeste/vatapa5.1.png" id="81_bhwb2"]
 [ext_resource type="Texture2D" uid="uid://dpimdqmk6tkd" path="res://assets/nordeste/entrega (4).png" id="82_73fj7"]
 [ext_resource type="Texture2D" uid="uid://dljgl115kqm61" path="res://assets/nordeste/bolinha2.png" id="83_1xub3"]
-
-[sub_resource type="Resource" id="Resource_dgfrh"]
-script = ExtResource("58_h6v6t")
-ingredient_id = "coco"
-state = "fried"
-metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
-
-[sub_resource type="Resource" id="Resource_3u53g"]
-script = ExtResource("58_h6v6t")
-ingredient_id = "leite condensado"
-state = "fried"
-metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
-
-[sub_resource type="Resource" id="Resource_5mawo"]
-script = ExtResource("14_4m8qx")
-recipe_name = "Cocada"
-region = "nordeste"
-time_of_day = Array[String](["breakfast"])
-ingredient_requirements = Array[ExtResource("58_h6v6t")]([SubResource("Resource_dgfrh"), SubResource("Resource_3u53g")])
-plate_ingredient_visuals = Array[ExtResource("59_h4sy6")]([null, null])
-metadata/_custom_type_script = "uid://c6xvod46icb2"
+[ext_resource type="Script" uid="uid://gxjv6ck8vrnv" path="res://scenes/mix_manager.gd" id="90_tnnmq"]
 
 [sub_resource type="Resource" id="Resource_jxyry"]
 script = ExtResource("14_4m8qx")
@@ -117,6 +98,7 @@ recipe_name = "Baião de Dois"
 region = "nordeste"
 time_of_day = Array[String](["lunch"])
 ingredient_requirements = Array[ExtResource("58_h6v6t")]([null, null, null, null])
+plate_ingredient_visuals = Array[ExtResource("59_h4sy6")]([null])
 metadata/_custom_type_script = "uid://c6xvod46icb2"
 
 [sub_resource type="Resource" id="Resource_6jetn"]
@@ -408,7 +390,7 @@ ingredient_list = Array[ExtResource("28_6jetn")]([ExtResource("29_2l7ur"), ExtRe
 
 [node name="RecipeManager" type="Node" parent="."]
 script = ExtResource("13_tjrm2")
-all_recipes = Array[ExtResource("14_4m8qx")]([ExtResource("15_ocmb6"), ExtResource("16_fecln"), ExtResource("17_rfal5"), ExtResource("18_l5n31"), ExtResource("19_sn6px"), ExtResource("20_vkttu"), ExtResource("21_h6v6t"), ExtResource("22_h4sy6"), ExtResource("23_8q7ow"), ExtResource("24_dgfrh"), ExtResource("25_3u53g"), ExtResource("26_5mawo"), ExtResource("51_lkxab"), ExtResource("57_h4sy6"), ExtResource("58_8q7ow"), SubResource("Resource_5mawo"), SubResource("Resource_jxyry"), SubResource("Resource_75lyh"), SubResource("Resource_ug8hc"), ExtResource("77_p83yf"), SubResource("Resource_7fw65"), ExtResource("78_o1csy"), SubResource("Resource_tii06"), SubResource("Resource_8b6cd")])
+all_recipes = Array[ExtResource("14_4m8qx")]([ExtResource("15_ocmb6"), ExtResource("16_fecln"), ExtResource("17_rfal5"), ExtResource("18_l5n31"), ExtResource("19_sn6px"), ExtResource("20_vkttu"), ExtResource("21_h6v6t"), ExtResource("22_h4sy6"), ExtResource("23_8q7ow"), ExtResource("24_dgfrh"), ExtResource("25_3u53g"), ExtResource("26_5mawo"), ExtResource("51_lkxab"), ExtResource("57_h4sy6"), ExtResource("58_8q7ow"), ExtResource("72_j6plk"), SubResource("Resource_jxyry"), SubResource("Resource_75lyh"), SubResource("Resource_ug8hc"), ExtResource("77_p83yf"), SubResource("Resource_7fw65"), ExtResource("78_o1csy"), SubResource("Resource_tii06"), SubResource("Resource_8b6cd")])
 
 [node name="DragManager" type="Node" parent="."]
 script = ExtResource("49_rrdc0")
@@ -416,4 +398,8 @@ script = ExtResource("49_rrdc0")
 [node name="RegionManager" type="Node" parent="."]
 script = ExtResource("52_emnlt")
 region_resources = Array[ExtResource("53_11yci")]([ExtResource("54_lkxab"), ExtResource("55_tjrm2")])
-current_region_id = "nordeste"
+
+[node name="MixManager" type="Node" parent="."]
+script = ExtResource("90_tnnmq")
+
+[node name="Node" type="Node" parent="."]

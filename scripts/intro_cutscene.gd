@@ -25,7 +25,7 @@ func _ready() -> void:
 
 	# iniciar cutscene
 	_run_sequence()
-
+	AudioManager.play_bgm(AudioManager.library.bgm_cutscene)
 
 # ================================================
 #               SEQUÊNCIA PRINCIPAL
@@ -119,5 +119,6 @@ func _start_skip_blink() -> void:
 #                FINALIZAÇÃO
 # ================================================
 func _finish_cutscene() -> void:
+	AudioManager.play_bgm_fade(AudioManager.library.bgm_main, 1.0)
 	emit_signal("cutscene_finished")
 	queue_free()   # a cena é limpa; MainMenu faz a troca real

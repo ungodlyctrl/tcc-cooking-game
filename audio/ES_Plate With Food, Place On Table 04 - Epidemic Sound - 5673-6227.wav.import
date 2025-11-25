@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://7saif5ydbys8"
+path="res://.godot/imported/ES_Plate With Food, Place On Table 04 - Epidemic Sound - 5673-6227.wav-d8bc5904378c31c9d7d6efbb995c0a70.sample"
+
+[deps]
+
+source_file="res://audio/ES_Plate With Food, Place On Table 04 - Epidemic Sound - 5673-6227.wav"
+dest_files=["res://.godot/imported/ES_Plate With Food, Place On Table 04 - Epidemic Sound - 5673-6227.wav-d8bc5904378c31c9d7d6efbb995c0a70.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c6no2om08mc1i"
+path="res://.godot/imported/ES_Cartoon, Negative, Error, Short Musical Reaction - Epidemic Sound - 1231-2501.wav-5df92dff1157337855593a71f8043b23.sample"
+
+[deps]
+
+source_file="res://audio/ES_Cartoon, Negative, Error, Short Musical Reaction - Epidemic Sound - 1231-2501.wav"
+dest_files=["res://.godot/imported/ES_Cartoon, Negative, Error, Short Musical Reaction - Epidemic Sound - 1231-2501.wav-5df92dff1157337855593a71f8043b23.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

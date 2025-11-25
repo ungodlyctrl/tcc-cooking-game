@@ -1,13 +1,20 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://bf7wd61ghnegv"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://bf7wd61ghnegv"]
 
 [ext_resource type="Texture2D" uid="uid://xd78edsx1mp5" path="res://assets/nordeste2/vinagrete (1).png" id="1_cno16"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_alakp"]
+[ext_resource type="Texture2D" uid="uid://cbxjpjbm1ga38" path="res://assets/mini/nore/vinagrate.png" id="3_8hbev"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="3_fndjy"]
 [ext_resource type="Texture2D" uid="uid://cpjmfy55eftj5" path="res://assets/nordeste2/colhervinagrete.png" id="4_alakp"]
+
+[sub_resource type="Resource" id="Resource_5gg84"]
+script = ExtResource("2_alakp")
+texture = ExtResource("3_8hbev")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
 
 [resource]
 script = ExtResource("3_fndjy")
 id = "vinagrete"
+mini_icons = Array[ExtResource("2_alakp")]([SubResource("Resource_5gg84")])
 display_name = "Vinagrete"
 container_texture = ExtResource("1_cno16")
 states = Dictionary[String, Texture2D]({

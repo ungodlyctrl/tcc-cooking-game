@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://dcigg377cndry"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=8 format=3 uid="uid://dcigg377cndry"]
 
 [ext_resource type="Texture2D" uid="uid://jrr0sahf4qyi" path="res://assets/ingredientes/feijao/container.png" id="1_37p6i"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_87f4n"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_fmivg"]
 [ext_resource type="Texture2D" uid="uid://h6i1m1kjqsrl" path="res://assets/mini/feijão.png" id="3_7rgu5"]
 [ext_resource type="Texture2D" uid="uid://dw53ii0o0eqn5" path="res://assets/ingredientes/feijao/cooked.png" id="3_gloc7"]
+[ext_resource type="Texture2D" uid="uid://cqv7p5hgw7rda" path="res://assets/feijao.png" id="6_7rgu5"]
 
 [sub_resource type="Resource" id="Resource_pwwew"]
 script = ExtResource("2_fmivg")
@@ -20,7 +21,8 @@ display_name = "Feijão"
 container_texture = ExtResource("1_37p6i")
 initial_state = "cooked"
 states = Dictionary[String, Texture2D]({
-"cooked": ExtResource("3_gloc7")
+"cooked": ExtResource("3_gloc7"),
+"plate": ExtResource("6_7rgu5")
 })
 gender = "m"
 drag_offset = Vector2(-3, -37)

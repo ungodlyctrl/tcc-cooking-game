@@ -71,6 +71,12 @@ func _ready() -> void:
 	# bancada inicial
 	prep_area.update_ingredients_for_day(day)
 	_connect_plate_drag_signal()
+	
+	var bowl_node := prep_area.get_node_or_null("UtensilsParent/BowlArea")
+	if bowl_node:
+		if bowl_node.is_connected("drag_state_changed", Callable(self, "_on_bowl_drag_state_changed")):
+			bowl_node.disconnect("drag_state_changed", Callable(self, "_on_bowl_drag_state_changed"))
+			bowl_node.connect("drag_state_changed", Callable(self, "_on_bowl_drag_state_changed"))
 
 
 # ---------------- REGION HOOK ----------------
@@ -395,3 +401,14 @@ func _input(event) -> void:
 func open_region_map() -> void:
 	if region_map:
 		region_map.open()
+
+
+
+
+
+
+func _on_bowl_drag_state_changed(is_dragging: bool) -> void:
+	if is_dragging:
+		set_process_input(false)
+	else:
+		set_process_input(true)

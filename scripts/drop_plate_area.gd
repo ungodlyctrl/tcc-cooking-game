@@ -131,52 +131,70 @@ func _try_recover_recipe() -> void:
 
 # ---------------- BUSCA DE SPRITES ----------------
 func _get_plate_sprite_for(id: String, state: String, quantity: int = 1) -> Texture2D:
-	var st: String = (state if state != null else "").to_lower()
-	var id_lower: String = (id if id != null else "").to_lower()
+	var id_lower := id.to_lower()
+	var st_lower := state.to_lower()
 
-	var quantity_suffixes: Array[String] = [
-		"%s_%d" % [st, quantity],
-		"qty%d" % quantity,
-		"count%d" % quantity,
-		st
-	]
-
+	# ============================================================
+	# 1) TENTA SPRITE ESPECÍFICO DA RECEITA
+	# ============================================================
 	if expected_recipe and expected_recipe.plate_ingredient_visuals:
 		for vis in expected_recipe.plate_ingredient_visuals:
-			if vis == null or vis.ingredient_id == "":
-				continue
+			if vis and vis.ingredient_id.to_lower() == id_lower:
 
-			if vis.ingredient_id.to_lower() == id_lower:
-
-				var default_tex: Texture2D = null
-
+				# tenta match perfeito de state/quantidade
 				for entry in vis.state_sprites:
 					if entry == null or entry.texture == null:
 						continue
 
-					var state_name: String = entry.state.to_lower()
+					var entry_state := entry.state.to_lower()
 
-					if state_name == "" or state_name == "default":
-						default_tex = entry.texture
+					# variantes tipo "cooked_2", "raw_3"…
+					if entry_state == "%s_%d" % [st_lower, quantity]:
+						return entry.texture
 
-					for variant in quantity_suffixes:
-						if state_name == variant:
-							return entry.texture
+					# variantes tipo "qty2", "count2"
+					if entry_state == "qty%d" % quantity:
+						return entry.texture
+					if entry_state == "count%d" % quantity:
+						return entry.texture
 
-				if default_tex != null:
-					return default_tex
+					# match direto de state ("raw", "cut", "cooked")
+					if entry_state == st_lower:
+						return entry.texture
 
+				# se nenhum entry bateu, tenta default
+				for entry in vis.state_sprites:
+					if entry and entry.state.to_lower() in ["", "default"]:
+						return entry.texture
+
+	# ============================================================
+	# 2) FALLBACK UNIVERSAL → SEMPRE TENTAR "plate" PRIMEIRO
+	# ============================================================
 	if Managers and Managers.ingredient_database:
-		for variant in quantity_suffixes:
-			var tex := Managers.ingredient_database.get_sprite(id, variant)
+		var tex_plate := Managers.ingredient_database.get_sprite(id, "plate")
+		if tex_plate:
+			return tex_plate
+
+	# ============================================================
+	# 3) FALLBACK NORMAL → procurar qualquer outro state
+	#    (ordem sugerida: raw → cooked → cut → fried)
+	# ============================================================
+	if Managers and Managers.ingredient_database:
+		var order := ["raw", "cooked", "cut", "fried"]
+
+		for s in order:
+			var tex := Managers.ingredient_database.get_sprite(id, s)
 			if tex:
 				return tex
 
-		var base_tex := Managers.ingredient_database.get_sprite(id, "raw")
-		if base_tex:
-			return base_tex
-
+	# ============================================================
+	# 4) nada encontrado
+	# ============================================================
 	return null
+
+
+
+
 
 
 #----------------- ICONES -----------
@@ -474,12 +492,9 @@ func _flash_wrong_ing_visual(ing: Dictionary) -> void:
 
 	var node := TextureRect.new()
 	node.texture = tex
-	node.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	node.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	node.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	node.modulate = Color(1, 0.4, 0.4)
-	node.custom_minimum_size = PLATE_SPRITE_SIZE
-	node.size = PLATE_SPRITE_SIZE
 	node.position = await _center_visual_position_for(node)
 
 	visual_container.add_child(node)

@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://dypvp3p014tpl"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=8 format=3 uid="uid://dypvp3p014tpl"]
 
 [ext_resource type="Texture2D" uid="uid://dmr2kgxf3uqxd" path="res://assets/ingredientes/mortadela/container.png" id="1_1vcf3"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_6y75s"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_yi3o6"]
 [ext_resource type="Texture2D" uid="uid://dc8efcl4s58x2" path="res://assets/mini/mortadela.png" id="3_4qc58"]
 [ext_resource type="Texture2D" uid="uid://tawlg64wkyf6" path="res://assets/ingredientes/mortadela/raw.png" id="3_c2xej"]
+[ext_resource type="Texture2D" uid="uid://c3cs3dyqjos1j" path="res://assets/mortadela1.png" id="6_4qc58"]
 
 [sub_resource type="Resource" id="Resource_g1vd2"]
 script = ExtResource("2_yi3o6")
@@ -19,6 +20,7 @@ display_name = "Mortadela"
 container_texture = ExtResource("1_1vcf3")
 states = Dictionary[String, Texture2D]({
 "fried": null,
+"plate": ExtResource("6_4qc58"),
 "raw": ExtResource("3_c2xej")
 })
 drag_offset = Vector2(-4, -14)

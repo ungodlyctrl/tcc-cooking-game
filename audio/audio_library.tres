@@ -1,0 +1,168 @@
+[gd_resource type="Resource" script_class="AudioLibrary" load_steps=41 format=3 uid="uid://bm8vre4txgt15"]
+
+[ext_resource type="Script" uid="uid://rwmyxl03qkmu" path="res://audio_entry.gd" id="1_ai8j6"]
+[ext_resource type="Script" uid="uid://bc6vnqhn6gkbq" path="res://scripts/audio_library.gd" id="1_n6fec"]
+[ext_resource type="AudioStream" uid="uid://cd2dx34qs0b4r" path="res://audio/ES_Foodtruck-Area_-High-Activity_-Voices_-Walla_-Music_-Distant-Traffic_-Preparing-Food_-Brazil-05-E.ogg" id="2_o5egq"]
+[ext_resource type="AudioStream" uid="uid://yj8g2hqgmdld" path="res://audio/ES_City_-Amsterdam_-Walking-Street_-Walla_-Calm_-People_-Bikes_-Mopeds-Passing_-Bike-Bells_-Urban_-C.ogg" id="3_jb8wk"]
+[ext_resource type="AudioStream" uid="uid://c6no2om08mc1i" path="res://audio/ES_Cartoon, Negative, Error, Short Musical Reaction - Epidemic Sound - 1231-2501.wav" id="4_tusyq"]
+[ext_resource type="AudioStream" uid="uid://dsfnjxccx5vs2" path="res://audio/musica sudeste (mastered).ogg" id="5_jse56"]
+[ext_resource type="AudioStream" uid="uid://j2emrol4i5tk" path="res://audio/ES_Village, Quiet, Night, Distant Walla - Epidemic Sound - 0000-81040.wav" id="6_mdi88"]
+[ext_resource type="AudioStream" uid="uid://cop4rs1pidwmk" path="res://audio/ES_Kitchen, Chop, Mushrooms, Knife, Wooden Chopping Board 01 - Epidemic Sound - 1275-1637.wav" id="7_xaa0o"]
+[ext_resource type="AudioStream" uid="uid://bd8ymsenhgwkn" path="res://audio/ES_Kitchen, Chop, Mushrooms, Knife, Wooden Chopping Board 01 - Epidemic Sound - 3464-3855.wav" id="8_fmk5k"]
+[ext_resource type="AudioStream" uid="uid://cj085fqqrul0g" path="res://audio/ES_Metal Cup, Pick Up & Put Down, Grab, From Wooden Table - Epidemic Sound - 1104-1472.wav" id="9_jyhnp"]
+[ext_resource type="AudioStream" uid="uid://cli51dsh8ftkj" path="res://audio/ES_Completions, Melodic, Success - Epidemic Sound.mp3" id="10_7s8xb"]
+[ext_resource type="AudioStream" uid="uid://dq31mlhe4e1ro" path="res://audio/ES_Button Click, Plop, Short - Epidemic Sound.mp3" id="11_ssafa"]
+[ext_resource type="AudioStream" uid="uid://ctgofu3oqsggp" path="res://audio/ES_Metal Bin, Trash Can, Lid Close - Epidemic Sound - 0000-0536.wav" id="12_oqhk4"]
+[ext_resource type="AudioStream" uid="uid://7saif5ydbys8" path="res://audio/ES_Plate With Food, Place On Table 04 - Epidemic Sound - 5673-6227.wav" id="13_0qo07"]
+[ext_resource type="AudioStream" uid="uid://b2f7dnuufgqhe" path="res://audio/ES_Couscous, Cooking In Pan - Epidemic Sound - 3136-20426.wav" id="15_ni27t"]
+[ext_resource type="AudioStream" uid="uid://ue22eh768ddw" path="res://audio/ES_Camping, Cooking Bacon In Frying Pan 02 - Epidemic Sound - 9197-27591.wav" id="16_86pxo"]
+[ext_resource type="AudioStream" uid="uid://b6icbm67g65pp" path="res://audio/ES_Metal Cup, Pick Up & Put Down, Grab, From Wooden Table - Epidemic Sound - 0000-0424.wav" id="17_jiekr"]
+[ext_resource type="AudioStream" uid="uid://bdh8n55ch7uk8" path="res://audio/ES_Dull Pan - Epidemic Sound - 0103-0574.wav" id="18_px7uv"]
+[ext_resource type="AudioStream" uid="uid://dpr8swhg28wyb" path="res://audio/ES_Various - Epidemic Sound - 1470-1788.wav" id="19_eg01u"]
+
+[sub_resource type="Resource" id="Resource_m1mco"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("2_o5egq")
+volume_db = -18.0
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_f0ujs"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("3_jb8wk")
+volume_db = -11.0
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_5xlbu"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("4_tusyq")
+volume_db = -4.0
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_7cl0v"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("5_jse56")
+volume_db = -30.0
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_ihyf1"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("6_mdi88")
+volume_db = -20.0
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_a22k1"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("5_jse56")
+volume_db = -25.0
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_innq0"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("7_xaa0o")
+volume_db = 4.6
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_diwbw"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("8_fmk5k")
+volume_db = 4.6
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_r5d5r"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("9_jyhnp")
+volume_db = -4.0
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_62dba"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("10_7s8xb")
+volume_db = -7.0
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_j05gt"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("11_ssafa")
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_0dohx"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("11_ssafa")
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_p0amt"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("12_oqhk4")
+volume_db = -13.0
+pitch_scale = 0.8
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_xql7e"]
+script = ExtResource("1_ai8j6")
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_odbl0"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("13_0qo07")
+volume_db = -9.75
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_0ejyh"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("13_0qo07")
+volume_db = -9.75
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_l6bcr"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("15_ni27t")
+volume_db = -17.0
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_a4e4f"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("16_86pxo")
+volume_db = -17.0
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_u8njh"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("17_jiekr")
+volume_db = -7.0
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_1am2d"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("18_px7uv")
+volume_db = -13.0
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[sub_resource type="Resource" id="Resource_ygdkr"]
+script = ExtResource("1_ai8j6")
+stream = ExtResource("19_eg01u")
+volume_db = -5.0
+pitch_scale = 1.08
+metadata/_custom_type_script = "uid://rwmyxl03qkmu"
+
+[resource]
+script = ExtResource("1_n6fec")
+bgm_main = SubResource("Resource_a22k1")
+bgm_cutscene = SubResource("Resource_7cl0v")
+bgm_end_of_day = SubResource("Resource_ihyf1")
+ambience_street_tracks = Array[ExtResource("1_ai8j6")]([SubResource("Resource_m1mco"), SubResource("Resource_f0ujs")])
+ui_click = SubResource("Resource_ygdkr")
+ingredient_pick = SubResource("Resource_0dohx")
+ingredient_drop = SubResource("Resource_j05gt")
+ingredient_trash = SubResource("Resource_p0amt")
+plate_pick = SubResource("Resource_0ejyh")
+plate_drop = SubResource("Resource_odbl0")
+cutgame_start = SubResource("Resource_r5d5r")
+cut_slices = Array[ExtResource("1_ai8j6")]([SubResource("Resource_innq0"), SubResource("Resource_diwbw")])
+stove_place_pan = SubResource("Resource_1am2d")
+stove_place_fryer = SubResource("Resource_u8njh")
+sfx_fry_loop = SubResource("Resource_a4e4f")
+sfx_boiling_loop = SubResource("Resource_l6bcr")
+bad_reaction = SubResource("Resource_5xlbu")
+good_reaction = SubResource("Resource_62dba")
+new_client = SubResource("Resource_xql7e")
+metadata/_custom_type_script = "uid://bc6vnqhn6gkbq"

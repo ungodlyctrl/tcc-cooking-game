@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=11 format=3 uid="uid://csppvrhxqj4ng"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=12 format=3 uid="uid://csppvrhxqj4ng"]
 
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_4nb86"]
 [ext_resource type="Texture2D" uid="uid://muisugj7wadh" path="res://assets/ingredientes/carne/container.png" id="1_mprf7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b6vkk2ebf3h3m" path="res://assets/mini/carne 1.png" id="3_p7bah"]
 [ext_resource type="Texture2D" uid="uid://cjmhmd4el8o6t" path="res://assets/mini/carne 2.png" id="4_o6w80"]
 [ext_resource type="Texture2D" uid="uid://c67iu8yjaopf2" path="res://assets/ingredientes/carne/cut.png" id="4_tlh4s"]
+[ext_resource type="Texture2D" uid="uid://ddut1ol1wu7tk" path="res://assets/carne (4).png" id="8_p7bah"]
 
 [sub_resource type="Resource" id="Resource_a31cf"]
 script = ExtResource("2_q5vnj")
@@ -35,6 +36,7 @@ states = Dictionary[String, Texture2D]({
 "cooked": null,
 "cut": ExtResource("4_tlh4s"),
 "fried": null,
+"plate": ExtResource("8_p7bah"),
 "raw": ExtResource("3_f5ltr")
 })
 drag_offset = Vector2(-4, -2)

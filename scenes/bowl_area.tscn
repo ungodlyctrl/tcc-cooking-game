@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://bakvadfjjkpqh"]
+
+[ext_resource type="Script" uid="uid://dqh1sxx24ogq4" path="res://scripts/bowl_area.gd" id="1_drhi8"]
+[ext_resource type="Texture2D" uid="uid://b383suro3k5uv" path="res://assets/bowl.png" id="2_2djwr"]
+
+[node name="BowlArea" type="Control"]
+custom_minimum_size = Vector2(84, 88)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_drhi8")
+
+[node name="BowlRoot" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BowlBase" type="TextureRect" parent="BowlRoot"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 0
+texture = ExtResource("2_2djwr")
+
+[node name="MiniIconsContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+alignment = 1

@@ -19,6 +19,7 @@ display_name = "Alface"
 min_day = 5
 container_texture = ExtResource("1_x40hn")
 states = Dictionary[String, Texture2D]({
+"plate": ExtResource("5_qe7or"),
 "raw": ExtResource("5_qe7or")
 })
 metadata/_custom_type_script = "uid://ccubj8or3d2vb"

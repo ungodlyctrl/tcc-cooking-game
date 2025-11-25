@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cbkoc1j4qovls" path="res://assets/opcoes.png" id="5_meetk"]
 [ext_resource type="Texture2D" uid="uid://ck615kf77obvs" path="res://assets/sair.png" id="6_orc0m"]
 [ext_resource type="Texture2D" uid="uid://bcdfjmuybtvho" path="res://assets/abluble_2.png" id="8_orc0m"]
+[ext_resource type="Texture2D" uid="uid://dpfmfyejcommj" path="res://assets/dialogoo.png" id="8_skis4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_guywi"]
 
@@ -31,13 +32,6 @@ expand_margin_left = 4.0
 expand_margin_top = 4.0
 expand_margin_right = 4.0
 expand_margin_bottom = 4.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewhso"]
-bg_color = Color(0.796078, 0.858824, 0.988235, 1)
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orc0m"]
 bg_color = Color(0.913725, 0.941176, 1, 1)
@@ -243,7 +237,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.4)
 
-[node name="OptionsPanel" type="Panel" parent="."]
+[node name="OptionsPanel" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(230, 230)
 layout_mode = 1
 anchors_preset = 8
@@ -251,13 +245,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -115.0
+offset_top = -115.0
+offset_right = 115.0
+offset_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ewhso")
+texture = ExtResource("8_skis4")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
 [node name="OptionsTitle" type="Label" parent="OptionsPanel"]
 layout_mode = 1
@@ -315,9 +314,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -37.5
-offset_top = -39.0
+offset_top = -49.0
 offset_right = 37.5
-offset_bottom = -9.0
+offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)

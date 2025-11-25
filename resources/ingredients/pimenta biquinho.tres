@@ -1,13 +1,20 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://c413icpckpbe6"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://c413icpckpbe6"]
 
 [ext_resource type="Texture2D" uid="uid://cpeldi2cy0eyy" path="res://assets/nordeste2/pimenta biquinho.png" id="1_2hn4u"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_ke5qm"]
+[ext_resource type="Texture2D" uid="uid://bm8wamu1p1vky" path="res://assets/mini/nore/pimenta.png" id="3_ke5qm"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="3_n8b61"]
 [ext_resource type="Texture2D" uid="uid://cxhm6n1sedk3q" path="res://assets/nordeste2/colher pimenta biquinho .png" id="4_pxbtl"]
+
+[sub_resource type="Resource" id="Resource_n8b61"]
+script = ExtResource("2_ke5qm")
+texture = ExtResource("3_ke5qm")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
 
 [resource]
 script = ExtResource("3_n8b61")
 id = "pimenta biquinho"
+mini_icons = Array[ExtResource("2_ke5qm")]([SubResource("Resource_n8b61")])
 display_name = "Pimenta Biquinho"
 container_texture = ExtResource("1_2hn4u")
 states = Dictionary[String, Texture2D]({

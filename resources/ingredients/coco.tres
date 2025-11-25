@@ -1,13 +1,20 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://b7qhlsndurxc0"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://b7qhlsndurxc0"]
 
 [ext_resource type="Texture2D" uid="uid://cjbpg1hxgbdg5" path="res://assets/nordeste2/coco (1).png" id="1_46xy7"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_wbmmk"]
+[ext_resource type="Texture2D" uid="uid://23efjs6b083x" path="res://assets/mini/nore/coco (3).png" id="3_6vuhs"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="3_8tf2w"]
 [ext_resource type="Texture2D" uid="uid://dqb2ur7qhfgn8" path="res://assets/nordeste2/colher coco.png" id="4_wbmmk"]
+
+[sub_resource type="Resource" id="Resource_r6sn1"]
+script = ExtResource("2_wbmmk")
+texture = ExtResource("3_6vuhs")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
 
 [resource]
 script = ExtResource("3_8tf2w")
 id = "coco"
+mini_icons = Array[ExtResource("2_wbmmk")]([SubResource("Resource_r6sn1")])
 display_name = "Coco"
 container_texture = ExtResource("1_46xy7")
 states = Dictionary[String, Texture2D]({

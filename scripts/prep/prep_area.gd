@@ -16,26 +16,36 @@ class_name PrepArea
 @onready var slots_parent: Control = $SlotsParent
 @onready var utensils_parent: Control = $UtensilsParent
 
+# Bowl manually placed in scene:
+@onready var bowl_area_reference: BowlArea = $UtensilsParent/BowlArea
+
 # ---------------- Vars ----------------
 var current_plate: DropPlateArea = null
 var _is_dragging_plate: bool = false
-var region_resource: RegionResource = null
 
+var bowl_area: BowlArea = null
+var _is_dragging_bowl: bool = false
+
+var region_resource: RegionResource = null
 
 # ---------------- Region Setup ----------------
 func set_region(region: RegionResource) -> void:
 	region_resource = region
-
-	# aplica layouts específicos
 	if region != null:
 		clear_day_leftovers()
-		# layouts aplicados no update_ingredients_for_day
-		pass
+
+
+# ---------------- READY ----------------
+func _ready() -> void:
+	# If bowl exists in the scene manually, register it
+	if bowl_area_reference:
+		bowl_area = bowl_area_reference
+		_connect_bowl_drag_signal()
 
 
 # ---------------- Public ----------------
 func update_ingredients_for_day(current_day: int) -> void:
-	if _is_dragging_plate:
+	if _is_dragging_plate or _is_dragging_bowl:
 		return
 
 	clear_day_leftovers()
@@ -47,15 +57,19 @@ func update_ingredients_for_day(current_day: int) -> void:
 	call_deferred("_reflow")
 	ensure_plate_for_day(current_day)
 
+	# If bowl already exists, it stays in place; do NOT instantiate automatically.
+
 
 func clear_day_leftovers() -> void:
-	if _is_dragging_plate:
+	if _is_dragging_plate or _is_dragging_bowl:
 		return
 
 	if current_plate and current_plate.is_inside_tree():
 		current_plate.queue_free()
-
 	current_plate = null
+
+	if bowl_area and bowl_area.is_inside_tree():
+		bowl_area.clear_ingredients()
 
 	for s in slots_parent.get_children():
 		if s is Control:
@@ -68,12 +82,10 @@ func _find_best_layout_for_region(current_day: int) -> PrepLayoutResource:
 		return null
 
 	var best: PrepLayoutResource = null
-
 	for pr in region_resource.prep_layouts:
 		if pr and pr.min_day <= current_day:
 			if best == null or pr.min_day > best.min_day:
 				best = pr
-
 	return best
 
 
@@ -84,7 +96,7 @@ func _apply_layout(preset: PrepLayoutResource, current_day: int) -> void:
 			push_error("❌ IngredientDatabase não inicializado!")
 			return
 
-	# SLOTS (ingredientes)
+	# Ingredient Slots
 	for se in preset.slots:
 		if se == null or se.ingredient_id == "":
 			continue
@@ -98,7 +110,7 @@ func _apply_layout(preset: PrepLayoutResource, current_day: int) -> void:
 
 		_instantiate_slot(se.ingredient_id, se.pos, se.size)
 
-	# UTENSÍLIOS
+	# Utensils
 	for ue in preset.utensils:
 		if ue == null or ue.node_name == "":
 			continue
@@ -111,7 +123,6 @@ func _apply_layout(preset: PrepLayoutResource, current_day: int) -> void:
 		target.anchor_top = 0
 		target.anchor_right = 0
 		target.anchor_bottom = 0
-
 		target.position = ue.pos - utensils_parent.position
 
 		if ue.size != Vector2.ZERO:
@@ -130,12 +141,10 @@ func _instantiate_slot(ingredient_id: String, pos: Vector2, size: Vector2) -> vo
 		return
 
 	slot.set("ingredient_id", ingredient_id)
-
 	slot.anchor_left = 0
 	slot.anchor_top = 0
 	slot.anchor_right = 0
 	slot.anchor_bottom = 0
-
 	slot.position = pos - slots_parent.position
 
 	if size == Vector2.ZERO:
@@ -148,11 +157,10 @@ func _instantiate_slot(ingredient_id: String, pos: Vector2, size: Vector2) -> vo
 
 # ---------------- Plate ----------------
 func ensure_plate_for_day(current_day: int) -> void:
-	if _is_dragging_plate:
+	if _is_dragging_plate or _is_dragging_bowl:
 		return
 
 	var target_world_pos: Vector2
-
 	if current_day < plate_threshold_day:
 		target_world_pos = plate_early_pos
 	else:
@@ -186,9 +194,27 @@ func ensure_plate_for_day(current_day: int) -> void:
 
 func _on_plate_drag_state_changed(is_dragging: bool) -> void:
 	_is_dragging_plate = is_dragging
-
 	if current_plate and current_plate.is_inside_tree():
 		current_plate.visible = not is_dragging
+	set_process(not is_dragging)
+
+
+# ---------------- Bowl Drag ----------------
+func _connect_bowl_drag_signal() -> void:
+	if bowl_area == null:
+		return
+
+	if bowl_area.is_connected("drag_state_changed", Callable(self, "_on_bowl_drag_state_changed")):
+		bowl_area.disconnect("drag_state_changed", Callable(self, "_on_bowl_drag_state_changed"))
+
+	bowl_area.connect("drag_state_changed", Callable(self, "_on_bowl_drag_state_changed"))
+
+
+func _on_bowl_drag_state_changed(is_dragging: bool) -> void:
+	_is_dragging_bowl = is_dragging
+
+	if bowl_area and bowl_area.is_inside_tree():
+		bowl_area.visible = not is_dragging
 
 	set_process(not is_dragging)
 

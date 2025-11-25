@@ -15,6 +15,12 @@ run/main_scene="uid://xr31gi5ou22p"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://clokdcc2ntrvg"
+buses/Music=true
+buses/Ambience=true
+
 [autoload]
 
 ClientManager="*res://scripts/client_manager.gd"
@@ -25,6 +31,7 @@ IngredientCostManager="*res://scripts/ingredient_cost_manager.gd"
 Crt="*res://scenes/crt.tscn"
 Managers="*res://scenes/managers.tscn"
 DragManager="*res://scripts/drag_manager.gd"
+AudioManager="*res://scenes/AudioManager.tscn"
 
 [display]
 
@@ -34,6 +41,10 @@ window/size/mode=3
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray()
 
 [gui]
 

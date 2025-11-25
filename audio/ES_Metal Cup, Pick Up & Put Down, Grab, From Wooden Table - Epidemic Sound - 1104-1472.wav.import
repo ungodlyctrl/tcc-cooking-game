@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cj085fqqrul0g"
+path="res://.godot/imported/ES_Metal Cup, Pick Up & Put Down, Grab, From Wooden Table - Epidemic Sound - 1104-1472.wav-c3a6ad266aab84ea7069539239bf0d57.sample"
+
+[deps]
+
+source_file="res://audio/ES_Metal Cup, Pick Up & Put Down, Grab, From Wooden Table - Epidemic Sound - 1104-1472.wav"
+dest_files=["res://.godot/imported/ES_Metal Cup, Pick Up & Put Down, Grab, From Wooden Table - Epidemic Sound - 1104-1472.wav-c3a6ad266aab84ea7069539239bf0d57.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

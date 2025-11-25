@@ -1,13 +1,20 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://bm2k7jgl3dsur"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://bm2k7jgl3dsur"]
 
 [ext_resource type="Texture2D" uid="uid://cm6x7g8ha74yf" path="res://assets/nordeste2/camarão (1).png" id="1_ixnov"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_svr5n"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="3_dfid8"]
+[ext_resource type="Texture2D" uid="uid://c0hqof37l4uvh" path="res://assets/mini/nore/camarao.png" id="3_jtent"]
 [ext_resource type="Texture2D" uid="uid://c78v768kdaryy" path="res://assets/nordeste2/camarao unico (1).png" id="4_svr5n"]
+
+[sub_resource type="Resource" id="Resource_6bbhg"]
+script = ExtResource("2_svr5n")
+texture = ExtResource("3_jtent")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
 
 [resource]
 script = ExtResource("3_dfid8")
 id = "camarao"
+mini_icons = Array[ExtResource("2_svr5n")]([SubResource("Resource_6bbhg")])
 display_name = "Camarão"
 container_texture = ExtResource("1_ixnov")
 states = Dictionary[String, Texture2D]({

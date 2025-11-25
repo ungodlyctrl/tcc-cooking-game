@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://nvrpjwi02mln"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=8 format=3 uid="uid://nvrpjwi02mln"]
 
 [ext_resource type="Texture2D" uid="uid://4pyft2xfly2b" path="res://assets/ingredientes/pimentao/container.png" id="1_b7qsk"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_ih3fw"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_l2srj"]
 [ext_resource type="Texture2D" uid="uid://dxxl15u51x3kt" path="res://assets/mini/pimentao.png" id="3_6gq8a"]
 [ext_resource type="Texture2D" uid="uid://bxigm3gj32k4" path="res://assets/ingredientes/pimentao/raw.png" id="3_up3dg"]
+[ext_resource type="Texture2D" uid="uid://robn5njpapym" path="res://assets/pimentão (1).png" id="6_6gq8a"]
 
 [sub_resource type="Resource" id="Resource_r8fbv"]
 script = ExtResource("2_l2srj")
@@ -21,6 +22,7 @@ container_texture = ExtResource("1_b7qsk")
 states = Dictionary[String, Texture2D]({
 "cooked": null,
 "fried": null,
+"plate": ExtResource("6_6gq8a"),
 "raw": ExtResource("3_up3dg")
 })
 gender = "m"

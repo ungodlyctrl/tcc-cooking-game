@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://c8w71uoxo511l"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=8 format=3 uid="uid://c8w71uoxo511l"]
 
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_igqo6"]
 [ext_resource type="Texture2D" uid="uid://betd4887fcquu" path="res://assets/ingredientes/arroz/container.png" id="1_plfdw"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_nc7af"]
 [ext_resource type="Texture2D" uid="uid://dpncam464box1" path="res://assets/ingredientes/arroz/cooked.png" id="3_g3658"]
 [ext_resource type="Texture2D" uid="uid://1rgcqyxhancf" path="res://assets/mini/arroz.png" id="3_ypheu"]
+[ext_resource type="Texture2D" uid="uid://c5mrhtlcyrj2b" path="res://assets/arroz.png" id="6_ypheu"]
 
 [sub_resource type="Resource" id="Resource_mhnei"]
 script = ExtResource("2_nc7af")
@@ -20,7 +21,8 @@ display_name = "Arroz"
 container_texture = ExtResource("1_plfdw")
 initial_state = "cooked"
 states = Dictionary[String, Texture2D]({
-"cooked": ExtResource("3_g3658")
+"cooked": ExtResource("3_g3658"),
+"plate": ExtResource("6_ypheu")
 })
 drag_offset = Vector2(-6, -13)
 metadata/_custom_type_script = "uid://ccubj8or3d2vb"

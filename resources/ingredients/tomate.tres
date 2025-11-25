@@ -18,6 +18,7 @@ mini_icons = Array[ExtResource("2_33f7l")]([SubResource("Resource_fp2lk")])
 display_name = "Tomate"
 container_texture = ExtResource("1_kcooi")
 states = Dictionary[String, Texture2D]({
+"plate": ExtResource("3_7enfk"),
 "raw": ExtResource("3_7enfk")
 })
 gender = "m"

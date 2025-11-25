@@ -1,13 +1,20 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://b6ui5fm7kasst"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://b6ui5fm7kasst"]
 
 [ext_resource type="Texture2D" uid="uid://djl88wd53qjsx" path="res://assets/nordeste2/tapioca.png" id="1_8lvhy"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_j8012"]
+[ext_resource type="Texture2D" uid="uid://6vggbukunf13" path="res://assets/mini/nore/tapioca (1).png" id="3_j8012"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="3_s1vu0"]
 [ext_resource type="Texture2D" uid="uid://c07mkbqgc8agm" path="res://assets/nordeste2/colher tapioca.png" id="4_6dexa"]
+
+[sub_resource type="Resource" id="Resource_s1vu0"]
+script = ExtResource("2_j8012")
+texture = ExtResource("3_j8012")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
 
 [resource]
 script = ExtResource("3_s1vu0")
 id = "tapioca"
+mini_icons = Array[ExtResource("2_j8012")]([SubResource("Resource_s1vu0")])
 display_name = "Tapioca"
 container_texture = ExtResource("1_8lvhy")
 states = Dictionary[String, Texture2D]({

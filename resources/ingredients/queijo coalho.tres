@@ -1,13 +1,32 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://g5nn1waylyg1"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=9 format=3 uid="uid://g5nn1waylyg1"]
 
 [ext_resource type="Texture2D" uid="uid://rhvihdq6suxs" path="res://assets/nordeste2/queijo coalha (1).png" id="1_s1cki"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_urdrm"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="3_uic8m"]
+[ext_resource type="Texture2D" uid="uid://mp4irny6rnrv" path="res://assets/mini/nore/queijo .png" id="3_urdrm"]
 [ext_resource type="Texture2D" uid="uid://d3m81dj4utd01" path="res://assets/nordeste2/queijo coalho unico2 (1).png" id="4_ww4i2"]
+
+[sub_resource type="Resource" id="Resource_uic8m"]
+script = ExtResource("2_urdrm")
+texture = ExtResource("3_urdrm")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
+
+[sub_resource type="Resource" id="Resource_ww4i2"]
+script = ExtResource("2_urdrm")
+state = "cooked"
+texture = ExtResource("3_urdrm")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
+
+[sub_resource type="Resource" id="Resource_2amml"]
+script = ExtResource("2_urdrm")
+state = "fried"
+texture = ExtResource("3_urdrm")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
 
 [resource]
 script = ExtResource("3_uic8m")
 id = "queijo coalho"
+mini_icons = Array[ExtResource("2_urdrm")]([SubResource("Resource_uic8m"), SubResource("Resource_ww4i2"), SubResource("Resource_2amml")])
 display_name = "Queijo coalho"
 container_texture = ExtResource("1_s1cki")
 states = Dictionary[String, Texture2D]({

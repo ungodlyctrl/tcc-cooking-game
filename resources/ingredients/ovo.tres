@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://sebcmd5raimh"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=8 format=3 uid="uid://sebcmd5raimh"]
 
 [ext_resource type="Texture2D" uid="uid://dwwfckkgjx4c2" path="res://assets/ingredientes/ovo/container.png" id="1_hivub"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_mcomf"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_btcvk"]
 [ext_resource type="Texture2D" uid="uid://d7qi2tly0g06" path="res://assets/mini/ovo.png" id="3_m72xa"]
 [ext_resource type="Texture2D" uid="uid://c3tqhlns1fd5r" path="res://assets/ingredientes/ovo/raw.png" id="3_tnaqi"]
+[ext_resource type="Texture2D" uid="uid://cqkr7oh05kox7" path="res://assets/Cópia de ovo.png" id="6_m72xa"]
 
 [sub_resource type="Resource" id="Resource_3i1wl"]
 script = ExtResource("2_btcvk")
@@ -20,7 +21,8 @@ min_day = 5
 container_texture = ExtResource("1_hivub")
 initial_state = "cooked"
 states = Dictionary[String, Texture2D]({
-"cooked": ExtResource("3_tnaqi")
+"cooked": ExtResource("3_tnaqi"),
+"plate": ExtResource("6_m72xa")
 })
 gender = "m"
 drag_offset = Vector2(-1, -2)

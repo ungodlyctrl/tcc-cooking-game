@@ -72,6 +72,7 @@ recipe_name = "Cuscuz Nordestino"
 region = "nordeste"
 base_price = 28
 min_day = 2
+time_of_day = Array[String](["breakfast"])
 ingredient_requirements = Array[ExtResource("2_uhfhv")]([SubResource("Resource_c36e5"), SubResource("Resource_uhfhv"), SubResource("Resource_qkq5v")])
 client_lines = Array[String](["Bom dia meu lindo, me vê um cuscuz com aquela manteiguinha e carne de sol? ", "E aí mano, um cuscuz bem quentinho daquele por favor.", "Oi, um cuscuz!"])
 plate_ingredient_visuals = Array[ExtResource("3_otlad")]([SubResource("Resource_rx4eq"), SubResource("Resource_5d2k8"), SubResource("Resource_aj8ah")])

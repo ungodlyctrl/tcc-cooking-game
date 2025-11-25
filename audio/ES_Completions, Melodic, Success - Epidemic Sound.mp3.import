@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cli51dsh8ftkj"
+path="res://.godot/imported/ES_Completions, Melodic, Success - Epidemic Sound.mp3-c000d7c128eb10eb913270c6da72a273.mp3str"
+
+[deps]
+
+source_file="res://audio/ES_Completions, Melodic, Success - Epidemic Sound.mp3"
+dest_files=["res://.godot/imported/ES_Completions, Melodic, Success - Epidemic Sound.mp3-c000d7c128eb10eb913270c6da72a273.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

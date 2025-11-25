@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="1_p1sa1"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_hcein"]
 [ext_resource type="Texture2D" uid="uid://bcnai4b7pmnxi" path="res://assets/mini/peixe.png" id="3_1denm"]
-[ext_resource type="Texture2D" uid="uid://qfpwfahr715m" path="res://assets/ingredientes/peixe/cut.png" id="4_3nnve"]
 [ext_resource type="Texture2D" uid="uid://bswupv3127ugp" path="res://assets/mini/peixe2.png" id="4_68ffv"]
 [ext_resource type="Texture2D" uid="uid://c7oqc5ekbcreo" path="res://assets/ingredientes/peixe/peixe unico 2.png" id="4_onhh4"]
+[ext_resource type="Texture2D" uid="uid://xt5kgnvuq5fp" path="res://assets/ingredientes/peixe/peixe cortado 3 (1).png" id="6_hcein"]
 
 [sub_resource type="Resource" id="Resource_gwxhb"]
 script = ExtResource("2_hcein")
@@ -34,8 +34,9 @@ min_day = 5
 container_texture = ExtResource("1_ih8bh")
 states = Dictionary[String, Texture2D]({
 "cooked": null,
-"cut": ExtResource("4_3nnve"),
+"cut": ExtResource("6_hcein"),
 "fried": null,
+"plate": ExtResource("4_onhh4"),
 "raw": ExtResource("4_onhh4")
 })
 gender = "m"

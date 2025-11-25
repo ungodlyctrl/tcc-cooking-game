@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="MixResource" load_steps=5 format=3 uid="uid://owxip3n16v8r"]
+
+[ext_resource type="Script" uid="uid://bciy8ggaduuqd" path="res://mix_ingredient.gd" id="1_fiy0g"]
+[ext_resource type="Script" uid="uid://dpu6eaul5gjsb" path="res://scripts/mix_resource.gd" id="1_me6h3"]
+
+[sub_resource type="Resource" id="Resource_fiy0g"]
+script = ExtResource("1_fiy0g")
+ingredient_id = "peixe"
+state = "fried"
+metadata/_custom_type_script = "uid://bciy8ggaduuqd"
+
+[sub_resource type="Resource" id="Resource_32v6d"]
+script = ExtResource("1_fiy0g")
+ingredient_id = "batata"
+state = "cooked"
+metadata/_custom_type_script = "uid://bciy8ggaduuqd"
+
+[resource]
+script = ExtResource("1_me6h3")
+mix_id = "massa bolinho bacalhau"
+required_ingredients = Array[ExtResource("1_fiy0g")]([SubResource("Resource_fiy0g"), SubResource("Resource_32v6d")])
+display_name = "Massa de Bolinho de Bacalhau"
+metadata/_custom_type_script = "uid://dpu6eaul5gjsb"

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://j2emrol4i5tk"
+path="res://.godot/imported/ES_Village, Quiet, Night, Distant Walla - Epidemic Sound - 0000-81040.wav-8217e40b135a4c341de5660b6d72670e.sample"
+
+[deps]
+
+source_file="res://audio/ES_Village, Quiet, Night, Distant Walla - Epidemic Sound - 0000-81040.wav"
+dest_files=["res://.godot/imported/ES_Village, Quiet, Night, Distant Walla - Epidemic Sound - 0000-81040.wav-8217e40b135a4c341de5660b6d72670e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,13 +1,20 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://drmqtqs6eoh0j"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=7 format=3 uid="uid://drmqtqs6eoh0j"]
 
 [ext_resource type="Texture2D" uid="uid://b3ttgo2o823ay" path="res://assets/nordeste2/carangueijo (1).png" id="1_xrbd2"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_4o66p"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="3_gpl1w"]
+[ext_resource type="Texture2D" uid="uid://8v5jdb1pucu4" path="res://assets/mini/nore/carangueijo (2).png" id="3_wbi0h"]
 [ext_resource type="Texture2D" uid="uid://14m37qm82mfh" path="res://assets/nordeste2/carangueijo unico (1).png" id="4_4o66p"]
+
+[sub_resource type="Resource" id="Resource_skelm"]
+script = ExtResource("2_4o66p")
+texture = ExtResource("3_wbi0h")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
 
 [resource]
 script = ExtResource("3_gpl1w")
 id = "caranguejo"
+mini_icons = Array[ExtResource("2_4o66p")]([SubResource("Resource_skelm")])
 display_name = "Caranguejo"
 container_texture = ExtResource("1_xrbd2")
 states = Dictionary[String, Texture2D]({

@@ -43,6 +43,15 @@ size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("3_s610r")
 
+[node name="TextureRect2" type="TextureRect" parent="ScrollContainer/PrepArea"]
+visible = false
+layout_mode = 0
+offset_left = 24.0
+offset_top = 640.0
+offset_right = 784.0
+offset_bottom = 680.0
+texture = ExtResource("14_i1lce")
+
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/PrepArea"]
 layout_mode = 0
 offset_top = 320.0

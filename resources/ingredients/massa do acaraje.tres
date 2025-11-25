@@ -1,13 +1,27 @@
-[gd_resource type="Resource" script_class="IngredientData" load_steps=5 format=3 uid="uid://beoscs2u5bsn5"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=9 format=3 uid="uid://beoscs2u5bsn5"]
 
 [ext_resource type="Texture2D" uid="uid://rm11n2ko4vjd" path="res://assets/nordeste2/massa de acaraje (1).png" id="1_407ws"]
 [ext_resource type="Script" uid="uid://cwqqv8iocvvay" path="res://ingredient_mini_data.gd" id="2_q3t78"]
+[ext_resource type="Texture2D" uid="uid://ghqnlljpmkd2" path="res://assets/mini/nore/acaraje.png" id="3_1pedw"]
 [ext_resource type="Script" uid="uid://ccubj8or3d2vb" path="res://scripts/IngredientData.gd" id="3_cyifl"]
 [ext_resource type="Texture2D" uid="uid://dnnaeps5iafao" path="res://assets/nordeste2/acaraje uncio.png" id="4_1pedw"]
+[ext_resource type="Texture2D" uid="uid://dtov48ton00ty" path="res://assets/mini/nore/acaraje frito.png" id="4_wayxn"]
+
+[sub_resource type="Resource" id="Resource_65qsb"]
+script = ExtResource("2_q3t78")
+texture = ExtResource("3_1pedw")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
+
+[sub_resource type="Resource" id="Resource_42wex"]
+script = ExtResource("2_q3t78")
+state = "fried"
+texture = ExtResource("4_wayxn")
+metadata/_custom_type_script = "uid://cwqqv8iocvvay"
 
 [resource]
 script = ExtResource("3_cyifl")
 id = "massa do acaraje"
+mini_icons = Array[ExtResource("2_q3t78")]([SubResource("Resource_65qsb"), SubResource("Resource_42wex")])
 display_name = "Massa do Acarajé"
 container_texture = ExtResource("1_407ws")
 states = Dictionary[String, Texture2D]({
