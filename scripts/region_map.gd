@@ -118,6 +118,7 @@ func close() -> void:
 # ====================================================================
 func _on_area_input_event(viewport, event, shape_idx, area) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		AudioManager.play_sfx(AudioManager.library.ui_click)
 		var rid := ""
 		if area is RegionArea:
 			rid = area.region_id
@@ -144,6 +145,7 @@ func _on_region_clicked(region_id: String) -> void:
 	_selected_region = region_id
 	rm.request_region_change_next_day(region_id)
 	_update_visuals()
+	AudioManager.play_sfx(AudioManager.library.ui_click)
   # fecha o mapa ao selecionar região desbloqueada
 
 
@@ -294,11 +296,13 @@ func _input(event: InputEvent) -> void:
 # ====================================================================
 func _on_close_button_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		AudioManager.play_sfx(AudioManager.library.ui_click)
 		_on_popup_close()
 
 
 func _on_unlock_button_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		AudioManager.play_sfx(AudioManager.library.ui_click)
 		_on_popup_unlock_pressed()
 
 

@@ -21,6 +21,12 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 
 	var data_type: String = data.get("type", "")
 	var state_type: String = data.get("state", "")
+	
+	# se for prato → avisar DropPlateArea
+	if data_type == "plate":
+		var source = data.get("source", null)
+		if source and source is DropPlateArea:
+			source.dropped_in_trash = true
 
 	# --- EXISTENTES ---
 	if data_type == TYPE_COOKED_TOOL:
@@ -44,7 +50,7 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 		if source and source is BurnerSlot:
 			source.remove_tool_from_burner()
 
-
+	AudioManager.play_sfx(AudioManager.library.ingredient_trash)
 
 func _on_mouse_entered() -> void:
 	texture = open_texture

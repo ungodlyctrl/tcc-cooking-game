@@ -41,6 +41,7 @@ var _pointer_auto_end_on_return: bool = true
 
 # ---------------- READY ----------------
 func _ready() -> void:
+	AudioManager.play_sfx(AudioManager.library.cutgame_start)
 	# carregar sprite do ingrediente
 	var tex: Texture2D = Managers.ingredient_database.get_sprite(ingredient_name, "raw")
 	if tex:
@@ -207,6 +208,7 @@ func is_cooking() -> bool:
 
 
 func _attempt_cut() -> void:
+	AudioManager.play_sfx_variants(AudioManager.library.cut_slices)
 	_attempts_left -= 1
 	var pointer_x := pointer.position.x
 	var success := false

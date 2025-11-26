@@ -88,8 +88,13 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 		_update_ui()
 		_update_mini_icons()
 
+		if current_tool_id == "panela":
+			AudioManager.play_sfx(AudioManager.library.stove_place_pan)
+		elif current_tool_id == "frigideira":
+			AudioManager.play_sfx(AudioManager.library.stove_place_fryer)
 	# INGREDIENT placed
 	else:
+		AudioManager.play_sfx(AudioManager.library.ingredient_drop)
 		ingredient_queue.append({
 			KEY_ID: data.get(KEY_ID, ""),
 			KEY_STATE: data.get(KEY_STATE, "")
@@ -173,6 +178,11 @@ func _on_start_gui_input(event: InputEvent) -> void:
 func _start_minigame() -> void:
 	state = State.COOKING
 	_update_ui()
+
+	if current_tool_id == "frigideira":
+		AudioManager.play_loop_sfx(AudioManager.library.sfx_fry_loop)
+	else:
+		AudioManager.play_loop_sfx(AudioManager.library.sfx_boiling_loop)
 
 	# instantiate minigame and attach
 	var game: CookingMinigame = minigame_scene.instantiate() as CookingMinigame

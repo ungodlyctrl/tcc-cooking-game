@@ -121,6 +121,7 @@ func _update_content(premeasure: bool) -> void:
 
 func _on_note_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
+		AudioManager.play_sfx(AudioManager.library.ui_click)
 		_toggle_open()
 
 

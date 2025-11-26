@@ -21,6 +21,8 @@ var _visual_nodes: Array[Control] = []
 var _ready_finished: bool = false
 var _is_dragging_local: bool = false
 var _saved_base_texture: Texture2D = null
+var dropped_in_trash = false
+
 
 # ---------------- READY ----------------
 func _ready() -> void:
@@ -395,6 +397,11 @@ func _get_drag_data(_pos: Vector2) -> Variant:
 
 func _hide_plateroot_for_drag() -> void:
 	_is_dragging_local = true
+	dropped_in_trash = false  # ← reset no início de todo drag
+
+	# som de pegar o prato
+	AudioManager.play_sfx(AudioManager.library.plate_pick)
+
 
 	if base_plate and base_plate.texture:
 		_saved_base_texture = base_plate.texture
@@ -429,6 +436,7 @@ func _can_drop_data(_position: Vector2, data: Variant) -> bool:
 
 
 func _drop_data(_position: Vector2, data: Variant) -> void:
+	AudioManager.play_sfx(AudioManager.library.ingredient_drop)
 	if not _can_drop_data(_position, data):
 		return
 
@@ -470,6 +478,10 @@ func _notification(what: int) -> void:
 		if _is_dragging_local:
 			_is_dragging_local = false
 			_set_plate_root_visible(true)
+			# só toca plate_drop se NÃO foi pro lixo
+			if not dropped_in_trash:
+				AudioManager.play_sfx(AudioManager.library.plate_drop)
+				
 			emit_signal("drag_state_changed", false)
 
 # Garantir fim do drag, independente de qualquer coisa

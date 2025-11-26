@@ -11,6 +11,7 @@ library = ExtResource("2_4tesi")
 bus = &"Music"
 
 [node name="Ambience" type="AudioStreamPlayer" parent="."]
+volume_db = -6.5
 bus = &"Ambience"
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]

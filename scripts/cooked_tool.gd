@@ -64,6 +64,7 @@ func _refresh_mini_icons() -> void:
 # DRAG TOOL
 # ============================================================
 func _get_drag_data(_pos: Vector2) -> Dictionary:
+	AudioManager.play_sfx(AudioManager.library.ingredient_pick)
 	var preview_tex := load("res://assets/utensilios/%s.png" % tool_type)
 
 	var preview := TextureRect.new()

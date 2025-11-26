@@ -6,6 +6,8 @@ extends Node
 @onready var ambience: AudioStreamPlayer = $Ambience
 @onready var sfx: AudioStreamPlayer = $SFX
 
+var ambience_playing := false
+
 func _ready():
 	bgm.bus = "Music"
 	ambience.bus = "Ambience"
@@ -56,6 +58,11 @@ func stop_bgm():
 func play_ambience_random(entries: Array[AudioEntry]):
 	if entries.is_empty():
 		return
+	
+	if ambience_playing:
+		return
+
+	ambience_playing = true
 
 	var entry: AudioEntry = entries.pick_random()
 	_apply_entry(ambience, entry)
@@ -68,6 +75,17 @@ func play_ambience_random(entries: Array[AudioEntry]):
 
 func stop_ambience():
 	ambience.stop()
+	ambience_playing = false
+
+	
+func stop_ambience_fade(fade_time := 0.8):
+	if not ambience.playing:
+		return
+	var tween := create_tween()
+	tween.tween_property(ambience, "volume_db", ambience.volume_db - 20.0, fade_time)
+	await tween.finished
+	ambience.stop()
+	ambience_playing = false
 
 
 # =====================================================
@@ -76,12 +94,21 @@ func stop_ambience():
 func play_sfx(entry: AudioEntry, random_pitch := true):
 	if entry == null:
 		return
-	_apply_entry(sfx, entry)
 
+	# não chamar _apply_entry por causa do pitch
+	sfx.stream = entry.stream
+	sfx.volume_db = entry.volume_db
+	
 	if random_pitch:
-		sfx.pitch_scale = entry.pitch_scale * randf_range(0.95, 1.05)
+		sfx.pitch_scale = entry.pitch_scale * randf_range(0.95, 1.04)
+	else:
+		sfx.pitch_scale = entry.pitch_scale
 
+	# faz interrupção do som anterior para evitar overlap
+	sfx.stop()
 	sfx.play()
+
+
 
 
 # SFX com variação (corte)

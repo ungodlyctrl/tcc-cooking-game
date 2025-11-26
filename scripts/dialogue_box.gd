@@ -199,10 +199,10 @@ func _on_confirm_button_gui_input(event: InputEvent) -> void:
 				confirm_label.add_theme_color_override("font_color", hover_text_color)
 			else:
 				confirm_label.add_theme_color_override("font_color", _normal_font_color)
-
+		
 			_restore_confirm_texture()
-
-
+			AudioManager.play_sfx(AudioManager.library.ui_click)
+		
 
 func _restore_confirm_texture() -> void:
 	if confirm_texture:
@@ -241,7 +241,8 @@ func _on_next_hover_exit() -> void:
 # =========================================================
 func _on_next_button_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-
+		
+		
 		# PRESS
 		if event.pressed:
 			if next_arrow_pressed:
@@ -259,7 +260,8 @@ func _on_next_button_gui_input(event: InputEvent) -> void:
 			else:
 				next_button_arrow.texture = next_arrow_normal
 				next_button.texture = next_button_bg_normal
-
+		
+		
 			# Lógica do diálogo
 			if _typing:
 				dialogue_label.text = _full_text
@@ -270,7 +272,7 @@ func _on_next_button_gui_input(event: InputEvent) -> void:
 				current_index += 1
 				if current_index < lines.size():
 					_show_current_line()
-
+			AudioManager.play_sfx(AudioManager.library.ui_click)
 
 
 # =========================================================

@@ -8,7 +8,7 @@ enum GameMode { ATTENDANCE, PREPARATION, END_OF_DAY }
 var current_mode: GameMode = GameMode.ATTENDANCE
 var current_time_minutes: int = 8 * 60
 var absolute_minutes: int = 8 * 60
-var day: int = 5
+var day: int = 1
 var money: int = 100
 
 const END_OF_DAY_MINUTES: int = 19 * 60
@@ -132,7 +132,10 @@ func switch_mode(new_mode: GameMode) -> void:
 		prep_area.ensure_plate_for_day(day)
 		_connect_plate_drag_signal()
 
-
+	if new_mode == GameMode.ATTENDANCE:
+		AudioManager.play_ambience_random(AudioManager.library.ambience_street_tracks)
+	else:
+		AudioManager.stop_ambience_fade(0.7)
 # ---------------- Time Tick ----------------
 func _on_time_tick() -> void:
 
@@ -394,7 +397,6 @@ func _input(event) -> void:
 		var options_panel: Control = $InGameOptions
 		options_panel.visible = not options_panel.visible
 		get_tree().paused = options_panel.visible
-
 
 
 

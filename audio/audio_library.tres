@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="AudioLibrary" load_steps=41 format=3 uid="uid://bm8vre4txgt15"]
+[gd_resource type="Resource" script_class="AudioLibrary" load_steps=42 format=3 uid="uid://bm8vre4txgt15"]
 
 [ext_resource type="Script" uid="uid://rwmyxl03qkmu" path="res://audio_entry.gd" id="1_ai8j6"]
 [ext_resource type="Script" uid="uid://bc6vnqhn6gkbq" path="res://scripts/audio_library.gd" id="1_n6fec"]
 [ext_resource type="AudioStream" uid="uid://cd2dx34qs0b4r" path="res://audio/ES_Foodtruck-Area_-High-Activity_-Voices_-Walla_-Music_-Distant-Traffic_-Preparing-Food_-Brazil-05-E.ogg" id="2_o5egq"]
 [ext_resource type="AudioStream" uid="uid://yj8g2hqgmdld" path="res://audio/ES_City_-Amsterdam_-Walking-Street_-Walla_-Calm_-People_-Bikes_-Mopeds-Passing_-Bike-Bells_-Urban_-C.ogg" id="3_jb8wk"]
 [ext_resource type="AudioStream" uid="uid://c6no2om08mc1i" path="res://audio/ES_Cartoon, Negative, Error, Short Musical Reaction - Epidemic Sound - 1231-2501.wav" id="4_tusyq"]
+[ext_resource type="AudioStream" uid="uid://cmqs5hq3417r7" path="res://audio/ES_Village_-Birds_-Car-Pass_-Slow-Epidemic-Sound.ogg" id="5_jb8wk"]
 [ext_resource type="AudioStream" uid="uid://dsfnjxccx5vs2" path="res://audio/musica sudeste (mastered).ogg" id="5_jse56"]
 [ext_resource type="AudioStream" uid="uid://j2emrol4i5tk" path="res://audio/ES_Village, Quiet, Night, Distant Walla - Epidemic Sound - 0000-81040.wav" id="6_mdi88"]
 [ext_resource type="AudioStream" uid="uid://cop4rs1pidwmk" path="res://audio/ES_Kitchen, Chop, Mushrooms, Knife, Wooden Chopping Board 01 - Epidemic Sound - 1275-1637.wav" id="7_xaa0o"]
@@ -23,13 +24,13 @@
 [sub_resource type="Resource" id="Resource_m1mco"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("2_o5egq")
-volume_db = -18.0
+volume_db = -22.35
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_f0ujs"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("3_jb8wk")
-volume_db = -11.0
+volume_db = -14.735
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_5xlbu"]
@@ -40,8 +41,8 @@ metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_7cl0v"]
 script = ExtResource("1_ai8j6")
-stream = ExtResource("5_jse56")
-volume_db = -30.0
+stream = ExtResource("5_jb8wk")
+volume_db = -15.0
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_ihyf1"]
@@ -59,13 +60,13 @@ metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 [sub_resource type="Resource" id="Resource_innq0"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("7_xaa0o")
-volume_db = 4.6
+volume_db = -4.6
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_diwbw"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("8_fmk5k")
-volume_db = 4.6
+volume_db = -4.6
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_r5d5r"]
@@ -83,17 +84,21 @@ metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 [sub_resource type="Resource" id="Resource_j05gt"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("11_ssafa")
+volume_db = -10.0
+pitch_scale = 0.6
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_0dohx"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("11_ssafa")
+volume_db = -10.0
+pitch_scale = 0.8
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_p0amt"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("12_oqhk4")
-volume_db = -13.0
+volume_db = -17.0
 pitch_scale = 0.8
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
@@ -104,13 +109,13 @@ metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 [sub_resource type="Resource" id="Resource_odbl0"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("13_0qo07")
-volume_db = -9.75
+volume_db = -11.0
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_0ejyh"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("13_0qo07")
-volume_db = -9.75
+volume_db = -11.0
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_l6bcr"]
@@ -140,8 +145,7 @@ metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 [sub_resource type="Resource" id="Resource_ygdkr"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("19_eg01u")
-volume_db = -5.0
-pitch_scale = 1.08
+volume_db = -10.0
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [resource]

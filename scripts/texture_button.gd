@@ -12,7 +12,9 @@ func _ready() -> void:
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		AudioManager.play_sfx(AudioManager.library.ui_click)
 		_do_action()
+		
 
 func _do_action():
 	var menu := get_tree().current_scene

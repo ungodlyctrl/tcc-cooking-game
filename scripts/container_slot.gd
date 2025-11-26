@@ -23,6 +23,7 @@ func _ready() -> void:
 # Drag & Drop
 # ---------------------------------------------------------
 func _get_drag_data(_pos: Vector2) -> Variant:
+	AudioManager.play_sfx(AudioManager.library.ingredient_pick)
 	var data: IngredientData = Managers.ingredient_database.get_ingredient(ingredient_id)
 	if data == null:
 		push_warning("⚠️ Ingrediente '%s' não encontrado no IngredientDatabase" % ingredient_id)

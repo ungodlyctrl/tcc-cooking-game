@@ -28,6 +28,7 @@ func _can_drop_data(_pos: Vector2, data: Variant) -> bool:
 
 
 func _drop_data(_pos: Vector2, data: Variant) -> void:
+	AudioManager.play_sfx(AudioManager.library.ingredient_drop)
 	if active:
 		return
 	if not _can_drop_data(_pos, data):

@@ -32,6 +32,7 @@ Crt="*res://scenes/crt.tscn"
 Managers="*res://scenes/managers.tscn"
 DragManager="*res://scripts/drag_manager.gd"
 AudioManager="*res://scenes/AudioManager.tscn"
+UiAudioLayer="*res://ui_audio_layer.gd"
 
 [display]
 
