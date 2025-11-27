@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RegionBackgrounds" load_steps=5 format=3 uid="uid://sdo8hau5jnr3"]
+
+[ext_resource type="Script" uid="uid://bfjeeag3q7k8f" path="res://citybackgroundset.gd" id="1_o8ok6"]
+[ext_resource type="Script" uid="uid://ctvxf6sw87uyw" path="res://region_backgrounds.gd" id="2_ug1ab"]
+[ext_resource type="Resource" uid="uid://q2ijyr0holke" path="res://assets/backgrounds/sp_fundo.tres" id="2_xkl0a"]
+[ext_resource type="Resource" uid="uid://cb7ywfjuahj0f" path="res://assets/backgrounds/rildy_fundo.tres" id="3_2gqmu"]
+
+[resource]
+script = ExtResource("2_ug1ab")
+background_sets = Array[ExtResource("1_o8ok6")]([ExtResource("2_xkl0a"), ExtResource("3_2gqmu")])
+metadata/_custom_type_script = "uid://ctvxf6sw87uyw"

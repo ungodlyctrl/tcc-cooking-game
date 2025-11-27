@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CityBackgroundSet" load_steps=5 format=3 uid="uid://dhkuwlb4luqxk"]
+
+[ext_resource type="Script" uid="uid://bfjeeag3q7k8f" path="res://citybackgroundset.gd" id="1_atph5"]
+[ext_resource type="Texture2D" uid="uid://hqba52gfdd1w" path="res://assets/backgrounds/cenario2 tarde.png" id="1_xea5w"]
+[ext_resource type="Texture2D" uid="uid://dd7hh4nudim8s" path="res://assets/backgrounds/cenario2 dia.png" id="2_xhrek"]
+[ext_resource type="Texture2D" uid="uid://b05j3r3w46yh2" path="res://assets/backgrounds/cenario2 noite.png" id="3_5sd6x"]
+
+[resource]
+script = ExtResource("1_atph5")
+morning = ExtResource("2_xhrek")
+afternoon = ExtResource("1_xea5w")
+night = ExtResource("3_5sd6x")
+metadata/_custom_type_script = "uid://bfjeeag3q7k8f"

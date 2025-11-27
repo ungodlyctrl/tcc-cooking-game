@@ -18,8 +18,7 @@ class_name RegionResource
 ## Clientes dessa região
 @export var clients: Array[ClientData] = []
 
-## Fundos possíveis (manhã, tarde, noite) OU uma lista de backgrounds
-@export var backgrounds: Array[Texture2D] = []
+@export var background_data: RegionBackgrounds
 
 ## Layouts de preparação específicos da região
 @export var prep_layouts: Array[PrepLayoutResource] = []

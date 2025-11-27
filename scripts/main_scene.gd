@@ -8,7 +8,7 @@ enum GameMode { ATTENDANCE, PREPARATION, END_OF_DAY }
 var current_mode: GameMode = GameMode.ATTENDANCE
 var current_time_minutes: int = 8 * 60
 var absolute_minutes: int = 8 * 60
-var day: int = 1
+var day: int = 4
 var money: int = 100
 
 const END_OF_DAY_MINUTES: int = 19 * 60
@@ -62,7 +62,8 @@ func _ready() -> void:
 
 	await get_tree().process_frame
 	_apply_region_to_preparea()
-
+	_prep_select_random_city_background()
+	
 	load_new_recipe()
 
 	last_time_of_day = get_visual_time_of_day()
@@ -208,6 +209,7 @@ func start_new_day() -> void:
 	# aplica troca de região
 	Managers.region_manager.apply_pending_change()
 	_apply_region_to_preparea()
+	_prep_select_random_city_background()
 
 	last_time_of_day = get_visual_time_of_day()
 	mode_attendance.update_city_background(last_time_of_day)
@@ -317,6 +319,7 @@ func load_new_recipe() -> void:
 		has_shown_note_first_day = true
 
 	show_random_client()
+	mode_attendance.show_map_hint_if_needed(day)
 
 
 # ---------------- Attendance ----------------
@@ -452,3 +455,25 @@ func show_money_gain(amount: int) -> void:
 
 func show_money_loss(amount: int) -> void:
 	_spawn_money_float("-%d" % amount, Color(0.9, 0.2, 0.2), 1)
+
+
+
+
+func _prep_select_random_city_background():
+	var region := Managers.region_manager.get_current_region()
+	if region == null:
+		return
+
+	var bg_data: RegionBackgrounds = region.background_data
+	if bg_data == null or bg_data.background_sets.is_empty():
+		return
+
+	# escolhe um set aleatório para o dia
+	var chosen = bg_data.background_sets.pick_random()
+
+	# guarda no modo attendance
+	mode_attendance.current_background_set = chosen
+
+	# atualiza imediatamente para o horário atual
+	var time := get_visual_time_of_day()
+	mode_attendance.update_city_background(time)

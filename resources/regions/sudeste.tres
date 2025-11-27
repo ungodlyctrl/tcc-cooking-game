@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="RegionResource" load_steps=51 format=3 uid="uid://djysxtd8w1ccv"]
+[gd_resource type="Resource" script_class="RegionResource" load_steps=52 format=3 uid="uid://djysxtd8w1ccv"]
 
 [ext_resource type="Script" uid="uid://d0tobb7uauvh8" path="res://scripts/region_resource.gd" id="1_gblrd"]
 [ext_resource type="Script" uid="uid://c1roybtu8ul0l" path="res://scripts/client_data.gd" id="1_m1spv"]
+[ext_resource type="Resource" uid="uid://sdo8hau5jnr3" path="res://assets/backgrounds/sudeste_fundos.tres" id="1_rgfc3"]
 [ext_resource type="Resource" uid="uid://cg004qv7yfein" path="res://resources/clients/sudeste/alana.tres" id="2_m1spv"]
 [ext_resource type="Resource" uid="uid://kidgqhou1d5q" path="res://resources/clients/sudeste/bea.tres" id="3_rgfc3"]
 [ext_resource type="Resource" uid="uid://vik0d5npu7sq" path="res://resources/clients/sudeste/bia.tres" id="4_ti0ea"]
@@ -58,5 +59,6 @@ display_name = "Sudeste"
 ingredients = Array[ExtResource("13_qdcfi")]([ExtResource("14_rugkw"), ExtResource("15_ouwwe"), ExtResource("16_ikwpn"), ExtResource("17_kpdgb"), ExtResource("18_cvwot"), ExtResource("19_7phng"), ExtResource("20_n7ggd"), ExtResource("21_k53fi"), ExtResource("22_e8wl2"), ExtResource("23_rxdqn"), ExtResource("24_wv02w"), ExtResource("25_tlg3c"), ExtResource("26_8wp2k"), ExtResource("27_uxwcm"), ExtResource("28_3m6i6"), ExtResource("29_me7yb"), ExtResource("30_cap0k"), ExtResource("31_vupvb"), ExtResource("32_slm2n")])
 recipes = Array[ExtResource("37_c5am8")]([ExtResource("38_m1spv"), ExtResource("39_rgfc3"), ExtResource("40_ti0ea"), ExtResource("41_dhe5h"), ExtResource("42_50igg"), ExtResource("43_tjm3c"), ExtResource("44_g2dra"), ExtResource("45_0qg6y"), ExtResource("46_wa4no"), ExtResource("47_304wu"), ExtResource("48_44j1f"), ExtResource("49_3yljl")])
 clients = Array[ExtResource("1_m1spv")]([ExtResource("2_m1spv"), ExtResource("3_rgfc3"), ExtResource("4_ti0ea"), ExtResource("5_dhe5h"), ExtResource("6_50igg"), ExtResource("7_tjm3c"), ExtResource("8_g2dra"), ExtResource("9_0qg6y"), ExtResource("10_wa4no"), ExtResource("11_304wu"), ExtResource("12_44j1f")])
+background_data = ExtResource("1_rgfc3")
 prep_layouts = Array[ExtResource("33_7dnkc")]([ExtResource("34_hhmid"), ExtResource("35_5wfay"), ExtResource("36_m70uu")])
 metadata/_custom_type_script = "uid://d0tobb7uauvh8"

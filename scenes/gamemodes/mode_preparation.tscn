@@ -139,6 +139,7 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="RecipeNotePanel" parent="HUDPrep" instance=ExtResource("11_ytfgg")]
+z_index = 4
 layout_mode = 1
 offset_left = -190.0
 offset_right = -190.0
