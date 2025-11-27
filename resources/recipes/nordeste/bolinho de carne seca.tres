@@ -1,0 +1,75 @@
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=17 format=3 uid="uid://bv7ksumt0fti3"]
+
+[ext_resource type="Texture2D" uid="uid://dpimdqmk6tkd" path="res://assets/nordeste/entrega (4).png" id="1_fp03y"]
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="2_o2j4b"]
+[ext_resource type="Texture2D" uid="uid://dljgl115kqm61" path="res://assets/nordeste/bolinha2.png" id="3_bdiir"]
+[ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="4_5g05y"]
+[ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="5_8tokd"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="6_24440"]
+[ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="7_hu8b4"]
+
+[sub_resource type="Resource" id="Resource_7f4q8"]
+script = ExtResource("4_5g05y")
+ingredient_id = "macaxeira"
+state = "fried"
+stages = Array[int]([2, 4, 3])
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_3t4d3"]
+script = ExtResource("4_5g05y")
+ingredient_id = "queijo coalho"
+state = "fried"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_dls05"]
+script = ExtResource("4_5g05y")
+ingredient_id = "carne"
+state = "fried"
+stages = Array[int]([1, 3, 4])
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_pudow"]
+script = ExtResource("6_24440")
+texture = ExtResource("3_bdiir")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_ws7w8"]
+script = ExtResource("5_8tokd")
+ingredient_id = "carne"
+state_sprites = Array[ExtResource("6_24440")]([SubResource("Resource_pudow")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_vyv4n"]
+script = ExtResource("6_24440")
+texture = ExtResource("3_bdiir")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_0ylrm"]
+script = ExtResource("5_8tokd")
+ingredient_id = "macaxeira"
+state_sprites = Array[ExtResource("6_24440")]([SubResource("Resource_vyv4n")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_34eav"]
+script = ExtResource("6_24440")
+texture = ExtResource("3_bdiir")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_5li85"]
+script = ExtResource("5_8tokd")
+ingredient_id = "queijo coalho"
+state_sprites = Array[ExtResource("6_24440")]([SubResource("Resource_34eav")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[resource]
+script = ExtResource("7_hu8b4")
+recipe_name = "Bolinho de carne seca"
+region = "nordeste"
+base_price = 40
+time_of_day = Array[String](["dinner"])
+ingredient_requirements = Array[ExtResource("4_5g05y")]([SubResource("Resource_7f4q8"), SubResource("Resource_3t4d3"), SubResource("Resource_dls05")])
+client_lines = Array[String](["Hoje tô no simples em?! Me vê só um bolinho de carne seca por favor. ", "Olá, um bolinho de carne seca! ", "Opa moço, um bolinho de carne seca. "])
+plate_ingredient_visuals = Array[ExtResource("5_8tokd")]([SubResource("Resource_ws7w8"), SubResource("Resource_0ylrm"), SubResource("Resource_5li85")])
+final_plate_sprite = ExtResource("3_bdiir")
+delivered_plate_sprite = ExtResource("1_fp03y")
+metadata/_custom_type_script = "uid://c6xvod46icb2"

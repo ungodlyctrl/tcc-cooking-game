@@ -3,7 +3,11 @@ extends Control
 ## ------------------------- NODES -------------------------
 @onready var options_panel: Control = $OptionsPanel
 @onready var credits_panel: Control = $CreditsPanel
-@onready var volume_slider: HSlider = $OptionsPanel/VolumeSlider
+@onready var slider_master   = $OptionsPanel/SliderMaster
+@onready var slider_music    = $OptionsPanel/SliderMusic
+@onready var slider_sfx      = $OptionsPanel/SliderSFX
+@onready var slider_ambience = $OptionsPanel/SliderAmbience
+
 @onready var overlay: Control = $OverlayDarkener
 @onready var logo: TextureRect = $Logo
 
@@ -18,6 +22,11 @@ func _ready() -> void:
 	
 	AudioManager.play_bgm(AudioManager.library.bgm_main)
 	
+	slider_master.value   = AudioSettings.master
+	slider_music.value    = AudioSettings.music
+	slider_sfx.value      = AudioSettings.sfx
+	slider_ambience.value = AudioSettings.ambience
+
 	options_panel.visible = false
 	credits_panel.visible = false
 	overlay.visible = false
@@ -27,6 +36,19 @@ func _ready() -> void:
 
 	# Garantir animação natural
 	logo.pivot_offset = logo.size / 2.0
+	
+	
+func _on_SliderMaster_value_changed(v): 
+	AudioSettings.set_master(v)
+func _on_SliderMusic_value_changed(v): 
+	AudioSettings.set_music(v)
+func _on_SliderSFX_value_changed(v): 
+	AudioSettings.set_sfx(v)
+func _on_SliderAmbience_value_changed(v): 
+	AudioSettings.set_ambience(v)
+
+
+
 
 
 ## ------------------------- PROCESS (ANIMAÇÃO LOGO) -------------------------

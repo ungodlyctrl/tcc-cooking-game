@@ -1,0 +1,90 @@
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=21 format=3 uid="uid://bccit37x1gsct"]
+
+[ext_resource type="Texture2D" uid="uid://c57j7vg3b55b8" path="res://assets/marisc5.png" id="1_yt76e"]
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="2_27yph"]
+[ext_resource type="Texture2D" uid="uid://dhb3amgbx25vk" path="res://assets/marisc4.png" id="3_44hge"]
+[ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="4_dqpn8"]
+[ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="5_h2hm5"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="6_5awbv"]
+[ext_resource type="Texture2D" uid="uid://dlrynk7eq8hse" path="res://assets/marisc2 (1).png" id="7_iiycb"]
+[ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="8_sw0yr"]
+
+[sub_resource type="Resource" id="Resource_72n0v"]
+script = ExtResource("4_dqpn8")
+ingredient_id = "caranquejo"
+state = "cooked"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_gatoq"]
+script = ExtResource("4_dqpn8")
+ingredient_id = "agua"
+state = "cooked"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_sscjt"]
+script = ExtResource("4_dqpn8")
+ingredient_id = "camarao"
+state = "fried"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_382q2"]
+script = ExtResource("4_dqpn8")
+ingredient_id = "vinagrete"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_pr6nd"]
+script = ExtResource("6_5awbv")
+texture = ExtResource("7_iiycb")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_k3u45"]
+script = ExtResource("5_h2hm5")
+ingredient_id = "caranguejo"
+state_sprites = Array[ExtResource("6_5awbv")]([SubResource("Resource_pr6nd")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_labgw"]
+script = ExtResource("6_5awbv")
+texture = ExtResource("7_iiycb")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_51ny7"]
+script = ExtResource("5_h2hm5")
+ingredient_id = "agua"
+state_sprites = Array[ExtResource("6_5awbv")]([SubResource("Resource_labgw")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_n7q5s"]
+script = ExtResource("6_5awbv")
+texture = ExtResource("7_iiycb")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_sbect"]
+script = ExtResource("5_h2hm5")
+ingredient_id = "camarao"
+state_sprites = Array[ExtResource("6_5awbv")]([SubResource("Resource_n7q5s")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_wgxiv"]
+script = ExtResource("6_5awbv")
+texture = ExtResource("1_yt76e")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_ot0jx"]
+script = ExtResource("5_h2hm5")
+ingredient_id = "vinagrete"
+state_sprites = Array[ExtResource("6_5awbv")]([SubResource("Resource_wgxiv")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[resource]
+script = ExtResource("8_sw0yr")
+recipe_name = "Mariscada"
+region = "nordeste"
+base_price = 40
+time_of_day = Array[String](["lunch"])
+ingredient_requirements = Array[ExtResource("4_dqpn8")]([SubResource("Resource_72n0v"), SubResource("Resource_gatoq"), SubResource("Resource_sscjt"), SubResource("Resource_382q2")])
+client_lines = Array[String](["Hoje pode, me vê uma mariscada aí véi!", "Bom dia, uma mariscada bem saborosa por favor.", "Uma mariscada, não esquece o vinagrete por favor moço. "])
+plate_ingredient_visuals = Array[ExtResource("5_h2hm5")]([SubResource("Resource_k3u45"), SubResource("Resource_51ny7"), SubResource("Resource_sbect"), SubResource("Resource_ot0jx")])
+final_plate_sprite = ExtResource("3_44hge")
+delivered_plate_sprite = ExtResource("1_yt76e")
+metadata/_custom_type_script = "uid://c6xvod46icb2"

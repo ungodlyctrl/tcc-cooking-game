@@ -16,7 +16,22 @@ const INGREDIENT_COSTS := {
 	"farofa": 2,
 	"cuscuz": 4,
 	"batata": 3,
-	"pimentao": 2
+	"pimentao": 2,
+	"massa do acaraje": 6,
+	"camarao": 8,
+	"caranguejo": 8,
+	"coco": 5,
+	"feijao fradinho": 5,
+	"leite de coco": 7,
+	"leite condensado": 6,
+	"macaxeira": 5,
+	"pimenta biquinho": 6,
+	"queijo coalho": 8,
+	"tapioca": 5,
+	"vatapa": 7,
+	"vinagrete": 6,
+	"alface": 3,
+	"tomate": 3,
 }
 
 func get_cost(ingredient_id: String) -> int:
@@ -26,3 +41,4 @@ func charge_for_ingredient(main_scene: Node, ingredient_id: String, quantity: in
 	var total_cost := get_cost(ingredient_id) * quantity
 	main_scene.total_ingredient_expense += total_cost
 	main_scene.add_money(-total_cost)
+	main_scene.show_money_loss(total_cost)

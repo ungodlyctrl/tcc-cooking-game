@@ -1,0 +1,99 @@
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=24 format=3 uid="uid://bdqgu10kbe2ac"]
+
+[ext_resource type="Texture2D" uid="uid://b0l3q6jer6svd" path="res://assets/bauru6.png" id="1_diy74"]
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="2_cl11w"]
+[ext_resource type="Texture2D" uid="uid://dnqsgvesyt7we" path="res://assets/bauru5.1.png" id="3_58s70"]
+[ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="4_lcbpd"]
+[ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="5_m6uhn"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="6_apug7"]
+[ext_resource type="Texture2D" uid="uid://m13n8xojbatd" path="res://assets/pao.png" id="7_jl860"]
+[ext_resource type="Texture2D" uid="uid://i67s13jitwfp" path="res://assets/carne (5).png" id="8_hcusu"]
+[ext_resource type="Texture2D" uid="uid://b0mh83ebfp6ry" path="res://assets/tomate.png" id="9_aoxi8"]
+[ext_resource type="Texture2D" uid="uid://b5mv0x113f32w" path="res://assets/queijo (3).png" id="10_ddiue"]
+[ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="11_pkn47"]
+
+[sub_resource type="Resource" id="Resource_p83yf"]
+script = ExtResource("4_lcbpd")
+ingredient_id = "pao"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_o1csy"]
+script = ExtResource("4_lcbpd")
+ingredient_id = "carne"
+state = "fried"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_hanps"]
+script = ExtResource("4_lcbpd")
+ingredient_id = "queijo"
+state = "fried"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_0qx2i"]
+script = ExtResource("4_lcbpd")
+ingredient_id = "tomate"
+quantity = 2
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_bhwb2"]
+script = ExtResource("6_apug7")
+texture = ExtResource("7_jl860")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_73fj7"]
+script = ExtResource("5_m6uhn")
+ingredient_id = "pao"
+state_sprites = Array[ExtResource("6_apug7")]([SubResource("Resource_bhwb2")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_1xub3"]
+script = ExtResource("6_apug7")
+state = "fried"
+texture = ExtResource("8_hcusu")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_1agi5"]
+script = ExtResource("5_m6uhn")
+ingredient_id = "carne"
+state_sprites = Array[ExtResource("6_apug7")]([SubResource("Resource_1xub3")])
+z_index = 1
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_6532l"]
+script = ExtResource("6_apug7")
+texture = ExtResource("9_aoxi8")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_vpeoq"]
+script = ExtResource("5_m6uhn")
+ingredient_id = "tomate"
+state_sprites = Array[ExtResource("6_apug7")]([SubResource("Resource_6532l")])
+z_index = 3
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_ttcp8"]
+script = ExtResource("6_apug7")
+state = "fried"
+texture = ExtResource("10_ddiue")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_mxefn"]
+script = ExtResource("5_m6uhn")
+ingredient_id = "queijo"
+state_sprites = Array[ExtResource("6_apug7")]([SubResource("Resource_ttcp8")])
+z_index = 2
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[resource]
+script = ExtResource("11_pkn47")
+recipe_name = "Bauru"
+region = "sudeste"
+base_price = 31
+min_day = 5
+time_of_day = Array[String](["breakfast", "lunch"])
+ingredient_requirements = Array[ExtResource("4_lcbpd")]([SubResource("Resource_p83yf"), SubResource("Resource_o1csy"), SubResource("Resource_hanps"), SubResource("Resource_0qx2i")])
+client_lines = Array[String](["Tô morrendo de vontade de comer um bauru!", "Opa, tudo bom? Me vê um bauru bem feito por favor.", "QUE FOME! Preciso muito de um bauru!"])
+plate_ingredient_visuals = Array[ExtResource("5_m6uhn")]([SubResource("Resource_73fj7"), SubResource("Resource_1agi5"), SubResource("Resource_vpeoq"), SubResource("Resource_mxefn")])
+final_plate_sprite = ExtResource("3_58s70")
+delivered_plate_sprite = ExtResource("1_diy74")
+metadata/_custom_type_script = "uid://c6xvod46icb2"

@@ -33,6 +33,7 @@ Managers="*res://scenes/managers.tscn"
 DragManager="*res://scripts/drag_manager.gd"
 AudioManager="*res://scenes/AudioManager.tscn"
 UiAudioLayer="*res://ui_audio_layer.gd"
+AudioSettings="*res://audio_settings.gd"
 
 [display]
 

@@ -1,0 +1,80 @@
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=19 format=3 uid="uid://cw4fkx21jc1c4"]
+
+[ext_resource type="Texture2D" uid="uid://dx5oahvsgr85y" path="res://assets/entrega1 (4).png" id="1_8xwsd"]
+[ext_resource type="Script" uid="uid://dhmrlg7flv700" path="res://scripts/display_steps_variant.gd" id="2_cny7w"]
+[ext_resource type="Texture2D" uid="uid://c12oq4jmq8b8x" path="res://assets/nordeste/paçoca2.1.png" id="3_sgsxa"]
+[ext_resource type="Script" uid="uid://cqo6ov8v5e63f" path="res://scripts/IngredientRequirement.gd" id="4_jxnxs"]
+[ext_resource type="Script" uid="uid://mwsanke8s50t" path="res://scripts/plate_ingredient_visual.gd" id="5_hx8oy"]
+[ext_resource type="Script" uid="uid://hs2a32jl4pas" path="res://ingredient_state_sprite.gd" id="6_d83sq"]
+[ext_resource type="Texture2D" uid="uid://t3gaykhmul4y" path="res://assets/nordeste/paçoca1.1 (1).png" id="7_4l8on"]
+[ext_resource type="Texture2D" uid="uid://8iw5uehc1e4e" path="res://assets/nordeste/paçoca3.1 (1).png" id="8_ck04d"]
+[ext_resource type="Script" uid="uid://c6xvod46icb2" path="res://scripts/RecipeResource.gd" id="10_14wt5"]
+
+[sub_resource type="Resource" id="Resource_6jetn"]
+script = ExtResource("4_jxnxs")
+ingredient_id = "farofa"
+state = "cooked"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_2l7ur"]
+script = ExtResource("4_jxnxs")
+ingredient_id = "carne"
+state = "fried"
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_gjllj"]
+script = ExtResource("4_jxnxs")
+ingredient_id = "arroz"
+state = "cooked"
+optional = true
+inclusion_chance = 0.8
+variation_line_absent = Array[String](["Mas não precisa acompanhar com arroz, valeu véi!"])
+metadata/_custom_type_script = "uid://cqo6ov8v5e63f"
+
+[sub_resource type="Resource" id="Resource_bfa81"]
+script = ExtResource("6_d83sq")
+state = "cooked"
+texture = ExtResource("7_4l8on")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_go6kp"]
+script = ExtResource("5_hx8oy")
+ingredient_id = "arroz"
+state_sprites = Array[ExtResource("6_d83sq")]([SubResource("Resource_bfa81")])
+z_index = 1
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_7knat"]
+script = ExtResource("6_d83sq")
+texture = ExtResource("8_ck04d")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_xosxq"]
+script = ExtResource("5_hx8oy")
+ingredient_id = "carne"
+state_sprites = Array[ExtResource("6_d83sq")]([SubResource("Resource_7knat")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[sub_resource type="Resource" id="Resource_sjl0h"]
+script = ExtResource("6_d83sq")
+texture = ExtResource("8_ck04d")
+metadata/_custom_type_script = "uid://hs2a32jl4pas"
+
+[sub_resource type="Resource" id="Resource_f0f6f"]
+script = ExtResource("5_hx8oy")
+ingredient_id = "farofa"
+state_sprites = Array[ExtResource("6_d83sq")]([SubResource("Resource_sjl0h")])
+metadata/_custom_type_script = "uid://mwsanke8s50t"
+
+[resource]
+script = ExtResource("10_14wt5")
+recipe_name = "Paçoca de carne"
+region = "nordeste"
+base_price = 32
+time_of_day = Array[String](["lunch"])
+ingredient_requirements = Array[ExtResource("4_jxnxs")]([SubResource("Resource_6jetn"), SubResource("Resource_2l7ur"), SubResource("Resource_gjllj")])
+client_lines = Array[String](["Bom dia, uma paçoca de carne por favor.", "Opa, me vê uma paçoca de carne aí caba!", "Uma paçoca de carne que hoje eu tô brocada!"])
+plate_ingredient_visuals = Array[ExtResource("5_hx8oy")]([SubResource("Resource_go6kp"), SubResource("Resource_xosxq"), SubResource("Resource_f0f6f")])
+final_plate_sprite = ExtResource("3_sgsxa")
+delivered_plate_sprite = ExtResource("1_8xwsd")
+metadata/_custom_type_script = "uid://c6xvod46icb2"

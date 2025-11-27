@@ -81,6 +81,7 @@ metadata/_custom_type_script = "uid://mwsanke8s50t"
 script = ExtResource("7_dnjaw")
 recipe_name = "Tapioca Molhada"
 region = "nordeste"
+base_price = 36
 time_of_day = Array[String](["breakfast"])
 ingredient_requirements = Array[ExtResource("4_khlga")]([SubResource("Resource_7auok"), SubResource("Resource_6ayix"), SubResource("Resource_58wo2"), SubResource("Resource_lmmvi")])
 client_lines = Array[String](["Que dia bonito né não? Uma tapioca alagada por favor. ", "Digo, uma tapioca molhada de coco por favor.", "Imagina uma tapioquinha agora? Me vê uma chefe!", "Uma tapioca molhada."])

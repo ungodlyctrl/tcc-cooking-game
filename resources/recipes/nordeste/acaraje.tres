@@ -82,6 +82,7 @@ metadata/_custom_type_script = "uid://mwsanke8s50t"
 script = ExtResource("10_e5u1d")
 recipe_name = "Acarajé"
 region = "nordeste"
+base_price = 45
 time_of_day = Array[String](["dinner"])
 ingredient_requirements = Array[ExtResource("4_sur8j")]([SubResource("Resource_wqon3"), SubResource("Resource_1wbos"), SubResource("Resource_vv084"), SubResource("Resource_dd00f")])
 client_lines = Array[String](["Boa noite, um acarajé. Obrigado. ", "Meu mano, hoje eu quero é cair de boca em um acarajé. Manda!", "Um acarajé bem recheado, mas por favor, sem verduras! "])

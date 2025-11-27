@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AudioLibrary" load_steps=42 format=3 uid="uid://bm8vre4txgt15"]
+[gd_resource type="Resource" script_class="AudioLibrary" load_steps=43 format=3 uid="uid://bm8vre4txgt15"]
 
 [ext_resource type="Script" uid="uid://rwmyxl03qkmu" path="res://audio_entry.gd" id="1_ai8j6"]
 [ext_resource type="Script" uid="uid://bc6vnqhn6gkbq" path="res://scripts/audio_library.gd" id="1_n6fec"]
@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://dq31mlhe4e1ro" path="res://audio/ES_Button Click, Plop, Short - Epidemic Sound.mp3" id="11_ssafa"]
 [ext_resource type="AudioStream" uid="uid://ctgofu3oqsggp" path="res://audio/ES_Metal Bin, Trash Can, Lid Close - Epidemic Sound - 0000-0536.wav" id="12_oqhk4"]
 [ext_resource type="AudioStream" uid="uid://7saif5ydbys8" path="res://audio/ES_Plate With Food, Place On Table 04 - Epidemic Sound - 5673-6227.wav" id="13_0qo07"]
+[ext_resource type="AudioStream" uid="uid://bug37h2jpi76" path="res://audio/ES_Pings, Tings, Bell, Desk, Tings - Epidemic Sound.mp3" id="14_tusyq"]
 [ext_resource type="AudioStream" uid="uid://b2f7dnuufgqhe" path="res://audio/ES_Couscous, Cooking In Pan - Epidemic Sound - 3136-20426.wav" id="15_ni27t"]
 [ext_resource type="AudioStream" uid="uid://ue22eh768ddw" path="res://audio/ES_Camping, Cooking Bacon In Frying Pan 02 - Epidemic Sound - 9197-27591.wav" id="16_86pxo"]
 [ext_resource type="AudioStream" uid="uid://b6icbm67g65pp" path="res://audio/ES_Metal Cup, Pick Up & Put Down, Grab, From Wooden Table - Epidemic Sound - 0000-0424.wav" id="17_jiekr"]
@@ -24,13 +25,13 @@
 [sub_resource type="Resource" id="Resource_m1mco"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("2_o5egq")
-volume_db = -22.35
+volume_db = -20.35
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_f0ujs"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("3_jb8wk")
-volume_db = -14.735
+volume_db = -13.735
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_5xlbu"]
@@ -42,19 +43,19 @@ metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 [sub_resource type="Resource" id="Resource_7cl0v"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("5_jb8wk")
-volume_db = -15.0
+volume_db = -13.0
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_ihyf1"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("6_mdi88")
-volume_db = -20.0
+volume_db = -18.0
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_a22k1"]
 script = ExtResource("1_ai8j6")
 stream = ExtResource("5_jse56")
-volume_db = -25.0
+volume_db = -22.0
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_innq0"]
@@ -104,6 +105,8 @@ metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_xql7e"]
 script = ExtResource("1_ai8j6")
+stream = ExtResource("14_tusyq")
+volume_db = -8.0
 metadata/_custom_type_script = "uid://rwmyxl03qkmu"
 
 [sub_resource type="Resource" id="Resource_odbl0"]

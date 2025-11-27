@@ -197,6 +197,10 @@ func start_new_day() -> void:
 	day_should_end = false
 	prep_start_minutes = -1
 
+	# 🔥 Reset da cor do relógio ao iniciar um novo dia
+	clock_label.remove_theme_color_override("font_color")
+
+
 	daily_report.clear()
 	total_ingredient_expense = 0
 	pending_delivery.clear()
@@ -375,20 +379,6 @@ func finalize_attendance(final_score: int, final_payment: int, comment: String, 
 		load_new_recipe()
 
 
-# ---------------- UI Money Gain ----------------
-func show_money_gain(amount: int) -> void:
-	var gain_label: Label = $HUD/MoneyLabel/MoneyGainLabel
-	gain_label.text = "+%d" % amount
-	gain_label.visible = true
-	gain_label.modulate.a = 1.0
-	gain_label.position = Vector2(25, -20)
-
-	var tween := create_tween()
-	tween.tween_property(gain_label, "position:y", -30, 0.6)
-	tween.tween_property(gain_label, "modulate:a", 0.0, 0.4).set_delay(0.3)
-
-	await tween.finished
-	gain_label.visible = false
 
 
 # ---------------- Input ----------------
@@ -414,3 +404,51 @@ func _on_bowl_drag_state_changed(is_dragging: bool) -> void:
 		set_process_input(false)
 	else:
 		set_process_input(true)
+
+
+
+
+# ---------------- UI Money Animations ----------------
+
+func _spawn_money_float(text: String, color: Color, direction: int) -> void:
+	# direction: 1 = direita, -1 = esquerda
+
+	var label := Label.new()
+	label.text = text
+	label.modulate = color
+	label.modulate.a = 0.0     # começa invisível
+	label.add_theme_font_size_override("font_size", 16)
+
+	# adiciona no HUD ao lado do MoneyLabel
+	var hud := $HUD/MoneyLabel
+	hud.add_child(label)
+
+	label.position = Vector2(hud.size.x, 0)  # posição inicial
+
+	# animações
+	var tween := create_tween()
+	tween.set_parallel(true)
+
+	# Fade in rápido + pop
+	label.scale = Vector2(0.2, 0.2)
+	tween.tween_property(label, "modulate:a", 1.0, 0.15)
+	tween.tween_property(label, "scale", Vector2(1.0, 1.0), 0.15).set_trans(Tween.TRANS_BACK)
+
+	# Slide lateral
+	var slide_offset := Vector2(5 * direction, 0)
+	tween.tween_property(label, "position", label.position + slide_offset, 0.2).set_delay(0.05)
+
+	# Fade out
+	var tween2 := create_tween()
+	tween2.tween_property(label, "modulate:a", 0.0, 0.35).set_delay(0.4)
+	await tween2.finished
+
+	label.queue_free()
+
+
+func show_money_gain(amount: int) -> void:
+	_spawn_money_float("+%d" % amount, Color(0.2, 0.9, 0.2), 1)
+
+
+func show_money_loss(amount: int) -> void:
+	_spawn_money_float("-%d" % amount, Color(0.9, 0.2, 0.2), 1)

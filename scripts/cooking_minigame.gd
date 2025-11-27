@@ -182,7 +182,6 @@ func _input(event: InputEvent) -> void:
 
 func _stop_and_evaluate() -> void:
 	is_cooking = false
-	AudioManager.stop_loop_sfx()
 	_evaluate_cook()
 
 # ---------------------------

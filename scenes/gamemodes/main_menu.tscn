@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://xr31gi5ou22p"]
+[gd_scene load_steps=19 format=3 uid="uid://xr31gi5ou22p"]
 
 [ext_resource type="Script" uid="uid://cidbmcw2jvpgw" path="res://scripts/main_menu.gd" id="1_1lf7f"]
 [ext_resource type="Texture2D" uid="uid://7l1hjfhu6epf" path="res://assets/Ilustração30.png" id="2_1lf7f"]
@@ -23,7 +23,12 @@ bg_color = Color(0.9138015, 0.94100165, 1, 0)
 draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lf7f"]
-bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
+bg_color = Color(0.8, 0.6901961, 0.61960787, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.38431373, 0.3137255, 0.26666668, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -33,27 +38,13 @@ expand_margin_top = 4.0
 expand_margin_right = 4.0
 expand_margin_bottom = 4.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orc0m"]
-bg_color = Color(0.913725, 0.941176, 1, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.913725, 0.941176, 1, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skis4"]
-bg_color = Color(0.882353, 0.32549, 0.207843, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w1q6q"]
-bg_color = Color(0.913725, 0.941176, 1, 1)
+bg_color = Color(0.9764706, 0.94509804, 0.89411765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3372549, 0.2627451, 0.21176471, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -69,6 +60,17 @@ corner_radius_top_left = 14
 corner_radius_top_right = 14
 corner_radius_bottom_right = 14
 corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w1q6q"]
+bg_color = Color(0.913725, 0.941176, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -278,33 +280,13 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -30.5
-offset_top = 78.0
+offset_top = 30.0
 offset_right = 32.5
-offset_bottom = 101.0
+offset_bottom = 53.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.160784, 1)
 text = "Volume"
 horizontal_alignment = 1
-
-[node name="VolumeSlider" type="HSlider" parent="OptionsPanel"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -8.0
-offset_right = 100.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/slider = SubResource("StyleBoxFlat_orc0m")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_skis4")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_skis4")
-step = 0.2
-value = 30.0
 
 [node name="Button" type="Button" parent="OptionsPanel"]
 layout_mode = 1
@@ -332,9 +314,85 @@ theme_override_colors/icon_pressed_color = Color(0.0980392, 0.105882, 0.160784, 
 theme_override_colors/icon_hover_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/icon_hover_pressed_color = Color(0.0980392, 0.105882, 0.160784, 1)
 theme_override_colors/icon_disabled_color = Color(0.0980392, 0.105882, 0.160784, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_w1q6q")
+theme_override_styles/normal = SubResource("StyleBoxFlat_skis4")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1lf7f")
 text = "FECHAR"
+
+[node name="SliderMaster" type="HSlider" parent="OptionsPanel"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 0
+offset_left = 61.0
+offset_top = 57.0
+offset_right = 221.0
+offset_bottom = 73.0
+max_value = 1.0
+step = 0.1
+
+[node name="SliderMusic" type="HSlider" parent="OptionsPanel"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 0
+offset_left = 61.0
+offset_top = 75.0
+offset_right = 221.0
+offset_bottom = 91.0
+max_value = 1.0
+step = 0.1
+
+[node name="SliderAmbience" type="HSlider" parent="OptionsPanel"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 0
+offset_left = 61.0
+offset_top = 95.0
+offset_right = 221.0
+offset_bottom = 111.0
+max_value = 1.0
+step = 0.1
+
+[node name="SliderSFX" type="HSlider" parent="OptionsPanel"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 0
+offset_left = 61.0
+offset_top = 115.0
+offset_right = 221.0
+offset_bottom = 131.0
+max_value = 1.0
+step = 0.1
+
+[node name="Geral" type="Label" parent="OptionsPanel"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 55.0
+offset_right = 51.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(0.09803922, 0.105882354, 0.16078432, 1)
+text = "Geral"
+
+[node name="Música" type="Label" parent="OptionsPanel"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 73.0
+offset_right = 51.0
+offset_bottom = 90.0
+theme_override_colors/font_color = Color(0.09803922, 0.105882354, 0.16078432, 1)
+text = "Música"
+
+[node name="Ambiente" type="Label" parent="OptionsPanel"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 93.0
+offset_right = 59.0
+offset_bottom = 110.0
+theme_override_colors/font_color = Color(0.09803922, 0.105882354, 0.16078432, 1)
+text = "Ambiente"
+
+[node name="Efeitos" type="Label" parent="OptionsPanel"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 113.0
+offset_right = 51.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(0.09803922, 0.105882354, 0.16078432, 1)
+text = "Efeitos"
 
 [node name="CreditsPanel" type="Panel" parent="."]
 visible = false
@@ -443,4 +501,8 @@ region_rect = Rect2(774, 149, 1944, 1815)
 [connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="OptionsPanel/Button" to="." method="_on_button_pressed"]
+[connection signal="value_changed" from="OptionsPanel/SliderMaster" to="." method="_on_SliderMaster_value_changed"]
+[connection signal="value_changed" from="OptionsPanel/SliderMusic" to="." method="_on_SliderMusic_value_changed"]
+[connection signal="value_changed" from="OptionsPanel/SliderAmbience" to="." method="_on_SliderAmbience_value_changed"]
+[connection signal="value_changed" from="OptionsPanel/SliderSFX" to="." method="_on_SliderSFX_value_changed"]
 [connection signal="pressed" from="CreditsPanel/Button" to="." method="_on_button_pressed"]

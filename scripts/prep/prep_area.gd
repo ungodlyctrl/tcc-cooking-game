@@ -43,6 +43,14 @@ func _ready() -> void:
 		_connect_bowl_drag_signal()
 
 
+func clear_cutting_board():
+	var board := $UtensilsParent/CuttingBoardArea
+	if board and board.current_ingredient and board.current_ingredient.is_inside_tree():
+		board.current_ingredient.queue_free()
+		board.current_ingredient = null
+		board.active = false
+
+
 # ---------------- Public ----------------
 func update_ingredients_for_day(current_day: int) -> void:
 	if _is_dragging_plate or _is_dragging_bowl:

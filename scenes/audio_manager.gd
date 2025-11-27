@@ -13,10 +13,14 @@ func _ready():
 	ambience.bus = "Ambience"
 	sfx.bus = "SFX"
 
+	bgm.process_mode = Node.PROCESS_MODE_ALWAYS
+	ambience.process_mode = Node.PROCESS_MODE_PAUSABLE
+	sfx.process_mode = Node.PROCESS_MODE_PAUSABLE
 
-# =====================================================
-# INTERNAL — helper
-# =====================================================
+
+# -------------------
+# INTERNAL
+# -------------------
 func _apply_entry(player: AudioStreamPlayer, entry: AudioEntry) -> void:
 	if entry == null:
 		return
@@ -25,77 +29,66 @@ func _apply_entry(player: AudioStreamPlayer, entry: AudioEntry) -> void:
 	player.pitch_scale = entry.pitch_scale
 
 
-# =====================================================
+# -------------------
 # BGM
-# =====================================================
+# -------------------
 func play_bgm(entry: AudioEntry):
-	if entry == null:
-		return
+	if entry == null: return
 	_apply_entry(bgm, entry)
 	bgm.play()
 
 func play_bgm_fade(entry: AudioEntry, fade_time := 1.0):
-	if entry == null:
-		return
+	if entry == null: return
 
-	var tween := create_tween()
-	tween.tween_property(bgm, "volume_db", -40.0, fade_time * 0.5)
-	await tween.finished
+	var tw := create_tween()
+	tw.tween_property(bgm, "volume_db", -40.0, fade_time * 0.5)
+	await tw.finished
 
 	_apply_entry(bgm, entry)
 	bgm.play()
 
-	var tween2 := create_tween()
-	tween2.tween_property(bgm, "volume_db", entry.volume_db, fade_time * 0.5)
+	var tw2 := create_tween()
+	tw2.tween_property(bgm, "volume_db", entry.volume_db, fade_time * 0.5)
 
 func stop_bgm():
 	bgm.stop()
 
 
-# =====================================================
+# -------------------
 # AMBIENCE
-# =====================================================
+# -------------------
 func play_ambience_random(entries: Array[AudioEntry]):
-	if entries.is_empty():
-		return
-	
-	if ambience_playing:
-		return
+	if entries.is_empty(): return
+	if ambience_playing: return
 
 	ambience_playing = true
 
-	var entry: AudioEntry = entries.pick_random()
+	var entry = entries.pick_random()
 	_apply_entry(ambience, entry)
 
-	# ponto aleatório
-	var len := entry.stream.get_length()
-	var offset := randf() * len
-
+	var len = entry.stream.get_length()
+	var offset = randf() * len
 	ambience.play(offset)
 
 func stop_ambience():
 	ambience.stop()
 	ambience_playing = false
 
-	
 func stop_ambience_fade(fade_time := 0.8):
-	if not ambience.playing:
-		return
-	var tween := create_tween()
-	tween.tween_property(ambience, "volume_db", ambience.volume_db - 20.0, fade_time)
-	await tween.finished
+	if not ambience.playing: return
+	var tw := create_tween()
+	tw.tween_property(ambience, "volume_db", ambience.volume_db - 20.0, fade_time)
+	await tw.finished
 	ambience.stop()
 	ambience_playing = false
 
 
-# =====================================================
-# SFX
-# =====================================================
+# -------------------
+# SFX (one-shot)
+# -------------------
 func play_sfx(entry: AudioEntry, random_pitch := true):
-	if entry == null:
-		return
+	if entry == null: return
 
-	# não chamar _apply_entry por causa do pitch
 	sfx.stream = entry.stream
 	sfx.volume_db = entry.volume_db
 	
@@ -104,26 +97,9 @@ func play_sfx(entry: AudioEntry, random_pitch := true):
 	else:
 		sfx.pitch_scale = entry.pitch_scale
 
-	# faz interrupção do som anterior para evitar overlap
 	sfx.stop()
 	sfx.play()
 
-
-
-
-# SFX com variação (corte)
 func play_sfx_variants(entries: Array[AudioEntry]):
-	if entries.is_empty():
-		return
-
-	var e: AudioEntry = entries.pick_random()
-	play_sfx(e)
-
-
-# loops (fritura/cozimento)
-func play_loop_sfx(entry: AudioEntry):
-	_apply_entry(ambience, entry)
-	ambience.play()
-
-func stop_loop_sfx():
-	ambience.stop()
+	if entries.is_empty(): return
+	play_sfx(entries.pick_random())

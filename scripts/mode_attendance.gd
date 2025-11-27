@@ -31,6 +31,8 @@ func _on_confirm_button_pressed() -> void:
 func show_client(client: ClientData) -> void:
 	if client == null:
 		return
+	
+	AudioManager.play_sfx(AudioManager.library.new_client)
 	client_sprite.texture = client.neutral
 	client_sprite.visible = true
 	client_sprite.modulate = Color(1, 1, 1, 0)
@@ -42,8 +44,10 @@ func show_feedback(text: String, grade: String, client: ClientData) -> void:
 	if client != null:
 		match grade:
 			"Excelente", "Bom":
+				AudioManager.play_sfx(AudioManager.library.good_reaction)
 				client_sprite.texture = client.happy if client.happy != null else client.neutral
 			"Ruim":
+				AudioManager.play_sfx(AudioManager.library.bad_reaction)
 				client_sprite.texture = client.angry if client.angry != null else client.neutral
 			_:
 				client_sprite.texture = client.neutral

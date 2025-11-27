@@ -17,6 +17,9 @@ var state: State = State.EMPTY
 var current_tool_id: String = ""
 var ingredient_queue: Array[Dictionary] = []
 
+# player local de áudio (instância criada quando o minigame inicia)
+var _cooking_player: AudioStreamPlayer = null
+
 # Nodes (expect these names exist in the scene)
 @onready var tool_anchor: TextureRect = $ToolAnchor
 @onready var mini_icons: HBoxContainer = $MiniIcons
@@ -25,6 +28,10 @@ var ingredient_queue: Array[Dictionary] = []
 
 # tween for outline blink / rotation
 var _outline_tween = null
+
+# unique key used with AudioManager for this burner (se precisar)
+func _audio_key() -> String:
+	return "burner_%s" % str(get_instance_id())
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_PASS
@@ -77,6 +84,9 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 	if not _can_drop_data(_pos, data):
 		return
 
+	# Se tentar soltar a mesma ferramenta no mesmo BurnerSlot, ignorar completamente
+	
+
 	# TOOL placed
 	if data.get(KEY_STATE, "") == STATE_TOOL:
 		# replace existing tool (if any)
@@ -88,10 +98,12 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 		_update_ui()
 		_update_mini_icons()
 
+		# play place sound depending on tool
 		if current_tool_id == "panela":
 			AudioManager.play_sfx(AudioManager.library.stove_place_pan)
 		elif current_tool_id == "frigideira":
 			AudioManager.play_sfx(AudioManager.library.stove_place_fryer)
+
 	# INGREDIENT placed
 	else:
 		AudioManager.play_sfx(AudioManager.library.ingredient_drop)
@@ -102,22 +114,29 @@ func _drop_data(_pos: Vector2, data: Variant) -> void:
 		_update_ui()
 		_update_mini_icons()
 
-	# remove origin safely (se veio de outro BurnerSlot, chame remove_tool_from_burner)
+# -----------------------------------------
+# REMOVER ORIGEM CORRETAMENTE
+# -----------------------------------------
 	var src = data.get(KEY_SOURCE, null)
 
-# 1. Veio de OUTRO BurnerSlot
+	# 1) Moveu ferramenta entre bocas
 	if src is BurnerSlot and src != self:
-		# Só limpar se realmente era a ferramenta do slot anterior
 		if src.current_tool_id == data.get(KEY_ID, ""):
 			src._clear_tool()
 
-	# 2. Veio da prateleira (Tool), mas apenas se era o original na árvore
+	# 2) Ferramenta veio da prateleira (Tool)
 	elif src is Tool and src.is_inside_tree():
 		src.queue_free()
 
+	# 3) Ingrediente vindo da tábua (CuttingBoardArea)
+	elif src and src.get_parent() and src.get_parent() is CuttingBoardArea:
+		if src.is_inside_tree():
+			src.queue_free()
 
-
+	# nada mais some
 	DragManager.current_drag_type = DragManager.DragType.NONE
+
+
 
 	if auto_start_on_first_ingredient and state == State.LOADED and not ingredient_queue.is_empty():
 		_start_minigame()
@@ -179,10 +198,30 @@ func _start_minigame() -> void:
 	state = State.COOKING
 	_update_ui()
 
+	# Criar player local para esta boca e tocar o SFX correspondente.
+	# Não usamos AudioManager para isso porque queremos players independentes.
+	if _cooking_player:
+		# segurança: se já houver, para e limpa antes
+		_cooking_player.stop()
+		_cooking_player.queue_free()
+		_cooking_player = null
+
+	_cooking_player = AudioStreamPlayer.new()
+	_cooking_player.bus = "SFX"
+	add_child(_cooking_player)
+
+	var entry: AudioEntry = null
 	if current_tool_id == "frigideira":
-		AudioManager.play_loop_sfx(AudioManager.library.sfx_fry_loop)
+		entry = AudioManager.library.sfx_fry_loop
 	else:
-		AudioManager.play_loop_sfx(AudioManager.library.sfx_boiling_loop)
+		entry = AudioManager.library.sfx_boiling_loop
+
+	# se entry existir, aplica e toca; não forçamos loop — a duração normalmente cobre o minigame
+	if entry != null:
+		_cooking_player.stream = entry.stream
+		_cooking_player.volume_db = entry.volume_db
+		_cooking_player.pitch_scale = entry.pitch_scale
+		_cooking_player.play()
 
 	# instantiate minigame and attach
 	var game: CookingMinigame = minigame_scene.instantiate() as CookingMinigame
@@ -190,7 +229,10 @@ func _start_minigame() -> void:
 	game.show_background = false
 	game.attach_to_anchor(tool_anchor)
 	game.initialize(current_tool_id, ingredient_queue.duplicate(true))
-	game.finished.connect(_on_minigame_finished)
+	# conectar para parar o player só dessa boca quando o minigame terminar
+	game.finished.connect(func(result_ingredients: Array[Dictionary], tool_type: String, quality: String) -> void:
+		_on_minigame_finished(result_ingredients, tool_type, quality)
+	)
 
 	# hide the tool anchor while minigame runs
 	tool_anchor.visible = false
@@ -203,6 +245,13 @@ func _start_minigame() -> void:
 
 
 func _on_minigame_finished(result_ingredients: Array[Dictionary], tool_type: String, quality: String) -> void:
+	# Para e remove o player local desta boca (não toca no player de outra boca)
+	if _cooking_player:
+		_cooking_player.stop()
+		if _cooking_player.is_inside_tree():
+			_cooking_player.queue_free()
+		_cooking_player = null
+
 	# instantiate cooked tool and drop into prep area (same as before)
 	var cooked: CookedTool = cooked_tool_scene.instantiate() as CookedTool
 	cooked.tool_type = tool_type
