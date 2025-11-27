@@ -199,7 +199,7 @@ func start_new_day() -> void:
 	prep_start_minutes = -1
 
 	# 🔥 Reset da cor do relógio ao iniciar um novo dia
-	clock_label.remove_theme_color_override("font_color")
+	clock_label.add_theme_color_override("font_color", Color("242649"))
 
 
 	daily_report.clear()

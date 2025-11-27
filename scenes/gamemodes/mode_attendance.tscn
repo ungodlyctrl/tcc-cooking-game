@@ -1,6 +1,7 @@
-[gd_scene load_steps=33 format=3 uid="uid://dehkeao1vbiy0"]
+[gd_scene load_steps=35 format=3 uid="uid://dehkeao1vbiy0"]
 
 [ext_resource type="Script" uid="uid://6dn564kkwxms" path="res://scripts/mode_attendance.gd" id="1_jdssm"]
+[ext_resource type="Shader" uid="uid://3tjefks04fng" path="res://assets/backgrounds/bg_transition.gdshader" id="2_gd5yg"]
 [ext_resource type="Texture2D" uid="uid://dipvc7isego2b" path="res://assets/backgrounds/Foodtruck (1)-export.png" id="3_30cfc"]
 [ext_resource type="Script" uid="uid://f8ltra48a5fx" path="res://scripts/client_drop_area.gd" id="3_k6rd5"]
 [ext_resource type="PackedScene" uid="uid://idosu0ea81b0" path="res://scenes/ui/dialogue_box.tscn" id="3_tdh31"]
@@ -28,6 +29,10 @@
 [ext_resource type="Texture2D" uid="uid://67wnjcx7sjhl" path="res://assets/mapa/sudeste.png" id="23_2akgv"]
 [ext_resource type="Texture2D" uid="uid://cixxl4ny0fdr8" path="res://assets/mapa/sudeste e nordeste.png" id="24_s3axi"]
 [ext_resource type="Texture2D" uid="uid://b0hanfjmer8tv" path="res://assets/mapa/feli frente-export.png" id="26_30cfc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_skkcu"]
+shader = ExtResource("2_gd5yg")
+shader_parameter/blend = 0.0
 
 [sub_resource type="Animation" id="Animation_kpxur"]
 length = 0.001
@@ -120,13 +125,26 @@ _data = {
 
 [node name="Mode_Attendance" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_jdssm")
 
 [node name="CityBackground" type="TextureRect" parent="."]
 layout_mode = 0
+
+[node name="BackgroundRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_skkcu")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="ClientSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
